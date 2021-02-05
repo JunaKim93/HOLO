@@ -9,6 +9,7 @@
 <table border="1" width="400" align="center">
 	<tr>
 		<td align="right" colspan="4">
+		<span align="center">안 읽은 쪽지 [${unreadMsg}]개</span>
 		<input type="button" value="쪽지보내기" onclick="window.location='/holo/message/writeForm.holo'" />
 		</td>
 	</tr>

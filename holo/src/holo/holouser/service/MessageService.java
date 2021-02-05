@@ -15,5 +15,5 @@ public interface MessageService {
 	public void deleteSendMsg(int msgnum) throws Exception;
 	public void deleteReceiveMsg(int msgnum) throws Exception;
 	public void deleteMsg(int msgnum) throws Exception;
-	
+	public int countUnreadMsg(String receiver) throws Exception;
 }

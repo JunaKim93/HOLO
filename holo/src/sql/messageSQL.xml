@@ -47,6 +47,12 @@
 		 where sender = #{sender} 
 	</select>
 	
+	<select id="countMsgU" resultType="int" parameterType="String">
+		select count(*) from 
+		(select * from message where status = 0 or status=2)
+		where readcount = 0 and receiver = #{value}
+	</select>
+	
 	
 	
 	<!-- 메세지 작성 -->
