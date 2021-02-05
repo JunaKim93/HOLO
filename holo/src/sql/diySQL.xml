@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="diy">
+
+	<!-- 게시글 기본기능 -->
+	<insert id="insert" parameterType="diyboardDTO">
+		insert into diyBoard values (diyBoard_seq.nextval,#{category_a},#{category_b},#{id},#{subject},#{content},#{viewcount},#{likes},#{report},sysdate,#{thumbnail})
+	</insert> 
+	<update id="update" parameterType="diyboardDTO">
+		update diyBoard set subject=#{subject}, content=#{content} where articleNum=#{articleNum}
+	</update>
+	<update id="updateViewCount" parameterType="int">
+		update diyBoard set viewcount = viewcount+1 where articleNum=#{value}
+	</update>
+	<delete id="delete" parameterType="diyboardDTO">
+		delete from diyBoard where articleNum=#{articleNum}
+	</delete>
+	
+	<select id="getArticles" resultType="diyboardDTO" parameterType="HashMap">	
+		select articleNum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, 
+					<if test="category_b == show">
+						thumbnail, 
+					</if>
+					r from (select articleNum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, 
+					<if test="category_b == show">
+						thumbnail, 
+					</if>
+					rownum r from (select * from diyBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} order by regDate desc) 
+					<![CDATA[where r >= #{start} and r <= #{end}]]>
+		
+	</select>	
+	<select id="getArticleCount" resultType="int" parameterType="HashMap">
+		select count(*) from diyBoard where category_a=#{category_a} and category_b=#{category_b}
+	</select>
+	<select id="getArticle" resultType="diyboardDTO" parameterType="int">
+		select * from diyBoard where articleNum=#{value}
+	</select>
+	
+	<!-- 댓글 기본기능 -->
+	<insert id="insertRpl" parameterType="diyreplyDTO">
+		insert into diyReply values (diyReply_seq.nextval,#{articleNum},#{id},#{content},sysdate,0,0)
+	</insert> 
+	<update id="updateRpl" parameterType="diyreplyDTO">
+		update diyReply set content=#{content} where repNum=#{repNum}
+	</update>
+	<delete id="deleteRpl" parameterType="diyreplyDTO">
+		delete from diyReply where repNum=#{repNum}
+	</delete>
+		
+	<select id="getRpl" resultType="diyreplyDTO" parameterType="int">
+		select * from diyReply where articleNum=#{value} order by regDate
+	</select>
+
+	<!-- 게시글(A)좋아요  -->
+	<insert id="insertALikes" parameterType="HashMap">
+		insert into diyBoardLike values(#{articleNum}, #{id})
+	</insert>
+	<delete id="deleteALikes" parameterType="HashMap">
+		delete from diyBoardLike where articleNum=#{articleNum} and id=#{id}
+	</delete>
+	<select id="checkALikes" parameterType="HashMap" resultType="int">
+		select count(*) from diyBoardLike where articleNum=#{articleNum} and id=#{id}
+	</select>
+	<select id="countALikes" parameterType="int" resultType="int">
+		select count(*) from diyBoardLike where articleNum=#{articleNum}
+	</select>
+	<update id="updateALikes" parameterType="int">
+		update diyBoard set likes=likes+1 where articleNum=#{value}
+	</update>
+	
+	<!-- 댓글(R) 좋아요  -->
+	<insert id="insertRLikes" parameterType="HashMap">
+		insert into diyReplyLike values(#{repNum}, #{id})
+	</insert>
+	<delete id="deleteRLikes" parameterType="HashMap">
+		delete from diyReplyLike where repNum=#{repNum} and id={id}
+	</delete>
+	<select id="checkRLikes" resultType="int" parameterType="HashMap">
+		select count(*) from diyReplyLike where repNum=#{repNum} and id=#{id} 
+	</select>
+	<select id="countRLikes" parameterType="int" resultType="int">
+		select count(*) from diyReplyLike where articleNum=#{articleNum}
+	</select>
+	<update id="updateRLikes" parameterType="int">
+		update diyReply set likes=likes+1 where repNum=#{value}
+	</update>
+
+	
+	<!-- 게시글(A) 신고 -->
+	<select id="checkAReport" resultType="int" parameterType="diyreportDTO">
+		select count(*) from diyBoardReport where articleNum=#{articleNum} and id=#{id}
+	</select>
+	<insert id="insertAReport" parameterType="diyreportDTO">
+		insert into diyBoardReport values (#{articleNum}, #{id}, #{reason})
+	</insert>
+	<update id="updateAReport" parameterType="int">
+		update diyBoard set report=report+1 where articleNum=#{value}
+	</update>
+	
+	
+	<!-- 댓글(R) 신고 -->
+	<select id="checkRReport" resultType="int" parameterType="diyrplreportDTO">
+		select count(*) from diyReplyReport where repNum=#{repNum} and id=#{id}
+	</select>
+	<insert id="insertRReport" parameterType="diyrplreportDTO">
+		insert into diyReplyReport values(#{repNum}, #{id}, #{reason})
+	</insert>
+	<select id="countRReport" parameterType="int" resultType="int">
+		select count(*) from diyReplyReport where repNum=#{value}
+	</select>
+	<update id="updateRReport" parameterType="int">
+		update diyBoard set report= report+1 where articleNum=#{value}
+	</update>
+	<select id="getArticleNum" resultType="int" parameterType="int">
+		select articleNum from diyReply where repNum=#{value}
+	</select>
+	
+	<!-- 검색기능 -->
+	<select id="getSearchCount" resultType="int" parameterType="HashMap">
+	 	select count(*) from diyBoard where category_a='myroom' and category_b='tip' and ${choice} like '%' || #{search} || '%'
+	</select>
+	<select id="getSearchArticles" resultType="diyboardDTO" parameterType="HashMap">
+		<![CDATA[
+		select articleNum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, r
+					from (select articleNum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, rownum r
+					from (select * from diyBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} and ${choice} like '%' || #{search} || '%' order by regDate desc) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	
+<!-- 파일 업로드 관련 -->
+<!-- 	<insert id="insertFile" parameterType="diyimgDTO"> -->
+<!-- 		insert into diyImage fileList(fileName, articleNum, num) values(#{fileName},#{articleNum},img_seq.nextval) -->
+<!-- 	</insert> -->
+	
+<!-- 	<select id="getImgNum" parameterType="diyimgDTO" resultType="int"> -->
+<!-- 		select max(num) from diyImage -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="updateFile" parameterType="diyimgDTO"> -->
+<!-- 		update diyImage set fileRealName=#{fileRealName} where num=#{num} -->
+<!-- 	</update> -->
+	
+<!-- 	<select id="getFiles" resultType="diyimgDTO"> -->
+<!-- 		select * from diyImage -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getArticleNum" resultType="int" parameterType="" -->
+
+</mapper>
+
+
+	
+

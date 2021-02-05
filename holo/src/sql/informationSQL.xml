@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="information">
+
+	<!-- article 공통 -->
+
+	<insert id="insertArticle" parameterType="infoboardDTO">
+		insert into infoboard values(infoboard_seq.nextval,
+									 #{category_a},
+									 #{category_b},
+									 #{id},
+									 #{subject},
+									 #{content},
+									 0,
+									 0,
+									 0,
+									 sysdate,
+									 0)
+	</insert>
+		
+	<update id="countViews" parameterType="int">
+		update infoboard set viewcount=viewcount+1 where articlenum=#{value}
+	</update>
+	
+	<select id="getArticle" resultType="infoboardDTO" parameterType="int">
+		select * from infoboard where articlenum=#{value}
+	</select>
+	
+	<update id="updateArticle" parameterType="infoboardDTO">
+		update infoboard set subject=#{subject}, content=#{content}	where articlenum=#{articlenum}
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+		delete from infoboard where articlenum=#{value}
+	</delete>
+	<insert id="insertLikes" parameterType="HashMap">
+		insert into infoboardlike values(#{articlenum}, #{id})
+	</insert>
+	<select id="checkLikes" parameterType="HashMap" resultType="int">
+		select count(*) from infoboardlike where articlenum=#{articlenum} and id=#{id}
+	</select>
+	<delete id="deleteLikes" parameterType="HashMap">
+		delete from infoboardlike where articlenum=#{articlenum} and id=#{id}
+	</delete>
+	<select id="countLikes" parameterType="int" resultType="int">
+		select count(*) from infoboardlike where articlenum=#{articlenum}
+	</select> 
+	<update id="updateLikesCount" parameterType="HashMap">
+		update infoboard set likes=#{likes} where articlenum=#{articlenum}
+	</update>
+	<select id="articleRptCheck" parameterType="HashMap" resultType="int">
+		select count(*) from infoboardreport where articlenum=#{articlenum} and id=#{id}
+	</select>
+	<insert id="insertArticleRpt" parameterType="inforeportDTO">
+		insert into infoboardreport values(#{articlenum},
+											#{id},
+											#{reason})
+	</insert>
+	<update id="updateRepcount" parameterType="HashMap">
+		update infoboard set repcount=#{repcount} where articlenum=#{articlenum}
+	</update>
+	<select id="countArticleRpt" parameterType="int" resultType="int">
+		select count(*) from infoboardreport where articlenum=#{articlenum}
+	</select>
+	<update id="updateArticleRpt" parameterType="HashMap">
+		update infoboard set report=#{report} where articlenum=#{articlenum}
+	</update>
+	
+	
+	
+	<!-- reply -->
+	
+	<insert id="insertRep" parameterType="inforepDTO">
+		insert into inforep values(inforep_seq.nextval, #{articlenum}, #{id}, #{content}, sysdate, 0, 0)
+	</insert>
+	<select id="getReply" parameterType="int" resultType="inforepDTO">
+		select * from (select * from inforep where articlenum=#{articlenum}) order by repnum asc
+	</select>
+	<select id="getReplyCount" parameterType="int" resultType="int">
+		select count(*) from inforep where articlenum=#{articlenum}
+	</select>
+	<update id="updateRep" parameterType="inforepDTO">
+		update inforep set content=#{content} where repnum=#{repnum}
+	</update>
+	<delete id="deleteRep" parameterType="int">
+		delete from inforep where repnum=#{value}
+	</delete>
+	<select id="checkRepLikes" resultType="int" parameterType="HashMap">
+		select count(*) from inforeplike where id=#{id} and repnum=#{repnum}
+	</select>
+	<insert id="insertRepLikes" parameterType="HashMap">
+		insert into inforeplike values(#{repnum}, #{id})
+	</insert>
+	<select id="getRepLikes" parameterType="int" resultType="int">
+		select count(*) from inforeplike where repnum=#{repnum}
+	</select>
+	<update id="updateRepLikes" parameterType="HashMap">
+		update inforep set likes=#{likes} where repnum=#{repnum}
+	</update>
+	<select id="countRepLikes" resultType="int" parameterType="int">
+		select count(*) from inforeplike where repnum=#{repnum}
+	</select>
+	<select id="reportRepCheck" resultType="int" parameterType="HashMap">
+		select count(*) from inforepreport where id=#{id} and repnum=#{repnum}
+	</select>
+	<insert id="insertRepReport" parameterType="inforepreportDTO">
+		insert into inforepreport values(#{repnum}, #{id}, #{reason})
+	</insert>
+	<select id="countRepReport" parameterType="int" resultType="int">
+		select count(*) from inforepreport where repnum=#{value}
+	</select>
+	<update id="updateRepReport" parameterType="HashMap">
+		update inforep set report=#{report} where repnum=#{repnum}
+	</update>
+
+
+
+	<!-- 게시판 별 리스트 출력 -->
+
+	<select id="getArticleCount" resultType="int" parameterType="HashMap">
+		select count(*) from infoboard where category_a=#{category_a}
+		<if test="category_b != null">
+			and category_b=#{category_b}
+		</if>
+	</select>
+	
+	<select id="getArticles" resultType="infoboardDTO" parameterType="HashMap">
+		select articlenum, category_b, subject, id, likes, viewcount, regdate, repcount, r
+                    from (select articlenum, category_b, subject, id, likes, viewcount, regdate, repcount, rownum r
+					from (select articlenum, category_b, subject, id, likes, viewcount, regdate, repcount 
+					from infoboard where category_a =#{category_a}
+					<if test="category_b != null">
+						and category_b=#{category_b}
+					</if>
+					 order by articlenum desc))
+					<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
+
+
+	<!--      검색기능 sql    -->
+
+	<select id="searchArticleCount" resultType="int" parameterType="HashMap">
+		select count(*) from 
+			(select * from infoboard where category_a=#{category_a}
+			<if test="category_b != null">
+				and category_b=#{category_b}
+			</if>
+			)
+			<include refid="search" />
+	</select>
+
+		<select id="searchArticles" resultType="infoboardDTO" parameterType="HashMap">
+		select articlenum, category_b, content, subject, id, likes, viewcount, regdate, repcount, r
+                    from (select articlenum, category_b, content, subject, id, likes, viewcount, regdate, repcount, rownum r
+					from (select articlenum, category_b, content, subject, id, likes, viewcount, regdate, repcount 
+					from (select articlenum, category_b, content, subject, id, likes, viewcount, regdate, repcount
+					from (select * from infoboard where category_a =#{category_a}
+					<if test="category_b != null">
+						and category_b=#{category_b}
+					</if>
+					) 
+					<include refid="search" />
+					order by articlenum desc)))
+					<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
+	
+
+
+	<sql id="search">
+		<choose>
+			<when test="sort == 'sort_both' ">
+				where subject like '%'||#{keyword}||'%'
+					or id like '%'||#{keyword}||'%'
+					or content like '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				where ${sort} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

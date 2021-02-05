@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com">
+
+<!--.................................INSERT.................................-->
+	<insert id="write" parameterType="comDTO">
+		INSERT INTO COMMUNITYBOARD 		 VALUES ( 	COMMUNITYBOARD_SEQ.NEXTVAL,
+													#{category_a},
+													#{category_b},
+													#{id},
+													#{subject},
+													#{content},
+													#{viewcount},
+													#{likes},
+													#{report},
+													SYSDATE)
+	</insert>
+	<insert id="reply" parameterType="comRplDTO">
+		INSERT INTO COMMUNITYREPLY 		 VALUES ( 	COMMUNITYREPLY_SEQ.NEXTVAL,
+													#{articlenum},
+													#{id},
+													#{content},
+													SYSDATE,
+													#{likes},
+													#{report},
+													<if test="repnum == 0">
+													COMMUNITYREPLY_SEQ.CURRVAL,
+													</if>
+													<if test="repnum != 0">
+													#{ref},
+													</if>
+													#{step},
+													#{depth})
+	</insert>
+	<insert id="insertImg" parameterType="comImgDTO">
+		INSERT INTO COMMUNITYIMG VALUES ( 			#{filerealname},
+												  	#{filename},
+												  	#{articlenum})
+	</insert>
+	<insert id="like" parameterType="comLikeDTO">
+		INSERT INTO COMMUNITYBOARDLIKE 	 VALUES ( 	#{articlenum},
+													#{id})
+	</insert>
+	<insert id="likeRpl" parameterType="comLikeDTO">
+		INSERT INTO COMMUNITYREPLYLIKE 	 VALUES ( 	#{repnum},
+													#{id})
+	</insert>
+	<insert id="report" parameterType="comReportDTO">
+		INSERT INTO COMMUNITYBOARDREPORT 	 VALUES (#{articlenum},
+													 #{id},
+													 null)
+	</insert>
+	<insert id="reportRpl" parameterType="comLikeDTO">
+		INSERT INTO COMMUNITYREPLYREPORT VALUES ( 	#{repnum},
+												  	#{id},
+												  	null)
+	</insert>
+
+	
+<!--.................................SELECT.................................-->
+	<select id="getList" resultType="ComDTO" parameterType="Map">
+		SELECT * 
+				FROM COMMUNITYBOARD 
+			WHERE CATEGORY_A = #{1} AND CATEGORY_B = #{2}
+		ORDER BY REGDATE DESC
+	</select>
+	<select id="imgList" resultType="ComImgDTO" parameterType="int">
+		SELECT * 
+				FROM COMMUNITYIMG 
+			WHERE ARTICLENUM = #{articlenum}
+		ORDER BY FILEREALNAME ASC
+	</select>
+	<select id="view" resultType="ComDTO" parameterType="int">
+		SELECT * 
+			FROM COMMUNITYBOARD 
+		WHERE ARTICLENUM = #{articlenum}
+	</select>
+	<select id="getRpl" resultType="ComRplDTO" parameterType="int">
+		SELECT * 
+				FROM COMMUNITYREPLY 
+			WHERE ARTICLENUM = #{articlenum}
+		ORDER BY REF ASC , STEP ASC
+	</select>
+	<select id="oneRpl" resultType="ComRplDTO" parameterType="int">
+		SELECT *
+			FROM COMMUNITYREPLY
+		WHERE REPNUM=#{repnum}
+	</select>
+	<select id="countLaterRepliesOfSameDepth" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM COMMUNITYREPLY WHERE REF=#{ref} AND DEPTH=#{depth} AND STEP>#{step}
+	</select>
+	<select id="fetchNextInSameDepth" resultType="int" parameterType="map">
+		SELECT MIN(STEP) FROM COMMUNITYREPLY WHERE REF=#{ref} AND DEPTH=#{depth} AND STEP>#{step}
+	</select>
+	<select id="countReReplies" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM COMMUNITYREPLY WHERE 
+													REF=#{ref} 
+												AND DEPTH>#{depth}
+												AND STEP>#{step}
+												<if test="nextStepOfSameDepth!=null">
+												<![CDATA[
+												AND	STEP<#{nextStepInSameDepth}; 
+												]]>
+												</if>
+	</select>
+	<select id="countArt" resultType="int">
+		SELECT COUNT(*) FROM COMMUNITYBOARD
+	</select>
+	<select id="countRpl" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM COMMUNITYREPLY WHERE ARTICLENUM = #{articlenum}
+	</select>
+	<select id="identify" resultType="int" parameterType="ComDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYBOARD 
+		WHERE ARTICLENUM = #{articlenum} AND ID = #{id}
+	</select>
+	<select id="identifyRpl" resultType="int" parameterType="ComRplDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYREPLY 
+		WHERE REPNUM = #{repnum} AND ID = #{id}
+	</select>
+	<select id="likes" resultType="int" parameterType="int">
+		SELECT COUNT(*) 
+			FROM COMMUNITYBOARDLIKE 
+		WHERE ARTICLENUM = #{articlenum}
+	</select>
+	<select id="replyLikes" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+			FROM COMMUNITYREPLYLIKE
+		WHERE REPNUM = #{repnum}
+	</select>
+	<select id="alreadyLike" resultType="int" parameterType="ComLikeDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYBOARDLIKE 
+		WHERE ARTICLENUM = #{articlenum} AND ID = #{id}
+	</select>
+	<select id="alreadyLikeRpl" resultType="int" parameterType="ComRplLikeDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYREPLYLIKE 
+		WHERE REPNUM = #{repnum} AND ID = #{id}
+	</select>
+	<select id="alreadyReport" resultType="int" parameterType="ComReportDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYBOARDREPORT 
+		WHERE ARTICLENUM = #{articlenum} AND ID = #{id}
+	</select>
+	<select id="alreadyReportRpl" resultType="int" parameterType="ComRplReportDTO">
+		SELECT COUNT(*) 
+			FROM COMMUNITYREPLYREPORT 
+		WHERE REPNUM = #{repnum} AND ID = #{id}
+	</select>
+	
+<!--.................................UPDATE.................................-->
+	<update id="plusOneView" parameterType="int">
+		UPDATE COMMUNITYBOARD SET
+			VIEWCOUNT = VIEWCOUNT+1
+		WHERE ARTICLENUM=#{articlenum}
+	</update>
+	<update id="edit" parameterType="ComDTO">
+		UPDATE COMMUNITYBOARD SET 
+			CATEGORY_A = #{category_a},
+			CATEGORY_B = #{category_b},
+			SUBJECT	   = #{subject},
+			CONTENT	   = #{content},
+			REGDATE	   = SYSDATE
+		WHERE ARTICLENUM = #{articlenum}
+	</update>
+	<update id="editRpl" parameterType="ComRplDTO">
+		UPDATE COMMUNITYREPLY SET
+			CONTENT	   = #{content},
+			REGDATE	   = SYSDATE
+		WHERE REPNUM = #{repnum}
+	</update>
+	<update id="pushStep" parameterType="map">
+		UPDATE COMMUNITYREPLY SET
+			STEP	   = STEP+1
+		WHERE REF = #{ref} AND STEP > #{step}
+	</update>
+	<update id="deleteRpl" parameterType="int">
+		UPDATE COMMUNITYREPLY SET
+			CONTENT= '삭제된 댓글',
+			ID='삭제됨'
+		WHERE repnum=#{repnum}
+	</update>
+	<update id="addLikes" parameterType="ComDTO">
+		UPDATE COMMUNITYBOARD SET
+			LIKES = LIKES + 1
+		WHERE ARTICLENUM = #{articlenum}
+	</update>
+	<update id="addReport" parameterType="ComReportDTO">
+		UPDATE COMMUNITYBOARD SET
+			REPORT = REPORT + 1
+		WHERE ARTICLENUM = #{articlenum}
+	</update>
+	<update id="addRplLikes" parameterType="ComRplDTO">
+		UPDATE COMMUNITYREPLY SET
+			LIKES = LIKES + 1
+		WHERE REPNUM = #{repnum}
+	</update>
+	<update id="addRplReport" parameterType="ComRplDTO">
+		UPDATE COMMUNITYREPLY SET
+			REPORT = REPORT + 1
+		WHERE REPNUM = #{repnum}
+	</update>
+	<update id="subLikes" parameterType="ComLikeDTO">
+		UPDATE COMMUNITYBOARD SET
+			LIKES = LIKES - 1
+		WHERE ARTICLENUM = #{articlenum}
+	</update>
+	<update id="subRplLikes" parameterType="ComRplLikeDTO">
+		UPDATE COMMUNITYREPLY SET
+			LIKES = LIKES - 1
+		WHERE REPNUM = #{repnum}
+	</update>
+	
+<!--.................................DELETE.................................-->
+	<delete id="delete" parameterType="int">
+		DELETE FROM COMMUNITYBOARD WHERE ARTICLENUM=#{articlenum}
+	</delete>
+	<delete id="unlike" parameterType="comLikeDTO">
+		DELETE FROM COMMUNITYBOARDLIKE WHERE ARTICLENUM=#{articlenum}
+	</delete>
+	<delete id="unlikeRpl" parameterType="comRplLikeDTO">
+		DELETE FROM COMMUNITYREPLYLIKE WHERE repnum=#{repnum}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias alias="infoboardDTO" type="holo.board.information.DTO.InfoBoardDTO"/>	
+		<typeAlias alias="infolikeDTO" type="holo.board.information.DTO.InfoBoardLikeDTO"/>	
+		<typeAlias alias="inforeportDTO" type="holo.board.information.DTO.InfoBoardReportDTO"/>	
+		<typeAlias alias="inforepDTO" type="holo.board.information.DTO.InfoRepDTO"/>	
+		<typeAlias alias="inforeplikeDTO" type="holo.board.information.DTO.InfoRepLikeDTO"/>	
+		<typeAlias alias="inforepreportDTO" type="holo.board.information.DTO.InfoRepReportDTO"/>	
+		<typeAlias alias="infoimgDTO" type="holo.board.information.DTO.InfoImgDTO"/>	
+		<typeAlias type="holo.holouser.HolouserDTO" alias="holouserDTO"/>
+		<typeAlias alias="msgDTO" type="holo.holouser.MessageDTO" />
+		
+		<typeAlias alias="comDTO" type="holo.board.community.dto.ComDTO"/>
+		<typeAlias alias="comLikeDTO" type="holo.board.community.dto.ComLikeDTO"/>
+		<typeAlias alias="comReportDTO" type="holo.board.community.dto.ComReportDTO"/>
+		<typeAlias alias="comRplDTO" type="holo.board.community.dto.ComRplDTO"/>
+		<typeAlias alias="comRplLikeDTO" type="holo.board.community.dto.ComRplLikeDTO"/>
+		<typeAlias alias="comRplReportDTO" type="holo.board.community.dto.ComRplReportDTO"/>
+		<typeAlias alias="comimgDTO" type="holo.board.community.dto.ComImgDTO"/>
+		
+		
+		<typeAlias type="holo.board.interior.dto.DiyBoardDTO" alias="diyboardDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyReplyDTO" alias="diyreplyDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyImgDTO" alias="diyimgDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyReplyDTO" alias="diyreplyDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyRplLikeDTO" alias="diyrpllikeDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyReportDTO" alias="diyreportDTO"/>
+		<typeAlias type="holo.board.interior.dto.DiyRplReportDTO" alias="diyrplreportDTO"/>
+		
+	</typeAliases>
+	
+	<mappers> 
+		<mapper resource="/sql/informationSQL.xml" />
+		<mapper resource="/sql/holouserSQL.xml"/>
+		<mapper resource="/sql/messageSQL.xml" />
+		<mapper resource="/sql/communitySQL.xml" />
+		<mapper resource="/sql/diySQL.xml"/>
+
+	</mappers>  
+</configuration>
