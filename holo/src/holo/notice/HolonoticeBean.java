@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import holo.holouser.HolouserDTO;
 import holo.holouser.service.HolouserService;
 import holo.notice.service.HolonoticeService;
-import spring.model.service.BoardDataBean;
 
 @Controller
 @RequestMapping("/notice/")
