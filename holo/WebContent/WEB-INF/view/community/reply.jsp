@@ -32,16 +32,21 @@ $(function(){
 			}
 		}
 	});
+	//대댓글 버튼 이벤트
 	$(".btnReReply").click(function(repnum){
+		//부모 element에 저장된 id속성을 가져옴(해당 댓글의 repnum이 저장되어 있음.)
 		var repnum = $(this).parent().attr("id");
 		replyForm(repnum,"","new");
 	});
+	//댓글 수정 버튼 이벤트
 	$(".btnEditRpl").click(function(){
+		//부모 element에 저장된 id속성을 가져옴
     	var repnum = $(this).parent().attr("id");
+		//댓글의 기존 내용을 가져옴
     	var content = $("#replyContent"+repnum).html();
-    	console.log($("#replyContent"+repnum).html());
     	replyForm(repnum,content,"edit");
 	});
+	//댓글 삭제 버튼 이벤트
 	$(".btnDelRpl").click(function(){
 		if(confirm("삭제하시겠습니까?")==true){
 			delReply($(this).parent().attr("id"));
@@ -63,7 +68,9 @@ $(function(){
 			url: "/holo/com/alreadyLikeRpl.holo",type: "POST",async:false,
 			data: {repnum: repnum},
 			success:function(alreadyLiked){
+				//이미 좋아요를 눌렀을 경우
 				if(alreadyLiked=="true"){
+					//해당 버튼 element에 done이라는 클래스를 추가
 	    			$("#"+repnum).children(".btnLikeRpl").toggleClass("done");
 				}
 			}
@@ -92,6 +99,7 @@ $(function(){
     	})
     	return alreadyReported;
 	};
+	//댓글폼 가져오기
 	function replyForm(repnum,content,mode){
 		$.ajax({
 			url: "/holo/com/replyForm.holo",type:"post",
@@ -101,31 +109,43 @@ $(function(){
 					content:		content,
 					mode:			mode},
 			success:function(html){
+				//기존의 열려있던 폼의 element를 삭제
 				$(".reply-form-open").remove();
+				//수정하는 동안 숨겨놓았던 댓글 다시 표시
 				$(".editing").show();
+				//더이상 수정중이 아닌 댓글의 editing이라는 클래스를 제거
 				$(".editing").removeClass();
 				if(mode=="new"){
+					//댓글 바로 밑에 폼 표시
 					$("#replyRow"+repnum).after(html);
 				}else{
+					//수정할 댓글 숨김
 					$("#replyRow"+repnum).hide();
+					//숨긴 댓글에 editing이라는 클래스 추가
 					$("#replyRow"+repnum).addClass("editing");
+					//댓글 폼 표시
 					$("#replyRow"+repnum).after(html);
+					//저장해 놓았던 기존 댓글 내용을 textarea에 표시
 					$("#replyTextarea"+repnum).val(content);
 				}
+				//열려있는 폼에 열려있음을 확인 할 클래스 추가
 				$("#replyForm"+repnum).addClass("reply-form-open");
 			}
 		})
 	};
+	//댓글 삭제
 	function delReply(repnum){
 		$.ajax({
 			url:"/holo/com/delReply.holo",type:"post",
 			data:{repnum:repnum},
 			success:function(){
+				//댓글 목록 새로고침
 				refreshReplyList();
 				alert("삭제되었습니다.")
 			}
 		})
 	};
+	//댓글 목록 새로고침
 	function refreshReplyList(){
 		$.ajax({
 			url: "/holo/com/replyList.holo",
@@ -141,13 +161,15 @@ $(function(){
 	}
 	//최초 1회 실행
 	function init(){
+		//댓글 이미 좋아요 했는지 표시 그리고 좋아요수 갱신
 		<c:forEach var="r" items="${rplList}">
 			alreadyLikeRpl(${r.repnum});
 			replyLikes(${r.repnum});
 		</c:forEach>
+		//새로운 댓글은 repnum을 0으로 요청
+		replyForm(0,"","new");
 	};
 	init();
-	replyForm(0,"","new");
 });
 </script>
 <br/><b>댓글</b>
