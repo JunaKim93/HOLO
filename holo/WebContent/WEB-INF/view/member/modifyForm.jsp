@@ -86,7 +86,7 @@
     
    <tr>
    <td width="200">비밀번호</td>
-   <td width="400"><input class="w3-input" type="password" id="pw" name="pw" required></td>
+   <td width="400"><input class="w3-input" type="password" id="pw" name="password" required></td>
    </tr>
    <tr>
    <td width="200">비밀번호 확인</td>
