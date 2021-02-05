@@ -59,6 +59,17 @@ body, td, a, div, p, pre, input, textarea {
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+	function edit(){
+		window.location="/holo/com/edit.holo?articlenum="+${dto.articlenum};
+	}
+	function del(){
+		if(confirm("삭제하시겠습니까?")==true){
+			window.location="/holo/com/del.holo?articlenum="+${dto.articlenum};
+		}
+	}
+	function goList(){
+		window.location.href="/holo/com/list.holo?pagenum="+${pagenum};
+	}
 	$(function(){
 		$(".replypage").click(function(){
 			replyList($(this).val());
@@ -87,14 +98,7 @@ body, td, a, div, p, pre, input, textarea {
 			if(${alreadyLiked} == true){
 		    	$(".btn-like").toggleClass("done");
 			}
-		};
-		
-		function del(){
-			if(confirm("삭제하시겠습니까?")==true){
-				window.location.href="/holo/com/del.holo?articlenum="+${dto.articlenum};
-			}
-		};
-		
+		}
 		// 게시글 추천수
 	    function likes() {
 			$.ajax({
@@ -185,18 +189,14 @@ body, td, a, div, p, pre, input, textarea {
 					</div>
 					<div class="bot_btn_r">
 						<br/>
-						<form>
 							<c:if test="${sid==dto.id}">
-								<input type="button" value="✏️"
-									onclick="document.location.href='/holo/com/edit.holo?articlenum=${dto.articlenum}'">
+								<button onclick="edit()">✏️</button>
 		   							&nbsp;&nbsp;&nbsp;&nbsp;
 		  						<button onclick="del()">❌</button>
 		   							&nbsp;&nbsp;&nbsp;&nbsp;
 		   					</c:if>
-							<input type="button" value="글목록"
-								onclick="document.location.href='/holo/com/list.holo?pagenum=${pagenum}'">
+							<button onclick="goList()">글목록</button>
 								&nbsp;&nbsp;
-						</form>
 					</div>
 				</td>
 			</tr>
