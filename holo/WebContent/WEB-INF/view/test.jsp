@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 ggzzzz
+=======
+testtestetsesetset
+>>>>>>> c1733840c3fae0f201a0944f4073356cf507dde0
 </body>
 </html>
