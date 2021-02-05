@@ -58,7 +58,7 @@
                   $('#pw2').val('');
            }else{
         	   if($('#pw').val() != null){
-        		   htmls = '<font size="3" color="red">일치합니다</font>';
+        		   htmls = '<font size="3" color="green">일치합니다</font>';
         	   		$('#pw_ok').html(htmls);
         	   	   $('#pwcheck').html("");
         	   }
