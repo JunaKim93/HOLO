@@ -32,6 +32,13 @@
 		<typeAlias type="holo.board.interior.dto.DiyReportDTO" alias="diyreportDTO"/>
 		<typeAlias type="holo.board.interior.dto.DiyRplReportDTO" alias="diyrplreportDTO"/>
 		
+		<typeAlias alias="MkBoardDTO" type="holo.board.market.dto.MarketBoardDTO" />
+		<typeAlias alias="MkReportDTO" type="holo.board.market.dto.MarketBoardReportDTO" />
+		<typeAlias alias="MkLikeDTO" type="holo.board.market.dto.MarketBoardLikeDTO" />
+		<typeAlias alias="MkReplyDTO" type="holo.board.market.dto.MarketReplyDTO" />
+		<typeAlias alias="MkRplLikeDTO" type="holo.board.market.dto.MarketReplyLikeDTO" />
+		<typeAlias alias="MkRplReportDTO" type="holo.board.market.dto.MarketReplyReportDTO" />	
+		
 	</typeAliases>
 	
 	<mappers> 
@@ -40,6 +47,6 @@
 		<mapper resource="/sql/messageSQL.xml" />
 		<mapper resource="/sql/communitySQL.xml" />
 		<mapper resource="/sql/diySQL.xml"/>
-
+		<mapper resource="/sql/marketSQL.xml"/>
 	</mappers>  
 </configuration>

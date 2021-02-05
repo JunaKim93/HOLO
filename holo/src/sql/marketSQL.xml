@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="market">
+
+	<!-- 게시글 기본기능 -->
+	<insert id="insert" parameterType="MkBoardDTO">
+		insert into marketBoard values (mkBoard_seq.nextval,#{category_a},#{category_b},#{id},#{subject},#{price}, #{content},#{viewCount},#{report},sysdate,#{thumbnail}, #{condition}, #{dealing})
+	</insert> 
+	<update id="update" parameterType="MkBoardDTO">
+		update marketBoard set subject=#{subject}, price=#{price}, content=#{content}, regDate=sysdate where articleNum=#{articleNum}
+	</update>
+	<update id="updateViewCount" parameterType="int">
+		update marketBoard set viewCount = viewCount+1 where articleNum=#{value}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from marketBoard where articleNum=#{value}
+	</delete>
+	
+	<select id="getArticles" resultType="MkBoardDTO" parameterType="HashMap">	
+		select articleNum, category_a, category_b, id, subject, price, content, viewCount, report, regDate, thumbnail, condition, dealing, r 
+		from (select articleNum, category_a, category_b, id, subject, price, content, viewCount, report, regDate, thumbnail, condition, dealing, rownum r 
+		from (select * from marketBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} order by regDate desc) 
+					<![CDATA[where r >= #{start} and r <= #{end}]]>
+		
+	</select>	
+	<select id="getArticleCount" resultType="int" parameterType="HashMap">
+		select count(*) from marketBoard where category_a=#{category_a} and category_b=#{category_b}
+	</select>
+	<select id="getArticle" resultType="MkBoardDTO" parameterType="int">
+		select * from marketBoard where articleNum=#{value}
+	</select>
+	
+	<!-- 댓글 기본기능 -->
+	<insert id="insertRpl" parameterType="MkReplyDTO">
+		insert into marketReply values (mkReply_seq.nextval,#{articleNum},#{id},#{content},sysdate,0,0)
+	</insert> 
+	<update id="updateRpl" parameterType="MkReplyDTO">
+		update marketReply set content=#{content} where repNum=#{repNum}
+	</update>
+	<delete id="deleteRpl" parameterType="MkReplyDTO">
+		delete from marketReply where repNum=#{repNum}
+	</delete>
+		
+	<select id="getRpl" resultType="MkReplyDTO" parameterType="int">
+		select * from marketReply where articleNum=#{value} order by regDate
+ 	</select>
+
+	<!-- 댓글(R) 좋아요  -->
+	<insert id="insertRLikes" parameterType="HashMap">
+		insert into marketReplyLike values(#{repNum}, #{id})
+	</insert>
+	<delete id="deleteRLikes" parameterType="HashMap">
+		delete from marketReplyLike where repNum=#{repNum} and id={id}
+	</delete>
+	<select id="checkRLikes" resultType="int" parameterType="HashMap">
+		select count(*) from marketReplyLike where repNum=#{repNum} and id=#{id} 
+	</select>
+	<select id="countRLikes" parameterType="int" resultType="int">
+		select count(*) from marketReplyLike where articleNum=#{articleNum}
+	</select>
+	<update id="updateRLikes" parameterType="int">
+		update marketReply set likes=likes+1 where repNum=#{value}
+	</update>
+
+	
+	<!-- 게시글(A) 신고 -->
+	<select id="checkAReport" resultType="int" parameterType="MkReportDTO">
+		select count(*) from marketBoardReport where articleNum=#{articleNum} and id=#{id}
+	</select>
+	<insert id="insertAReport" parameterType="MkReportDTO">
+		insert into marketBoardReport values (#{articleNum}, #{id}, #{reason})
+	</insert>
+	<update id="updateAReport" parameterType="int">
+		update marketBoard set report=report+1 where articleNum=#{value}
+	</update>
+	
+	
+	<!-- 댓글(R) 신고 -->
+	<select id="checkRReport" resultType="int" parameterType="MkRplReportDTO">
+		select count(*) from marketReplyReport where repNum=#{repNum} and id=#{id}
+	</select>
+	<insert id="insertRReport" parameterType="MkRplReportDTO">
+		insert into marketReplyReport values(#{repNum}, #{id}, #{reason})
+	</insert>
+	<select id="countRReport" parameterType="int" resultType="int">
+		select count(*) from marketReplyReport where repNum=#{value}
+	</select>
+	<update id="updateRReport" parameterType="int">
+		update marketBoard set report= report+1 where articleNum=#{value}
+	</update>
+	<select id="getArticleNum" resultType="int" parameterType="int">
+		select articleNum from marketReply where repNum=#{value}
+	</select>
+	
+	<!-- 검색기능 -->
+	<select id="getSearchCount" resultType="int" parameterType="HashMap">
+	 	select count(*) from marketBoard where category_a=#{category_a} and category_b=#{category_b} and ${choice} like '%' || #{search} || '%'
+	</select>
+	<select id="getSearchArticles" resultType="MkBoardDTO" parameterType="HashMap">
+		<![CDATA[
+<!-- 		select articleNum, category_a, category_b, id, subject, price, content, viewCount, report, regDate, thumbnail, r -->
+<!-- 					from (select articleNum, category_a, category_b, id, subject, price, content, viewCount, report, regDate, thumbnail, rownum r -->
+<!-- 					from (select * from marketBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} and ${choice} like '%' || #{search} || '%' order by regDate desc) where r >= #{start} and r <= #{end} -->
+<!-- 		]]> -->
+	</select>
+</mapper>
+
+
+	
+
