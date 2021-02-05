@@ -35,7 +35,7 @@
 	function cancelForm(){
 		$.ajax({
 			url: "/holo/com/replyForm.holo",type:"post",
-			data:{articlenum:${articlenum}, repnum: 0},
+			data:{articlenum:${articlenum},writer:${writer}, repnum: 0},
 			success:function(html){
 				$(".reply-form-open").remove();
 				$("#replyRow"+${repnum}).show();
@@ -68,7 +68,11 @@
 				</c:if>
 			</td>
 			<td width="640">
-				<textarea id="replyTextarea${repnum}" rows="6" style="resize: none; width: 100%;"></textarea>
+				<textarea id="replyTextarea${repnum}" rows="6" style="resize: none; width: 100%;">
+					<c:if test="${mode=='edit'}">
+						${rplContent}
+					</c:if>
+				</textarea>
 			</td>
 				<td border="0" colspan="3">&nbsp;&nbsp;
 					<c:if test="${mode=='edit'}">

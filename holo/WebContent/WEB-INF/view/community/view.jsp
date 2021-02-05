@@ -114,7 +114,7 @@ body, td, a, div, p, pre, input, textarea {
 	    };
 	    
 	  	//댓글 가져오기
-	    function replyList(replypage) {
+	    function replyList() {
 			$.ajax({
 				url: "/holo/com/replyList.holo",
                 type: "POST",
@@ -159,7 +159,7 @@ body, td, a, div, p, pre, input, textarea {
 	    };
 	    alreadyLike();
 	    likes();
-	    replyList(1);
+	    replyList();
 	});
 </script>
 </head>

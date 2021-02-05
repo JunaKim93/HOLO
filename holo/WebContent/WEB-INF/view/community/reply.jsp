@@ -39,7 +39,8 @@ $(function(){
 	$(".btnEditRpl").click(function(){
     	var repnum = $(this).parent().attr("id");
     	var content = $("#replyContent"+repnum).html();
-    	replyForm(repnum,content, "edit");
+    	console.log($("#replyContent"+repnum).html());
+    	replyForm(repnum,content,"edit");
 	});
 	$(".btnDelRpl").click(function(){
 		if(confirm("삭제하시겠습니까?")==true){
@@ -175,7 +176,7 @@ $(function(){
 						</c:forEach>
 						<div style="border-left: 2px solid DarkGreen;height: 30px;"></div>
 						<c:if test="${reply.id==writer}">
-							<div style="background-color: #66ffcc">${reply.content}</div>
+							<div id="replyContent${reply.repnum}" style="background-color: #66ffcc">${reply.content}</div>
 						</c:if>
 						<c:if test="${reply.id!=writer}">
 							<div id="replyContent${reply.repnum}">${reply.content}</div>
