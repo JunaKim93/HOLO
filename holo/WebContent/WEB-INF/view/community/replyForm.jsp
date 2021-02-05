@@ -58,7 +58,7 @@
 		})
 	}
 </script>
-			<td width="60" align="center" >
+			<td width="63" align="center" >
 				<c:if test="${mode=='edit'}">
 					<b>수정</b>
 				</c:if>
@@ -67,15 +67,15 @@
 					<c:if test="${repnum!=0}"><b>대댓글</b></c:if>
 				</c:if>
 			</td>
-			<td width="590">
+			<td width="640">
 				<textarea id="replyTextarea${repnum}" rows="6" style="resize: none; width: 100%;"></textarea>
 			</td>
 				<td border="0" colspan="3">&nbsp;&nbsp;
 					<c:if test="${mode=='edit'}">
-						<button onclick="validateEdit(this.form)">수정하기</button>
+						<button onclick="validateEdit()">수정하기</button>
 					</c:if>
 					<c:if test="${mode=='new'}">
-						<button onclick="validateForm(this.form)">작성하기</button>
+						<button onclick="validateForm()">작성하기</button>
 					</c:if>
 					<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:if test="${repnum!=0}">

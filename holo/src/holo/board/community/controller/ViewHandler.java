@@ -77,24 +77,23 @@ public class ViewHandler {
 	
 	@RequestMapping("writeForm.holo")
 	public String writeForm(ComDTO cdto, @RequestParam(defaultValue="1") int pagenum,String mode, Model model) {
-		cdto.setArticlenum(0);
-		model.addAttribute("dto",cdto);
+		if(mode=="new") {
+			cdto = new ComDTO();
+			cdto.setArticlenum(0);
+			cdto.setSubject("");
+			cdto.setContent("");
+		}
+		model.addAttribute("cdto",cdto);
 		model.addAttribute("pagenum",pagenum);
 		model.addAttribute("mode",mode);
 		return "community/writeForm";
 	}
 	
 	@RequestMapping("pro.holo")
-	public String pro(String articlenum, String cat_a, String cat_b, String subject, String content, String mode, @RequestParam(defaultValue="1") String sid) {
+	public String pro(ComDTO cdto, String mode, @RequestParam(defaultValue="1") String sid) {
 		try {
-			ComDTO cdto = new ComDTO();
-			cdto.setArticlenum(Integer.parseInt(articlenum));
-			cdto.setCategory_a(cat_a);
-			cdto.setCategory_b(cat_b);
-			cdto.setSubject(subject);
-			cdto.setContent(content);
 			cdto.setId(sid);
-			if(cat_a.equals("1")) {
+			if(cdto.getCategory_a().equals("1")) {
 				cdto.setCategory_b("1");
 			}
 			if(mode.equals("new")){
