@@ -27,7 +27,7 @@
     <td align="center">카테고리</td>
     <td><select name="category_b">
       <option value="show">인테리어 뽐내기</option>
-      <option value="tip">인테리어 팁</option>
+      <option value="tip" selected>인테리어 팁</option>
       <option value="qna">인테리어 질문</option>
    </select></td>
   </tr>
@@ -67,22 +67,38 @@ nhn.husky.EZCreator.createInIFrame({
 });
 
 window.onload = function(){
-   var btn = document.getElementById("updatebtn");
-   btn.onclikc = function(){
+   var btn = document.getElementById("writebtn");
+   btn.onclick = function(){
+	   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
       submitContents(btn);
    }
 }
 
  
- $("#writebtn").click(function(){
-       oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-       $("#writeform").submit();
-   });  
- 
  function pasteHTML(filepath){
        var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
        oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
    }
+ 
+ function writeSave() {
+	    if(document.writeform.id.value == "") {
+	        alert("이름을 입력하세요");
+	        document.writeform.id.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.subject.value == "") {
+	        alert("제목을 입력하세요");
+	        document.writeform.subject.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.content.value == "") {
+	        alert("내용을 입력하세요");
+	        document.writeform.content.focus();
+	        return false;
+	    }
+ }
     
  
 </script>      
