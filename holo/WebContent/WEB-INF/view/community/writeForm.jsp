@@ -12,14 +12,14 @@
 <script>
 	function changeSelect(cat_a) {
 		if (cat_a == "1") {
-			$("[name=cat_b]").hide();
+			$("[name=category_b]").hide();
 		}else{
-			$("[name=cat_b]").show();
+			$("[name=category_b]").show();
 		}
 	};
 	function validateForm(form){
-		var cat_a = $("[name='cat_a']").val();
-		var cat_b = $("[name='cat_b']").val();
+		var cat_a = $("[name='category_a']").val();
+		var cat_b = $("[name='category_b']").val();
 		if(cat_a==null){
 			alert("대분류를 선택해주세요!!");
 		}else if(cat_a=="2"&&cat_b==null){
@@ -30,11 +30,11 @@
 	};
 	function init(){
 		if(${mode=='edit'}){
-			$("[name=cat_a]").val(${cdto.category_a});
+			$("[name=category_a]").val(${cdto.category_a});
 			if(${cdto.category_a=='1'}){
-				$("[name=cat_b]").hide();
+				$("[name=cateogry_b]").hide();
 			}else{
-				$("[name=cat_b]").val(${cdto.category_b});
+				$("[name=category_b]").val(${cdto.category_b});
 			}
 		}
 	}
@@ -53,12 +53,12 @@
 					</td>
 				</tr>
 				<tr>
-					<select onchange="changeSelect(this.value)" name="cat_a">
+					<select onchange="changeSelect(this.value)" name="category_a">
 						<option disabled selected>게시판선택</option>
 						<option value="1">자유게시판</option>
 						<option value="2">지역별게시판</option>
 					</select>
-					<select name="cat_b">
+					<select name="category_b">
 						<option disabled selected>분류 선택</option>
 						<option value="1">서울</option>
 						<option value="2">강원</option>
