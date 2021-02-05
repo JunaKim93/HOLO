@@ -71,12 +71,12 @@ body, td, a, div, p, pre, input, textarea {
 		window.location.href="/holo/com/list.holo?pagenum="+${pagenum};
 	}
 	$(function(){
-		$(".replypage").click(function(){
-			replyList($(this).val());
-		});
+		//좋아요 버튼 이벤트
 		$(".btn-like").click(function() {
+			//누를 때마다 done이라는 클래스를 추가했다 제거했다 함
 			$(this).toggleClass("done");
 		});
+		//신고 버튼 이벤트
 		$("#btn-report").click(function(){
 			reportArticle();
 		});
@@ -94,12 +94,13 @@ body, td, a, div, p, pre, input, textarea {
                 },
 			})
 		})
+		//이미 좋아요 했으면 done클래스 주입
 		function alreadyLike(){
 			if(${alreadyLiked} == true){
 		    	$(".btn-like").toggleClass("done");
 			}
 		}
-		// 게시글 추천수
+		// 게시글 추천수 가져오기
 	    function likes() {
 			$.ajax({
 				url: "/holo/com/likes.holo",
@@ -114,7 +115,7 @@ body, td, a, div, p, pre, input, textarea {
 	    };
 	    
 	  	//댓글 가져오기
-	    function replyList(replypage) {
+	    function replyList() {
 			$.ajax({
 				url: "/holo/com/replyList.holo",
                 type: "POST",
@@ -159,7 +160,7 @@ body, td, a, div, p, pre, input, textarea {
 	    };
 	    alreadyLike();
 	    likes();
-	    replyList(1);
+	    replyList();
 	});
 </script>
 </head>

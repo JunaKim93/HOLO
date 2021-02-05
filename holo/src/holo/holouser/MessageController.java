@@ -41,6 +41,7 @@ public class MessageController {
 		try {
 			List<MessageDTO> msgListR = null;
 			String receiver = (String)session.getAttribute("sessionId");
+			int unreadMsg = msg.countUnreadMsg(receiver);
 			int pageSize = 5;							//페이지에 노출될 게시물 수
 			int currentPage = pageNum;					//현재 페이지 번호
 			int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
@@ -65,7 +66,7 @@ public class MessageController {
 			}
 			number = count - (currentPage-1)*pageSize;		
 		
-			
+			model.addAttribute("unreadMsg", unreadMsg);
 			model.addAttribute("msgListR", msgListR);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("start", start);

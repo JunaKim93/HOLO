@@ -85,4 +85,6 @@ public class HolouserServiceMybatis implements HolouserService {
 	public HolouserDTO memberPage(String id) throws Exception {
 		return dao.selectOne("holouser.member", id); 
 	}
+
+	
 }

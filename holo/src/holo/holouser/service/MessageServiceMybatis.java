@@ -86,6 +86,10 @@ public class MessageServiceMybatis implements MessageService{
 		
 	}
 
-
+	@Override
+	public int countUnreadMsg(String receiver) throws Exception {
+		
+		return dao.selectOne("msg.countMsgU", receiver);
+	}
 
 }

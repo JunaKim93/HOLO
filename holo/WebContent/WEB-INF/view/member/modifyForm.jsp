@@ -58,7 +58,7 @@
                   $('#pw2').val('');
            }else{
         	   if($('#pw').val() != null){
-        		   htmls = '<font size="3" color="red">일치합니다</font>';
+        		   htmls = '<font size="3" color="green">일치합니다</font>';
         	   		$('#pw_ok').html(htmls);
         	   	   $('#pwcheck').html("");
         	   }
@@ -86,7 +86,7 @@
     
    <tr>
    <td width="200">비밀번호</td>
-   <td width="400"><input class="w3-input" type="password" id="pw" name="pw" required></td>
+   <td width="400"><input class="w3-input" type="password" id="pw" name="password" required></td>
    </tr>
    <tr>
    <td width="200">비밀번호 확인</td>

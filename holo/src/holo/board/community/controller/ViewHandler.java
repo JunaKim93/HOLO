@@ -139,11 +139,11 @@ public class ViewHandler {
 		return "redirect:list.holo";
 	}
 	@RequestMapping("replyForm.holo")
-	public String replyForm(int articlenum, String writer, int repnum,@RequestParam(defaultValue="") String content, @RequestParam(defaultValue="new") String mode, Model model) {
+	public String replyForm(int articlenum, String writer, int repnum, @RequestParam(defaultValue="") String content, @RequestParam(defaultValue="new") String mode, Model model) {
 		model.addAttribute("articlenum",articlenum);
 		model.addAttribute("writer",writer);
 		model.addAttribute("repnum",repnum);
-		model.addAttribute("content",content);
+		model.addAttribute("rplContent",content);
 		model.addAttribute("mode",mode);
 		return "community/replyForm";
 	}

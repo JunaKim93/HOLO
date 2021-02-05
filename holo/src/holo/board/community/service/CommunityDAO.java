@@ -164,7 +164,6 @@ public class CommunityDAO implements CommunityDBService{
 	}
 	@Override
 	public void edit(ComDTO dto) throws Exception {
-		System.out.println(dto.getArticlenum());
 		if(identify(dto)){
 			sql.update("com.edit",dto);
 		}

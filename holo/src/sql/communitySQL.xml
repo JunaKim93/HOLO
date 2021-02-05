@@ -34,11 +34,6 @@
 													#{step},
 													#{depth})
 	</insert>
-	<insert id="insertImg" parameterType="comImgDTO">
-		INSERT INTO COMMUNITYIMG VALUES ( 			#{filerealname},
-												  	#{filename},
-												  	#{articlenum})
-	</insert>
 	<insert id="like" parameterType="comLikeDTO">
 		INSERT INTO COMMUNITYBOARDLIKE 	 VALUES ( 	#{articlenum},
 													#{id})
@@ -64,13 +59,7 @@
 		SELECT * 
 				FROM COMMUNITYBOARD 
 			WHERE CATEGORY_A = #{1} AND CATEGORY_B = #{2}
-		ORDER BY REGDATE DESC
-	</select>
-	<select id="imgList" resultType="ComImgDTO" parameterType="int">
-		SELECT * 
-				FROM COMMUNITYIMG 
-			WHERE ARTICLENUM = #{articlenum}
-		ORDER BY FILEREALNAME ASC
+		ORDER BY ARTICLENUM DESC
 	</select>
 	<select id="view" resultType="ComDTO" parameterType="int">
 		SELECT * 

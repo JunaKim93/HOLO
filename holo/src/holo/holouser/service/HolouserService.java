@@ -16,4 +16,5 @@ public interface HolouserService {
 	 public void setTempPw(HolouserDTO member) throws Exception;
 	 public int userCheck(String id) throws Exception;
 	 public HolouserDTO memberPage(String id) throws Exception;
+	 
 }
