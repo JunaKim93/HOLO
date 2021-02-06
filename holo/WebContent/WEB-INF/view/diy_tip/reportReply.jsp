@@ -6,7 +6,7 @@
     <form action="/holo/diy_tip/reportReplyPro.holo" method="post">
     	<table border="1" width="500" style="border-collapse:collapse">
     		<tr>
-    			<td colspan="2">게시글 신고</td>
+    			<td colspan="2">댓글 신고</td>
     		</tr>
     		<tr>
     			<td align="center" width="150"> 내용</td>

@@ -302,7 +302,6 @@
 		<button style="background-color: white;"
 			onclick="reportArticle('${article.articleNum}', '${article.subject}')">
 			&nbsp;📢 &nbsp;</button>
-
 	</div>
 	<br />
 	<div align="center">

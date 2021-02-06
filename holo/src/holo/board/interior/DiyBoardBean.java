@@ -88,9 +88,6 @@ public class DiyBoardBean {
 
 	@RequestMapping("content.holo")
 	public String tip(int articleNum, int pageNum, Model model) throws Exception {
-//		CountManager cm = new CountManager();
-//		int mcount = cm.getCount();
-//		
 		DiyBoardDTO article = diyBoardDAO.getArticle(articleNum);
 		diyBoardDAO.updateViewCount(articleNum);
 		List replyList = null;
@@ -103,7 +100,6 @@ public class DiyBoardBean {
 		model.addAttribute("id", id);
 		model.addAttribute("article", article);
 		model.addAttribute("rplList", replyList);
-//		model.addAttribute("mcount", mcount);
 
 		return "/diy_tip/content";
 	}
@@ -121,8 +117,9 @@ public class DiyBoardBean {
 	}
 
 	@RequestMapping("updatePro.holo")
-	public String updatePro(DiyBoardDTO dto, int pageNum, Model model) throws Exception {
+	public String updatePro(DiyBoardDTO dto, int articleNum, int pageNum, Model model) throws Exception {
 		diyBoardDAO.update(dto);
+		model.addAttribute("articleNum", new Integer(articleNum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/diy_tip/updatePro";
 	}
