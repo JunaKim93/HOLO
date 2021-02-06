@@ -10,7 +10,7 @@
 		insert into marketBoard values (mkBoard_seq.nextval,#{category_a},#{category_b},#{id},#{subject},#{price}, #{content},#{viewCount},#{report},sysdate,#{thumbnail}, #{condition}, #{dealing})
 	</insert> 
 	<update id="update" parameterType="MkBoardDTO">
-		update marketBoard set subject=#{subject}, price=#{price}, content=#{content}, regDate=sysdate where articleNum=#{articleNum}
+		update marketBoard set subject=#{subject}, price=#{price}, content=#{content}, condition=#{condition}, dealing=#{dealing}, regDate=sysdate where articleNum=#{articleNum}
 	</update>
 	<update id="updateViewCount" parameterType="int">
 		update marketBoard set viewCount = viewCount+1 where articleNum=#{value}

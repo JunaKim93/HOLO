@@ -14,29 +14,30 @@
 <br>
 <form method="post" name="updateform" action="/holo/market_sell/updatePro.holo?pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="660" style="border-spacing: 0; padding: 0; align: center;" border="1">
-	<tr>
-		<td width="150" align="center">게시판</td>
-		<td width="150" colspan="3">
+<!-- 	<tr> -->
+<!-- 		<td width="150" align="center">게시판</td> -->
+<!-- 		<td width="150" colspan="3"> -->
 		
-			<select name='category_a' onChange='chkSel(this);'>
-				<option value='null'>---- 선택하세요</option>
-				<option value='market'
-					<c:if test="${article.category_a eq 'market'}">selected</c:if>>중고장터</option>
-				<option value='free'
-					<c:if test="${article.category_a eq 'free'}">selected</c:if>>무료나눔</option>
-				<option value='group'
-					<c:if test="${article.category_a eq 'group'}">selected</c:if>>공동구매</option>
-			</select>
+<!-- 			<select name='category_a' onChange='chkSel(this);'> -->
+<!-- 				<option value='null'>---- 선택하세요</option> -->
+<!-- 				<option value='market' -->
+<%-- 					<c:if test="${article.category_a eq 'market'}">selected</c:if>>중고장터</option> --%>
+<!-- 				<option value='free' -->
+<%-- 					<c:if test="${article.category_a eq 'free'}">selected</c:if>>무료나눔</option> --%>
+<!-- 				<option value='group' -->
+<%-- 					<c:if test="${article.category_a eq 'group'}">selected</c:if>>공동구매</option> --%>
+<!-- 			</select> -->
 			
-			<select name='category_b' style='display:none;'>
+<!-- 			<select name='category_b' style='display:none;'> -->
 
-				<option value='sell'
-					<c:if test="${article.category_b eq 'sell'}">selected</c:if>>팝니다</option>
-				<option value='buy'
-					<c:if test="${article.category_b eq 'buy'}">selected</c:if>>삽니다</option>
-			</select>
-		</td>
-	</tr>
+<!-- 				<option value='sell' -->
+<%-- 					<c:if test="${article.category_b eq 'sell'}">selected</c:if>>팝니다</option> --%>
+<!-- 				<option value='buy' -->
+<%-- 					<c:if test="${article.category_b eq 'buy'}">selected</c:if>>삽니다</option> --%>
+<!-- 			</select> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+
 	<tr>
 		<td colspan="4"><input type="text" name="subject" placeholder="제목 (상품명)" value="${article.subject }"style="width:100%; padding: 0; border-width: 0;"></td>
 	</tr>
@@ -74,6 +75,9 @@
   </tr>
 <tr>      
  <td colspan=2  align="center"> 
+ 	<input type="hidden" name="articleNum" value="${article.articleNum}" />
+ 	<input type="hidden" name="category_a" value="${article.category_a}" />
+	<input type="hidden" name="category_b" value="${article.category_b}" />
 	<input type="hidden" name="id" value="sessionId">
  	<input type="submit" name="updatebtn" id="updatebtn" value="수정하기" >  
  	<input type="reset" value="다시작성">

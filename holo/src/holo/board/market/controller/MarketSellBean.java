@@ -11,8 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import holo.board.information.DTO.InfoBoardDTO;
-import holo.board.interior.dto.DiyBoardDTO;
+import holo.board.interior.dto.DiyReportDTO;
 import holo.board.market.dto.MarketBoardDTO;
 import holo.board.market.service.MarketService;
 
@@ -54,6 +53,7 @@ public class MarketSellBean {
 		return "market_sell/writePro";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/list.holo")
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
 		try{
@@ -80,7 +80,7 @@ public class MarketSellBean {
 				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
 			
 			}else {
-				articleList = Collections.EMPTY_LIST;
+				articleList = Collections.emptyList();
 			}
 			number = count - (currentPage-1)*pageSize;		
 		
@@ -140,5 +140,12 @@ public class MarketSellBean {
 		MarketDAO.delete(articleNum);
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/market_sell/deletePro";
+	}
+	
+	@RequestMapping("reportArticle.holo")
+	public String boardReport(int articleNum, String subject, Model model) throws Exception {
+		model.addAttribute("subject", subject);
+		model.addAttribute("articleNum", articleNum);
+		return "/market_sell/reportArticle";
 	}
 }
