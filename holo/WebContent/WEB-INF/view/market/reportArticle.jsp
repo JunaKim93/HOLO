@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <center>
-    <form action="/holo/market_sell/reportArticlePro.holo" method="post">
+    <form action="/holo/market/reportArticlePro.holo" method="post">
     	<table border="1" width="500" style="border-collapse:collapse">
     		<tr>
     			<td colspan="2">게시글 신고</td>

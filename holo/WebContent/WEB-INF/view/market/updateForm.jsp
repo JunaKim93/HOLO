@@ -12,31 +12,8 @@
 <body>  
 <center><b>글 수정</b>
 <br>
-<form method="post" name="updateform" action="/holo/market_sell/updatePro.holo?pageNum=${pageNum}" onsubmit="return writeSave()">
+<form method="post" name="updateform" action="/holo/market/updatePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="660" style="border-spacing: 0; padding: 0; align: center;" border="1">
-<!-- 	<tr> -->
-<!-- 		<td width="150" align="center">게시판</td> -->
-<!-- 		<td width="150" colspan="3"> -->
-		
-<!-- 			<select name='category_a' onChange='chkSel(this);'> -->
-<!-- 				<option value='null'>---- 선택하세요</option> -->
-<!-- 				<option value='market' -->
-<%-- 					<c:if test="${article.category_a eq 'market'}">selected</c:if>>중고장터</option> --%>
-<!-- 				<option value='free' -->
-<%-- 					<c:if test="${article.category_a eq 'free'}">selected</c:if>>무료나눔</option> --%>
-<!-- 				<option value='group' -->
-<%-- 					<c:if test="${article.category_a eq 'group'}">selected</c:if>>공동구매</option> --%>
-<!-- 			</select> -->
-			
-<!-- 			<select name='category_b' style='display:none;'> -->
-
-<!-- 				<option value='sell' -->
-<%-- 					<c:if test="${article.category_b eq 'sell'}">selected</c:if>>팝니다</option> --%>
-<!-- 				<option value='buy' -->
-<%-- 					<c:if test="${article.category_b eq 'buy'}">selected</c:if>>삽니다</option> --%>
-<!-- 			</select> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
 
 	<tr>
 		<td colspan="4"><input type="text" name="subject" placeholder="제목 (상품명)" value="${article.subject }"style="width:100%; padding: 0; border-width: 0;"></td>
@@ -81,33 +58,13 @@
 	<input type="hidden" name="id" value="sessionId">
  	<input type="submit" name="updatebtn" id="updatebtn" value="수정하기" >  
  	<input type="reset" value="다시작성">
-	<input type="button" value="목록보기" OnClick="window.location='/holo/market_sell/list.holo'">
+	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo'">
 </td></tr></table>    
 </form>     
 </body>
 </html>
 
 <script type="text/javascript">
-
-function categoryChange(e) {
-	var b_market = ["팝니다", "삽니다"];
-	var b_free = ["무료나눔"];
-	var b_group = ["공동구매"];
-	var target = document.getElementById("category_b");
-
-	if(e.value == "market") var d = b_market;
-	else if(e.value == "free") var d = b_free;
-	else if(e.value == "group") var d = b_group;
-
-	target.options.length = 0;
-
-	for (x in d) {
-		var opt = document.createElement("option");
-		opt.value = d[x];
-		opt.innerHTML = d[x];
-		target.appendChild(opt);
-	}	
-}
 
 function chkSel(obj)
 {

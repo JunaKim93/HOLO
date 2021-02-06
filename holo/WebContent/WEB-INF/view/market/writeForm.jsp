@@ -14,30 +14,29 @@
 <body >  
 <center><b>글쓰기</b>
 <br>
-<form method="post" id="writeform" name="writeform" action="/holo/market_sell/writePro.holo" onsubmit="return writeSave()">
+<form method="post" id="writeform" name="writeform" action="/holo/market/writePro.holo" onsubmit="return writeSave()">
 <table width="660" style="border-spacing: 0; padding: 0; align: center;" border="1">
 	<tr>
 		<td width="150" align="center">게시판</td>
 		<td width="150" colspan="3">
 			<select name='category_a' onChange='chkSel(this);'>
-				<option value='null'>---- 선택하세요</option>
-				<option value='market'>중고장터</option>
+				<option value='market' selected>중고장터</option>
 				<option value='free'>무료나눔</option>
 				<option value='group'>공동구매</option>
 			</select>
 			
-			<select name='category_b' style='display:none;'>
-				<option value='null'>---- 선택하세요</option>
+			<select name='category_b'>
+				<option value='null' selected>---- 선택하세요</option>
 				<option value='sell'>팝니다</option>
 				<option value='buy'>삽니다</option>
 			</select>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><input type="text" name="subject" placeholder="제목 (상품명)" style="width:100%; padding: 0; border-width: 0;"></td>
+		<td colspan="4" height="35"><input type="text" name="subject" placeholder="제목 (상품명)" style="width:100%; padding: 0; border-width: 0;"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><input type="text" name="price" placeholder="판매 가격">원</td>
+		<td colspan="4"><input type="text" name="price" placeholder="희망 판매(구매) 가격/ 무료 나눔은 값을 입력하셔도 반영되지 않습니다."  style="width:440px; height:30px;">원</td>
 	</tr>
 	<tr>
 		<td>상품 상태</td>
@@ -66,7 +65,7 @@
 	<input type="hidden" name="id" value="sessionId">
  	<input type="submit" name="writebtn" id="writebtn" value="글쓰기" >  
  	<input type="reset" value="다시작성">
-	<input type="button" value="목록보기" OnClick="window.location='/holo/market_sell/list.holo'">
+	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo'">
 </td></tr></table>    
 </form>     
 </body>
@@ -94,15 +93,6 @@ function categoryChange(e) {
 	}	
 }
 
-function chkSel(obj){
-    if((obj.value) == "market")
-        document.writeform.category_b.style.display = '';
-//  		document.getElementsByName('category_b')[0].style.width='100pt';
-      else
-        document.writeform.category_b.style.display = 'none';
-// 			document.getElementsByName('category_b')[0].style.width='0pt';
-}
-
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
@@ -127,11 +117,6 @@ window.onload = function(){
    }
  
  function writeSave() {
-	if(document.writeform.category_a.value == "null") {
-	        alert("게시판을 선택하세요");
-	        document.writeform.id.focus();
-	        return false;
-	    }
 	
 	 if((document.writeform.category_a.value == "market" && document.writeform.category_b.value == "null")
 			 && document.writeform.category_b.value != "sell" 
@@ -158,6 +143,14 @@ window.onload = function(){
 	        return false;
 	    }
  }
-    
+ 
+ function chkSel(cate) {
+		if (cate.value == "market") {
+			$("[name=category_b]").show();
+		}else{
+			$("[name=category_b]").hide();
+		}
+	};
+	func
  
 </script>      
