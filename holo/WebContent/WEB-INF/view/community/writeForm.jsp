@@ -7,8 +7,11 @@
 <head>
 <title>자유게시판</title>
 <link href="/holo/resource/style/style_board.css" rel="stylesheet" type="text/css">
-</head>
+<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+</head>
+
 <script>
 	function changeSelect(cat_a) {
 		if (cat_a == "1") {
@@ -80,7 +83,7 @@
 				<tr>
 					<td width="50" align="center" bgcolor="${value_c}">내 용</td>
 					<td width="950">
-						<textarea name="content" rows="20" style="resize: none; width: 100%;">${cdto.content}</textarea>
+						<textarea rows="20" cols="30" id="content" name="content" style="resize: none; width: 100%;">${cdto.content}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -99,3 +102,51 @@
 		</form>
 </body>
 </html>
+
+
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "content",
+ sSkinURI: "/holo/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+
+});
+
+window.onload = function(){
+   var btn = document.getElementById("writebtn");
+   btn.onclick = function(){
+	   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+      submitContents(btn);
+   }
+}
+
+ 
+ function pasteHTML(filepath){
+       var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
+       oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
+   }
+ 
+ function writeSave() {
+	    if(document.writeform.id.value == "") {
+	        alert("이름을 입력하세요");
+	        document.writeform.id.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.subject.value == "") {
+	        alert("제목을 입력하세요");
+	        document.writeform.subject.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.content.value == "") {
+	        alert("내용을 입력하세요");
+	        document.writeform.content.focus();
+	        return false;
+	    }
+ }
+    
+ 
+</script>    
