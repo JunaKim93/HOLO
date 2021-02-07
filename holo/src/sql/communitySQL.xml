@@ -61,6 +61,11 @@
 			WHERE CATEGORY_A = #{1} AND CATEGORY_B = #{2}
 		ORDER BY ARTICLENUM DESC
 	</select>
+	<select id="myRecentArticlenum" resultType="int" parameterType="String">
+		SELECT MAX(ARTICLENUM) 
+			FROM COMMUNITYBOARD
+		WHERE ID=#{value}
+	</select>
 	<select id="view" resultType="ComDTO" parameterType="int">
 		SELECT * 
 			FROM COMMUNITYBOARD 

@@ -35,7 +35,7 @@
 	function cancelForm(){
 		$.ajax({
 			url: "/holo/com/replyForm.holo",type:"post",
-			data:{articlenum:${articlenum},writer:${writer}, repnum: 0},
+			data:{articlenum:${articlenum},writer:'${writer}', repnum: 0},
 			success:function(html){
 				$(".reply-form-open").remove();
 				$("#replyRow"+${repnum}).show();
@@ -50,7 +50,7 @@
             type: "POST",
             data: {
                 articlenum: ${articlenum},
-                writer:		${writer}
+                writer:		'${writer}'
             },
             success: function (html) {
             	$("#reply_section").html(html);
@@ -68,17 +68,13 @@
 				</c:if>
 			</td>
 			<td width="640">
-				<textarea id="replyTextarea${repnum}" rows="6" style="resize: none; width: 100%;">
-					<c:if test="${mode=='edit'}">
-						${rplContent}
-					</c:if>
-				</textarea>
+				<textarea id="replyTextarea${repnum}" rows="6" style="resize: none; width: 100%;">${rplContent}</textarea>
 			</td>
 				<td border="0" colspan="3">&nbsp;&nbsp;
 					<c:if test="${mode=='edit'}">
 						<button onclick="validateEdit()">수정하기</button>
 					</c:if>
-					<c:if test="${mode=='new'}">
+					<c:if test="${mode=='new'&&sessionScope.sessionId!=null}">
 						<button onclick="validateForm()">작성하기</button>
 					</c:if>
 					<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

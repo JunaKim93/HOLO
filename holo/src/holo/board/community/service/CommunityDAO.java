@@ -28,8 +28,9 @@ public class CommunityDAO implements CommunityDBService{
 	private SqlSessionTemplate sql = null;
 	
 	@Override
-	public void write(ComDTO dto) throws Exception {
-		sql.insert("com.write" ,  dto);	
+	public int write(ComDTO dto) throws Exception {
+		sql.insert("com.write" ,  dto);
+		return sql.selectOne("com.myRecentArticlenum", dto.getId());
 	}
 
 	@Override

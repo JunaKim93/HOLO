@@ -17,7 +17,7 @@ import holo.board.community.dto.ComRplReportDTO;
 public interface CommunityDBService {
 
 	
-	public void write(ComDTO dto) throws Exception;
+	public int write(ComDTO dto) throws Exception;
 	public void reply(ComRplDTO dto)throws Exception;
 	public int countLaterRepliesInSameDepth(Map map) throws Exception;
 	public int countReReplies(Map map) throws Exception;
