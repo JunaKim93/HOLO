@@ -89,10 +89,10 @@
 				<tr>
 					<td colspan=2 align="center" bgcolor="${value_c}">
 						<c:if test="${mode=='new'}">
-							<button onclick="validateForm()">글쓰기</button>
+							<button id="writebtn" onclick="validateForm()">글쓰기</button>
 						</c:if>
 						<c:if test="${mode=='edit'}">
-							<button onclick="validateForm()">수정하기</button>
+							<button id="writebtn" onclick="validateForm()">수정하기</button>
 						</c:if>
 						<input type="reset" value="다시작성"/> 
 						<input type="button" value="목록보기" OnClick="window.location='/holo/com/list.holo?pagenum=${pagenum}'"/>
@@ -128,25 +128,6 @@ window.onload = function(){
        oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
    }
  
- function writeSave() {
-	    if(document.writeform.id.value == "") {
-	        alert("이름을 입력하세요");
-	        document.writeform.id.focus();
-	        return false;
-	    }
-	    
-	    if(document.writeform.subject.value == "") {
-	        alert("제목을 입력하세요");
-	        document.writeform.subject.focus();
-	        return false;
-	    }
-	    
-	    if(document.writeform.content.value == "") {
-	        alert("내용을 입력하세요");
-	        document.writeform.content.focus();
-	        return false;
-	    }
- }
     
  
 </script>    
