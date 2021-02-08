@@ -60,8 +60,6 @@ public class MarketBean {
 			MarketDAO.insert(dto);
 			String category_a = dto.getCategory_a();
 			String category_b = dto.getCategory_b();
-			int price = dto.getPrice();
-			System.out.println(price);
 			model.addAttribute("category_a", category_a);
 			model.addAttribute("category_b", category_b);
 		}catch(Exception e){
@@ -345,6 +343,22 @@ public class MarketBean {
 		model.addAttribute("articleNum", new Integer(dto.getArticleNum()));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/market/rplDeletePro";
+	}
+	
+	@RequestMapping("newArticlePro.holo")
+	public String newArticle(MarketBoardDTO dto, Model model) throws Exception {
+		int x = 0; 
+		int articleNum = dto.getArticleNum();
+		x = MarketDAO.newArticleCheck(articleNum);
+		int check = 1;
+		if(x==0) {
+			MarketDAO.newArticle(articleNum);
+			check = 0;
+		}
+		String cate_b = dto.getCategory_b();
+		model.addAttribute("check",check);
+		model.addAttribute("category_b",cate_b);
+		return "/market/newArticlePro";
 	}
 	
 }

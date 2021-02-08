@@ -38,5 +38,23 @@ public class RestMarketBean {
 	public void updateRpl(@ModelAttribute MarketReplyDTO dto) throws Exception {
 		MarketDAO.updateRpl(dto);
 	}
+	
+	@RequestMapping(value = "/updateRepLikes.holo", method = RequestMethod.POST)
+	public int updateRepLikes(@RequestBody String paramData) throws Exception{
+		int result = 1;
+		int check = 0;
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
+		String id = (String) jsonObj.get("id");
+		int repNum = Integer.parseInt(String.valueOf(jsonObj.get("repNum")));
+		check = MarketDAO.checkRLikes(repNum, id);
+		if (check == 0) {
+			MarketDAO.insertRLikes(repNum, id);
+			MarketDAO.updateRLikes(repNum);
+			result = 0;
+		}
 
+		return result;
+	}
+	
 }

@@ -50,4 +50,8 @@ public interface MarketService {
 	public int getSearchCount(String category_a, String category_b, String choice, String search) throws Exception;
 	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception;
 	
+	// 끌어올리기
+	public void newArticle(int articleNum) throws Exception;
+	public int newArticleCheck(int articleNum) throws Exception;
+	
 }
