@@ -21,7 +21,7 @@
 
 	function deleteConfirm() {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}";
+			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&category_b=${article.category_b}";
 		}
 	}
 	function deleteRepConfirm(repNum) {
@@ -32,12 +32,12 @@
 	}
 
 	function reportArticle(articleNum, subject) {
-		window.open("/holo/diy_tip/reportArticle.holo?articleNum=" + articleNum
+		window.open("/holo/diy/reportArticle.holo?articleNum=" + articleNum
 				+ "&subject=" + subject, "a",
 				"width=700, height=700, left=100, top=50");
 	}
 	function reportReply(repNum, content) {
-		window.open("/holo/diy_tip/reportReply.holo?repNum=" + repNum
+		window.open("/holo/diy/reportReply.holo?repNum=" + repNum
 				+ "&content=" + content, "a",
 				"width=700, height=700, left=100, top=50");
 	}
@@ -54,7 +54,7 @@
 
 					$.ajax({
 						type : "POST",
-						url : "/holo/diy_tip/insertRpl.holo",
+						url : "/holo/diy/insertRpl.holo",
 						data : param,
 						success : function() {
 							$("#replytext").val('');
@@ -69,7 +69,7 @@
 		$
 				.ajax({
 					type : "GET",
-					url : "/holo/diy_tip/replyList.holo?articleNum=${article.articleNum}",
+					url : "/holo/diy/replyList.holo?articleNum=${article.articleNum}",
 					success : function(result) {
 						console.log(result);
 						var output = "";
@@ -151,7 +151,7 @@
 		var param = "content=" + replyEditContent + "&repNum=" + repNum;
 		$.ajax({
 			type : "POST",
-			url : "/holo/diy_tip/updateReply.holo",
+			url : "/holo/diy/updateReply.holo",
 			data : param,
 			success : function(result) {
 				console.log(result);
@@ -166,7 +166,7 @@
 	$(function() {
 		$("#likesUpdate").click(function() {
 			$.ajax({
-				url : "/holo/diy_tip/updateLikes.holo",
+				url : "/holo/diy/updateLikes.holo",
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
@@ -183,7 +183,7 @@
 
 		function likesCount() {
 			$.ajax({
-				url : "/holo/diy_tip/countLikes.holo",
+				url : "/holo/diy/countLikes.holo",
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
@@ -199,7 +199,7 @@
 
 		function checkLikes() {
 			$.ajax({
-				url : "/holo/diy_tip/checkLikes.holo",
+				url : "/holo/diy/checkLikes.holo",
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
@@ -224,7 +224,7 @@
 
 	function replikesUpdate_click(repNum) {
 		$.ajax({
-			url : "/holo/diy_tip/updateRepLikes.holo",
+			url : "/holo/diy/updateRepLikes.holo",
 			contentType : "application/json; charset=UTF-8",
 			data : JSON.stringify({
 				'repNum' : repNum,
@@ -249,7 +249,7 @@
 
 <body>
 	<div align="center">
-		<b>글내용 보기</b> ${mcount}
+		<b>글내용 보기</b>
 	</div>
 	<br />
 	<div align="center">
@@ -281,11 +281,19 @@
 				<tr height="30">
 					<td colspan="4" bgcolor="${value_c}" align="right"><input
 						type="button" value="글수정"
-						onclick="document.location.href='/holo/diy_tip/updateForm.holo?articleNum=${article.articleNum}&pageNum=${pageNum}'">
+						onclick="document.location.href='/holo/diy/updateForm.holo?articleNum=${article.articleNum}&pageNum=${pageNum}'">
 						&nbsp;&nbsp; <input type="button" value="글삭제"
-						onclick="deleteConfirm()"> &nbsp;&nbsp; <input
-						type="button" value="글목록"
-						onclick="document.location.href='/holo/diy_tip/list.holo?pageNum=${pageNum}'">
+						onclick="deleteConfirm()"> &nbsp;&nbsp; 
+						<c:choose>
+						<c:when test="${article.category_b ne 'show'}">
+						<input type="button" value="글목록"
+						onclick="document.location.href='/holo/diy/list.holo?pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}'">
+						</c:when>
+						<c:when test="${article.category_b eq 'show'}">
+						<input type="button" value="글목록"
+						onclick="document.location.href='/holo/diy/showList.holo?pageNum=${pageNum}'">
+						</c:when>
+						</c:choose>
 						<input type="hidden" name="articleNum"
 						value="${article.articleNum}"> <input type="hidden"
 						name="pageNum" value="${pageNum}"></td>

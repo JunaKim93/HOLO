@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,21 +15,23 @@
 <body >  
 <center><b>글쓰기</b>
 <br>
-<form method="post" id="writeform" name="writeform" action="/holo/diy_tip/writePro.holo" onsubmit="return writeSave()">
+<form method="post" id="writeform" name="writeform" action="/holo/diy/writePro.holo" onsubmit="return writeSave()">
    <input type = "hidden" name="category_a" value="myroom">
    
 <table width="810"  border="1"  align="center">
    <tr>
     <td align="right" colspan="2" >
-       <a href="/holo/diy_tip/list.holo"> 글목록</a> 
+       <a href="/holo/diy/list.holo?category_b=${category_b}"> 글목록</a> 
    </td>
    </tr>
    <tr>
     <td align="center">카테고리</td>
     <td><select name="category_b">
       <option value="show">인테리어 뽐내기</option>
-      <option value="tip" selected>인테리어 팁</option>
-      <option value="qna">인테리어 질문</option>
+      <option value="tip" 
+      	<c:if test="${category_b eq 'tip'}">selected</c:if>>인테리어 팁</option>
+      <option value="qna"
+      	<c:if test="${category_b eq 'qna'}">selected</c:if>>인테리어 질문</option>
    </select></td>
   </tr>
    <tr>
@@ -50,7 +53,7 @@
  <td colspan=2  align="center"> 
   <input type="submit" name="writebtn" id="writebtn" value="글쓰기" >  
   <input type="reset" value="다시작성">
-  <input type="button" value="목록보기" OnClick="window.location='/holo/diy_tip/list.holo'">
+  <input type="button" value="목록보기" OnClick="window.location='/holo/diy/list.holo?category_b=${category_b}'">
 </td></tr></table>    
 </form>      
 </body>

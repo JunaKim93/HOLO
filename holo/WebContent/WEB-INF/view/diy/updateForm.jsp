@@ -10,12 +10,14 @@
 </head>
 
 <body>  
-<center><b>글 수정</b>
+<div align="center">
+		<b>글 수정</b> ${mcount}
+	</div>
 <br>
-<form method="post" name="updateform" action="/holo/diy_tip/updatePro.holo?pageNum=${pageNum}" onsubmit="return writeSave()">
+<form method="post" name="updateform" action="/holo/diy/updatePro.holo?pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="1000" border="1" cellspacing="0" cellpadding="0" align="center">  
   <tr height="30">
- 	<input type="hidden" name="articleNum" value="${article.articleNum}"></td>
+ 	<td><input type="hidden" name="articleNum" value="${article.articleNum}"></td>
     <td align="center" width="125">글번호</td>
     <td align="center" width="125" align="center">${article.articleNum}</td>
     <td align="center" width="125" >조회수</td>
@@ -40,7 +42,7 @@
      <input type="submit" name="updatebtn" id="updatebtn" value="글수정" >  
      <input type="reset" value="다시작성">
      <input type="button" value="목록보기" 
-       onclick="document.location.href='/holo/diy_tip/list.holo?pageNum=${pageNum}'">
+       onclick="document.location.href='/holo/diy/list.holo?pageNum=${pageNum}&category_b=${category_b}'">
    </td>
   </tr>
 </table>    
