@@ -54,7 +54,6 @@ public class RestController {
 			crdto.setId(sessionId);
 			crdto.setReason(reason);
 			dao.report(crdto);
-			model.addAttribute("articlenum",articlenum);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
