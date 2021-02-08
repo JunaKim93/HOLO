@@ -28,17 +28,18 @@ import holo.board.information.service.LivingBoardService;
 
 @EnableWebMvc
 @Controller
-@RequestMapping("/livingboard/")
-public class LivingBoardController {
+@RequestMapping("/infoboard/")
+public class InfoBoardController {
 
 	@Autowired
 	public LivingBoardService liveBrdDAO = null;
 	
 	@RequestMapping("/list.holo")
-	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
+	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
+						@RequestParam(defaultValue="living", required=true)String category_a,
+						@RequestParam(required=false) String category_b, Model model) {
 		try{
-			String category_a = "living";
-			String category_b = null;
+			System.out.println(category_b);
 			List <InfoBoardDTO> articleList = null;
 			int pageSize = 20;							//페이지에 노출될 게시물 수
 			int currentPage = pageNum;					//현재 페이지 번호
@@ -64,7 +65,8 @@ public class LivingBoardController {
 			}
 			number = count - (currentPage-1)*pageSize;		
 		
-			
+			model.addAttribute("category_a", category_a);
+			model.addAttribute("category_b", category_b);
 			model.addAttribute("articleList", articleList);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("start", start);
@@ -77,27 +79,29 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/list";
+		return "infoboard/list";
 	}
 	
 	
 	@RequestMapping("/writeForm.holo")
 	public String logon_writeForm() {
-		return "livingboard/writeForm";
+		return "infoboard/writeForm";
 	}
 	
 	@RequestMapping("/writePro.holo")
-	public String logon_writePro(InfoBoardDTO dto) {
+	public String logon_writePro(InfoBoardDTO dto, Model model) {
 		try{
 			liveBrdDAO.insertArticle(dto);
+			model.addAttribute("dto", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/writePro";
+		return "infoboard/writePro";
 	}
 	
 	@RequestMapping("/article.holo")
-	public String article(int pageNum, int articlenum, Model model, HttpSession session) {
+	public String article(int pageNum, int articlenum, Model model, HttpSession session, 
+						@RequestParam(required=false) String category_b) {
 		try{
 			InfoBoardDTO dto = liveBrdDAO.getArticle(articlenum);
 			String sessionId = (String)session.getAttribute("sessionId");
@@ -108,12 +112,13 @@ public class LivingBoardController {
 				model.addAttribute("dto", dto);
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("sessionCheck", sessionCheck);
+				model.addAttribute("category_b", category_b);
 				
 			}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "livingboard/article";
+		return "infoboard/article";
 	}
 	
 	@ResponseBody
@@ -135,39 +140,38 @@ public class LivingBoardController {
 	
 	
 	@RequestMapping("/updateForm.holo")
-	public String logon_updateForm(int pageNum, int articlenum, Model model){
+	public String logon_updateForm(int articlenum, Model model){
 		try{
 			InfoBoardDTO dto = liveBrdDAO.updateGetArticle(articlenum);
 			model.addAttribute("dto", dto);
-			model.addAttribute("pageNum", pageNum);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/updateForm";
+		return "infoboard/updateForm";
 	}
 	
 	@RequestMapping("/updatePro.holo")
-	public String logon_updatePro(InfoBoardDTO dto, int pageNum, int articlenum, Model model) {
+	public String logon_updatePro(InfoBoardDTO dto, int articlenum, Model model) {
 		try{
 			liveBrdDAO.updateArticle(dto);
 			model.addAttribute("articlenum", articlenum);
-			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("dto", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/updatePro";
+		return "infoboard/updatePro";
 	}
 	
 	
 	@RequestMapping("/deleteArticle.holo")
-	public String logon_deleteArticle(int articlenum, int pageNum, Model model) {
+	public String logon_deleteArticle(int articlenum, Model model, String category_a) {
 		try {
 			liveBrdDAO.deleteArticle(articlenum);
-			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("category_a", category_a);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return "livingboard/deleteArticle";
+		return "infoboard/deleteArticle";
 	}
 	
 	@RequestMapping("/insertRep.holo")
@@ -181,7 +185,7 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/insertRep";
+		return "infoboard/insertRep";
 	}
 	
 	@RequestMapping("/deleteRep.holo")
@@ -193,7 +197,7 @@ public class LivingBoardController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "livingboard/deleteRep";
+		return "infoboard/deleteRep";
 	}
 	
 	@RequestMapping("/reportArticle.holo")
@@ -204,7 +208,7 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/reportArticle";
+		return "infoboard/reportArticle";
 	}
 	
 	@RequestMapping("/reportArticlePro.holo")
@@ -216,7 +220,7 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/reportArticlePro";
+		return "infoboard/reportArticlePro";
 	}
 	
 	@RequestMapping("/reportReply.holo")
@@ -228,7 +232,7 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/reportReply";
+		return "infoboard/reportReply";
 	}
 	
 	@RequestMapping("/reportReplyPro.holo")
@@ -240,15 +244,17 @@ public class LivingBoardController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/reportReplyPro";
+		return "infoboard/reportReplyPro";
 	}
 
 	
 	@RequestMapping("/searchList.holo")
 	public String searchList(@RequestParam(defaultValue="1", required = true) int pageNum, 
 					String sort, String keyword, 
-					@RequestParam(defaultValue="living") String category_a, String category_b, Model model) {
+					 String category_a, 
+					 @RequestParam(required=false) String category_b, Model model) {
 		try{
+			System.out.println(category_b);
 			List <InfoBoardDTO> searchList = null;
 			int pageSize = 20;							//페이지에 노출될 게시물 수
 			int currentPage = pageNum;					//현재 페이지 번호
@@ -286,10 +292,11 @@ public class LivingBoardController {
 			model.addAttribute("sort", sort);
 			model.addAttribute("keyword", keyword);
 			model.addAttribute("category_a", category_a);
+			model.addAttribute("category_b", category_b);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "livingboard/searchList";
+		return "infoboard/searchList";
 	}
 	
 	

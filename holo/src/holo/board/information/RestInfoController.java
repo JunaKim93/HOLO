@@ -19,10 +19,10 @@ import holo.board.information.DTO.InfoRepDTO;
 import holo.board.information.service.LivingBoardService;
 
 @RestController
-@RequestMapping("/livingboard/")
-public class RestLivingController {
+@RequestMapping("/infoboard/")
+public class RestInfoController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LivingBoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(InfoBoardController.class);
 
 	@Autowired
 	public LivingBoardService liveBrdDAO = null;

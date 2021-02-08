@@ -23,16 +23,20 @@
 			alert("내용을 입력하세요");
 			return false;
 		}
+		if(!form.category_a.value){
+			alert("카테고리를 선택하세요");
+			return false;
+		}
 	}
 </script>
 
 
 
-<form method="post" name="updateForm" action="/holo/livingboard/updatePro.holo" onSubmit="return checkValue()">
+<form method="post" name="updateForm" action="/holo/infoboard/updatePro.holo" onSubmit="return checkValue()">
 <table width="750" align="center" border="1" style="border-collapse:collapse">
 	<input type="hidden" name="id" value="${sessionScope.sessionId}" />
 	<input type="hidden" name="articlenum" value="${dto.articlenum}" />
-	<input type="hidden" name="pageNum" value="${pageNum}" />
+	<input type="hidden" name="category_a" value="${dto.category_a}" />
 	<tr>
 		<td>제목</td>
 		<td>
@@ -41,15 +45,16 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			<select name="category_a">
-				<option value="living" selected>생활Tip</option>
-				<option value="cooking">자취요리Tip</option>
-				<option value="findplace">집 구하기Tip</option>
-			</select>
-			<select name="category_b">
-				<option value="tip">Tip게시판</option>
-				<option value="question">질문게시판</option>
-			</select>
+			<c:choose>
+				<c:when test="${dto.category_a == 'living'}">생활정보 || </c:when>
+				<c:when test="${dto.category_a == 'cooking'}">요리정보 || </c:when>
+				<c:when test="${dto.category_a == 'findplace'}">부동산정보 || </c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.category_b == 'tip'}"> Tip </c:when>
+				<c:when test="${dto.category_b == 'question'}"> 질문 </c:when>
+			</c:choose>
+			
 		</td>
 	</tr>
 	<tr>
@@ -60,7 +65,7 @@
 	<tr>
 		<td colspan="2">
 			<input type="submit" id="updatebtn" value="수정"/>
-			<input type="button" value="목록으로" Onclick="window.location='/holo/livingboard/list.holo'" />
+			<input type="button" value="뒤로가기" Onclick="history.back()" />
 		</td>
 	</tr>
 	

@@ -33,7 +33,7 @@
 		var paramData = {"articlenum" : "${dto.articlenum}"};
 		$.ajax({
 			type:'POST',
-			url: "/holo/livingboard/replyList.holo",
+			url: "/holo/infoboard/replyList.holo",
 			data: paramData,
 			dataType: 'JSON',
 			success: function(result){
@@ -91,7 +91,7 @@
 		var paramData = JSON.stringify({"content": replyEditContent
 				, "repnum": repnum});
 		$.ajax({
-			url: "/holo/livingboard/updateReply.holo"
+			url: "/holo/infoboard/updateReply.holo"
 			, data : paramData
 			, contentType: 'application/json'
 			, type : 'POST'
@@ -111,7 +111,7 @@
     	var check = confirm("댓글을 삭제하시겠습니까?");
     	if(check){
     		$.ajax({
-    			url: "/holo/livingboard/deleteReply.holo",
+    			url: "/holo/infoboard/deleteReply.holo",
     			data: paramData,
     			contentType: 'application/json',
     			type: 'POST',
@@ -136,7 +136,7 @@
     			alert("로그인 후 이용 가능합니다.");
     		}else{
 	    		$.ajax({
-	    			url:"/holo/livingboard/updateLikes.holo",
+	    			url:"/holo/infoboard/updateLikes.holo",
 	    			contentType:"application/json; charset=UTF-8",
 	    			type: "POST",
 	    			data: JSON.stringify({
@@ -154,7 +154,7 @@
     	
     	function likesCount(){
     		$.ajax({
-    			url:"/holo/livingboard/countLikes.holo",
+    			url:"/holo/infoboard/countLikes.holo",
     			contentType:"application/json; charset=UTF-8",
     			type: "POST",
     			data: JSON.stringify({
@@ -170,7 +170,7 @@
     	
     	function checkLikes(){
     		$.ajax({
-    			url:"/holo/livingboard/checkLikes.holo",
+    			url:"/holo/infoboard/checkLikes.holo",
     			contentType:"application/json; charset=UTF-8",
     			type: "POST",
     			data: JSON.stringify({
@@ -197,7 +197,7 @@
     	if(!${sessionCheck}){
 			alert("로그인 후 이용 가능합니다.");
 		}else{
-			window.open("/holo/livingboard/reportArticle.holo?articlenum="+articlenum+"&subject="+subject, "a", "width=700, height=700, left=100, top=50");
+			window.open("/holo/infoboard/reportArticle.holo?articlenum="+articlenum+"&subject="+subject, "a", "width=700, height=700, left=100, top=50");
 		}
 	}
     
@@ -206,7 +206,7 @@
 			alert("로그인 후 이용 가능합니다.");
 		}else{
 	    	$.ajax({
-	    		url:"/holo/livingboard/reportRepCheck.holo",
+	    		url:"/holo/infoboard/reportRepCheck.holo",
 	    		contentType: "application/json; charset=UTF-8",
 	    		data: JSON.stringify({
 	    			'repnum' : repnum,
@@ -218,7 +218,7 @@
 	    			if(result==1){
 	    				alert("이미 신고하셨습니다.");
 	    			}else{
-	    				window.open("/holo/livingboard/reportReply.holo?repnum="+repnum, "a", "width=500, height=300, left=100, top=50");
+	    				window.open("/holo/infoboard/reportReply.holo?repnum="+repnum, "a", "width=500, height=300, left=100, top=50");
 	    			}
 	    		}
 	    	})
@@ -231,7 +231,7 @@
 			alert("로그인 후 이용 가능합니다.");
 		}else{
 	    	$.ajax({
-	    		url:"/holo/livingboard/updateRepLikes.holo",
+	    		url:"/holo/infoboard/updateRepLikes.holo",
 	    		contentType: "application/json; charset=UTF-8",
 	    		data: JSON.stringify({
 	    			'repnum' : repnum,
@@ -262,7 +262,9 @@
 
 <center>
 
-<h7><a href="/holo/livingboard/list.holo">생활Tip</a></h7>
+			<a class="category" href="/holo/infoboard/list.holo?category_a=living"><b>생활정보</b></a> |
+			<a class="category" href="/holo/infoboard/list.holo?category_a=cooking"><b>요리정보</b></a> |
+			<a class="category" href="/holo/infoboard/list.holo?category_a=findplace"><b>부동산정보</b></a>
 <table border="1" width="500" style="border-collapse:collapse">
 	<tr>
 		<td colspan="4"><b>${dto.subject}</b></td>
@@ -283,10 +285,10 @@
 	<tr>
 		<td colspan="4" align="right">
 			<c:if test="${sessionScope.sessionId == dto.id}">
-				<input type="button" value="수정하기" onclick="window.location='/holo/livingboard/updateForm.holo?articlenum=${dto.articlenum}&pageNum=${pageNum}'" />
-				<input type="button" value="글삭제" onclick="delConfirm('/holo/livingboard/deleteArticle.holo?articlenum=${dto.articlenum}&pageNum=${pageNum}')" />
+				<input type="button" value="수정하기" onclick="window.location='/holo/infoboard/updateForm.holo?articlenum=${dto.articlenum}'" />
+				<input type="button" value="글삭제" onclick="delConfirm('/holo/infoboard/deleteArticle.holo?articlenum=${dto.articlenum}&category_a=${dto.category_a}')" />
 			</c:if>
-			<input type="button" value="목록으로" onclick="window.location='/holo/livingboard/list.holo?pageNum=${pageNum}'" />
+				<input type="button" value="목록으로" onclick="history.back()" />
 		</td>
 	</tr>
 	<tr>
@@ -310,7 +312,7 @@
 
 <!-- 댓글 작성 -->
 <c:if test="${sessionScope.sessionId != null }">
-	<form method="POST" action="/holo/livingboard/insertRep.holo">
+	<form method="POST" action="/holo/infoboard/insertRep.holo">
 		<tr>
 			<td colspan="3"><textarea name="content" rows="3" cols="60" placeholder="댓글을 입력하세요" style="resize:none;"></textarea></td>
 			<td><input type="submit" value="댓글쓰기" /></td>

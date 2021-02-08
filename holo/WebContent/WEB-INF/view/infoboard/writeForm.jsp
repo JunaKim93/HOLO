@@ -10,16 +10,9 @@
 
 </head>
 
-<!-- 
-<c:if test="${id == null}">
-	<script>
-		alert("로그인 후 작성 가능합니다.");
-		window.location="/holo/livingboard/list.holo";
-	</script>
-</c:if>
- -->
 
-<form method="post" name="writeForm" action="/holo/livingboard/writePro.holo" onSubmit="return checkValue()">
+
+<form method="post" name="writeForm" action="/holo/infoboard/writePro.holo" onSubmit="return checkValue()">
 <table width="750" align="center" border="1" style="border-collapse:collapse">
 	<input type="hidden" name="id" value="${sessionScope.sessionId}" />
 	<tr>
@@ -31,9 +24,10 @@
 	<tr>
 		<td colspan="2" align="right">
 			<select name="category_a">
-				<option value="living" selected>생활Tip</option>
-				<option value="cooking">자취요리Tip</option>
-				<option value="findplace">집 구하기Tip</option>
+				<option value="" selected disabled hidden>----</option>
+				<option value="living" >생활정보</option>
+				<option value="cooking">요리정보</option>
+				<option value="findplace">부동산정보</option>
 			</select>
 			<select name="category_b">
 				<option value="" selected disabled hidden>----</option>
@@ -51,7 +45,7 @@
 	<tr>
 		<td colspan="2">
 			<input type="submit" id="writebtn" value="작성완료"/>
-			<input type="button" value="목록으로" Onclick="window.location='/holo/livingboard/list.holo'" />
+			<input type="button" value="목록으로" Onclick="history.back()" />
 		</td>
 	</tr>
 	
@@ -95,6 +89,10 @@ window.onload = function(){
 		}
 		if(!form.content.value){
 			alert("내용을 입력하세요");
+			return false;
+		}
+		if(!form.category_a.value){
+			alert("카테고리를 선택하세요");
 			return false;
 		}
 	}
