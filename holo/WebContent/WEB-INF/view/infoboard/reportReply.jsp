@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <center>
-    	<form action="/holo/livingboard_tip/reportReplyPro.holo" method="post">
+    	<form action="/holo/infoboard/reportReplyPro.holo" method="post">
     		<table  border="1" width="500" style="border-collapse:collapse">
     			<tr>
     				<td colspan="2"> 댓글 신고 </td>
@@ -19,7 +19,7 @@
     				</td>
     			</tr>
     			<input type="hidden" name="repnum" value="${repnum}" />
-    			<input type="hidden" name="id" value="sessionId" />
+    			<input type="hidden" name="id" value="${sessionScope.sessionId}" />
     		</table>
     	</form>
     </center>

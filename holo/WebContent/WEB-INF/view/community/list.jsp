@@ -7,14 +7,48 @@
 <head>
 <title>자유게시판</title>
 <link href="/holo/resource/style/style_board.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+function navByCat(){
+	var cat_a = $("#category_a").val();
+	var cat_b = $("#category_b").val();
+	if(cat_a=='1'){cat_b="1";}
+	if(cat_b==null){cat_b="1";}
+	window.location="/holo/com/list.holo?category_a="+cat_a+"&category_b="+cat_b;
+};
+function init(){
+	$("#category_a").val("${cat_a}");
+	$("#category_b").val("${cat_b}");
+};
+</script>
 </head>
 
-<body bgcolor="${bodyback_c}">
-<center><b>글목록</b>
-<table width="700">
-  <tr>
-    <td align="right" bgcolor="${value_c}">
-       <a href="/holo/com/writeForm.holo?pagenum=${pagenum}&mode=new">글쓰기</a>
+<body onload="init()" bgcolor="${bodyback_c}">
+
+<center>
+<a href="/holo/member/main.holo"><h1>메인으로</h1></a>
+<b>글목록</b>
+<table width="700" border="0">
+  <tr bgcolor="${value_c}">
+  	<td width 500>
+  		<select id="category_a" onchange="navByCat()">
+			<option value="1">자유게시판</option>
+			<option value="2">지역별게시판</option>
+		</select>
+		<c:if test="${cat_a!='1'}">
+			<select id="category_b" onchange="navByCat()">
+				<option value="1">서울</option>
+				<option value="2">강원</option>
+				<option value="3">인천/경기</option>
+				<option value="4">대구/경북</option>
+				<option value="5">대전/충청</option>
+				<option value="6">광주/전라</option>
+				<option value="7">부산/경남</option>
+			</select>
+		</c:if>
+  	</td>
+    <td align="right">
+       <a href="/holo/com/form.holo?pagenum=${pagenum}&mode=new&category_a=${cat_a}&category_b=${cat_b}">글쓰기</a>
     </td>
   </tr>
 </table>
@@ -23,7 +57,7 @@
 <table width="700" border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="center">
-      게시판에 저장된 글이 없습니다.
+      <p><h2>게시판에 저장된 글이 없습니다.</h2></p>
     </td>
   </tr>
 </table>
@@ -46,7 +80,7 @@
 	  ${article.articlenum}
 	</td>
     <td  width="250" >    
-    	<a href="/holo/com/view.holo?articlenum=${article.articlenum}&pagenum=${pagenum}">
+    	<a href="/holo/com/view.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">
     		${article.subject}
     	</a> 
 	</td>
@@ -71,7 +105,7 @@
    <c:set var="pageCount" value="${count / pagesize + ( count % pagesize == 0 ? 0 : 1)}"/>
    <c:set var="pageBlock" value="${10}"/>
    <fmt:parseNumber var="result" value="${pagenum / 10}" integerOnly="true" />
-   <c:set var="startPage" value="${result * 10 + 1}" />
+   <c:set var="startPage" value="${result * 10 + 1}"/>
    <c:set var="endPage" value="${startPage + pageBlock-1}"/>
    <c:if test="${endPage > pageCount}">
         <c:set var="endPage" value="${pageCount}"/>

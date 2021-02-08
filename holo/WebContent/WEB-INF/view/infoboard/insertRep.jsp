@@ -4,5 +4,5 @@
     
     <script>
     	alert("댓글이 등록되었습니다.");
-    	window.location="/holo/livingboard_QA/article.holo?articlenum=${articlenum}&pageNum=${pageNum}";
+    	window.location="/holo/infoboard/article.holo?articlenum=${articlenum}&pageNum=${pageNum}";
     </script>

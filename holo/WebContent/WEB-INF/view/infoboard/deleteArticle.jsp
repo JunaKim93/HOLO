@@ -2,5 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<meta http-equiv="Refresh" content="0;url=/holo/livingboard_tip/article.holo?articlenum=${articlenum}&pageNum=${pageNum}" >
+<script>
+	alert("게시물이 삭제되었습니다.");
+	window.location="/holo/infoboard/list.holo?category_a=${category_a}";
+</script>
