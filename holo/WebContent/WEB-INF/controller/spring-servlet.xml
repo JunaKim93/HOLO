@@ -28,6 +28,8 @@
 	
 	<context:component-scan base-package="holo.board" />	
 	<context:component-scan base-package="holo.holouser" />	
+	<context:component-scan base-package="holo.guide" />	
+	
 	
 
 

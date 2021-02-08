@@ -39,7 +39,6 @@ public class InfoBoardController {
 						@RequestParam(defaultValue="living", required=true)String category_a,
 						@RequestParam(required=false) String category_b, Model model) {
 		try{
-			System.out.println(category_b);
 			List <InfoBoardDTO> articleList = null;
 			int pageSize = 20;							//페이지에 노출될 게시물 수
 			int currentPage = pageNum;					//현재 페이지 번호
@@ -254,7 +253,6 @@ public class InfoBoardController {
 					 String category_a, 
 					 @RequestParam(required=false) String category_b, Model model) {
 		try{
-			System.out.println(category_b);
 			List <InfoBoardDTO> searchList = null;
 			int pageSize = 20;							//페이지에 노출될 게시물 수
 			int currentPage = pageNum;					//현재 페이지 번호
