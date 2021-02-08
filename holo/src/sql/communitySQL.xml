@@ -99,8 +99,9 @@
 												]]>
 												</if>
 	</select>
-	<select id="countArt" resultType="int">
+	<select id="countArt" resultType="int" parameterType="map">
 		SELECT COUNT(*) FROM COMMUNITYBOARD
+		WHERE CATEGORY_A = ${category_a} AND CATEGORY_B = ${category_b}
 	</select>
 	<select id="countRpl" resultType="int" parameterType="int">
 		SELECT COUNT(*) FROM COMMUNITYREPLY WHERE ARTICLENUM = #{articlenum}

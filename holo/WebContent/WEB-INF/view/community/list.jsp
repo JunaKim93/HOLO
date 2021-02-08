@@ -57,7 +57,7 @@ function init(){
 <table width="700" border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="center">
-      게시판에 저장된 글이 없습니다.
+      <p><h2>게시판에 저장된 글이 없습니다.</h2></p>
     </td>
   </tr>
 </table>
@@ -105,7 +105,7 @@ function init(){
    <c:set var="pageCount" value="${count / pagesize + ( count % pagesize == 0 ? 0 : 1)}"/>
    <c:set var="pageBlock" value="${10}"/>
    <fmt:parseNumber var="result" value="${pagenum / 10}" integerOnly="true" />
-   <c:set var="startPage" value="${result * 10 + 1}" />
+   <c:set var="startPage" value="${result * 10 + 1}"/>
    <c:set var="endPage" value="${startPage + pageBlock-1}"/>
    <c:if test="${endPage > pageCount}">
         <c:set var="endPage" value="${pageCount}"/>

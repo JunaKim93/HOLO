@@ -46,7 +46,7 @@ public class ViewHandler {
 						Model model){
 		try {
 			List list;
-			int count = dao.countArt();
+			int count = dao.countArt(category_a, category_b);
 			if(count>0) {
 				list = dao.getList(category_a, category_b, pagenum, pagesize);
 			}else {
