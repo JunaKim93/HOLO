@@ -195,4 +195,19 @@ public class MarketServiceImpl implements MarketService {
 	    
 		return dao.selectList("market.getSearchArticles", hashmap);
 	}
+
+	// 끌어올리기
+	@Override
+	public void newArticle(int articleNum) throws Exception {
+		dao.update("market.newArticle", articleNum);
+	}
+
+	@Override
+	public int newArticleCheck(int articleNum) throws Exception {
+		return dao.selectOne("market.newArticleCheck", articleNum);
+	}
+	
+
+	
+	
 }

@@ -28,6 +28,12 @@
 					+ repNum;
 		}
 	}
+	
+	function newArticle() {
+		if (confirm("새 글로 다시 등록하시겠습니까? \n**끌어올리기는 하루에 한 번만 가능합니다!**")) {
+			window.location.href = "newArticlePro.holo?articleNum=${article.articleNum}&category_b=${article.category_b}";
+		}
+	}
 
 	function reportArticle(articleNum, subject) {
 		window.open("/holo/market/reportArticle.holo?articleNum=" + articleNum
@@ -113,8 +119,7 @@
 										+ moment(result[i].regDate).format(
 												"YYYY-MM-DD HH:mm")
 										+ '</font></td></tr>';
-							}
-							;
+							};
 							output += "</table>";
 						}
 						$("#replyList").html(output);
@@ -152,15 +157,35 @@
 			}
 		});
 	}
-$('textarea').val('');
+	$('textarea').val('');
 
-function reportReply(repNum, content) {
-	window.open("/holo/market/reportReply.holo?repNum=" + repNum
-			+ "&content=" + content, "a",
-			"width=700, height=700, left=100, top=50");
-}
+	function reportReply(repNum, content) {
+		window.open("/holo/market/reportReply.holo?repNum=" + repNum
+				+ "&content=" + content, "a",
+				"width=700, height=700, left=100, top=50");
+		
+	}
+	function replikesUpdate_click(repNum) {
+		$.ajax({
+			url : "/holo/market/updateRepLikes.holo",
+			contentType : "application/json; charset=UTF-8",
+			data : JSON.stringify({
+				'repNum' : repNum,
+				'id' : 'sessionId'
+			}),
+			type : "POST",
+			dataType : "text",
+			success : function(result) {
+				if (result == 1) {
+					alert("이미 추천하셨습니다.");
+				} else {
+					alert("추천되었습니다.");
+					location.reload();
+				}
+			}
+		});
+	}
 
-	
 </script>
 </head>
 <body>
@@ -179,7 +204,7 @@ function reportReply(repNum, content) {
 			<table border="1">
 				<tr>
 					<td style="width: 220px"><b>상품 설명</b> <br /> <br />
-						${article.content}</td>
+						<img src="${article.thumbnail}" style="width: 100%"></td>
 					<td>
 						<table>
 							<tr>
@@ -194,35 +219,35 @@ function reportReply(repNum, content) {
 									<th>희망 가격</th>
 								</c:if>
 								<c:if test="${article.category_a ne 'free'}">
-								<td>${article.price}</td>
+									<td>${article.price}</td>
 								</c:if>
 								<c:if test="${article.category_a eq 'free'}">
-								<td>무료 나눔</td>
+									<td>무료 나눔</td>
 								</c:if>
 							</tr>
 							<c:if test="${article.category_a ne 'group' }">
-							<tr>
-								<c:if test="${article.category_b ne 'buy'}">
-									<th>상품 상태</th>
-								</c:if>
-								<c:if test="${article.category_b eq 'buy'}">
-									<th>희망 상품 상태</th>
-								</c:if>
-								<td><c:if test="${article.condition eq 'unopened'}">미개봉</c:if>
-									<c:if test="${article.condition eq 'alnew'}">거의 새것</c:if> <c:if
-										test="${article.condition eq 'used'}">사용감 있음</c:if></td>
-							</tr>
-							<tr>
-								<c:if test="${article.category_b ne 'buy'}">
-									<th>배송 방법</th>
-								</c:if>
-								<c:if test="${article.category_b eq 'buy'}">
-									<th>희망 배송 방법</th>
-								</c:if>
-								<td><c:if test="${article.dealing eq 'direct'}">직거래</c:if>
-									<c:if test="${article.dealing eq 'parcel'}">택배 </c:if> <c:if
-										test="${article.dealing eq 'online'}">온라인 전송(기프티콘 등)</c:if></td>
-							</tr>
+								<tr>
+									<c:if test="${article.category_b ne 'buy'}">
+										<th>상품 상태</th>
+									</c:if>
+									<c:if test="${article.category_b eq 'buy'}">
+										<th>희망 상품 상태</th>
+									</c:if>
+									<td><c:if test="${article.condition eq 'unopened'}">미개봉</c:if>
+										<c:if test="${article.condition eq 'alnew'}">거의 새것</c:if> <c:if
+											test="${article.condition eq 'used'}">사용감 있음</c:if></td>
+								</tr>
+								<tr>
+									<c:if test="${article.category_b ne 'buy'}">
+										<th>배송 방법</th>
+									</c:if>
+									<c:if test="${article.category_b eq 'buy'}">
+										<th>희망 배송 방법</th>
+									</c:if>
+									<td><c:if test="${article.dealing eq 'direct'}">직거래</c:if>
+										<c:if test="${article.dealing eq 'parcel'}">택배 </c:if> <c:if
+											test="${article.dealing eq 'online'}">온라인 전송(기프티콘 등)</c:if></td>
+								</tr>
 							</c:if>
 							<tr>
 								<c:if test="${article.category_b ne 'buy'}">
@@ -233,12 +258,21 @@ function reportReply(repNum, content) {
 								</c:if>
 								<td><a>${article.id}</a></td>
 							</tr>
+							<tr> 
+							<td><input type="button" value="새 글로 등록" onclick="newArticle()" /></td>
+							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
 			<br />
-
+			<div align="center">
+				<table border="1">
+					<tr>
+						<td>${article.content}</td>
+					</tr>
+				</table>
+			</div>
 			<div align="center">
 				<button style="background-color: white;"
 					onclick="reportArticle('${article.articleNum}', '${article.subject}')">
