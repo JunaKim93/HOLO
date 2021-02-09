@@ -20,25 +20,31 @@
 			$("[name=category_b]").show();
 		}
 	};
-	function validateCat(form){
-		var validated = false;
+	function validateForm(){
 		var cat_a = $("[name=category_a]").val();
 		var cat_b = $("[name=category_b]").val();
+		var subject = $("[name=subject]").val();
+		var content = $("[name=content]").val();
 		if(cat_a==null){
 			alert("대분류를 선택해주세요!!");
+			return false;
 		}else if(cat_a=="2"&&cat_b==null){
 			alert("소분류를 선택해주세요!!");
-		}else{
-			validated = true;
+			return false;
+		}else if(subject==null||subject==""){
+			alert("제목을 입력해주세요!");
+			return false;
+		}else if(content==null||content==""){
+			alert("내용을 입력해주세요!");
+			return false;
 		}
-		return validated;
 	};
 </script>
 
 <body bgcolor="${bodyback_c}">
 	<center>
 		<b>작성하기</b> <br>
-		<form method="POST" id="writeForm" action="/holo/com/pro.holo">
+		<form method="POST" id="writeForm" action="/holo/com/pro.holo" onsubmit="return validateForm()">
 			<input type="hidden" name="articlenum" value="${cdto.articlenum}">
 			<input type="hidden" name="mode" value="${mode}">
 			<table width="1000" border="1" cellspacing="0" cellpadding="0" align="center">
@@ -110,10 +116,8 @@ window.onload = function(){
 	}
    var btn = document.getElementById("writebtn");
    btn.onclick = function(){
-	   if(validateCat($("#writeForm"))){
-		  oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-	      submitContents(btn);
-	   }
+		 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	     //submitContents(btn);
    }
 }
 
