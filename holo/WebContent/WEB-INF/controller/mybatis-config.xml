@@ -51,10 +51,7 @@
 		<mapper resource="/sql/communitySQL.xml" />
 		<mapper resource="/sql/diySQL.xml"/>
 		<mapper resource="/sql/marketSQL.xml"/>
-<<<<<<< HEAD
 		<mapper resource="/sql/searchSQL.xml"/>
-=======
 		<mapper resource="/sql/guideSQL.xml" />
->>>>>>> 158b1e612d4549a1f2d909a2df976672820e239b
 	</mappers>  
 </configuration>
