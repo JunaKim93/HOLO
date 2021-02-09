@@ -80,7 +80,7 @@ function init(){
 	  ${article.articlenum}
 	</td>
     <td  width="250" >    
-    	<a href="/holo/com/view.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">
+    	<a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">
     		${article.subject}
     	</a> 
 	</td>
