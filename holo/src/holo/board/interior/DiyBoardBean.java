@@ -124,7 +124,7 @@ public class DiyBoardBean {
 
 
 	@RequestMapping("content.holo")
-	public String tip(int articleNum, int pageNum, Model model) throws Exception {
+	public String tip(@RequestParam(defaultValue="1") int pageNum, int articleNum, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articleNum);
 		diyBoardDAO.updateViewCount(articleNum);
 		List replyList = null;

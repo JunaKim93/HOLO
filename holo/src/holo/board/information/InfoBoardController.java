@@ -40,19 +40,19 @@ public class InfoBoardController {
 						@RequestParam(required=false) String category_b, Model model) {
 		try{
 			List <InfoBoardDTO> articleList = null;
-			int pageSize = 20;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNum;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
+			int pageSize = 20;							//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
+			int currentPage = pageNum;					//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+			int start = (currentPage - 1) * pageSize+1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½È£
+			int end = currentPage * pageSize;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+			int number = 0;								//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+			int count = 0;								//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 			count = liveBrdDAO.getArticleCount(category_a, category_b);
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
+			int startPage = (int)(cp/5)*5+1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pages = 5;								//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			int endPage = startPage+pages-1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pageCount = 0;							//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}
@@ -97,9 +97,9 @@ public class InfoBoardController {
 		}
 		return "infoboard/writePro";
 	}
-	
+
 	@RequestMapping("/content.holo")
-	public String article(int pageNum, int articlenum, Model model, HttpSession session, 
+	public String article(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model, HttpSession session, 
 						@RequestParam(required=false) String category_b) {
 		try{
 			InfoBoardDTO dto = liveBrdDAO.getArticle(articlenum);
@@ -254,19 +254,19 @@ public class InfoBoardController {
 					 @RequestParam(required=false) String category_b, Model model) {
 		try{
 			List <InfoBoardDTO> searchList = null;
-			int pageSize = 20;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNum;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
+			int pageSize = 20;							//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
+			int currentPage = pageNum;					//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+			int start = (currentPage - 1) * pageSize+1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½È£
+			int end = currentPage * pageSize;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+			int number = 0;								//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+			int count = 0;								//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 			count = liveBrdDAO.searchArticleCount(category_a, category_b, sort, keyword);
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
+			int startPage = (int)(cp/5)*5+1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pages = 5;								//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			int endPage = startPage+pages-1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pageCount = 0;							//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}

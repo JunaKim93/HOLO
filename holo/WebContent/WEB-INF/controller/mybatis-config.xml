@@ -39,8 +39,9 @@
 		<typeAlias alias="MkRplLikeDTO" type="holo.board.market.dto.MarketReplyLikeDTO" />
 		<typeAlias alias="MkRplReportDTO" type="holo.board.market.dto.MarketReplyReportDTO" />	
 		
+		<typeAlias alias="searchDTO" type="holo.board.search.dto.SearchDTO" />
 		<typeAlias type="holo.guide.AddressDTO" alias="addrDTO"/>
-		
+
 	</typeAliases>
 	
 	<mappers> 
@@ -50,6 +51,10 @@
 		<mapper resource="/sql/communitySQL.xml" />
 		<mapper resource="/sql/diySQL.xml"/>
 		<mapper resource="/sql/marketSQL.xml"/>
+<<<<<<< HEAD
+		<mapper resource="/sql/searchSQL.xml"/>
+=======
 		<mapper resource="/sql/guideSQL.xml" />
+>>>>>>> 158b1e612d4549a1f2d909a2df976672820e239b
 	</mappers>  
 </configuration>

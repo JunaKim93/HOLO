@@ -46,7 +46,7 @@ public class MarketServiceImpl implements MarketService {
 	
 
 	@Override
-	   public List getArticles(String category_a, String category_b, int start, int end) throws Exception {
+	   public List<MarketBoardDTO> getArticles(String category_a, String category_b, int start, int end) throws Exception {
 	      hashmap.put("start", start);
 	      hashmap.put("end", end);
 	      hashmap.put("category_a", category_a);
@@ -185,7 +185,7 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 	@Override
-	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception {
+	public List<MarketBoardDTO> getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception {
 		hashmap.put("start", start);
 		hashmap.put("end", end);
 		hashmap.put("choice", choice);

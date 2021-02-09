@@ -118,55 +118,9 @@ public class MarketBean {
 		}
 		return "market/list";
 	}
-//	@SuppressWarnings("unchecked")
-//	@RequestMapping("/buyList.holo")
-//	public String buyList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
-//		try{
-//			String category_a = "market";
-//			String category_b = "buy";
-//			List <MarketBoardDTO> articleList = null;
-//			int pageSize = 20;							
-//			int currentPage = pageNum;					
-//			int start = (currentPage - 1) * pageSize+1;	
-//			int end = currentPage * pageSize;			
-//			int number = 0;								
-//			int count = 0;								
-//			count = MarketDAO.getArticleCount(category_a, category_b);
-//			int cp = 0;
-//			cp = currentPage-1;
-//			int startPage = (int)(cp/5)*5+1;			
-//			int pages = 5;							
-//			int endPage = startPage+pages-1;			
-//			int pageCount = 0;							
-//			if(count >0) {
-//				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-//				if(endPage > pageCount) {endPage = pageCount;}
-//				if(currentPage > endPage) {currentPage -= 1;}
-//				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
-//				
-//			}else {
-//				articleList = Collections.emptyList();
-//			}
-//			number = count - (currentPage-1)*pageSize;		
-//			
-//			
-//			model.addAttribute("articleList", articleList);
-//			model.addAttribute("currentPage", currentPage);
-//			model.addAttribute("start", start);
-//			model.addAttribute("end", end);
-//			model.addAttribute("count", count);
-//			model.addAttribute("num",number);
-//			model.addAttribute("startPage", startPage);
-//			model.addAttribute("endPage", endPage);
-//			model.addAttribute("pageCount", pageCount);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "market/list";
-//	}
 
 	@RequestMapping("content.holo")
-	public String content(int articleNum, int pageNum, Model model) {
+	public String content(@RequestParam(defaultValue="1") int pageNum, int articleNum, Model model) {
 		try {
 		MarketBoardDTO article = MarketDAO.getArticle(articleNum);
 		MarketDAO.updateViewCount(articleNum);
