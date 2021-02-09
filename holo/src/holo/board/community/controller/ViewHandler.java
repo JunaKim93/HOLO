@@ -71,7 +71,7 @@ public class ViewHandler {
 						@RequestParam(defaultValue="1") String category_b, 
 						Model model) {
 		try {
-			//세션이 있으면 읽어와서 이미 좋아요 했는지 model에 저장
+            //세션이 있으면 읽어와서 이미 좋아요 했는지 model에 저장
 			if(model.containsAttribute("sessionId")) {
 				String sessionId = (String) model.asMap().get("sessionId");
 				ComLikeDTO cldto = new ComLikeDTO();
