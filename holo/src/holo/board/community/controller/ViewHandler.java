@@ -64,8 +64,13 @@ public class ViewHandler {
 		return "community/list";
 	}
 	
+<<<<<<< Updated upstream
 	@RequestMapping("view.holo")
 	public String view(@RequestParam("articlenum") int articlenum, 
+=======
+	@RequestMapping("content.holo")
+	public String view( @RequestParam("articlenum") int articlenum, 
+>>>>>>> Stashed changes
 						@RequestParam(defaultValue="1") int pagenum,
 						@RequestParam(defaultValue="1") String category_a, 
 						@RequestParam(defaultValue="1") String category_b, 
@@ -89,7 +94,7 @@ public class ViewHandler {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "community/view";
+		return "community/content";
 	}
 	
 	@RequestMapping("replyList.holo")
@@ -165,7 +170,7 @@ public class ViewHandler {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:view.holo";
+		return "redirect:content.holo";
 	}
 	
 	@RequestMapping("del.holo")
