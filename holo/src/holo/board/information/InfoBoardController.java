@@ -98,7 +98,7 @@ public class InfoBoardController {
 		return "infoboard/writePro";
 	}
 	
-	@RequestMapping("/article.holo")
+	@RequestMapping("/content.holo")
 	public String article(int pageNum, int articlenum, Model model, HttpSession session, 
 						@RequestParam(required=false) String category_b) {
 		try{
@@ -117,7 +117,7 @@ public class InfoBoardController {
 			e.printStackTrace();
 		}
 		
-		return "infoboard/article";
+		return "infoboard/content";
 	}
 	
 	@ResponseBody

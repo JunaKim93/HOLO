@@ -17,4 +17,5 @@ public interface HolouserService {
 	 public int userCheck(String id) throws Exception;
 	 public HolouserDTO memberPage(String id) throws Exception;
 	 
+	 
 }

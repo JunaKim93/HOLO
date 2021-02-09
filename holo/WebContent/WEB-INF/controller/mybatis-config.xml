@@ -39,6 +39,8 @@
 		<typeAlias alias="MkRplLikeDTO" type="holo.board.market.dto.MarketReplyLikeDTO" />
 		<typeAlias alias="MkRplReportDTO" type="holo.board.market.dto.MarketReplyReportDTO" />	
 		
+		<typeAlias type="holo.guide.AddressDTO" alias="addrDTO"/>
+		
 	</typeAliases>
 	
 	<mappers> 

@@ -89,7 +89,7 @@
 	<c:forEach var="list" items="${searchList}">
 		<tr>
 			<td>
-			<a class="title" href="/holo/infoboard/article.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${category_a}&category_b=${category_b}">
+			<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${category_a}&category_b=${category_b}">
 			&nbsp;
 			<c:if test="${list.category_b == 'question'}">
 			<font color="#9932CC" size="2">[질문]</font>

@@ -1,13 +1,22 @@
 package holo.guide;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import holo.guide.service.GuideService;
+import holo.holouser.HolouserDTO;
+
 @Controller
 @RequestMapping("/guide/")
 public class GuideController {
+	
+	@Autowired
+	private GuideService guideDAO = null;
 
 	@RequestMapping("/location_map.holo")
 	public String getMap(@RequestParam(defaultValue="1",required=true)int location, Model model) {
@@ -48,5 +57,23 @@ public class GuideController {
 		
 		return "guide/map_places";
 	}
+	
+	@RequestMapping("/fixLocation.holo")
+	public String fixLocation(AddressDTO addr) {
+		int check = 0;
+		try {
+			check = guideDAO.checkAddr(addr.getId());
+			if (check == 0) {
+				guideDAO.insertAddr(addr);
+			}else {
+				guideDAO.updateAddr(addr);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "guide/fixLocation";
+	}
+	
 	
 }

@@ -26,23 +26,24 @@
     <div class="map_wrap">
 	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
 	    <div class="hAddr">
-	        <span class="title">지도중심기준 행정동 주소정보</span>
+	        <span class="title">지도중심기준 주소정보</span>
 	        <span id="centerAddr"></span>
 	    </div>
 	</div>
     <br><br><br>
    
     
-    <!-- 서울    강원      인천/경기       대구/경북       대전/충청      광주/전라       부산/경남-->
-    <div id="clickLatlng"></div>
 	[위치 검색] <br>
 	<input type="text" id="keyword" />
 	<button type="button" onClick="set_keyword()" >검색</button>
-	<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
-		<input type="hidden" name="lat" value="" />
-		<input type="hidden" name="lng" value="" />
-		<input type="submit" value="현재위치로 거주지 설정"/>
-	</form>
+	<c:if test="${sessionScope.sessionId != null }">
+		<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
+			<input type="hidden" name="lat" value="" />
+			<input type="hidden" name="lng" value="" />
+			<input type="hidden" name="id" value="${sessionScope.sessionId}" />
+			<input type="submit" value="선택위치로 거주지 설정"/>
+		</form>
+	</c:if>
 	    
     
     
