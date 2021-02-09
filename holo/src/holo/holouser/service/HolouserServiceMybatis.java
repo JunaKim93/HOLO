@@ -70,7 +70,7 @@ public class HolouserServiceMybatis implements HolouserService {
 		return dao.selectOne("holouser.getId", member);
 	}
 
-	//ÀÓ½Ã ºñ¹Ð¹øÈ£ ¹ß±Þ
+	//ï¿½Ó½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ ï¿½ß±ï¿½
 	@Override
 	public void setTempPw(HolouserDTO member) throws Exception {
 		dao.update("holouser.setTempPw", member);
@@ -86,6 +86,11 @@ public class HolouserServiceMybatis implements HolouserService {
 	@Override
 	public HolouserDTO memberPage(String id) throws Exception {
 		return dao.selectOne("holouser.member", id); 
+	}
+
+	@Override
+	public int getLevels(String id) throws Exception {
+		return dao.selectOne("holouser.getLevels",id);
 	}
 
 	
