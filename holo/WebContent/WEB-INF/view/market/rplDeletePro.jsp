@@ -5,4 +5,4 @@
 		alert("댓글이 삭제되었습니다.");
 	</script>
 	<meta http-equiv="Refresh"
-		content="0;url=/holo/market/content.holo?articleNum=${articleNum}&pageNum=${pageNum}">
+		content="0;url=/holo/market/content.holo?articlenum=${articlenum}&pageNum=${pageNum}">

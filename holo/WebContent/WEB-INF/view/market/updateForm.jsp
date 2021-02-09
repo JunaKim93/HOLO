@@ -14,7 +14,7 @@
 		<b>글 수정</b>
 </div>
 <br>
-<form method="post" name="updateform" action="/holo/market/updatePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}" onsubmit="return writeSave()">
+<form method="post" name="updateform" action="/holo/market/updatePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="660" style="border-spacing: 0; padding: 0; align: center;" border="1">
 
 	<tr>
@@ -54,7 +54,7 @@
   </tr>
 <tr>      
  <td colspan=2  align="center"> 
- 	<input type="hidden" name="articleNum" value="${article.articleNum}" />
+ 	<input type="hidden" name="articlenum" value="${article.articlenum}" />
  	<input type="hidden" name="category_a" value="${article.category_a}" />
 	<input type="hidden" name="category_b" value="${article.category_b}" />
 	<input type="hidden" name="id" value="sessionId">

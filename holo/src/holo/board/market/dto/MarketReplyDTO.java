@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class MarketReplyDTO {
 
 	private int repNum;
-	private int articleNum;
+	private int articlenum;
 	private String id;
 	private String content;
 	private Timestamp regDate;
@@ -18,11 +18,11 @@ public class MarketReplyDTO {
 	public void setRepNum(int repNum) {
 		this.repNum = repNum;
 	}
-	public int getArticleNum() {
-		return articleNum;
+	public int getArticlenum() {
+		return articlenum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticlenum(int articlenum) {
+		this.articlenum = articlenum;
 	}
 	public String getId() {
 		return id;

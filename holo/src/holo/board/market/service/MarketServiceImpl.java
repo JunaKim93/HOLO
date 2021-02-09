@@ -35,13 +35,13 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 	@Override
-	public void updateViewCount(int articleNum) throws Exception {
-		dao.update("market.updateViewCount", articleNum);
+	public void updateViewCount(int articlenum) throws Exception {
+		dao.update("market.updateViewCount", articlenum);
 		
 	}
 	@Override
-	public void delete(int articleNum) throws Exception {
-		dao.delete("market.delete", articleNum);
+	public void delete(int articlenum) throws Exception {
+		dao.delete("market.delete", articlenum);
 	}
 	
 
@@ -65,8 +65,8 @@ public class MarketServiceImpl implements MarketService {
 		
 
 	@Override
-	public MarketBoardDTO getArticle(int articleNum) throws Exception {
-		return dao.selectOne("market.getArticle", articleNum);
+	public MarketBoardDTO getArticle(int articlenum) throws Exception {
+		return dao.selectOne("market.getArticle", articlenum);
 	}
 	
 	
@@ -87,8 +87,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 	@Override
-	public List<MarketReplyDTO> getRpl(int articleNum) throws Exception {
-		return dao.selectList("market.getRpl", articleNum);
+	public List<MarketReplyDTO> getRpl(int articlenum) throws Exception {
+		return dao.selectList("market.getRpl", articlenum);
 	}
 
 	// 댓글 좋아요
@@ -141,8 +141,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public void updateAReport(int articleNum) throws Exception {
-		dao.update("market.updateAReport", articleNum);
+	public void updateAReport(int articlenum) throws Exception {
+		dao.update("market.updateAReport", articlenum);
 		
 	}
 	
@@ -169,8 +169,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public int getArticleNum(int repNum) throws Exception {
-		return dao.selectOne("market.getArticleNum",repNum);
+	public int getarticlenum(int repNum) throws Exception {
+		return dao.selectOne("market.getarticlenum",repNum);
 	}
 
 	// 검색
@@ -198,13 +198,13 @@ public class MarketServiceImpl implements MarketService {
 
 	// 끌어올리기
 	@Override
-	public void newArticle(int articleNum) throws Exception {
-		dao.update("market.newArticle", articleNum);
+	public void newArticle(int articlenum) throws Exception {
+		dao.update("market.newArticle", articlenum);
 	}
 
 	@Override
-	public int newArticleCheck(int articleNum) throws Exception {
-		return dao.selectOne("market.newArticleCheck", articleNum);
+	public int newArticleCheck(int articlenum) throws Exception {
+		return dao.selectOne("market.newArticleCheck", articlenum);
 	}
 	
 
