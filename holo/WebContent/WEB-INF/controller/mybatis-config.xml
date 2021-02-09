@@ -50,5 +50,6 @@
 		<mapper resource="/sql/communitySQL.xml" />
 		<mapper resource="/sql/diySQL.xml"/>
 		<mapper resource="/sql/marketSQL.xml"/>
+		<mapper resource="/sql/guideSQL.xml" />
 	</mappers>  
 </configuration>

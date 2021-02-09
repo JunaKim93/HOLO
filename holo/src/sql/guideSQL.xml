@@ -21,5 +21,8 @@
 			where id = #{id}		
 	</update>
 
+	<select id="getAddr" resultType="addrDTO" parameterType="String">
+		select * from useraddress where id = #{id}
+	</select>
 	
 </mapper>

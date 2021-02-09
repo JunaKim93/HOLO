@@ -28,4 +28,9 @@ public class GuideServiceImpl implements GuideService{
 		return dao.selectOne("guide.checkAddr", id);
 	}
 
+	@Override
+	public AddressDTO getAddr(String id) throws Exception {
+		return dao.selectOne("guide.getAddr", id);
+	}
+
 }
