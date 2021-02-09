@@ -3,7 +3,7 @@ package holo.board.search.dto;
 import java.sql.Timestamp;
 
 public class SearchDTO {
-	private int articleNum;
+	private int articlenum;
 	private String category_a;
 	private String category_b;
 	private String id;
@@ -13,11 +13,11 @@ public class SearchDTO {
 	private Timestamp regDate;
 	
 	
-	public int getArticleNum() {
-		return articleNum;
+	public int getArticlenum() {
+		return articlenum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticlenum(int articlenum) {
+		this.articlenum = articlenum;
 	}
 	public String getCategory_a() {
 		return category_a;

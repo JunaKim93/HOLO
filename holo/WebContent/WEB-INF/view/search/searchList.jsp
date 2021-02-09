@@ -12,8 +12,16 @@
 <div align="center">
 	<h1>통합검색 결과</h1>
 </div>
-<div align="right">
-ㅎㅇ
+<div align="center">
+<form action="/holo/search/searchList.holo">
+	<select name="choice">
+		<option value="id"> 작성자  </option>
+		<option value="subject"> 제목  </option>
+		<option value="content"> 내용 </option>
+	</select>
+		<input type="text" name="search">
+		<input type="submit" value="검색">
+</form>
 </div>
 
 <div align="center">
@@ -28,20 +36,28 @@
 		<c:forEach var="list" items="${list}">
 			<tr>
 				<td>
-				<c:choose>
-				<c:when test="${list.category_a eq 'living' or list.category_a eq 'cook' or list.category_a eq 'findplace'}">
-				<a href="/holo/infoboard/content.holo?articleNum=${list.articleNum}" target="_blank">${list.subject}</a>
-				</c:when>
-				<c:when test="${list.category_a eq 'market' or list.category_a eq 'free' or list.category_a eq 'group'}">
-				<a href="/holo/market/content.holo?articleNum=${list.articleNum}" target="_blank">${list.subject}</a>
-				</c:when>
-				<c:when test="${list.category_a eq 'myroom'}">
-				<a href="/holo/diy/content.holo?articleNum=${list.articleNum}" target="_blank">${list.subject}</a>
-				</c:when>
-				<c:when test="${list.category_a eq '1' or list.category_a eq '2'}">
-				<a href="/holo/com/content.holo?articleNum=${list.articleNum}" target="_blank">${list.subject}</a>
-				</c:when>
-				</c:choose>
+					<div>
+						<c:choose>
+						<c:when test="${list.category_a eq 'living' or list.category_a eq 'cook' or list.category_a eq 'findplace'}">
+							<a href="/holo/infoboard/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+						</c:when>
+						<c:when test="${list.category_a eq 'market' or list.category_a eq 'free' or list.category_a eq 'group'}">
+							<a href="/holo/market/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+						</c:when>
+						<c:when test="${list.category_a eq 'myroom'}">
+							<a href="/holo/diy/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+						</c:when>
+						<c:when test="${list.category_a eq '1' or list.category_a eq '2'}">
+							<a href="/holo/com/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+						</c:when>
+						</c:choose>
+					</div>
+					<div>
+						<c:if test="${empty list.content}">
+						글 내용이 없습니다.
+						</c:if>
+						${list.content}
+					</div>
 				</td>
 				<td align="center">${list.id}</td>
 				<td align="center"><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
