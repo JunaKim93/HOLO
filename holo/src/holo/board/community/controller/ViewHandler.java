@@ -63,20 +63,14 @@ public class ViewHandler {
 		}
 		return "community/list";
 	}
-	
-<<<<<<< Updated upstream
-	@RequestMapping("view.holo")
-	public String view(@RequestParam("articlenum") int articlenum, 
-=======
-	@RequestMapping("content.holo")
+
 	public String view( @RequestParam("articlenum") int articlenum, 
->>>>>>> Stashed changes
 						@RequestParam(defaultValue="1") int pagenum,
 						@RequestParam(defaultValue="1") String category_a, 
 						@RequestParam(defaultValue="1") String category_b, 
 						Model model) {
 		try {
-			//세션이 있으면 읽어와서 이미 좋아요 했는지 model에 저장
+			//�꽭�뀡�씠 �엳�쑝硫� �씫�뼱���꽌 �씠誘� 醫뗭븘�슂 �뻽�뒗吏� model�뿉 ���옣
 			if(model.containsAttribute("sessionId")) {
 				String sessionId = (String) model.asMap().get("sessionId");
 				ComLikeDTO cldto = new ComLikeDTO();

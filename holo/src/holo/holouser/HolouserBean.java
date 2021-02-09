@@ -1,5 +1,8 @@
 package holo.holouser;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -190,11 +193,80 @@ public class HolouserBean {
 	}
 	
 	@RequestMapping("mypage.holo")
-	public String mypage(HttpSession session, HolouserDTO member , Model model) throws Exception {
+	public String logon_mypage(HttpSession session, HolouserDTO member , Model model) throws Exception {
 		String id = (String)session.getAttribute("sessionId");
 		HolouserDTO dto = memberDAO.memberPage(id);
 		model.addAttribute("c",dto);
 		return "member/mypage";
+	}
+	
+	@RequestMapping("myContents.holo")
+	public String logon_myContents(HttpSession session) {
+		String id = (String)session.getAttribute("sessionId");
+		
+		return "member/myContents";
+	}
+	
+	
+	@RequestMapping("myInfo.holo")
+	public String logon_myInfo(String id, @RequestParam(defaultValue="1") int pageNum,
+								Model model)  {
+		try {
+		List infoList = null;
+		String board = "infoboard";
+		int pageSize = 20;							//페이지에 노출될 게시물 수
+		int currentPage = pageNum;					//현재 페이지 번호
+		int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
+		int end = currentPage * pageSize;			//페이지의 끝 번호
+		int number = 0;								//게시글 번호
+		int count = 0;								//총 게시물 개수
+		count = memberDAO.getArticleCount(board, id);
+		int cp = 0;
+		cp = currentPage-1;
+		int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
+		int pages = 5;								//리스트에서 보여줄 페이지 개수
+		int endPage = startPage+pages-1;			//가장 오른쪽 페이지
+		int pageCount = 0;							//총 페이지 개수
+		if(count >0) {
+			pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+			if(endPage > pageCount) {endPage = pageCount;}
+			if(currentPage > endPage) {currentPage -= 1;}
+			infoList = memberDAO.getArticles(start, end, id, board);
+		
+		
+		}else {
+			infoList = Collections.EMPTY_LIST;
+		}
+		number = count - (currentPage-1)*pageSize;		
+	
+		model.addAttribute("infoList", infoList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("count", count);
+		model.addAttribute("num",number);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "member/myInfo";
+	}
+	@RequestMapping("myDiy.holo")
+	public String logon_myDiy(String id) {
+		
+		return "member/myDiy";
+	}
+	@RequestMapping("myMarket.holo")
+	public String logon_myMarket(String id) {
+		
+		return "member/myMarket";
+	}
+	@RequestMapping("myCom.holo")
+	public String logon_myCom(String id) {
+		
+		return "member/myCom";
 	}
 	
 	
