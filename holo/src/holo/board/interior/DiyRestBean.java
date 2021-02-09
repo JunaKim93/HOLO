@@ -16,7 +16,7 @@ import holo.board.interior.dto.DiyReplyDTO;
 import holo.board.interior.service.InteriorBoardService;
 
 @RestController
-@RequestMapping("/diy_tip/")
+@RequestMapping("/diy/")
 public class DiyRestBean {
 
 	@Autowired

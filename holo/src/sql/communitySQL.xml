@@ -45,12 +45,12 @@
 	<insert id="report" parameterType="comReportDTO">
 		INSERT INTO COMMUNITYBOARDREPORT 	 VALUES (#{articlenum},
 													 #{id},
-													 null)
+													 #{reason})
 	</insert>
 	<insert id="reportRpl" parameterType="comLikeDTO">
 		INSERT INTO COMMUNITYREPLYREPORT VALUES ( 	#{repnum},
 												  	#{id},
-												  	null)
+												  	#{reason})
 	</insert>
 
 	

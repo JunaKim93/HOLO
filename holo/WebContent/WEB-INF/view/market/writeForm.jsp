@@ -26,7 +26,7 @@
 			</select>
 			
 			<select name='category_b'>
-				<option value='null' selected>---- 선택하세요</option>
+				<option value='b' selected>---- 선택하세요</option>
 				<option value='sell'>팝니다</option>
 				<option value='buy'>삽니다</option>
 			</select>
@@ -65,7 +65,7 @@
 	<input type="hidden" name="id" value="sessionId">
  	<input type="submit" name="writebtn" id="writebtn" value="글쓰기" >  
  	<input type="reset" value="다시작성">
-	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo'">
+	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo?category_a=${category_a}&category_b=${category_b}'">
 </td></tr></table>    
 </form>     
 </body>

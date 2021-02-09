@@ -95,7 +95,7 @@ $(function(){
 	            //성공시 좋아요수 새로고침
 	            success: function () {
 	            	alert("신고되었습니다!");
-	            },
+	            }
 			})
 		}
 	};

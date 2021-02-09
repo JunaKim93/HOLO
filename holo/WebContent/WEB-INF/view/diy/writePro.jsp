@@ -3,5 +3,5 @@
 
 <script>
 	alert("게시글이 등록되었습니다.");
-	window.location="/holo/diy_tip/list.holo"
+	window.location="/holo/diy/list.holo?category_b=${category_b}"
 </script>

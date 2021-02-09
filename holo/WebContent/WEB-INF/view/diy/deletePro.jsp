@@ -5,4 +5,4 @@
 		alert("게시글이 삭제되었습니다.");
 	</script>
 	<meta http-equiv="Refresh"
-		content="0;url=/holo/diy_tip/list.holo?pageNum=${pageNum}">
+		content="0;url=/holo/diy/list.holo?&category_b=${category_b}&pageNum=${pageNum}">

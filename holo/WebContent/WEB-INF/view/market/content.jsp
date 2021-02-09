@@ -19,7 +19,7 @@
 
 	function deleteConfirm() {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&category_b=${article.category_b}";
+			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}";
 		}
 	}
 	function deleteRepConfirm(repNum) {
@@ -28,10 +28,10 @@
 					+ repNum;
 		}
 	}
-	
+
 	function newArticle() {
 		if (confirm("새 글로 다시 등록하시겠습니까? \n**끌어올리기는 하루에 한 번만 가능합니다!**")) {
-			window.location.href = "newArticlePro.holo?articleNum=${article.articleNum}&category_b=${article.category_b}";
+			window.location.href = "newArticlePro.holo?articleNum=${article.articleNum}&category_a=${article.category_a}&category_b=${article.category_b}";
 		}
 	}
 
@@ -163,7 +163,7 @@
 		window.open("/holo/market/reportReply.holo?repNum=" + repNum
 				+ "&content=" + content, "a",
 				"width=700, height=700, left=100, top=50");
-		
+
 	}
 	function replikesUpdate_click(repNum) {
 		$.ajax({
@@ -185,7 +185,6 @@
 			}
 		});
 	}
-
 </script>
 </head>
 <body>
@@ -203,8 +202,8 @@
 		<form method="post">
 			<table border="1">
 				<tr>
-					<td style="width: 220px"><b>상품 설명</b> <br /> <br />
-						<img src="${article.thumbnail}" style="width: 100%"></td>
+					<td style="width: 220px"><b>상품 설명</b> <br /> <br /> <img
+						src="${article.thumbnail}" style="width: 100%"></td>
 					<td>
 						<table>
 							<tr>
@@ -237,18 +236,19 @@
 										<c:if test="${article.condition eq 'alnew'}">거의 새것</c:if> <c:if
 											test="${article.condition eq 'used'}">사용감 있음</c:if></td>
 								</tr>
-								<tr>
-									<c:if test="${article.category_b ne 'buy'}">
-										<th>배송 방법</th>
-									</c:if>
-									<c:if test="${article.category_b eq 'buy'}">
-										<th>희망 배송 방법</th>
-									</c:if>
-									<td><c:if test="${article.dealing eq 'direct'}">직거래</c:if>
-										<c:if test="${article.dealing eq 'parcel'}">택배 </c:if> <c:if
-											test="${article.dealing eq 'online'}">온라인 전송(기프티콘 등)</c:if></td>
-								</tr>
 							</c:if>
+							<tr>
+								<c:if test="${article.category_b ne 'buy'}">
+									<th>배송 방법</th>
+								</c:if>
+								<c:if test="${article.category_b eq 'buy'}">
+									<th>희망 배송 방법</th>
+								</c:if>
+								<td><c:if test="${article.dealing eq 'direct'}">직거래</c:if>
+									<c:if test="${article.dealing eq 'parcel'}">택배 </c:if> <c:if
+										test="${article.dealing eq 'online'}">온라인 전송(기프티콘 등)</c:if></td>
+							</tr>
+
 							<tr>
 								<c:if test="${article.category_b ne 'buy'}">
 									<th>판매자</th>
@@ -258,8 +258,9 @@
 								</c:if>
 								<td><a>${article.id}</a></td>
 							</tr>
-							<tr> 
-							<td><input type="button" value="새 글로 등록" onclick="newArticle()" /></td>
+							<tr>
+								<td><input type="button" value="새 글로 등록"
+									onclick="newArticle()" /></td>
 							</tr>
 						</table>
 					</td>
@@ -280,23 +281,8 @@
 			</div>
 
 			<br /> <input type="button" value="삭제" onclick="deleteConfirm()">
-			<c:if test="${article.category_b eq 'sell'}">
 				<input type="button" value="목록"
-					onclick="document.location.href='/holo/market/sellList.holo?pageNum=${pageNum}'">
-			</c:if>
-			<c:if test="${article.category_b eq 'buy'}">
-				<input type="button" value="목록"
-					onclick="document.location.href='/holo/market/buyList.holo?pageNum=${pageNum}'">
-			</c:if>
-			<c:if test="${article.category_a eq 'free'}">
-				<input type="button" value="목록"
-					onclick="document.location.href='/holo/market/freeList.holo?pageNum=${pageNum}'">
-			</c:if>
-			<c:if test="${article.category_a eq 'group'}">
-				<input type="button" value="목록"
-					onclick="document.location.href='/holo/market/groupList.holo?pageNum=${pageNum}'">
-			</c:if>
-
+					onclick="document.location.href='/holo/market/list.holo?pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}'">
 			<input type="button" value="수정"
 				onclick="document.location.href='/holo/market/updateForm.holo?articleNum=${article.articleNum}&pageNum=${pageNum}'">
 		</form>
