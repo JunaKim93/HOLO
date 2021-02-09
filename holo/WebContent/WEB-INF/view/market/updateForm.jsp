@@ -10,7 +10,9 @@
 </head>
 
 <body>  
-<center><b>글 수정</b>
+<div align="center">
+		<b>글 수정</b>
+</div>
 <br>
 <form method="post" name="updateform" action="/holo/market/updatePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="660" style="border-spacing: 0; padding: 0; align: center;" border="1">
@@ -58,23 +60,13 @@
 	<input type="hidden" name="id" value="sessionId">
  	<input type="submit" name="updatebtn" id="updatebtn" value="수정하기" >  
  	<input type="reset" value="다시작성">
-	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo'">
+	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo?category_a=${article.category_a}&category_b=${article.category_b}'">
 </td></tr></table>    
 </form>     
 </body>
 </html>
 
 <script type="text/javascript">
-
-function chkSel(obj)
-{
-    if((obj.value) == "market")
-        document.updateform.category_b.style.display = '';
-//  		document.getElementsByName('category_b')[0].style.width='100pt';
-      else
-        document.updateform.category_b.style.display = 'none';
-// 			document.getElementsByName('category_b')[0].style.width='0pt';
-}
 
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
@@ -91,7 +83,6 @@ window.onload = function(){
 		submitContents(btn);
 	}
 }
-
  
  $("#updatebtn").click(function(){
 	    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -102,5 +93,33 @@ window.onload = function(){
 	    var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
 	    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 	}
+ 
+ function writeSave() {
+		
+	 if((document.updateform.category_a.value == "market" && document.updateform.category_b.value == "null")
+			 && document.updateform.category_b.value != "sell" 
+			 && document.updateform.category_b.value != "buy") {
+	        alert("말머리를 선택하세요");
+	        document.updateform.id.focus();
+	        return false;
+	    }
+	    if(document.updateform.id.value == "") {
+	        alert("이름을 입력하세요");
+	        document.updateform.id.focus();
+	        return false;
+	    }
+	    
+	    if(document.updateform.subject.value == "") {
+	        alert("제목을 입력하세요");
+	        document.updateform.subject.focus();
+	        return false;
+	    }
+	    
+	    if(document.updateform.content.value == "") {
+	        alert("내용을 입력하세요");
+	        document.updateform.content.focus();
+	        return false;
+	    }
+ }
 	 
 </script>      

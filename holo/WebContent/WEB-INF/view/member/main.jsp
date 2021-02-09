@@ -70,7 +70,7 @@
 					<button onclick="window.location='logout.holo'">로그아웃</button>
 					<button onclick="window.location='mypage.holo'">마이페이지</button>
 					<button onclick="window.location='/holo/infoboard/list.holo'">생활정보 게시판</button>
-					<button onclick="window.location='/holo/diy_tip/list.holo'">인테리어 게시판</button>
+					<button onclick="window.location='/holo/diy/list.holo'">인테리어 게시판</button>
 					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>
 					<button onclick="open_message()">쪽지함</button>
 				</td>

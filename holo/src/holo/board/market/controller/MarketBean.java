@@ -28,7 +28,10 @@ public class MarketBean {
 	
 	
 	@RequestMapping("/writeForm.holo")
-	public String writeForm() {
+	public String writeForm(@RequestParam(defaultValue="market", required=false) String category_a,
+							@RequestParam(defaultValue="sell", required=false) String category_b, Model model) {
+		model.addAttribute("category_a",category_a);
+		model.addAttribute("category_b",category_b);
 		return "market/writeForm";
 	}
 	
@@ -69,11 +72,11 @@ public class MarketBean {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/sellList.holo")
-	public String sellList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
+	@RequestMapping("/list.holo")
+	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
+			@RequestParam(defaultValue="market", required=false) String category_a,
+			@RequestParam(defaultValue="sell", required=false) String category_b, Model model) {
 		try{
-			String category_a = "market";
-			String category_b = "sell";
 			List <MarketBoardDTO> articleList = null;
 			int pageSize = 10;							
 			int currentPage = pageNum;					
@@ -108,149 +111,59 @@ public class MarketBean {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("category_a", category_a);
+			model.addAttribute("category_b", category_b);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return "market/list";
 	}
-	@SuppressWarnings("unchecked")
-	@RequestMapping("/buyList.holo")
-	public String buyList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
-		try{
-			String category_a = "market";
-			String category_b = "buy";
-			List <MarketBoardDTO> articleList = null;
-			int pageSize = 20;							
-			int currentPage = pageNum;					
-			int start = (currentPage - 1) * pageSize+1;	
-			int end = currentPage * pageSize;			
-			int number = 0;								
-			int count = 0;								
-			count = MarketDAO.getArticleCount(category_a, category_b);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			
-			int pages = 5;							
-			int endPage = startPage+pages-1;			
-			int pageCount = 0;							
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
-				
-			}else {
-				articleList = Collections.emptyList();
-			}
-			number = count - (currentPage-1)*pageSize;		
-			
-			
-			model.addAttribute("articleList", articleList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "market/list";
-	}
-	@SuppressWarnings("unchecked")
-	@RequestMapping("/freeList.holo")
-	public String freeList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
-		try{
-			String category_a = "free";
-			String category_b = "null";
-			List <MarketBoardDTO> articleList = null;
-			int pageSize = 20;							
-			int currentPage = pageNum;					
-			int start = (currentPage - 1) * pageSize+1;	
-			int end = currentPage * pageSize;			
-			int number = 0;								
-			int count = 0;								
-			count = MarketDAO.getArticleCount(category_a, category_b);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			
-			int pages = 5;							
-			int endPage = startPage+pages-1;			
-			int pageCount = 0;							
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
-				
-			}else {
-				articleList = Collections.emptyList();
-			}
-			number = count - (currentPage-1)*pageSize;		
-			
-			
-			model.addAttribute("articleList", articleList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "market/freeList";
-	}
-	@SuppressWarnings("unchecked")
-	@RequestMapping("/groupList.holo")
-	public String groupList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
-		try{
-			String category_a = "group";
-			String category_b = "null";
-			List <MarketBoardDTO> articleList = null;
-			int pageSize = 20;							
-			int currentPage = pageNum;					
-			int start = (currentPage - 1) * pageSize+1;	
-			int end = currentPage * pageSize;			
-			int number = 0;								
-			int count = 0;								
-			count = MarketDAO.getArticleCount(category_a, category_b);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			
-			int pages = 5;							
-			int endPage = startPage+pages-1;			
-			int pageCount = 0;							
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
-				
-			}else {
-				articleList = Collections.emptyList();
-			}
-			number = count - (currentPage-1)*pageSize;		
-			
-			
-			model.addAttribute("articleList", articleList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "market/groupList";
-	}
+//	@SuppressWarnings("unchecked")
+//	@RequestMapping("/buyList.holo")
+//	public String buyList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
+//		try{
+//			String category_a = "market";
+//			String category_b = "buy";
+//			List <MarketBoardDTO> articleList = null;
+//			int pageSize = 20;							
+//			int currentPage = pageNum;					
+//			int start = (currentPage - 1) * pageSize+1;	
+//			int end = currentPage * pageSize;			
+//			int number = 0;								
+//			int count = 0;								
+//			count = MarketDAO.getArticleCount(category_a, category_b);
+//			int cp = 0;
+//			cp = currentPage-1;
+//			int startPage = (int)(cp/5)*5+1;			
+//			int pages = 5;							
+//			int endPage = startPage+pages-1;			
+//			int pageCount = 0;							
+//			if(count >0) {
+//				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+//				if(endPage > pageCount) {endPage = pageCount;}
+//				if(currentPage > endPage) {currentPage -= 1;}
+//				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
+//				
+//			}else {
+//				articleList = Collections.emptyList();
+//			}
+//			number = count - (currentPage-1)*pageSize;		
+//			
+//			
+//			model.addAttribute("articleList", articleList);
+//			model.addAttribute("currentPage", currentPage);
+//			model.addAttribute("start", start);
+//			model.addAttribute("end", end);
+//			model.addAttribute("count", count);
+//			model.addAttribute("num",number);
+//			model.addAttribute("startPage", startPage);
+//			model.addAttribute("endPage", endPage);
+//			model.addAttribute("pageCount", pageCount);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "market/list";
+//	}
 
 	@RequestMapping("content.holo")
 	public String content(int articleNum, int pageNum, Model model) {
@@ -288,10 +201,14 @@ public class MarketBean {
 	}
 
 	@RequestMapping("deletePro.holo")
-	public String deletePro(int articleNum, int pageNum, String category_b, Model model) throws Exception {
+	public String deletePro(MarketBoardDTO dto, int pageNum, Model model) throws Exception {
+		int articleNum = dto.getArticleNum();
+		String cate_a = dto.getCategory_a();
+		String cate_b = dto.getCategory_b();
 		MarketDAO.delete(articleNum);
 		model.addAttribute("pageNum", new Integer(pageNum));
-		model.addAttribute("category_b", category_b);
+		model.addAttribute("category_a", cate_a);
+		model.addAttribute("category_b", cate_b);
 		return "/market/deletePro";
 	}
 	
@@ -355,8 +272,10 @@ public class MarketBean {
 			MarketDAO.newArticle(articleNum);
 			check = 0;
 		}
+		String cate_a = dto.getCategory_a();
 		String cate_b = dto.getCategory_b();
 		model.addAttribute("check",check);
+		model.addAttribute("category_a",cate_a);
 		model.addAttribute("category_b",cate_b);
 		return "/market/newArticlePro";
 	}
