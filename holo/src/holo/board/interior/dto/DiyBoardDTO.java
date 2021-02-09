@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class DiyBoardDTO {
 	
-	private int articleNum;
+	private int articlenum;
 	private String category_a;
 	private String category_b;
 	private String id;
@@ -16,11 +16,11 @@ public class DiyBoardDTO {
 	private Timestamp regDate;
 	private String thumbnail;
 	
-	public int getArticleNum() {
-		return articleNum;
+	public int getArticlenum() {
+		return articlenum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticlenum(int articlenum) {
+		this.articlenum = articlenum;
 	}
 	public String getCategory_a() {
 		return category_a;

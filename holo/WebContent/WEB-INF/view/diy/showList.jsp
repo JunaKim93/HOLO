@@ -116,7 +116,7 @@ a {
 		</div>
 			<c:forEach var="show" items="${showList}">
 				<li><a
-					href="/holo/diy/content.holo?articleNum=${show.articleNum}&pageNum=${currentPage}">
+					href="/holo/diy/content.holo?articlenum=${show.articlenum}&pageNum=${currentPage}">
 						<div class="img-wrap" style="cursor: pointer;">
 							<img alt="" src="${show.thumbnail}" style="width: 100%">
 						</div>

@@ -56,7 +56,7 @@
 	</td>
     <td  width="250" >
 
-      <a href="/holo/diy/content.holo?articleNum=${article.articleNum}&pageNum=${currentPage}">
+      <a href="/holo/diy/content.holo?articlenum=${article.articlenum}&pageNum=${currentPage}">
           ${article.subject}</a> 
           
 	</td>

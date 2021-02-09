@@ -124,15 +124,15 @@ public class DiyBoardBean {
 
 
 	@RequestMapping("content.holo")
-	public String tip(@RequestParam(defaultValue="1") int pageNum, int articleNum, Model model) throws Exception {
-		DiyBoardDTO article = diyBoardDAO.getArticle(articleNum);
-		diyBoardDAO.updateViewCount(articleNum);
+	public String tip(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model) throws Exception {
+		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
+		diyBoardDAO.updateViewCount(articlenum);
 		List replyList = null;
-		replyList = diyBoardDAO.getRpl(articleNum);
+		replyList = diyBoardDAO.getRpl(articlenum);
 
 		String id = article.getId();
 
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("id", id);
 		model.addAttribute("article", article);
@@ -143,10 +143,10 @@ public class DiyBoardBean {
 
 	 
 	@RequestMapping("updateForm.holo")
-	public String updateForm(int articleNum, int pageNum, Model model) throws Exception {
-		DiyBoardDTO article = diyBoardDAO.getArticle(articleNum);
+	public String updateForm(int articlenum, int pageNum, Model model) throws Exception {
+		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
 
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("article", article);
 
@@ -154,9 +154,9 @@ public class DiyBoardBean {
 	}
 
 	@RequestMapping("updatePro.holo")
-	public String updatePro(DiyBoardDTO dto, int articleNum, int pageNum, Model model) throws Exception {
+	public String updatePro(DiyBoardDTO dto, int articlenum, int pageNum, Model model) throws Exception {
 		diyBoardDAO.update(dto);
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/diy/updatePro";
 	}
@@ -178,27 +178,27 @@ public class DiyBoardBean {
 	@RequestMapping("rplDeletePro.holo")
 	public String rplDeletePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
 		diyBoardDAO.deleteRpl(dto);
-		model.addAttribute("articleNum", new Integer(dto.getArticleNum()));
+		model.addAttribute("articlenum", new Integer(dto.getArticlenum()));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/diy/rplDeletePro";
 	}
 
 	@RequestMapping("reportArticle.holo")
-	public String boardReport(int articleNum, String subject, Model model) throws Exception {
+	public String boardReport(int articlenum, String subject, Model model) throws Exception {
 		model.addAttribute("subject", subject);
-		model.addAttribute("articleNum", articleNum);
+		model.addAttribute("articlenum", articlenum);
 		return "/diy/reportArticle";
 	}
 	
 	@RequestMapping("reportArticlePro.holo")
 	public String boardReportPro(DiyReportDTO dto, Model model) throws Exception {
 		int check = 1;
-		int articleNum;
+		int articlenum;
 		check = diyBoardDAO.checkAReport(dto);
 		if(check == 0) {
 			diyBoardDAO.insertAReport(dto);
-			articleNum=dto.getArticleNum();
-			diyBoardDAO.updateAReport(articleNum);
+			articlenum=dto.getArticlenum();
+			diyBoardDAO.updateAReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/diy/reportArticlePro";
@@ -214,12 +214,12 @@ public class DiyBoardBean {
 	@RequestMapping("reportReplyPro.holo")
 	public String replyReportPro(DiyRplReportDTO dto, Model model) throws Exception {
 		int check = 1;
-		int articleNum=0;
+		int articlenum=0;
 		check = diyBoardDAO.checkRReport(dto);
 		if(check == 0) {
 			diyBoardDAO.insertRReport(dto);
-			articleNum=diyBoardDAO.getArticleNum(dto.getRepNum());
-			diyBoardDAO.updateRReport(articleNum);
+			articlenum=diyBoardDAO.getarticlenum(dto.getRepNum());
+			diyBoardDAO.updateRReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/diy/reportReplyPro";
@@ -232,14 +232,14 @@ public class DiyBoardBean {
 //	@RequestMapping("rplWritePro.holo")
 //	public String rplWritePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
 //		diyBoardDAO.insertRpl(dto);
-//		model.addAttribute("articleNum", new Integer(dto.getArticleNum()));
+//		model.addAttribute("articlenum", new Integer(dto.getarticlenum()));
 //		model.addAttribute("pageNum", new Integer(pageNum));
 //		return "/diy_tip/rplWritePro";
 //	}
 //	@RequestMapping("/replyList.holo")
-//	public @ResponseBody List<DiyReplyDTO> repList(@RequestParam("articleNum") int articleNum) throws Exception{
-//		System.out.println(articleNum);
-//		List<DiyReplyDTO> repList = diyBoardDAO.getRpl(articleNum);
+//	public @ResponseBody List<DiyReplyDTO> repList(@RequestParam("articlenum") int articlenum) throws Exception{
+//		System.out.println(articlenum);
+//		List<DiyReplyDTO> repList = diyBoardDAO.getRpl(articlenum);
 //		for(int i=0 ; i < repList.size(); i++) {
 //			String id = repList.get(i).getId();
 //			System.out.println(id);
