@@ -66,6 +66,13 @@
 		delete from holouser where id=#{id}
 	</delete>
 	
+	<update id="updateAddr" parameterType="holouserDTO">
+		update holouser set lat=#{lat} and lng=#{lng} where id = #{id}
+	</update>
+	
+	
+	
+	
 	
 	
 	
@@ -88,6 +95,11 @@
 	<update id="setTempPw" parameterType="holouserDTO">
 		update holouser set password=#{password} where id=#{id} and email=#{email}
 	</update>
+	
+	<!-- 등급 가져오기 -->
+	<select id="getLevels" parameterType="String" resultType="int">
+		SELECT LEVELS FROM HOLOUSER WHERE ID = #{id}
+	</select>
 	
 	
 	

@@ -53,6 +53,7 @@
 					<button onclick="window.location='/holo/infoboard/list.holo'">생활정보 게시판</button>
 					<button onclick="window.location='/holo/diy_tip/list.holo'">인테리어 게시판</button>
 					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>		
+					<button onclick="window.location='/holo/guide/location_map.holo'">가이드</button>		
 				</td>
 			</tr>
 		</table>
@@ -72,6 +73,7 @@
 					<button onclick="window.location='/holo/infoboard/list.holo'">생활정보 게시판</button>
 					<button onclick="window.location='/holo/diy/list.holo'">인테리어 게시판</button>
 					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>
+					<button onclick="window.location='/holo/guide/location_map.holo'">가이드</button>	
 					<button onclick="open_message()">쪽지함</button>
 				</td>
 			</tr>

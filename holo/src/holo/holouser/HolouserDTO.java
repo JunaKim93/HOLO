@@ -15,14 +15,21 @@ public class HolouserDTO {
 	private int terms2;
 	private int terms3;
 	private String ch;
+	private String authkey;
+	private int status;
+
+	
+	
+	
+	
+
 	public String getCh() {
 		return ch;
 	}
 	public void setCh(String ch) {
 		this.ch = ch;
 	}
-	private String authkey;
-	private int status;
+	
 	
 	public String getAuthkey() {
 		return authkey;
