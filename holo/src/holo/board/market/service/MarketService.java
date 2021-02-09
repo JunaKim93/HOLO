@@ -3,8 +3,8 @@ package holo.board.market.service;
 import java.util.List;
 
 import holo.board.market.dto.MarketBoardDTO;
-import holo.board.market.dto.MarketReplyDTO;
 import holo.board.market.dto.MarketBoardReportDTO;
+import holo.board.market.dto.MarketReplyDTO;
 import holo.board.market.dto.MarketReplyReportDTO;
 
 public interface MarketService {
@@ -15,7 +15,7 @@ public interface MarketService {
 	public void updateViewCount(int articleNum) throws Exception;
 	public void delete(int articleNum) throws Exception;
 	
-	public List getArticles(String category_a, String category_b, int start, int end) throws Exception;
+	public List<MarketBoardDTO> getArticles(String category_a, String category_b, int start, int end) throws Exception;
 	public int getArticleCount(String category_a, String category_b) throws Exception;
 	public MarketBoardDTO getArticle(int articleNum) throws Exception;
 
@@ -48,7 +48,7 @@ public interface MarketService {
 	
 	// 검색
 	public int getSearchCount(String category_a, String category_b, String choice, String search) throws Exception;
-	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception;
+	public List<MarketBoardDTO> getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception;
 	
 	// 끌어올리기
 	public void newArticle(int articleNum) throws Exception;
