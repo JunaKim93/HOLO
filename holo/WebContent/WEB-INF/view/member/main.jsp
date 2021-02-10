@@ -51,6 +51,7 @@
 					<button onclick="window.location='loginForm.holo'">로그인</button>
 					<button onclick="window.location='signupForm.holo'">회원가입</button>		
 					<button onclick="window.location='/holo/infoboard/list.holo'">생활정보 게시판</button>
+					<button onclick="window.location='/holo/market/list.holo'">장터 게시판</button>
 					<button onclick="window.location='/holo/diy/list.holo'">인테리어 게시판</button>
 					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>		
 					<button onclick="window.location='/holo/guide/location_map.holo'">가이드</button>		
@@ -71,6 +72,7 @@
 					<button onclick="window.location='logout.holo'">로그아웃</button>
 					<button onclick="window.location='mypage.holo'">마이페이지</button>
 					<button onclick="window.location='/holo/infoboard/list.holo'">생활정보 게시판</button>
+					<button onclick="window.location='/holo/market/list.holo'">장터 게시판</button>
 					<button onclick="window.location='/holo/diy/list.holo'">인테리어 게시판</button>
 					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>
 					<button onclick="window.location='/holo/guide/location_map.holo'">가이드</button>	
