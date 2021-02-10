@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import holo.holouser.service.HolouserService;
 import holo.holouser.service.ScrapService;
@@ -26,6 +27,17 @@ public class ScrapController {
 		try {
 			scrapDTO.setId((String)model.asMap().get("sessionId"));
 			scrapDAO.doScrap(scrapDTO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("unScrap.holo")
+	@ResponseBody
+	public void unScrap(ScrapDTO scrapDTO,Model model) {
+		try {
+			scrapDTO.setId((String)model.asMap().get("sessionId"));
+			scrapDAO.unScrap(scrapDTO);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -49,25 +61,42 @@ public class ScrapController {
 	}
 	
 	@RequestMapping("contentFromScrap.holo")
-	public String viewFromScrap(int articlenum, String boardname) {
+	public String viewFromScrap(int articlenum, String boardname, RedirectAttributes ra) {
 		String view = null;
 		try{
+			ra.addAttribute("articlenum", articlenum);
 			switch(boardname) {
 			case "com" :
-				view = "forward:com/content.holo";
+				view = "redirect:com/content.holo";
 				break;
 			case "diy" :
-				view = "forward:diy/content.holo";
-			case "info" :
-				view = "forward:infoboard/content.holo";
+				view = "redirect:diy/content.holo";
 				break;
-			case "mkt" :
-				view = "forward:market/content.holo";
+			case "infoboard" :
+				view = "redirect:infoboard/content.holo";
+				break;
+			case "market" :
+				view = "redirect:market/content.holo";
 				break;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return view;
+	}
+	
+	@RequestMapping("alreadyScrapped.holo")
+	@ResponseBody
+	public boolean alreadyScrapped(int articlenum, String boardname, Model model) {
+		boolean result = false;
+		try{
+			String sessionId = (String) model.asMap().get("sessionId");
+			if(scrapDAO.alreadyScrapped(articlenum, boardname, sessionId)) {
+				result = true;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

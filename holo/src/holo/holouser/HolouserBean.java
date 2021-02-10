@@ -201,74 +201,199 @@ public class HolouserBean {
 	}
 	
 	@RequestMapping("myContents.holo")
-	public String logon_myContents(HttpSession session) {
+	public String logon_myContents(HttpSession session,
+							Model model,
+							@RequestParam(defaultValue="1") int pageNumI,
+							@RequestParam(defaultValue="1") int pageNumD,
+							@RequestParam(defaultValue="1") int pageNumM,
+							@RequestParam(defaultValue="1") int pageNumC) {
 		String id = (String)session.getAttribute("sessionId");
+		
+		model.addAttribute("pageNumI", pageNumI);
+		model.addAttribute("pageNumD", pageNumD);
+		model.addAttribute("pageNumM", pageNumM);
+		model.addAttribute("pageNumC", pageNumC);
+		
+		
+		
 		
 		return "member/myContents";
 	}
 	
 	
 	@RequestMapping("myInfo.holo")
-	public String logon_myInfo(String id, @RequestParam(defaultValue="1") int pageNum,
-								Model model)  {
+	public String logon_myInfo(String id, @RequestParam(defaultValue="1") int pageNumI,
+								Model model, HttpSession session)  {
 		try {
-		List infoList = null;
-		String board = "infoboard";
-		int pageSize = 20;							//페이지에 노출될 게시물 수
-		int currentPage = pageNum;					//현재 페이지 번호
-		int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
-		int end = currentPage * pageSize;			//페이지의 끝 번호
-		int number = 0;								//게시글 번호
-		int count = 0;								//총 게시물 개수
-		count = memberDAO.getArticleCount(board, id);
-		int cp = 0;
-		cp = currentPage-1;
-		int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
-		int pages = 5;								//리스트에서 보여줄 페이지 개수
-		int endPage = startPage+pages-1;			//가장 오른쪽 페이지
-		int pageCount = 0;							//총 페이지 개수
-		if(count >0) {
-			pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-			if(endPage > pageCount) {endPage = pageCount;}
-			if(currentPage > endPage) {currentPage -= 1;}
-			infoList = memberDAO.getArticles(start, end, id, board);
+			System.out.println(id);
+			List infoList = null;
+			int pageSize = 5;							//페이지에 노출될 게시물 수
+			int currentPage = pageNumI;					//현재 페이지 번호
+			int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
+			int end = currentPage * pageSize;			//페이지의 끝 번호
+			int number = 0;								//게시글 번호
+			int count = 0;								//총 게시물 개수
+			count = memberDAO.getArticleCount_I(id);
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
+			int pages = 5;								//리스트에서 보여줄 페이지 개수
+			int endPage = startPage+pages-1;			//가장 오른쪽 페이지
+			int pageCount = 0;							//총 페이지 개수
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				infoList = memberDAO.getArticles_I(start, end, id);
+			}else {
+				infoList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
 		
-		
-		}else {
-			infoList = Collections.EMPTY_LIST;
-		}
-		number = count - (currentPage-1)*pageSize;		
-	
-		model.addAttribute("infoList", infoList);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("start", start);
-		model.addAttribute("end", end);
-		model.addAttribute("count", count);
-		model.addAttribute("num",number);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("pageCount", pageCount);
+			model.addAttribute("infoList", infoList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return "member/myInfo";
 	}
+	
 	@RequestMapping("myDiy.holo")
-	public String logon_myDiy(String id) {
+	public String logon_myDiy(String id, @RequestParam(defaultValue="1") int pageNumD,
+								Model model, HttpSession session)  {
+		try {
+			List diyList = null;
+			int pageSize = 5;							//페이지에 노출될 게시물 수
+			int currentPage = pageNumD;					//현재 페이지 번호
+			int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
+			int end = currentPage * pageSize;			//페이지의 끝 번호
+			int number = 0;								//게시글 번호
+			int count = 0;								//총 게시물 개수
+			count = memberDAO.getArticleCount_D(id);
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
+			int pages = 5;								//리스트에서 보여줄 페이지 개수
+			int endPage = startPage+pages-1;			//가장 오른쪽 페이지
+			int pageCount = 0;							//총 페이지 개수
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				diyList = memberDAO.getArticles_I(start, end, id);
+			}else {
+				diyList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
 		
+			model.addAttribute("diyList", diyList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "member/myDiy";
 	}
+	
 	@RequestMapping("myMarket.holo")
-	public String logon_myMarket(String id) {
+	public String logon_myMarket(String id, @RequestParam(defaultValue="1") int pageNumM,
+								Model model, HttpSession session)  {
+		try {
+			List marketList = null;
+			int pageSize = 5;							//페이지에 노출될 게시물 수
+			int currentPage = pageNumM;					//현재 페이지 번호
+			int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
+			int end = currentPage * pageSize;			//페이지의 끝 번호
+			int number = 0;								//게시글 번호
+			int count = 0;								//총 게시물 개수
+			count = memberDAO.getArticleCount_M(id);
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
+			int pages = 5;								//리스트에서 보여줄 페이지 개수
+			int endPage = startPage+pages-1;			//가장 오른쪽 페이지
+			int pageCount = 0;							//총 페이지 개수
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				marketList = memberDAO.getArticles_M(start, end, id);
+			}else {
+				marketList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
 		
+			model.addAttribute("marketList", marketList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "member/myMarket";
 	}
+	
 	@RequestMapping("myCom.holo")
-	public String logon_myCom(String id) {
+	public String logon_myCom(String id, @RequestParam(defaultValue="1") int pageNumC,
+								Model model, HttpSession session)  {
+		try {
+			List comList = null;
+			int pageSize = 5;							//페이지에 노출될 게시물 수
+			int currentPage = pageNumC;					//현재 페이지 번호
+			int start = (currentPage - 1) * pageSize+1;	//페이지의 첫 번호
+			int end = currentPage * pageSize;			//페이지의 끝 번호
+			int number = 0;								//게시글 번호
+			int count = 0;								//총 게시물 개수
+			count = memberDAO.getArticleCount_C(id);
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			//가장 왼쪽 페이지
+			int pages = 5;								//리스트에서 보여줄 페이지 개수
+			int endPage = startPage+pages-1;			//가장 오른쪽 페이지
+			int pageCount = 0;							//총 페이지 개수
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				comList = memberDAO.getArticles_C(start, end, id);
+			}else {
+				comList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
 		
+			model.addAttribute("comList", comList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "member/myCom";
 	}
-	
+
 	
 	
 	
