@@ -1,5 +1,8 @@
 package holo.holouser.service;
 
+
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import holo.holouser.service.HolouserService;
 public class HolouserServiceMybatis implements HolouserService {
 	@Autowired
 	private SqlSessionTemplate dao = null;
+	
 	
 	@Override
 	public void insertMember(HolouserDTO member) throws Exception {
@@ -68,7 +72,7 @@ public class HolouserServiceMybatis implements HolouserService {
 		return dao.selectOne("holouser.getId", member);
 	}
 
-	//�ӽ� ��й�ȣ �߱�
+	//占쌈쏙옙 占쏙옙橘占싫� 占쌩깍옙
 	@Override
 	public void setTempPw(HolouserDTO member) throws Exception {
 		dao.update("holouser.setTempPw", member);
@@ -84,6 +88,23 @@ public class HolouserServiceMybatis implements HolouserService {
 	@Override
 	public HolouserDTO memberPage(String id) throws Exception {
 		return dao.selectOne("holouser.member", id); 
+	}
+
+	@Override
+	public int getLevels(String id) throws Exception {
+		return dao.selectOne("holouser.getLevels",id);
+	}
+
+	@Override
+	public int getArticleCount(String board, String id) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List getArticles(int start, int end, String id, String board) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

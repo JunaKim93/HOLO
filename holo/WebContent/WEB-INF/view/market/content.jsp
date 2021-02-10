@@ -19,24 +19,24 @@
 
 	function deleteConfirm() {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}";
+			window.location.href = "deletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}";
 		}
 	}
 	function deleteRepConfirm(repNum) {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "rplDeletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&repNum="
+			window.location.href = "rplDeletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&repNum="
 					+ repNum;
 		}
 	}
 
 	function newArticle() {
 		if (confirm("새 글로 다시 등록하시겠습니까? \n**끌어올리기는 하루에 한 번만 가능합니다!**")) {
-			window.location.href = "newArticlePro.holo?articleNum=${article.articleNum}&category_a=${article.category_a}&category_b=${article.category_b}";
+			window.location.href = "newArticlePro.holo?articlenum=${article.articlenum}&category_a=${article.category_a}&category_b=${article.category_b}";
 		}
 	}
 
-	function reportArticle(articleNum, subject) {
-		window.open("/holo/market/reportArticle.holo?articleNum=" + articleNum
+	function reportArticle(articlenum, subject) {
+		window.open("/holo/market/reportArticle.holo?articlenum=" + articlenum
 				+ "&subject=" + subject, "a",
 				"width=700, height=700, left=100, top=50");
 	}
@@ -46,9 +46,9 @@
 				function() {
 					var id = $("#sessionId").val();
 					var content = $("#replytext").val();
-					var articleNum = "${article.articleNum}";
+					var articlenum = "${article.articlenum}";
 					var param = "id=" + id + "&content=" + content
-							+ "&articleNum=" + articleNum;
+							+ "&articlenum=" + articlenum;
 
 					$.ajax({
 						type : "POST",
@@ -67,7 +67,7 @@
 		$
 				.ajax({
 					type : "GET",
-					url : "/holo/market/replyList.holo?articleNum=${article.articleNum}",
+					url : "/holo/market/replyList.holo?articlenum=${article.articlenum}",
 					success : function(result) {
 						console.log(result);
 						var output = "";
@@ -276,7 +276,7 @@
 			</div>
 			<div align="center">
 				<button style="background-color: white;"
-					onclick="reportArticle('${article.articleNum}', '${article.subject}')">
+					onclick="reportArticle('${article.articlenum}', '${article.subject}')">
 					&nbsp;📢 &nbsp;</button>
 			</div>
 
@@ -284,7 +284,7 @@
 				<input type="button" value="목록"
 					onclick="document.location.href='/holo/market/list.holo?pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}'">
 			<input type="button" value="수정"
-				onclick="document.location.href='/holo/market/updateForm.holo?articleNum=${article.articleNum}&pageNum=${pageNum}'">
+				onclick="document.location.href='/holo/market/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}'">
 		</form>
 	</div>
 	<br />

@@ -23,8 +23,8 @@ public class RestMarketBean {
 	private MarketService MarketDAO = null;
 
 	@RequestMapping("replyList.holo")
-	public List<MarketReplyDTO> repList(@RequestParam int articleNum) throws Exception {
-		List<MarketReplyDTO> repList = MarketDAO.getRpl(articleNum);
+	public List<MarketReplyDTO> repList(@RequestParam int articlenum) throws Exception {
+		List<MarketReplyDTO> repList = MarketDAO.getRpl(articlenum);
 
 		return repList;
 	}

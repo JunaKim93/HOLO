@@ -5,6 +5,7 @@
  	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
 
+
 <style>
 	.map_wrap {position:relative;width:100%;height:350px;}
     .title {font-weight:bold;display:block;}
@@ -22,27 +23,32 @@
     	<option value="6">광주/전라</option>
     	<option value="7">부산/경남</option>
 	</select>
+	<span><a href="/holo/guide/location_map.holo?location=0">초기화면으로</a></span>
+	<a href="/holo/member/main.holo">메인화면으로</a>
+	<a href="/holo/guide/map_places.holo">주변 장소 검색하기</a>
    
     <div class="map_wrap">
 	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
 	    <div class="hAddr">
-	        <span class="title">지도중심기준 행정동 주소정보</span>
+	        <span class="title">지도중심기준 주소정보</span>
 	        <span id="centerAddr"></span>
 	    </div>
 	</div>
     <br><br><br>
    
     
-    <!-- 서울    강원      인천/경기       대구/경북       대전/충청      광주/전라       부산/경남-->
-    <div id="clickLatlng"></div>
 	[위치 검색] <br>
 	<input type="text" id="keyword" />
 	<button type="button" onClick="set_keyword()" >검색</button>
-	<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
-		<input type="hidden" name="lat" value="" />
-		<input type="hidden" name="lng" value="" />
-		<input type="submit" value="현재위치로 거주지 설정"/>
-	</form>
+	<c:if test="${sessionScope.sessionId != null }">
+		<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
+			<input type="hidden" name="lat" value="" />
+			<input type="hidden" name="lng" value="" />
+			<input type="hidden" name="id" value="${sessionScope.sessionId}" />
+			<input type="hidden" name="address" value="" />
+			<input type="submit" value="선택위치로 거주지 설정"/>
+		</form>
+	</c:if>
 	    
     
     
@@ -69,41 +75,6 @@
 	
 	
 	
-	
-	//------------지도에 마커 생성하기------------------
-	
-	
-	// 지도를 클릭한 위치에 표출할 마커입니다
-	var marker = new kakao.maps.Marker({ 
-	    // 지도 중심좌표에 마커를 생성합니다 
-	    position: map.getCenter() 
-	}); 
-	// 지도에 마커를 표시합니다
-	marker.setMap(map);
-
-	// 지도에 클릭 이벤트를 등록합니다
-	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	    
-	    // 클릭한 위도, 경도 정보를 가져옵니다 
-	    var latlng = mouseEvent.latLng; 
-	    
-	    // 마커 위치를 클릭한 위치로 옮깁니다
-	    marker.setPosition(latlng);
-	    
-	    var getlat = latlng.getLat();
-	    var getlng = latlng.getLng();
-	    
-	    document.fix_location.lat.value=getlat;
-	    document.fix_location.lng.value=getlng;
-    
-	});
-	
-	
-	
-	
-	
-	
 	//-------------좌측상단 주소 띄우기----------------
 	
 	// 주소-좌표 변환 객체를 생성합니다
@@ -122,6 +93,11 @@
 	    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 	});
 	
+	function searchDetailAddrFromCoords(coords, callback) {
+	    // 좌표로 법정동 상세 주소 정보를 요청합니다
+	    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	}
+	
 	
 	// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 	function displayCenterInfo(result, status) {
@@ -132,6 +108,7 @@
 	            // 행정동의 region_type 값은 'H' 이므로
 	            if (result[i].region_type === 'H') {
 	                infoDiv.innerHTML = result[i].address_name;
+	                document.fix_location.address.value = result[i].address_name;
 	                break;
 	            }
 	        }
@@ -140,6 +117,56 @@
 	
 	
 	
+	
+	
+		
+	//------------지도에 마커 생성하기------------------
+	
+	
+	// 지도를 클릭한 위치에 표출할 마커입니다
+	var marker = new kakao.maps.Marker({ 
+	    // 지도 중심좌표에 마커를 생성합니다 
+	    position: map.getCenter() 
+	}); 
+	// 지도에 마커를 표시합니다
+	marker.setMap(map);
+	infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+	// 지도에 클릭 이벤트를 등록합니다
+	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+		searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+	        if (status === kakao.maps.services.Status.OK) {
+	            var detailAddr = '<div><b><font size="1">지번 주소 : ' + result[0].address.address_name + '</font></b></div>';
+	            
+	            var content = '<div class="bAddr">' +
+	                            detailAddr + 
+	                        '</div>';
+
+	            // 마커를 클릭한 위치에 표시합니다 
+	            marker.setPosition(mouseEvent.latLng);
+	            marker.setMap(map);
+	        	
+	         // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+	            infowindow.setContent(content);
+	            infowindow.open(map, marker);
+	            
+	            var getlat = mouseEvent.latLng.getLat();
+	            var getlng = mouseEvent.latLng.getLng();
+	            var getaddress = result[0].address.address_name;
+	            
+	            document.fix_location.lat.value=getlat;
+	    	    document.fix_location.lng.value=getlng;
+	    	    document.fix_location.address.value=getaddress;
+	        }
+		});
+	});
+
+	
+	
+	
+	
+
 	
 	
 	

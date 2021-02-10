@@ -118,60 +118,14 @@ public class MarketBean {
 		}
 		return "market/list";
 	}
-//	@SuppressWarnings("unchecked")
-//	@RequestMapping("/buyList.holo")
-//	public String buyList(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) {
-//		try{
-//			String category_a = "market";
-//			String category_b = "buy";
-//			List <MarketBoardDTO> articleList = null;
-//			int pageSize = 20;							
-//			int currentPage = pageNum;					
-//			int start = (currentPage - 1) * pageSize+1;	
-//			int end = currentPage * pageSize;			
-//			int number = 0;								
-//			int count = 0;								
-//			count = MarketDAO.getArticleCount(category_a, category_b);
-//			int cp = 0;
-//			cp = currentPage-1;
-//			int startPage = (int)(cp/5)*5+1;			
-//			int pages = 5;							
-//			int endPage = startPage+pages-1;			
-//			int pageCount = 0;							
-//			if(count >0) {
-//				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-//				if(endPage > pageCount) {endPage = pageCount;}
-//				if(currentPage > endPage) {currentPage -= 1;}
-//				articleList = MarketDAO.getArticles(category_a, category_b, start, end);
-//				
-//			}else {
-//				articleList = Collections.emptyList();
-//			}
-//			number = count - (currentPage-1)*pageSize;		
-//			
-//			
-//			model.addAttribute("articleList", articleList);
-//			model.addAttribute("currentPage", currentPage);
-//			model.addAttribute("start", start);
-//			model.addAttribute("end", end);
-//			model.addAttribute("count", count);
-//			model.addAttribute("num",number);
-//			model.addAttribute("startPage", startPage);
-//			model.addAttribute("endPage", endPage);
-//			model.addAttribute("pageCount", pageCount);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "market/list";
-//	}
 
 	@RequestMapping("content.holo")
-	public String content(int articleNum, int pageNum, Model model) {
+	public String content(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model) {
 		try {
-		MarketBoardDTO article = MarketDAO.getArticle(articleNum);
-		MarketDAO.updateViewCount(articleNum);
+		MarketBoardDTO article = MarketDAO.getArticle(articlenum);
+		MarketDAO.updateViewCount(articlenum);
 
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("article", article);
 		}catch(Exception e) {
@@ -182,10 +136,10 @@ public class MarketBean {
 	}
 
 	@RequestMapping("updateForm.holo")
-	public String updateForm(int articleNum, int pageNum, Model model) throws Exception {
-		MarketBoardDTO article = MarketDAO.getArticle(articleNum);
+	public String updateForm(int articlenum, int pageNum, Model model) throws Exception {
+		MarketBoardDTO article = MarketDAO.getArticle(articlenum);
 
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("article", article);
 
@@ -193,19 +147,19 @@ public class MarketBean {
 	}
 
 	@RequestMapping("updatePro.holo")
-	public String updatePro(MarketBoardDTO dto, int articleNum, int pageNum, Model model) throws Exception {
+	public String updatePro(MarketBoardDTO dto, int articlenum, int pageNum, Model model) throws Exception {
 		MarketDAO.update(dto);
-		model.addAttribute("articleNum", new Integer(articleNum));
+		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/market/updatePro";
 	}
 
 	@RequestMapping("deletePro.holo")
 	public String deletePro(MarketBoardDTO dto, int pageNum, Model model) throws Exception {
-		int articleNum = dto.getArticleNum();
+		int articlenum = dto.getArticlenum();
 		String cate_a = dto.getCategory_a();
 		String cate_b = dto.getCategory_b();
-		MarketDAO.delete(articleNum);
+		MarketDAO.delete(articlenum);
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("category_a", cate_a);
 		model.addAttribute("category_b", cate_b);
@@ -213,21 +167,21 @@ public class MarketBean {
 	}
 	
 	@RequestMapping("reportArticle.holo")
-	public String boardReport(int articleNum, String subject, Model model) throws Exception {
+	public String boardReport(int articlenum, String subject, Model model) throws Exception {
 		model.addAttribute("subject", subject);
-		model.addAttribute("articleNum", articleNum);
+		model.addAttribute("articlenum", articlenum);
 		return "/market/reportArticle";
 	}
 	
 	@RequestMapping("reportArticlePro.holo")
 	public String boardReportPro(MarketBoardReportDTO dto, Model model) throws Exception {
 		int check = 1;
-		int articleNum;
+		int articlenum;
 		check = MarketDAO.checkAReport(dto);
 		if(check == 0) {
 			MarketDAO.insertAReport(dto);
-			articleNum=dto.getArticleNum();
-			MarketDAO.updateAReport(articleNum);
+			articlenum=dto.getArticlenum();
+			MarketDAO.updateAReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/market/reportArticlePro";
@@ -243,12 +197,12 @@ public class MarketBean {
 	@RequestMapping("reportReplyPro.holo")
 	public String replyReportPro(MarketReplyReportDTO dto, Model model) throws Exception {
 		int check = 1;
-		int articleNum=0;
+		int articlenum=0;
 		check = MarketDAO.checkRReport(dto);
 		if(check == 0) {
 			MarketDAO.insertRReport(dto);
-			articleNum=MarketDAO.getArticleNum(dto.getRepNum());
-			MarketDAO.updateRReport(articleNum);
+			articlenum=MarketDAO.getarticlenum(dto.getRepNum());
+			MarketDAO.updateRReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/market/reportReplyPro";
@@ -257,7 +211,7 @@ public class MarketBean {
 	@RequestMapping("rplDeletePro.holo")
 	public String rplDeletePro(MarketReplyDTO dto, int pageNum, Model model) throws Exception {
 		MarketDAO.deleteRpl(dto);
-		model.addAttribute("articleNum", new Integer(dto.getArticleNum()));
+		model.addAttribute("articlenum", new Integer(dto.getArticlenum()));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		return "/market/rplDeletePro";
 	}
@@ -265,11 +219,11 @@ public class MarketBean {
 	@RequestMapping("newArticlePro.holo")
 	public String newArticle(MarketBoardDTO dto, Model model) throws Exception {
 		int x = 0; 
-		int articleNum = dto.getArticleNum();
-		x = MarketDAO.newArticleCheck(articleNum);
+		int articlenum = dto.getArticlenum();
+		x = MarketDAO.newArticleCheck(articlenum);
 		int check = 1;
 		if(x==0) {
-			MarketDAO.newArticle(articleNum);
+			MarketDAO.newArticle(articlenum);
 			check = 0;
 		}
 		String cate_a = dto.getCategory_a();

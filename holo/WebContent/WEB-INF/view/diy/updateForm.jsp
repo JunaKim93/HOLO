@@ -17,9 +17,9 @@
 <form method="post" name="updateform" action="/holo/diy/updatePro.holo?pageNum=${pageNum}" onsubmit="return writeSave()">
 <table width="1000" border="1" cellspacing="0" cellpadding="0" align="center">  
   <tr height="30">
- 	<td><input type="hidden" name="articleNum" value="${article.articleNum}"></td>
+ 	<td><input type="hidden" name="articlenum" value="${article.articlenum}"></td>
     <td align="center" width="125">글번호</td>
-    <td align="center" width="125" align="center">${article.articleNum}</td>
+    <td align="center" width="125" align="center">${article.articlenum}</td>
     <td align="center" width="125" >조회수</td>
     <td align="center" width="125" align="center">${article.viewcount}</td>
   </tr>

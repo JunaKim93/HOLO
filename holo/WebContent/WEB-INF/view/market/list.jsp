@@ -70,7 +70,7 @@
 				<c:out value="${num}" />
 				<c:set var="num" value="${num-1}" />
 			</td>
-			<td><a class="title" href="/holo/market/content.holo?articleNum=${list.articleNum}&pageNum=${currentPage}">
+			<td><a class="title" href="/holo/market/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
 			${list.subject}
 			</a></td>
 			<td align="center">${list.id}</td>

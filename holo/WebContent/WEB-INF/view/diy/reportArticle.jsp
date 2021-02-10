@@ -17,7 +17,7 @@
     			<td width="350"><textarea name="reason" rows="20" cols="60" placeholder="신고사유를 입력하세요" style="resize:none;"></textarea></td>
     		<tr>
     			<td colspan="2" align="center">
-    			<input type="hidden" name="articleNum" value="${articleNum}" />
+    			<input type="hidden" name="articlenum" value="${articlenum}" />
     			<input type="hidden" name="id" value="sessionId" />	
     			<input type="submit" value="제출" />
     			<input type="button" value="닫기" onclick="self.close()" />

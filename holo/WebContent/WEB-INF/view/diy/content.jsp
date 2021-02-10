@@ -21,18 +21,18 @@
 
 	function deleteConfirm() {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "deletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&category_b=${article.category_b}";
+			window.location.href = "deletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&category_b=${article.category_b}";
 		}
 	}
 	function deleteRepConfirm(repNum) {
 		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "rplDeletePro.holo?articleNum=${article.articleNum}&pageNum=${pageNum}&repNum="
+			window.location.href = "rplDeletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&repNum="
 					+ repNum;
 		}
 	}
 
-	function reportArticle(articleNum, subject) {
-		window.open("/holo/diy/reportArticle.holo?articleNum=" + articleNum
+	function reportArticle(articlenum, subject) {
+		window.open("/holo/diy/reportArticle.holo?articlenum=" + articlenum
 				+ "&subject=" + subject, "a",
 				"width=700, height=700, left=100, top=50");
 	}
@@ -48,9 +48,9 @@
 				function() {
 					var id = $("#sessionId").val();
 					var content = $("#replytext").val();
-					var articleNum = "${article.articleNum}";
+					var articlenum = "${article.articlenum}";
 					var param = "id=" + id + "&content=" + content
-							+ "&articleNum=" + articleNum;
+							+ "&articlenum=" + articlenum;
 
 					$.ajax({
 						type : "POST",
@@ -69,7 +69,7 @@
 		$
 				.ajax({
 					type : "GET",
-					url : "/holo/diy/replyList.holo?articleNum=${article.articleNum}",
+					url : "/holo/diy/replyList.holo?articlenum=${article.articlenum}",
 					success : function(result) {
 						console.log(result);
 						var output = "";
@@ -170,7 +170,7 @@
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
-					'articleNum' : '${article.articleNum}',
+					'articlenum' : '${article.articlenum}',
 					'id' : 'sessionId'
 				}),
 				dataType : "text",
@@ -187,7 +187,7 @@
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
-					'articleNum' : '${article.articleNum}'
+					'articlenum' : '${article.articlenum}'
 				}),
 				dataType : "text",
 				success : function(result) {
@@ -203,7 +203,7 @@
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
-					'articleNum' : '${article.articleNum}',
+					'articlenum' : '${article.articlenum}',
 					'id' : 'sessionId'
 				}),
 				dataType : "text",
@@ -259,7 +259,7 @@
 				border="1">
 				<tr height="30">
 					<td align="center" width="125">글번호</td>
-					<td align="center" width="125" align="center">${article.articleNum}</td>
+					<td align="center" width="125" align="center">${article.articlenum}</td>
 					<td align="center" width="125">조회수</td>
 					<td align="center" width="125" align="center">${article.viewcount}</td>
 				</tr>
@@ -281,7 +281,7 @@
 				<tr height="30">
 					<td colspan="4" bgcolor="${value_c}" align="right"><input
 						type="button" value="글수정"
-						onclick="document.location.href='/holo/diy/updateForm.holo?articleNum=${article.articleNum}&pageNum=${pageNum}'">
+						onclick="document.location.href='/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}'">
 						&nbsp;&nbsp; <input type="button" value="글삭제"
 						onclick="deleteConfirm()"> &nbsp;&nbsp; 
 						<c:choose>
@@ -294,8 +294,8 @@
 						onclick="document.location.href='/holo/diy/showList.holo?pageNum=${pageNum}'">
 						</c:when>
 						</c:choose>
-						<input type="hidden" name="articleNum"
-						value="${article.articleNum}"> <input type="hidden"
+						<input type="hidden" name="articlenum"
+						value="${article.articlenum}"> <input type="hidden"
 						name="pageNum" value="${pageNum}"></td>
 				</tr>
 			</table>
@@ -308,7 +308,7 @@
 		</button>
 		&nbsp;
 		<button style="background-color: white;"
-			onclick="reportArticle('${article.articleNum}', '${article.subject}')">
+			onclick="reportArticle('${article.articlenum}', '${article.subject}')">
 			&nbsp;📢 &nbsp;</button>
 	</div>
 	<br />

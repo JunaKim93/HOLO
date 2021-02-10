@@ -1,5 +1,7 @@
 package holo.holouser.service;
 
+import java.util.List;
+
 import holo.holouser.HolouserDTO;
 
 public interface HolouserService {
@@ -16,5 +18,7 @@ public interface HolouserService {
 	 public void setTempPw(HolouserDTO member) throws Exception;
 	 public int userCheck(String id) throws Exception;
 	 public HolouserDTO memberPage(String id) throws Exception;
-	 
+	 public int getLevels(String id) throws Exception;
+	 public int getArticleCount(String board, String id) throws Exception;
+	 public List getArticles(int start, int end, String id, String board) throws Exception;
 }

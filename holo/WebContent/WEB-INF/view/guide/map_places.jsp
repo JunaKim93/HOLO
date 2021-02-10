@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
@@ -37,9 +37,18 @@
 		.placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
 		</style>
 	</head>
+	<h1><a href="/holo/member/main.holo">메인화면으로</a></h1>
+	<c:if test="${markerCheck}">
+		<p>주변 장소를 확인하세요!</p>
+    </c:if>
+    <c:if test="${!markerCheck && sessionId != null}">
+    	<p>거주지를 설정해보세요</p>
+    	<a href="/holo/guide/location_map.holo">거주지 설정하기</a>
+    </c:if>
+    
     
 	<div class="map_wrap">
-	    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
 	    <ul id="category">
 	        <li id="BK9" data-order="0"> 
 	            <span class="category_bg bank"></span>
@@ -77,12 +86,32 @@
 		 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
-		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 5 // 지도의 확대 레벨
+		        center: new kakao.maps.LatLng(${lat}, ${lng}), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
 		    };  
-		
+		    
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		
+		if(${markerCheck}){    
+			var imageSrc = 'https://previews.123rf.com/images/anthonycz/anthonycz1304/anthonycz130400066/19194232-%EC%A7%91-%EA%B7%B8%EB%A6%AC%EA%B8%B0.jpg',
+				imageSize = new kakao.maps.Size(30,35),
+				imageOption = {offset: new kakao.maps.Point(5,5)};
+			    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+				markerPosition = new kakao.maps.LatLng(${lat}, ${lng});
+			    
+			var homeMarker = new kakao.maps.Marker({
+				position: markerPosition,
+				image: markerImage
+			});
+			
+			homeMarker.setMap(map);
+		};
+		
+		
+
 		
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places(map); 
