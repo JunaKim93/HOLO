@@ -8,6 +8,23 @@
 <title>스크랩한 게시물</title>
 <link href="/holo/resource/style/style_board.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(function(){
+	$(".btn-unScrap").click(function(){
+		var articlenum = $(this).attr("articlenum");
+		var boardname = $(this).attr("boardname");
+		$.ajax({
+			url:"/holo/unScrap.holo",type: "POST",async:false,
+			data:{	articlenum: articlenum,
+					boardname: boardname},
+			success:function(){
+				alert("삭제되었습니다.");
+				history.go(0);
+			}
+		})
+	})
+})
+</script>
 </head>
 
 <body bgcolor="${bodyback_c}">
@@ -57,13 +74,16 @@
 	  						공지
 	  					</c:if>
   					</td>
-					<td width="500">
+					<td width="450">
 						<a href="/holo/contentFromScrap.holo?articlenum=${scrap.articlenum}&boardname=${scrap.boardname}">
 							${scrap.subject} 
 						</a>
 					</td>
 					<td align="center" width="100">
 						${scrap.id}
+					</td>
+					<td boarder="0px">
+						<button class="btn-unScrap" articlenum="${scrap.articlenum}" boardname="${scrap.boardname}">❌</button>
 					</td>
 				</tr>
 			</c:forEach>

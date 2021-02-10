@@ -18,7 +18,7 @@ public class ScrapDTO {
 	public String getBoardname() {
 		return boardname;
 	}
-	public void setCategory(String boardname) {
+	public void setBoardname(String boardname) {
 		this.boardname = boardname;
 	}
 	public String getSubject() {

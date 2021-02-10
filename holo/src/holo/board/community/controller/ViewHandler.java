@@ -65,7 +65,7 @@ public class ViewHandler {
 	}
 	
 	@RequestMapping("content.holo")
-	public String view( @RequestParam("articlenum") int articlenum, 
+	public String view( int articlenum, 
 						@RequestParam(defaultValue="1") int pagenum,
 						@RequestParam(defaultValue="1") String category_a, 
 						@RequestParam(defaultValue="1") String category_b, 
