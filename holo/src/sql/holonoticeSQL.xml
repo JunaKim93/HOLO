@@ -16,26 +16,46 @@
 									   sysdate
 									   )
 	</insert>
+	
+	<select id="getnoticeCount" resultType="int">
+		select count (*) from noticeboard
+	</select>
+	
 									   
-	<update id="countViews" parameterType="int">
+	<update id="updateCountviews" parameterType="int">
 		update noticeboard set viewcount=viewcount+1  where articlenum=#{value}
 	</update>
-					   
 	
 	
+	<select id="getNotice" resultType="HolonoticeDTO" parameterType="int">
+		select * from noticeboard where articlenum=#{value}
+	</select>
 	
-	<update id="updateNotice" parameterType="holouserDTO">
-		update holouser <set>
+	<update id="updateNotice" parameterType="HolonoticeDTO">
+		update noticeboard 	<set>
 						<if test="category_a != null">category_a=#{category_a},</if>
 						<if test="subject != null">subject=#{subject},</if>
 						<if test="content != null">content=#{content},</if>
-					</set>
-             where id=#{id}
+							</set>
+             where articlenum=#{articlenum}
 	</update>
 	
-	<delete id="deleteNotice" parameterType="holouserDTO">
-		delete from holouser where id=#{id}
+	<select id="getnoticeList" parameterType="String" resultType="HolonoticeDTO">
+		select * from noticeboard where category_a = #{value} 
+		order by articlenum desc
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete from noticeboard where articlenum=#{value}
 	</delete>
+	
+	<select id="insertLikes" parameterType="int">
+		insert into noticeboard values(#{articlenum})
+	</select>
+	
+	<select id="insertDislikes" parameterType="int">
+		insert into noticeboard values(#{articlenum})
+	</select>
 	
 
 </mapper>
