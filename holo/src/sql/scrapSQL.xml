@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scrap">
+
+	<insert id="doScrap" parameterType="scrapDTO"> 
+		INSERT INTO scrap VALUES	(	SCRAP_SEQ.nextval,
+										#{boardname},
+										#{articlenum},
+										#{subject},
+										#{id},
+									   	sysdate
+									)
+	</insert>
+	<select id="countScrap" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM scrap WHERE id = #{value}
+	</select>
+	<select id="scrapList" parameterType="String" resultType="scrapDTO">
+		SELECT * FROM scrap WHERE id = #{value}
+	</select>
+</mapper>

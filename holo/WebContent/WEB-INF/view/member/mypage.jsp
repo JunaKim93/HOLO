@@ -38,6 +38,10 @@
 	</tr>
 	<tr>	
 		<td align="center" colspan="2">
+<<<<<<< Updated upstream
+=======
+			<a href="/holo/scrapList.holo">스크랩한 게시물</a>
+>>>>>>> Stashed changes
 			<a href="/holo/member/modifyForm.holo"> 내 정보 수정하기</a>
 			<a href="/holo/member/deleteForm.holo"> 회원 탈퇴 </a>
 			</td>
