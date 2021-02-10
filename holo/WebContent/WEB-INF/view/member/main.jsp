@@ -43,7 +43,7 @@
                <li><a href="/holo/member/mypage.holo">마이페이지</a></li>
                
             </c:if>
-               <li><a href="#">공지사항</a></li>
+               <li><a href="/holo/notice/list.holo">공지사항</a></li>
                <li><a href="#">고객센터</a></li>
             </ul>
          </div>
