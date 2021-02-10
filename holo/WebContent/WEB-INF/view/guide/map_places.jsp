@@ -95,7 +95,7 @@
 		
 		
 		if(${markerCheck}){    
-			var imageSrc = 'https://previews.123rf.com/images/anthonycz/anthonycz1304/anthonycz130400066/19194232-%EC%A7%91-%EA%B7%B8%EB%A6%AC%EA%B8%B0.jpg',
+			var imageSrc = '../resource/Image/homemarker.png',
 				imageSize = new kakao.maps.Size(30,35),
 				imageOption = {offset: new kakao.maps.Point(5,5)};
 			    

@@ -1,6 +1,7 @@
 package holo.holouser.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,6 +16,8 @@ public class HolouserServiceMybatis implements HolouserService {
 	@Autowired
 	private SqlSessionTemplate dao = null;
 	
+	@Autowired
+	private HashMap<String, Object> hashmap = null;
 	
 	@Override
 	public void insertMember(HolouserDTO member) throws Exception {
@@ -96,16 +99,59 @@ public class HolouserServiceMybatis implements HolouserService {
 	}
 
 	@Override
-	public int getArticleCount(String board, String id) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getArticleCount_I(String id) throws Exception {
+		return dao.selectOne("holouser.getArticleCount_I", id);
 	}
 
 	@Override
-	public List getArticles(int start, int end, String id, String board) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List getArticles_I(int start, int end, String id) throws Exception {
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		hashmap.put("id", id);
+		
+		return dao.selectList("holouser.getArticles_I", hashmap);
+	}
+	
+	@Override
+	public int getArticleCount_C(String id) throws Exception {
+		return dao.selectOne("holouser.getArticleCount_C", id);
 	}
 
+	@Override
+	public List getArticles_C(int start, int end, String id) throws Exception {
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		hashmap.put("id", id);
+		
+		return dao.selectList("holouser.getArticles_C", hashmap);
+	}
 	
+	@Override
+	public int getArticleCount_D(String id) throws Exception {
+		return dao.selectOne("holouser.getArticleCount_D", id);
+	}
+
+	@Override
+	public List getArticles_D(int start, int end, String id) throws Exception {
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		hashmap.put("id", id);
+		
+		return dao.selectList("holouser.getArticles_D", hashmap);
+	}
+	
+	@Override
+	public int getArticleCount_M(String id) throws Exception {
+		return dao.selectOne("holouser.getArticleCount_M", id);
+	}
+
+	@Override
+	public List getArticles_M(int start, int end, String id) throws Exception {
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		hashmap.put("id", id);
+		
+		return dao.selectList("holouser.getArticles_M", hashmap);
+	}
+
 }
