@@ -53,5 +53,6 @@
 		<mapper resource="/sql/marketSQL.xml"/>
 		<mapper resource="/sql/searchSQL.xml"/>
 		<mapper resource="/sql/guideSQL.xml" />
+		<mapper resource="/sql/scrapSQL.xml" />
 	</mappers>  
 </configuration>
