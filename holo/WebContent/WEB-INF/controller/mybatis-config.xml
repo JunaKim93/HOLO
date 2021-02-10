@@ -14,6 +14,7 @@
 		<typeAlias alias="infoimgDTO" type="holo.board.information.DTO.InfoImgDTO"/>	
 		<typeAlias type="holo.holouser.HolouserDTO" alias="holouserDTO"/>
 		<typeAlias alias="msgDTO" type="holo.holouser.MessageDTO" />
+		<typeAlias type="holo.holouser.ScrapDTO" alias="scrapDTO"/>
 		
 		<typeAlias alias="comDTO" type="holo.board.community.dto.ComDTO"/>
 		<typeAlias alias="comLikeDTO" type="holo.board.community.dto.ComLikeDTO"/>
