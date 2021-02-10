@@ -14,6 +14,7 @@
 		<typeAlias alias="infoimgDTO" type="holo.board.information.DTO.InfoImgDTO"/>	
 		<typeAlias type="holo.holouser.HolouserDTO" alias="holouserDTO"/>
 		<typeAlias alias="msgDTO" type="holo.holouser.MessageDTO" />
+		<typeAlias type="holo.holouser.ScrapDTO" alias="scrapDTO"/>
 		
 		<typeAlias alias="comDTO" type="holo.board.community.dto.ComDTO"/>
 		<typeAlias alias="comLikeDTO" type="holo.board.community.dto.ComLikeDTO"/>
@@ -42,6 +43,9 @@
 		<typeAlias alias="HolonoticeDTO" type="holo.notice.HolonoticeDTO"/>
 
 		
+		<typeAlias alias="searchDTO" type="holo.board.search.dto.SearchDTO" />
+		<typeAlias type="holo.guide.AddressDTO" alias="addrDTO"/>
+
 	</typeAliases>
 	
 	<mappers> 
@@ -52,5 +56,8 @@
 		<mapper resource="/sql/communitySQL.xml" />
 		<mapper resource="/sql/diySQL.xml"/>
 		<mapper resource="/sql/marketSQL.xml"/>
+		<mapper resource="/sql/searchSQL.xml"/>
+		<mapper resource="/sql/guideSQL.xml" />
+		<mapper resource="/sql/scrapSQL.xml" />
 	</mappers>  
 </configuration>

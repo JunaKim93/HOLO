@@ -45,12 +45,12 @@
 	<insert id="report" parameterType="comReportDTO">
 		INSERT INTO COMMUNITYBOARDREPORT 	 VALUES (#{articlenum},
 													 #{id},
-													 null)
+													 #{reason})
 	</insert>
 	<insert id="reportRpl" parameterType="comLikeDTO">
 		INSERT INTO COMMUNITYREPLYREPORT VALUES ( 	#{repnum},
 												  	#{id},
-												  	null)
+												  	#{reason})
 	</insert>
 
 	
@@ -60,6 +60,11 @@
 				FROM COMMUNITYBOARD 
 			WHERE CATEGORY_A = #{1} AND CATEGORY_B = #{2}
 		ORDER BY ARTICLENUM DESC
+	</select>
+	<select id="myRecentArticlenum" resultType="int" parameterType="String">
+		SELECT MAX(ARTICLENUM) 
+			FROM COMMUNITYBOARD
+		WHERE ID=#{value}
 	</select>
 	<select id="view" resultType="ComDTO" parameterType="int">
 		SELECT * 
@@ -94,8 +99,9 @@
 												]]>
 												</if>
 	</select>
-	<select id="countArt" resultType="int">
+	<select id="countArt" resultType="int" parameterType="map">
 		SELECT COUNT(*) FROM COMMUNITYBOARD
+		WHERE CATEGORY_A = ${category_a} AND CATEGORY_B = ${category_b}
 	</select>
 	<select id="countRpl" resultType="int" parameterType="int">
 		SELECT COUNT(*) FROM COMMUNITYREPLY WHERE ARTICLENUM = #{articlenum}

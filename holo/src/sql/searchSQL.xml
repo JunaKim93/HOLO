@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="search">
+	<select id="searchCount" resultType="int" parameterType="HashMap">
+	 	select sum(count) from (
+			select count(*) as count from diyBoard where ${choice} like '%' || #{search} || '%'
+			union
+			select count(*) as count from infoBoard where ${choice} like '%' || #{search} || '%'
+			union
+			select count(*) as count from marketBoard where ${choice} like '%' || #{search} || '%'
+			union
+			select count(*) as count from communityBoard where ${choice} like '%' || #{search} || '%'
+			)
+	</select>
+	
+	<select id="getSearchList" resultType="searchDTO" parameterType="HashMap">
+		select * from( 
+			select articleNum, category_a,category_b, id, subject, content, viewCount, regDate, rownum r from(
+				select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from( 
+					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
+					select * from diyBoard where ${choice} like '%' || #{search} || '%')
+					union
+					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
+					select * from marketBoard where ${choice} like '%' || #{search} || '%')
+					union
+					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
+					select * from communityBoard where ${choice} like '%' || #{search} || '%')
+					union
+					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
+					select * from infoBoard where ${choice} like '%' || #{search} || '%')
+				) order by regDate desc))
+		<![CDATA[ where r >= ${start} and r <= ${end}]]>
+	</select>	
+
+<!-- 	<select id="getList" resultType="searchDTO" parameterType="java.util.HashMap"> -->
+<!-- 		select * from product_info where product_status=1 -->
+<!-- 		<if test="color_list.size != 0"> -->
+<!-- 			and color in  -->
+<!-- 			<foreach collection="color_list" item="item" index="index" separator="," open="(" close=")"> -->
+<!-- 				#{item} -->
+<!-- 			</foreach> -->
+<!-- 		</if> -->
+<!-- 		<if test="brand_list.size != 0"> -->
+<!-- 			and brand in  -->
+<!-- 			<foreach collection="brand_list" item="item" index="index" separator="," open="(" close=")"> -->
+<!-- 				#{item} -->
+<!-- 			</foreach> -->
+<!-- 		</if> -->
+<!-- 	</select> -->
+
+</mapper>
+
+
+	
+

@@ -50,8 +50,8 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	   }
 
 	@Override
-	public void updateViewCount(int articleNum) throws Exception {
-		dao.update("diy.updateViewCount", articleNum);
+	public void updateViewCount(int articlenum) throws Exception {
+		dao.update("diy.updateViewCount", articlenum);
 		
 	}
 	
@@ -64,8 +64,8 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 		
 
 	@Override
-	public DiyBoardDTO getArticle(int articleNum) throws Exception {
-		return dao.selectOne("diy.getArticle", articleNum);
+	public DiyBoardDTO getArticle(int articlenum) throws Exception {
+		return dao.selectOne("diy.getArticle", articlenum);
 	}
 	
 	// 좋아요는 수정, 신고는 완료
@@ -78,34 +78,34 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 
 	
 	@Override
-	public void insertALikes(int articleNum, String id) throws Exception {
-		hashmap.put("articleNum", articleNum);
+	public void insertALikes(int articlenum, String id) throws Exception {
+		hashmap.put("articlenum", articlenum);
 		hashmap.put("id", id);
 		dao.insert("diy.insertALikes", hashmap);
 	}
 
 	@Override
-	public int checkALikes(int articleNum, String id) throws Exception {
-		hashmap.put("articleNum", articleNum);
+	public int checkALikes(int articlenum, String id) throws Exception {
+		hashmap.put("articlenum", articlenum);
 		hashmap.put("id", id);
 		return dao.selectOne("diy.checkALikes", hashmap);
 	}
 
 	@Override
-	public void deleteALikes(int articleNum, String id) throws Exception {
-		hashmap.put("articleNum", articleNum);
+	public void deleteALikes(int articlenum, String id) throws Exception {
+		hashmap.put("articlenum", articlenum);
 		hashmap.put("id", id);
 		dao.delete("diy.deleteALikes", hashmap);
 	}
 
 	@Override
-	public int countALikes(int articleNum) throws Exception {
-		return dao.selectOne("diy.countALikes", articleNum);
+	public int countALikes(int articlenum) throws Exception {
+		return dao.selectOne("diy.countALikes", articlenum);
 	}
 
 	@Override
-	public void updateALikes(int articleNum) throws Exception {
-		dao.update("diy.updateALikes", articleNum);
+	public void updateALikes(int articlenum) throws Exception {
+		dao.update("diy.updateALikes", articlenum);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	}
 
 	@Override
-	public void updateAReport(int articleNum) throws Exception {
-		dao.update("diy.updateAReport", articleNum);
+	public void updateAReport(int articlenum) throws Exception {
+		dao.update("diy.updateAReport", articlenum);
 		
 	}
 
@@ -137,15 +137,14 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	}
 
 	@Override
-	public List<DiyReplyDTO> getRpl(int articleNum) throws Exception {
-		return dao.selectList("diy.getRpl", articleNum);
+	public List<DiyReplyDTO> getRpl(int articlenum) throws Exception {
+		return dao.selectList("diy.getRpl", articlenum);
 	}
 
 
 	// 검색
 	@Override
-	public int getSearchCount(String category_a, String category_b, String choice, String search) throws Exception {
-		hashmap.put("category_a", category_a);
+	public int getSearchCount(String category_b, String choice, String search) throws Exception {
 	    hashmap.put("category_b", category_b);
 		hashmap.put("choice", choice);
 		hashmap.put("search", search);
@@ -154,12 +153,11 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	}
 	
 	@Override
-	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception {
+	public List getSearchArticles(String category_b, String choice, String search, int start, int end) throws Exception {
 		hashmap.put("start", start);
 		hashmap.put("end", end);
 		hashmap.put("choice", choice);
 		hashmap.put("search", search);
-		hashmap.put("category_a", category_a);
 	    hashmap.put("category_b", category_b);
 	    
 		return dao.selectList("diy.getSearchArticles", hashmap);
@@ -222,8 +220,8 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	}
 
 	@Override
-	public int getArticleNum(int repNum) throws Exception {
-		return dao.selectOne("diy.getArticleNum",repNum);
+	public int getarticlenum(int repNum) throws Exception {
+		return dao.selectOne("diy.getarticlenum",repNum);
 	}
 	
 	

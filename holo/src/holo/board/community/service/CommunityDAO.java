@@ -28,8 +28,9 @@ public class CommunityDAO implements CommunityDBService{
 	private SqlSessionTemplate sql = null;
 	
 	@Override
-	public void write(ComDTO dto) throws Exception {
-		sql.insert("com.write" ,  dto);	
+	public int write(ComDTO dto) throws Exception {
+		sql.insert("com.write" ,  dto);
+		return sql.selectOne("com.myRecentArticlenum", dto.getId());
 	}
 
 	@Override
@@ -150,8 +151,11 @@ public class CommunityDAO implements CommunityDBService{
 	}
 
 	@Override
-	public int countArt() throws Exception {
-		return sql.selectOne("com.countArt");
+	public int countArt(String category_a, String category_b) throws Exception {
+		HashMap map = new HashMap();
+		map.put("category_a", category_a);
+		map.put("category_b", category_b);
+		return sql.selectOne("com.countArt",map);
 	}
 
 	@Override

@@ -6,13 +6,16 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import holo.board.community.dto.ComLikeDTO;
@@ -23,29 +26,41 @@ import holo.board.community.dto.ComRplReportDTO;
 import holo.board.community.service.CommunityDAO;
 
 @Controller
+@ResponseBody
 @RequestMapping("/com/")
-@SessionAttributes("sid")
+@SessionAttributes("sessionId")
 public class RestController {
 	@Autowired
 	private CommunityDAO dao = null;
-
+	
 	@RequestMapping("like.holo")
-	public void like(HttpServletRequest request, HttpServletResponse response) {
+	public void like(int articlenum, Model model) {
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComLikeDTO dto = new ComLikeDTO();
-			int an = Integer.parseInt(request.getParameter("articlenum"));
-			String id = request.getParameter("sid");
-			dto.setArticlenum(an);
-			dto.setId(id);
+			dto.setArticlenum(articlenum);
+			dto.setId(sessionId);
 			dao.like(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	@RequestMapping("report.holo")
+	public void report(int articlenum, String reason, Model model) {
+		try{
+			String sessionId = (String) model.asMap().get("sessionId");
+			ComReportDTO crdto = new ComReportDTO();
+			crdto.setArticlenum(articlenum);
+			crdto.setId(sessionId);
+			crdto.setReason(reason);
+			dao.report(crdto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@RequestMapping("likes.holo")
-	public void likeCount(HttpServletRequest request, HttpServletResponse response) {
+	public void likeCount(int articlenum, HttpServletResponse response) {
 		try {
-			int articlenum = Integer.parseInt(request.getParameter("articlenum"));
 			int count = dao.likes(articlenum);
 			PrintWriter out = response.getWriter();
 			out.println(count);
@@ -55,13 +70,13 @@ public class RestController {
 		}
 	}
 	@RequestMapping("alreadyRptArt.holo")
-	@ResponseBody
-	public String alreadyRptArt(int articlenum, @RequestParam(defaultValue="1") String sid) {
+	public String alreadyRptArt(int articlenum, Model model) {
 		String result = "false";
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComReportDTO crdto = new ComReportDTO();
 			crdto.setArticlenum(articlenum);
-			crdto.setId(sid);
+			crdto.setId(sessionId);
 			if(dao.alreadyReport(crdto)) {
 				result = "true";
 			}
@@ -71,35 +86,47 @@ public class RestController {
 		return result;
 	}
 	@RequestMapping("likeReply.holo")
-	@ResponseBody
-	public void likeReply(String repnum,@RequestParam(defaultValue="1") String sid) {
+	public void likeReply(int repnum, Model model) {
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComRplLikeDTO crldto = new ComRplLikeDTO();
-			crldto.setId(sid);
-			crldto.setRepnum(Integer.parseInt(repnum));
+			crldto.setId(sessionId);
+			crldto.setRepnum(repnum);
 			dao.likeRpl(crldto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	@RequestMapping("replyLikes.holo")
-	@ResponseBody
-	public String replyLikes(String repnum) {
+	public String replyLikes(int repnum) {
 		String count="0";
 		try {
-			count = ""+dao.replyLikes(Integer.parseInt(repnum));
+			count = ""+dao.replyLikes(repnum);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return count;
 	}
+	@RequestMapping("reportReply.holo")
+	public void reportReply(int repnum, String reason, Model model) {
+		try{
+			String sessionId = (String) model.asMap().get("sessionId");
+			ComRplReportDTO crrdto = new ComRplReportDTO();
+			crrdto.setRepnum(repnum);
+			crrdto.setId(sessionId);
+			crrdto.setReason(reason);
+			dao.reportReply(crrdto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@RequestMapping("alreadyLikeRpl.holo")
-	@ResponseBody
-	public String alreadyLikeRpl(int repnum, @RequestParam(defaultValue="1") String sid) {
+	public String alreadyLikeRpl(int repnum,Model model) {
 		String result = "false";
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComRplLikeDTO crldto = new ComRplLikeDTO();
-			crldto.setId(sid);
+			crldto.setId(sessionId);
 			crldto.setRepnum(repnum);
 			result = ""+dao.alreadyLikeRpl(crldto);
 		}catch(Exception e) {
@@ -107,26 +134,14 @@ public class RestController {
 		}
 		return result;
 	}
-	@RequestMapping("reportReply.holo")
-	@ResponseBody
-	public void reportReply(int repnum, @RequestParam(defaultValue="1") String sid) {
-		try{
-			ComRplReportDTO crrdto = new ComRplReportDTO();
-			crrdto.setRepnum(repnum);
-			crrdto.setId(sid);
-			dao.reportReply(crrdto);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	@RequestMapping("alreadyRptRpl.holo")
-	@ResponseBody
-	public String alreadyRptRpl(int repnum, @RequestParam(defaultValue="1") String sid) {
+	public String alreadyRptRpl(int repnum, Model model) {
 		ComRplReportDTO crrdto;
 		boolean result=false;
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			crrdto = new ComRplReportDTO();
-			crrdto.setId(sid);
+			crrdto.setId(sessionId);
 			crrdto.setRepnum(repnum);
 			result = dao.alreadyReportRpl(crrdto);
 		}catch(Exception e) {
@@ -135,12 +150,12 @@ public class RestController {
 		return ""+result;
 	}
 	@RequestMapping("replyPro.holo")
-	@ResponseBody
-	public void replyPro(int articlenum, int repnum, String content, @RequestParam(defaultValue="1") String sid) {
+	public void replyPro(int articlenum, int repnum, String content, Model model) {
 		try{
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComRplDTO dto = new ComRplDTO();
 			dto.setRepnum(repnum);
-			dto.setId(sid);
+			dto.setId(sessionId);
 			dto.setArticlenum(articlenum);
 			dto.setContent(content);
 			dao.reply(dto);
@@ -149,13 +164,13 @@ public class RestController {
 		}
 	}
 	@RequestMapping("replyEditPro.holo")
-	@ResponseBody
-	public String replyEditPro(int repnum, String content, @RequestParam(defaultValue="1") String sid) {
+	public String replyEditPro(int repnum, String content, Model model) {
 		String result = "false";
 		try {
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComRplDTO dto = new ComRplDTO();
 			dto.setRepnum(repnum);
-			dto.setId(sid);
+			dto.setId(sessionId);
 			if(dao.identifyRpl(dto)) {
 				dto.setContent(content);
 				dao.editRpl(dto);
@@ -167,11 +182,11 @@ public class RestController {
 		return result;
 	}
 	@RequestMapping("delReply.holo")
-	@ResponseBody
-	public void delReply(int repnum, @RequestParam(defaultValue="1") String sid ) {
+	public void delReply(int repnum, Model model) {
 		try{
+			String sessionId = (String) model.asMap().get("sessionId");
 			ComRplDTO crdto = new ComRplDTO();
-			crdto.setId(sid);crdto.setRepnum(repnum);
+			crdto.setId(sessionId);crdto.setRepnum(repnum);
 			dao.deleteRpl(crdto);
 		}catch(Exception e) {
 			e.printStackTrace();

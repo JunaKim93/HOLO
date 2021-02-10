@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,15 +16,15 @@ import holo.board.interior.dto.DiyReplyDTO;
 import holo.board.interior.service.InteriorBoardService;
 
 @RestController
-@RequestMapping("/diy_tip/")
+@RequestMapping("/diy/")
 public class DiyRestBean {
 
 	@Autowired
 	private InteriorBoardService diyBoardDAO = null;
 
 	@RequestMapping("replyList.holo")
-	public List<DiyReplyDTO> repList(@RequestParam int articleNum) throws Exception {
-		List<DiyReplyDTO> repList = diyBoardDAO.getRpl(articleNum);
+	public List<DiyReplyDTO> repList(@RequestParam int articlenum) throws Exception {
+		List<DiyReplyDTO> repList = diyBoardDAO.getRpl(articlenum);
 
 		return repList;
 	}
@@ -44,15 +43,15 @@ public class DiyRestBean {
 	public void updateLikes(@RequestBody String paramData) throws Exception {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
-		int articleNum = Integer.parseInt((String) jsonObj.get("articleNum"));
+		int articlenum = Integer.parseInt((String) jsonObj.get("articlenum"));
 		String id = (String) jsonObj.get("id");
 
-		int check = diyBoardDAO.checkALikes(articleNum, id);
+		int check = diyBoardDAO.checkALikes(articlenum, id);
 		if (check == 0) {
-			diyBoardDAO.insertALikes(articleNum, id);
-			diyBoardDAO.updateALikes(articleNum);
+			diyBoardDAO.insertALikes(articlenum, id);
+			diyBoardDAO.updateALikes(articlenum);
 		} else {
-			diyBoardDAO.deleteALikes(articleNum, id);
+			diyBoardDAO.deleteALikes(articlenum, id);
 		}
 	}
 
@@ -61,8 +60,8 @@ public class DiyRestBean {
 		int result = 0;
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
-		int articleNum = Integer.parseInt((String) jsonObj.get("articleNum"));
-		result = diyBoardDAO.countALikes(articleNum);
+		int articlenum = Integer.parseInt((String) jsonObj.get("articlenum"));
+		result = diyBoardDAO.countALikes(articlenum);
 		return result;
 	}
 
@@ -73,8 +72,8 @@ public class DiyRestBean {
 			JSONParser parser = new JSONParser();
 			JSONObject jsonObj = (JSONObject) parser.parse(paramData);
 			String id = (String) jsonObj.get("id");
-			int articleNum = Integer.parseInt((String) jsonObj.get("articleNum"));
-			result = diyBoardDAO.checkALikes(articleNum, id);
+			int articlenum = Integer.parseInt((String) jsonObj.get("articlenum"));
+			result = diyBoardDAO.checkALikes(articlenum, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

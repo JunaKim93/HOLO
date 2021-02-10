@@ -1,81 +1,227 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>HOLO</title>
-	<link href="style.css" rel="stylesheet" type="text/css"/>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../resource/style/main.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+
+
+<title>main 페이지</title>
 </head>
 
-
 <script>
-	function open_message(){
-		window.open("/holo/message/msgListR.holo", "a", "width=700, height=500, left=50, top=50");
-	}
+   function logout_check(){
+      if(confirm("정말로 떠나시겠습니까?")){
+         window.location="/holo/member/logout.holo";
+      }
+   }
 </script>
 
-	<%-- <c:if test="${sessionScope.sessionId == null }">
-	
-		<c:if test="${cookie.autoId.value == null}">
-			<script>
-			     window.location="/holo/member/loginForm.holo";
-			</script>
-		</c:if>
-	    <c:if test="${cookie.autoPw.value == null}">
-	         <script>
-			     window.location="/holo/member/loginForm.holo";
-			</script>
-	    </c:if>
-	    <c:if test="${cookie.autoCh.value == null}">
-	        <script>
-			     window.location="/holo/member/loginForm.holo";
-			</script>
-	    </c:if>
-		<script>
-		window.location="/holo/member/loginPro.holo?id=${cookie.autoId.value}&password=${cookie.autoPw.value}&ch=${cookie.autoCh.value}";
-		</script>
-		
-</c:if> --%>
+<body>
+   <div id="wrap">
+      <header>
+      <p>[${sessionScope.sessionId}]</p>
+         <div>
+            <h1 class="logo">
+               <a href="/holo/member/main.holo"><img src="../resource/image/holoLogo.png"/></a>
+            </h1>
+            
+            <div>
+      
+            </div>
+            <ul class="gnb">
+            <c:if test="${sessionId == null}">
+               <li><a href="/holo/member/loginForm.holo">로그인</a></li>
+               <li><a href="/holo/member/signupForm.holo">회원가입</a></li>
+            </c:if>
+            <c:if test="${sessionId != null}">   
+               <li><a href="#" onclick="logout_check()">로그아웃</a></li>
+               <li><a href="/holo/member/mypage.holo">마이페이지</a></li>
+               
+            </c:if>
+               <li><a href="#">공지사항</a></li>
+               <li><a href="#">고객센터</a></li>
+            </ul>
+         </div>
+      </header>
+      </div>
+      
+      <div class="menu_wrap">
+      <ul class="dep1">
+         <li>
+            <a href="/holo/guide/location_map.holo">초보자가이드</a>
+            <ul class="dep2">
+               <li><a href="#">집 구하기 가이드</a></li>
+               <li><a href="#">시세</a></li>
+               <li><a href="/holo/guide/map_places.holo">상권</a></li>
+               <li><a href="#">교통</a></li>
+            </ul>
+         </li>   
+         <li>
+            <a href="/holo/infoboard/list.holo">생활정보</a>
+            <ul class="dep2">
+               <li><a href="#">best정보</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=living">생활팁</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=cooking">자취요리팁</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=findplace">집구하기팁</a></li>
+            </ul>
+         </li>   
+         <li>
+            <a href="/holo/market/list.holo">장터</a>
+            <ul class="dep2">
+               <li><a href="/holo/market/list.holo?category_a=market">중고장터</a></li>
+               <li><a href="/holo/market/list.holo?category_a=free&category_b=b">무료나눔</a></li>
+               <li><a href="/holo/market/list.holo?category_a=group&category_b=b">공동구매</a></li>
+            </ul>
+         </li>   
+         <li>
+            <a href="/holo/diy/list.holo">집꾸미기</a>
+            <ul class="dep2">
+               <li><a href="#">베스트인테리어</a></li>
+               <li><a href="/holo/diy/list.holo?category_a=myroom">우리집인테리어</a></li>
+            </ul>
+         </li>   
+         <li>
+            <a href="/holo/com/list.holo?category_a=1&category_b=1">자유게시판</a>
+            <ul class="dep2">
+               <li><a href="/holo/com/list.holo?category_a=1&category_b=1">전체 자유게시판</a></li>
+               <li><a href="/holo/com/list.holo?category_a=2&category_b=1">지역별 자유게시판</a></li>
+            </ul>
+         </li>
+      </ul>
+      
+      <div id="idx_board_wrap">
+         <div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">생활정보</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">게시판2</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">게시판3</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">게시판4</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+         </div>
+      </div>
+   </body>   
+   
+</html>      
 
 
-
-<c:if test="${sessionId == null}">
-	<body>
-		<br/>
-		<h1 align="center">메인 페이지입니다.</h1>
-		<br/>
-		<table>
-			<tr>
-				<td>
-					<button onclick="window.location='loginForm.holo'">로그인</button>
-					<button onclick="window.location='signupForm.holo'">회원가입</button>		
-					<button onclick="window.location='/holo/livingboard/list.holo'">생활정보 게시판</button>
-					<button onclick="window.location='/holo/diy_tip/list.holo'">인테리어 게시판</button>
-					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>		
-				</td>
-			</tr>
-		</table>
-	</body>
-</c:if>
-<c:if test="${sessionId != null}">
-	<body>
-		<br/>
-		<h1 align="center">메인페이지입니다</h1>
-		<br/>
-		<table>
-			<tr>
-				<td>
-					${sessionId}님 환영합니다.<br/>
-					<button onclick="window.location='logout.holo'">로그아웃</button>
-					<button onclick="window.location='mypage.holo'">마이페이지</button>
-					<button onclick="window.location='/holo/livingboard/list.holo'">생활정보 게시판</button>
-					<button onclick="window.location='/holo/diy_tip/list.holo'">인테리어 게시판</button>
-					<button onclick="window.location='/holo/com/list.holo'">자유게시판</button>
-					<button onclick="open_message()">쪽지함</button>
-				</td>
-			</tr>
-		</table>
-	</body>
-</c:if>
-</html>
+<!-- <input type="search" name="search" class="search_input" data-role="total-input-keyword" title="통합검색" placeholder="검색어를 입력하세요." /></input>
+      <button type="button" class="search_button" data-role="total-submit" title="검색하기"/><span class="fa fa-search"></span></button> -->   

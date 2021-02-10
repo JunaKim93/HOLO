@@ -2,14 +2,14 @@ package holo.board.interior.dto;
 
 public class DiyLikeDTO {
 
-	private int articleNum;
+	private int articlenum;
 	private String id;
 	
-	public int getArticleNum() {
-		return articleNum;
+	public int getArticlenum() {
+		return articlenum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticleNum(int articlenum) {
+		this.articlenum = articlenum;
 	}
 	public String getId() {
 		return id;

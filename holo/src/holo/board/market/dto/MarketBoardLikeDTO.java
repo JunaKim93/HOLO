@@ -2,14 +2,14 @@ package holo.board.market.dto;
 
 public class MarketBoardLikeDTO {
 	
-	private int articleNum;
+	private int articlenum;
 	private String id;
 	
-	public int getArticleNum() {
-		return articleNum;
+	public int getArticlenum() {
+		return articlenum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticlenum(int articlenum) {
+		this.articlenum = articlenum;
 	}
 	public String getId() {
 		return id;

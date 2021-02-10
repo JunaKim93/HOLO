@@ -1,0 +1,212 @@
+@charset "UTF-8";
+
+/*기본설정: 페이지 전체 */
+*{   margin: 0;
+   padding: 0;
+}
+
+body{font-family: 'NanumSquare', sans-serif !important; font-size:14px; color:#4e4e4e;
+   line-height: 1.4;}
+
+ul, li{
+   list-style: none;
+}
+
+a{
+   text-decoration: none;
+   color:inherit;
+}
+
+header{
+   /*border-bottom: 1px solid #ddd;*/
+   
+   
+}
+
+header > div{
+   width: 90%;
+   min-width: 1000px;
+   max-width: 1200px;
+   height: 80px;
+   margin: 0 auto;
+}
+
+
+header .logo{
+   display: block;
+   margin-top: 30px;
+   font-size: 42px;
+   font-weight: 600px;
+   letter-spacing: -6px;
+   color: #1e57a4;
+   float: left;
+}
+
+header .logo .img{
+   width: 25px;
+}
+
+header .gnb{
+   float: right;
+}
+
+header .gnb li{
+   display: inline-block;
+   margin-top: 50px;
+   margin-left: 60px;
+   font-size: 18px;
+   color: #808080;
+}
+
+header .gnb li:first-child{
+   margin-left: 0;
+}
+
+/* menu bar*/
+.menu_wrap .dep1{
+   margin-top: 50px;
+   font-size: 0;
+   color: white;
+}
+   
+.menu_wrap .dep1 > li{
+   display:inline-block;
+   width: 20%;
+   vertical-align: top;
+   background: #1e57a4;
+   text-align: center;
+   
+   font-size: 23px;
+}
+
+.menu_wrap .dep1 > li:hover > a{
+   background: #1c5197;
+   color: #fff;
+}
+
+.menu_wrap .dep1 > li > a{
+   display: block;
+   padding: 17px 0;
+}
+
+.menu_wrap .dep1 .dep2{
+   display: none;
+   background: #d4e3f7;
+   font-size: 19px;
+   color: black;
+}
+
+.menu_wrap .dep1 > li:hover > .dep2{
+   display: block;
+}
+
+.menu_wrap .dep2 > a{
+   display: block;
+   padding: 10px 0;
+   font-size: 12px;
+}
+
+.menu_wrap .dep2 a:hover{
+   text-decoration: underline;
+}
+
+/* inx_board*/
+
+#idx_board_wrap{
+   padding: 50px 0;
+   
+}
+
+#idx_board_wrap > div{
+   width: 90%;
+   min-width: 1000px;
+   max-width: 1200px;
+   margin: 0 auto;
+   font-size: 0;
+}
+
+.idx_board{
+   display: inline-block;
+   width: 48%;
+   background: #fff;
+}
+
+#idx_board_wrap > div > div:nth-child(even){
+   margin-left: 4%;
+}
+
+#idx_board_wrap > div > div:nth-child(1),
+#idx_board_wrap > div > div:nth-child(2){
+   border-bottom: 2px solid #ddd; 
+   border-top: 3px solid #1e57a4; 
+}
+
+#idx_board_wrap > div > div:nth-child(3),
+#idx_board_wrap > div > div:nth-child(4){
+   margin-top: 40px; 
+   border-bottom: 2px solid #ddd; 
+   border-top: 3px solid #1e57a4; 
+   
+}
+
+.idx_board .title{
+   position: relative;
+   padding: 20px;
+   border-bottom: 1px solid #aaa;
+}
+
+.idx_board .title a{
+   display: inline-block;
+   vertical-align: middle;
+}
+
+.idx_board .title .name{
+   font-size: 24px;
+   font-weight: 600;
+   letter-spacing: -2px;
+}
+
+.idx_board .title .more{
+   position: absolute;
+   top: 29px;
+   right: 20px;
+   
+}
+
+.idx_board .title .more img{
+   width: 40px;
+   margin-left: 3px;
+}
+
+.idx_board .list{
+   padding: 20px;
+} 
+
+.idx_board .list ul li{
+   margin-top: 10px;
+   padding-left: 8px;
+   background: url(../image/square.PNG) no-repeat 0 7px /3px;
+   font-size: 0;
+}
+
+.idx_board .list ul li:first-child{
+   margin-top: 0;
+}   
+
+.idx_board .list a,
+.idx_board .list span{
+   display: inline-block;
+   vertical-align: middle;
+}
+
+.idx_board .list a{
+   width: 80%;
+   font-size:  14px;
+}
+
+.idx_board .list span{
+   width: 20%;
+   text-align: right;
+   font-size:  12px;
+   color: #777;
+}

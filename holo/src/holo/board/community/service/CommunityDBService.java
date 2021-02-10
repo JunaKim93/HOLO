@@ -17,7 +17,7 @@ import holo.board.community.dto.ComRplReportDTO;
 public interface CommunityDBService {
 
 	
-	public void write(ComDTO dto) throws Exception;
+	public int write(ComDTO dto) throws Exception;
 	public void reply(ComRplDTO dto)throws Exception;
 	public int countLaterRepliesInSameDepth(Map map) throws Exception;
 	public int countReReplies(Map map) throws Exception;
@@ -35,7 +35,7 @@ public interface CommunityDBService {
 	public List imgList(int articlenum) throws Exception;
 	public List getRpl(int articlenum) throws Exception;
 	
-	public int countArt() throws Exception;
+	public int countArt(String category_a, String category_b) throws Exception;
 	public int countRpl(int articlenum) throws Exception;
 	public int likes(int articlenum) throws Exception;
 	public int replyLikes(int repnum) throws Exception;

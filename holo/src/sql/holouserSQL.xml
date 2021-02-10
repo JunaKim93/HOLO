@@ -66,6 +66,13 @@
 		delete from holouser where id=#{id}
 	</delete>
 	
+	<update id="updateAddr" parameterType="holouserDTO">
+		update holouser set lat=#{lat} and lng=#{lng} where id = #{id}
+	</update>
+	
+	
+	
+	
 	
 	
 	
@@ -89,8 +96,55 @@
 		update holouser set password=#{password} where id=#{id} and email=#{email}
 	</update>
 	
+	<!-- 등급 가져오기 -->
+	<select id="getLevels" parameterType="String" resultType="int">
+		SELECT LEVELS FROM HOLOUSER WHERE ID = #{id}
+	</select>
 	
 	
+	<!-- 내가 쓴 글 가져오기 -->
+	<select id = "getArticleCount_I" resultType="int" parameterType="HashMap">
+		select count(*) from infoboard where id = #{id}
+	</select>	
 	
+	<select id="getArticles_I" resultType="infoboardDTO" parameterType="HashMap">
+		select articlenum, subject, content, likes, regdate, r from
+		(select articlenum, subject, content, likes, regdate, rownum r from
+		(select * from infoboard where id = #{id} order by articlenum desc))
+		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
+	
+	<select id = "getArticleCount_C" resultType="int" parameterType="HashMap">
+		select count(*) from communityboard where id = #{id}
+	</select>	
+	
+	<select id="getArticles_C" resultType="comDTO" parameterType="HashMap">
+		select articlenum, subject, content, likes, regdate, r from
+		(select articlenum, subject, content, likes, regdate, rownum r from
+		(select * from communityboard where id = #{id} order by articlenum desc))
+		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
+	
+	<select id = "getArticleCount_D" resultType="int" parameterType="HashMap">
+		select count(*) from diyboard where id = #{id}
+	</select>	
+	
+	<select id="getArticles_D" resultType="diyboardDTO" parameterType="HashMap">
+		select articlenum, subject, content, likes, regdate, r from
+		(select articlenum, subject, content, likes, regdate, rownum r from
+		(select * from diyboard where id = #{id} order by articlenum desc))
+		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
+	
+	<select id = "getArticleCount_M" resultType="int" parameterType="HashMap">
+		select count(*) from marketboard where id = #{id}
+	</select>	
+	
+	<select id="getArticles_M" resultType="MkBoardDTO" parameterType="HashMap">
+		select articlenum, subject, content, likes, regdate, r from
+		(select articlenum, subject, content, likes, regdate, rownum r from
+		(select * from marketboard where id = #{id} order by articlenum desc))
+		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	</select>
 	
 </mapper>
