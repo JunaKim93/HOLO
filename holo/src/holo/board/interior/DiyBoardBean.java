@@ -15,6 +15,7 @@ import holo.board.interior.dto.DiyReplyDTO;
 import holo.board.interior.dto.DiyReportDTO;
 import holo.board.interior.dto.DiyRplReportDTO;
 import holo.board.interior.service.InteriorBoardService;
+import holo.board.search.dto.SearchDTO;
 
 @EnableWebMvc
 @Controller
@@ -43,16 +44,23 @@ public class DiyBoardBean {
 
 	@RequestMapping("list.holo")
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
-						@RequestParam(defaultValue="tip", required=false) String category_b, String choice, String search, Model model) throws Exception {
-		int pageSize = 10;
-		int currentPage = pageNum;
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = currentPage * pageSize;
-		int count = 0;
-		int number = 0;
+						@RequestParam(defaultValue="tip", required=false) String category_b, 
+						String choice, String search, Model model) throws Exception {
 		String category_a = "myroom";
 
-		List articleList = null;
+		List<DiyBoardDTO> articleList = null;
+		int pageSize = 10;
+		int currentPage = pageNum;
+		int start = (currentPage - 1) * pageSize + 1;
+		int end = currentPage * pageSize;
+		int number = 0;
+		int count = 0;
+		int cp = 0;
+		cp = currentPage - 1;
+		int startPage = (int) (cp / 5) * 5 + 1;
+		int pages = 5;
+		int endPage = startPage + pages - 1;
+		int pageCount = 0;
 		
 		if(choice != null && search != null) {
 			count = diyBoardDAO.getSearchCount(category_a, category_b, choice, search);
@@ -62,13 +70,19 @@ public class DiyBoardBean {
 
 		if(choice != null && search != null) {
 			if (count > 0) {
-				articleList = diyBoardDAO.getSearchArticles(category_a, category_b, choice, search, startRow, endRow);
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				articleList = diyBoardDAO.getSearchArticles(category_a, category_b, choice, search, start, end);
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}
 		}else {
 			if (count > 0) {
-				articleList = diyBoardDAO.getArticles(category_a, category_b, startRow, endRow);
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				articleList = diyBoardDAO.getArticles(category_a, category_b, start, end);
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}
@@ -76,12 +90,14 @@ public class DiyBoardBean {
 
 		number = count - (currentPage - 1) * pageSize;
 
-		model.addAttribute("currentPage", new Integer(currentPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
-		model.addAttribute("count", new Integer(count));
-		model.addAttribute("pageSize", new Integer(pageSize));
-		model.addAttribute("number", new Integer(number));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("count", count);
+		model.addAttribute("num", number);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("choice", choice);
 		model.addAttribute("search", search);
