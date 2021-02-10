@@ -63,7 +63,7 @@ public class DiyBoardBean {
 		int pageCount = 0;
 		
 		if(choice != null && search != null) {
-			count = diyBoardDAO.getSearchCount(category_a, category_b, choice, search);
+			count = diyBoardDAO.getSearchCount(category_b, choice, search);
 		}else{
 			count = diyBoardDAO.getArticleCount(category_a, category_b);
 		}
@@ -73,7 +73,7 @@ public class DiyBoardBean {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
-				articleList = diyBoardDAO.getSearchArticles(category_a, category_b, choice, search, start, end);
+				articleList = diyBoardDAO.getSearchArticles(category_b, choice, search, start, end);
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}

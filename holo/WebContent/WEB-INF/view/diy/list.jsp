@@ -56,18 +56,19 @@
 						href="/holo/diy/content.holo?articlenum=${article.articlenum}&pageNum=${currentPage}">
 							${article.subject}</a></td>
 					<td align="center" width="100">${article.id}</td>
-					<td align="center" width="150">${article.regDate}</td>
+					<td align="center" width="150"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
 					<td align="center" width="50">${article.viewcount}</td>
 				</tr>
 			</c:forEach>
 		</c:if>
 	</table>
-	]
+	
 	<br />
 
 	<div align="center">
 
 		<c:if test="${empty choice and empty search}">
+		<a class="button" href="/holo/diy/list.holo?pageNum=1">[처음]</a>
 			<c:if test="${startPage>5}">
 				<a class="pages"
 					href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}">[이전]</a>
@@ -82,9 +83,11 @@
 				<a class="pages"
 					href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}">[다음]</a>
 			</c:if>
+			<a class="button" href="/holo/diy/list.holo?pageNum=${end}&category_b=${category_b}">[끝]</a>
 		</c:if>
 
 		<c:if test="${not empty choice and not empty search}">
+		<a class="button" href="/holo/diy/list.holo?pageNum=1&choice=${choice}&search=${search}">[처음]</a>
 		<c:if test="${startPage>5}">
 				<a class="pages"
 					href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}&choice=${choice}&search=${search}">[이전]</a>
@@ -99,20 +102,26 @@
 				<a class="pages"
 					href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}&choice=${choice}&search=${search}">[다음]</a>
 			</c:if>
+			<a class="button" href="/holo/diy/list.holo?pageNum=${end}&category_b=${category_b}&choice=${choice}&search=${search}">[끝]</a>
 		</c:if>
 	</div>
 	<br />
 	<div align="center">
 		<form action="/holo/diy/list.holo">
-			<input type="hidden" name="pageNum" value="1" /> <select
+			<input type="hidden" name="pageNum" value="1" />
+			<input type="hidden" name="category_b" value="${category_b}" /> <select
 				name="choice">
 				<option value="id">작성자</option>
 				<option value="subject">제목</option>
 				<option value="content">내용</option>
 			</select> <input type="text" name="search"> <input type="submit"
-				value="검색">
+				value="검색"> &nbsp;
+				<c:if test="${not empty search}">
+					<input type="button" value="검색 초기화" onclick="document.location.href='/holo/diy/list.holo?category_b=${category_b}'" />
+				</c:if>
 		</form>
 	</div>
+	
 
 </body>
 </html>
