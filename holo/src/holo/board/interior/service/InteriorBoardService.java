@@ -52,8 +52,8 @@ public interface InteriorBoardService {
 	public int getarticlenum(int repNum) throws Exception;
 	
 	// 검색
-	public int getSearchCount(String category_a, String category_b, String choice, String search) throws Exception;
-	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception;
+	public int getSearchCount(String category_b, String choice, String search) throws Exception;
+	public List getSearchArticles(String category_b, String choice, String search, int start, int end) throws Exception;
 	
 
 	

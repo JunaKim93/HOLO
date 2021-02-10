@@ -144,8 +144,7 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 
 	// 검색
 	@Override
-	public int getSearchCount(String category_a, String category_b, String choice, String search) throws Exception {
-		hashmap.put("category_a", category_a);
+	public int getSearchCount(String category_b, String choice, String search) throws Exception {
 	    hashmap.put("category_b", category_b);
 		hashmap.put("choice", choice);
 		hashmap.put("search", search);
@@ -154,12 +153,11 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 	}
 	
 	@Override
-	public List getSearchArticles(String category_a, String category_b, String choice, String search, int start, int end) throws Exception {
+	public List getSearchArticles(String category_b, String choice, String search, int start, int end) throws Exception {
 		hashmap.put("start", start);
 		hashmap.put("end", end);
 		hashmap.put("choice", choice);
 		hashmap.put("search", search);
-		hashmap.put("category_a", category_a);
 	    hashmap.put("category_b", category_b);
 	    
 		return dao.selectList("diy.getSearchArticles", hashmap);
