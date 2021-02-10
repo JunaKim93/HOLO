@@ -38,7 +38,8 @@
 	</tr>
 	<tr>	
 		<td align="center" colspan="2">
-			<a href="/holo/scrapList.holo">스크랩한 게시물</a>
+			<a href="/holo/member/scrapList.holo">스크랩한 게시물</a>
+			<a href="/holo/member/myContents.holo">나의 게시물</a>
 			<a href="/holo/member/modifyForm.holo"> 내 정보 수정하기</a>
 			<a href="/holo/member/deleteForm.holo"> 회원 탈퇴 </a>
 			</td>

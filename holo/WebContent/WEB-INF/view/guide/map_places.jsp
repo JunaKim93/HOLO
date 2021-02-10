@@ -95,7 +95,7 @@
 		
 		
 		if(${markerCheck}){    
-			var imageSrc = '../resource/Image/homemarker.png',
+			var imageSrc = '../resource/image/homemarker.png',
 				imageSize = new kakao.maps.Size(30,35),
 				imageOption = {offset: new kakao.maps.Point(5,5)};
 			    
