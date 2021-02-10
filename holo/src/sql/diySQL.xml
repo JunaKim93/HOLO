@@ -120,13 +120,13 @@
 	
 	<!-- 검색기능 -->
 	<select id="getSearchCount" resultType="int" parameterType="HashMap">
-	 	select count(*) from diyBoard where category_a='myroom' and category_b='tip' and ${choice} like '%' || #{search} || '%'
+	 	select count(*) from diyBoard where category_a='myroom' and category_b=#{category_b} and ${choice} like '%' || #{search} || '%'
 	</select>
 	<select id="getSearchArticles" resultType="diyboardDTO" parameterType="HashMap">
 		<![CDATA[
 		select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, r
 					from (select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, rownum r
-					from (select * from diyBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} and ${choice} like '%' || #{search} || '%' order by regDate desc) where r >= #{start} and r <= #{end}
+					from (select * from diyBoard order by regDate desc) where category_a='myroom' and category_b=#{category_b} and ${choice} like '%' || #{search} || '%' order by regDate desc) where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 	

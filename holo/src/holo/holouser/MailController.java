@@ -43,20 +43,20 @@ public class MailController {
 			
 			
 			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			messageHelper.setFrom("2021holo@gmail.com");
-			messageHelper.setTo(dto.getEmail());
-			messageHelper.setSubject("[HOLO] È¸¿ø°¡ÀÔ ÀÎÁõ¸ŞÀÏ");
-			messageHelper.setText(new StringBuffer().append("<h1>[ÀÌ¸ŞÀÏ ÀÎÁõ]</h1>")
-						.append("<p>¾Æ·¡ ¸µÅ©¸¦ Å¬¸¯ÇÏ½Ã¸é ÀÌ¸ŞÀÏ ÀÎÁõÀÌ ¿Ï·áµË´Ï´Ù.</p>")
-						.append("<a href='http://192.168.0.130:8080/holo/sendmail/joinConfirm.holo?id=")
-						.append(dto.getId())
-						.append("&email=")
-						.append(dto.getEmail())
-						.append("&authkey=")
-						.append(authkey)
-						.append("' target='_blenk'>ÀÌ¸ŞÀÏ ÀÎÁõÇÏ±â</a>")
-						.toString(), true);
+	         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	         messageHelper.setFrom("2021holo@gmail.com");
+	         messageHelper.setTo(dto.getEmail());
+	         messageHelper.setSubject("[HOLO] íšŒì›ê°€ì… ì¸ì¦ë©”ì¼");
+	         messageHelper.setText(new StringBuffer().append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>")
+	                  .append("<p>ì•„ë˜ ë§í¬ë¥¼ í´ë¦­í•˜ì‹œë©´ ì´ë©”ì¼ ì¸ì¦ì´ ì™„ë£Œë©ë‹ˆë‹¤.</p>")
+	                  .append("<a href='http://192.168.0.130:8080/holo/sendmail/joinConfirm.holo?id=")
+	                  .append(dto.getId())
+	                  .append("&email=")
+	                  .append(dto.getEmail())
+	                  .append("&authkey=")
+	                  .append(authkey)
+	                  .append("' target='_blenk'>ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>")
+	                  .toString(), true);
 			
 			mailSender.send(message);
 		}catch(Exception e) {
@@ -93,15 +93,15 @@ public class MailController {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				messageHelper.setFrom("2021holo@gmail.com");
 				messageHelper.setTo(dto.getEmail());
-				messageHelper.setSubject("[HOLO] ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¹ß±Ş");
-				messageHelper.setText(new StringBuffer().append("<h1>[ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¹ß±Ş]</h1>")
+				messageHelper.setSubject("[HOLO] ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ß±ï¿½");
+				messageHelper.setText(new StringBuffer().append("<h1>[ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ß±ï¿½]</h1>")
 							.append("<p>")
 							.append(dto.getId())
-							.append("È¸¿ø´ÔÀÇ ÀÓ½Ã ºñ¹Ğ¹øÈ£´Â</p>")
+							.append("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½</p>")
 							.append("<h1>")
 							.append(tempPw)
 							.append("</h1>")
-							.append("ÀÔ´Ï´Ù.")
+							.append("ï¿½Ô´Ï´ï¿½.")
 							.toString(), true);
 				
 				mailSender.send(message);
