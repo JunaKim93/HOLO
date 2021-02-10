@@ -14,16 +14,24 @@
 </div>
 <div align="center">
 <form action="/holo/search/searchList.holo">
+	<select name="filter">
+		<option value="whole" selected> 전체 게시판  </option>
+		<option value="subject"> 생활정보 게시판  </option>
+		<option value="content"> 인테리어 게시판 </option>
+	</select>
+	
 	<select name="choice">
 		<option value="id"> 작성자  </option>
 		<option value="subject"> 제목  </option>
 		<option value="content"> 내용 </option>
 	</select>
-		<input type="text" name="search">
+		<input type="text" name="search" placeholder="${search}">
 		<input type="submit" value="검색">
 </form>
 </div>
-
+<div align="center">
+ " ${search} " 로 검색한 결과입니다. (총 ${count}건)
+</div>
 <div align="center">
 	<table border="1">
 		<tr>
@@ -53,6 +61,9 @@
 						</c:choose>
 					</div>
 					<div>
+						 ${cate_a } > ${cate_b }
+					</div>
+					<div>
 						<c:if test="${empty list.content}">
 						글 내용이 없습니다.
 						</c:if>
@@ -78,7 +89,7 @@
 		<a class="pages" href="/holo/search/searchList.holo?pageNum=${startPage+5}&choice=${choice}&search=${search}">[다음]</a>
 	</c:if>
 	<fmt:parseNumber var="end" value="${count/10+1}" integerOnly="true" />
-	<a class="pages" href="/holo/search/searchList.holo?pageNum=${end}&choice=${choice}&search=${search}">[끝]</a>
+	<a class="button" href="/holo/search/searchList.holo?pageNum=${end}&choice=${choice}&search=${search}">[끝]</a>
 </div>
 </body>
 </html>
