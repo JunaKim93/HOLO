@@ -22,18 +22,22 @@
 <script src="./js/script.js"></script>
 <title>게시판 글목록</title>
 </head>
+<a href="/holo/best/infolist.holo">BEST</a>
+<a href="/holo/infoboard/list.holo?category_a=living">생활정보</a>
+<a href="/holo/infoboard/list.holo?category_a=cooking">요리정보</a>
+<a href="/holo/infoboard/list.holo?category_a=findplace">집구하기</a>
 <body>
    <div class="board_wrap">
       <div class="board_title">
       <c:if test="${category_a == 'living'}">
-         <strong>생활정보</strong>
+         <strong><a href="/holo/infoboard/list.holo?category_a=living">생활정보</a></strong>
          <p>자취생활 정보 게시판입니다.</p>
       </c:if>
       <c:if test="${category_a == 'cooking'}">
-         <strong>요리정보</strong>
+         <strong><a href="/holo/infoboard/list.holo?category_a=cooking">요리정보</a></strong>
          <p>자취요리 정보 게시판입니다.</p>
       </c:if><c:if test="${category_a == 'findplace'}">
-         <strong>집구하기</strong>
+         <strong><a href="/holo/infoboard/list.holo?category_a=findplace">집구하기</a></strong>
          <p>집구하기 정보 게시판입니다.</p>
       </c:if>
       <div class="board_page">

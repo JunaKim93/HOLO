@@ -22,12 +22,16 @@
 <script src="./js/script.js"></script>
 <title>게시판 글목록</title>
 </head>
-
+<a href="/holo/best/infolist.holo">BEST</a>
+<a href="/holo/infoboard/list.holo?category_a=living">생활정보</a>
+<a href="/holo/infoboard/list.holo?category_a=cooking">요리정보</a>
+<a href="/holo/infoboard/list.holo?category_a=findplace">집구하기</a>
 <body>
    <div class="board_wrap">
       <div class="board_title">
-         <strong><a href="/holo/notice/list.holo">공지사항</a></strong>
-         <p></p>
+         <strong><a href="/holo/best/infolist.holo">오늘의 생활정보 Best</a></strong>
+         <p>최근 24시간 이내의 인기글입니다.</p>
+     
       </div>
       <div class="board_list_wrap">
          <div class="board_list">
@@ -40,18 +44,21 @@
          </div>
          <div>
          	<c:if test="${count == 0}">
-         		등록된 글이 없습니다.
+         		인기글이 없습니다.
          	</c:if>
          	
          	<c:if test="${count >0}">
-         		<c:forEach var="list" items="${articleList}">
+         		<c:forEach var="list" items="${infoBestList}">
 		            <div class="num">
-		            	${list.articlenum }
+		            	<c:out value="${num}" />
+						<c:set var="num" value="${num-1}" />
 		            </div>
 		            <div class="title">
-						<a class="title" href="/holo/notice/content.holo?num=${list.articlenum}&pageNum=${pagenum}">
+						<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
 						${list.subject} 
-						
+						<c:if test="${list.repcount != 0}">
+							[${list.repcount}]
+						</c:if>
 						</a>
 		            </div>
 		            
@@ -68,38 +75,28 @@
          
          
          </div>    
-       
                  
          </div>
          <div class="board_page">
-            <c:if test="${count>0}">
-			    <c:set var="pageCount" value="${count/pageSize + ( count % pageSize == 0 ? 0 : 1)}"/>
-			    <c:set var="pageBlock" value="${10}"/>
-			    <fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />
-			    <c:set var="startPage" value="${result * 10+ 1}" />
-			    <c:set var="endPage" value="${startPage + pageBlock-1}"/>
-			    <c:if test="${endPage > pageCount}">
-			        <c:set var="endPage" value="${pageCount}"/>
-			    </c:if> 
-			          
-			    <c:if test="${startPage > 10}">
-			        <a class="button prev" href="/holo/notice/list.holo?pageNum=${startPage - 10 }">[이전]</a>
-			    </c:if>
-			
-			    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-			        <a class="num" href="/holo/notice/list.holo?pageNum=${i}&category_a=1">[${i}]</a>
-			    </c:forEach>
-			
-			    <c:if test="${endPage < pageCount}">
-			        <a class="button next" href="/holo/notice/list.holo?pageNum=${startPage + 10}">[다음]</a>
-			    </c:if>
-		    </c:if>
+				<c:if test="${count>0}">
+					<a class="button first" href="/holo/best/infolist.holo?pageNum=1">맨앞</a>
+					<c:if test="${startPage>5}">
+						<a class="button prev" href="/holo/best/infolist.holo?pageNum=${startPage-1}">이전</a>
+					</c:if>
+					<c:if test="${startPage <= 5}">
+						<a class="button first" href="#">이전</a>
+					</c:if>
+					<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+						<a class="num" href="/holo/best/infolist.holo?pageNum=${pagenum}">${pagenum}</a>
+					</c:forEach>
+					<c:if test="${endPage<pageCount}">
+						<a class="button next" href="/holo/best/infolist.holo?pageNum=${startPage+5}">다음</a>
+					</c:if>
+					<a class="button last" href="/holo/best/infolist.holo?pageNum=${pageCount}">맨뒤</a>
+				</c:if>
          
          </div>
          <div class="button_wrap">
-         <c:if test="${sessionScope.sessionId == 'admin'}">
-            <a href="/holo/infoboard/writeForm.holo" class="on">글작성</a>
-         </c:if>
             <a href="/holo/member/main.holo" class="on">메인으로</a>
             
             <!-- <a href="#">수정</a> -->         

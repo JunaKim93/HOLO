@@ -76,20 +76,20 @@ public class HolouserBean {
 			response.addCookie(c3);
 		}
 	
-		int check = memberDAO.userCheck(member);
-		int status = memberDAO.getStatus(member.getId());
-		
-		if(check == 1 && status == 1) {
-			//session.setAttribute("sessionId", member.getId());
-			model.addAttribute("check", check);
-			model.addAttribute("sessionId", member.getId());
+		// status == 1 인증함 status 0 인증 안됨
 			
-		}else if(check == 1 && status == 0) {
-			model.addAttribute("check", 2);
-		}else {
-		model.addAttribute("check", check);
-		model.addAttribute("status", status);
+		int check = memberDAO.userCheck(member);
+		int status = 0;
+		if (check != 0) {
+			status = memberDAO.getStatus(member.getId());
+			if(status == 0) {
+				check = 2;
+			}else {
+				model.addAttribute("sessionId", member.getId());
+			}
 		}
+		model.addAttribute("check", check);
+		
 		return "member/loginPro";
 	}
 	

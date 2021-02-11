@@ -40,19 +40,19 @@ public class InfoBoardController {
 						@RequestParam(required=false) String category_b, Model model) {
 		try{
 			List <InfoBoardDTO> articleList = null;
-			int pageSize = 20;							//�������� ����� �Խù� ��
-			int currentPage = pageNum;					//���� ������ ��ȣ
-			int start = (currentPage - 1) * pageSize+1;	//�������� ù ��ȣ
-			int end = currentPage * pageSize;			//�������� �� ��ȣ
-			int number = 0;								//�Խñ� ��ȣ
-			int count = 0;								//�� �Խù� ����
+			int pageSize = 20;							//占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쌉시뱄옙 占쏙옙
+			int currentPage = pageNum;					//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
+			int start = (currentPage - 1) * pageSize+1;	//占쏙옙占쏙옙占쏙옙占쏙옙 첫 占쏙옙호
+			int end = currentPage * pageSize;			//占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙호
+			int number = 0;								//占쌉시깍옙 占쏙옙호
+			int count = 0;								//占쏙옙 占쌉시뱄옙 占쏙옙占쏙옙
 			count = liveBrdDAO.getArticleCount(category_a, category_b);
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//���� ���� ������
-			int pages = 5;								//����Ʈ���� ������ ������ ����
-			int endPage = startPage+pages-1;			//���� ������ ������
-			int pageCount = 0;							//�� ������ ����
+			int startPage = (int)(cp/5)*5+1;			//占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+			int pages = 5;								//占쏙옙占쏙옙트占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+			int endPage = startPage+pages-1;			//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+			int pageCount = 0;							//占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}
@@ -254,19 +254,19 @@ public class InfoBoardController {
 					 @RequestParam(required=false) String category_b, Model model) {
 		try{
 			List <InfoBoardDTO> searchList = null;
-			int pageSize = 20;							//�������� ����� �Խù� ��
-			int currentPage = pageNum;					//���� ������ ��ȣ
-			int start = (currentPage - 1) * pageSize+1;	//�������� ù ��ȣ
-			int end = currentPage * pageSize;			//�������� �� ��ȣ
-			int number = 0;								//�Խñ� ��ȣ
-			int count = 0;								//�� �Խù� ����
+			int pageSize = 20;							//占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쌉시뱄옙 占쏙옙
+			int currentPage = pageNum;					//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙호
+			int start = (currentPage - 1) * pageSize+1;	//占쏙옙占쏙옙占쏙옙占쏙옙 첫 占쏙옙호
+			int end = currentPage * pageSize;			//占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙호
+			int number = 0;								//占쌉시깍옙 占쏙옙호
+			int count = 0;								//占쏙옙 占쌉시뱄옙 占쏙옙占쏙옙
 			count = liveBrdDAO.searchArticleCount(category_a, category_b, sort, keyword);
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//���� ���� ������
-			int pages = 5;								//����Ʈ���� ������ ������ ����
-			int endPage = startPage+pages-1;			//���� ������ ������
-			int pageCount = 0;							//�� ������ ����
+			int startPage = (int)(cp/5)*5+1;			//占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+			int pages = 5;								//占쏙옙占쏙옙트占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+			int endPage = startPage+pages-1;			//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+			int pageCount = 0;							//占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}

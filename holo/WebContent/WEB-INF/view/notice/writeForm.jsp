@@ -1,85 +1,111 @@
-<%@ page contentType = "text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/resource/etc/color.jsp"%>
-
+<!DOCTYPE html>
 <html>
 <head>
-<title>HOLO</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8">
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="../resource/style/board_write_style.css">
+
+<!-- script 선언 -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js" charset="utf-8"></script> 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+
+<script src="./js/script.js"></script>
+<title>게시판 글작성</title>
 </head>
-
-<script language="JavaScript">
-</script>
-</head>
-
-
-<c:if test="${sessionScope.sessionId == null }">
-	<script>
-		alert("로그인을 해주세요.")
-		window.location="/holo/member/main.holo";
-	</script>
-</c:if>
-
-<c:if test="${sessionScope.sessionId != 'admin'}">
-	<script>
-		alert("사용 권한이 없습니다.")
-		window.location="/holo/member/main.holo";
-	</script>
-</c:if>
-
-<c:if test="${sessionScope.sessionId == 'admin'}">	
-   
-<body bgcolor="${bodyback_c}">
-<center>
-<b>글쓰기</b>
-<br>
-<form method="post" name="writeform" action="/holo/notice/writePro.holo" onsubmit="return writeSave()">
-	<input type="hidden" name="num" value="${dto.articlenum}">
-
-	<table align="center">
-	<tr>
-	   <td align="right">
-	   		<a href="/holo/notice/list.holo?category_a=1">글 목록</a>
-	   </td>
-	</tr>
-	</table>
-	
-<table align="center">
-    <tr> 
-  	<td align="center">작성자</td>
-  	<td><input type="text" name="id" required value="${sessionScope.sessionId}"></td>
-    </tr>
-
-    <tr>
-    <td align="center">카테고리</td>
- 	<td>
- 				<select name="category_a" required>
-					<option disabled selected>분류 선택</option>
-					<option value="1">공지</option>
-				</select>
-	</td>
-  	</tr>
-  
-  	<tr>
-    <td align="center">제목</td>
- 	<td><input type="text" name="subject" required></td>
-  	</tr>
-  	
-  	<tr>
-    <td align="center">내용</td>
-    <td>
-     <textarea name="content" required rows="10" cols="100"></textarea></td>
-  	</tr>
-	
-	<tr>
- 	<td colspan=2 align="center"> 
-  	<input type="submit" value="글쓰기">
-  	<input type="button" value="목록보기" OnClick="window.location='/holo/notice/list.holo?category_a=1'">
-	</td>
-	</tr>
-</table>    
-</form>
-</c:if>      
+<body>
+   <div class="board_wrap">
+      <div class="board_title">
+         <strong>공지사항 작성</strong>
+         <p></p>
+      </div>
+      <form method="post" name="writeform" action="/holo/notice/writePro.holo" onsubmit="return writeSave()">
+	      <div class="board_write_wrap">
+	         <div class="board_write">
+	            <div class="title">
+	               <dl>
+	                  <dt>제목</dt>
+	                  <dd><input type="text" name="subject" placeholder="제목입력" required></dd>
+	               </dl>
+	            </div>
+	            <div class="info">
+	               <dl>
+	                  <dt>작성자</dt>
+	                  <dd>${sessionScope.sessionId}</dd>
+	                  <input type="hidden" name="id" value="${sessionScope.sessionId}"/>
+	               </dl>
+	               <dl>
+	                  <dt>카테고리</dt>
+	                  <dd>
+						<select name="category_a">
+							<option value="" selected disabled>분류선택</option>
+							<option value="1" >공지</option>
+						</select>
+					  </dd>
+	               </dl>
+	            </div>
+	            <div class="content">
+	               <textarea id="content" name="content" placeholder="내용입력"></textarea>
+	            </div>
+	         </div>
+	         <div class="button_wrap">
+	            <input type="submit" id="writebtn" class="writebtn" value="등록">
+	            <!-- <a href="#" class="on">수정</a> 글 수정 시 -->
+	            <a href="/holo/notice/list.holo?category_a=1">취소</a>         
+	         </div>
+	      </div>
+      </form>
+   </div>
 </body>
 </html>
+
+<script type="text/javascript">
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+	 oAppRef: oEditors,
+	 elPlaceHolder: "content",
+	 sSkinURI: "/holo/se2/SmartEditor2Skin.html",
+	 fCreator: "createSEditor2"
+	
+	});
+	
+	window.onload = function(){
+	   var btn = document.getElementById("writebtn");
+	   btn.onclick = function(){
+		   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	      submitContents(btn);
+	   }
+	}
+	
+	 
+	 function pasteHTML(filepath){
+	       var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
+	       oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
+	   }
+	 
+	function writeSave(){
+		var form = document.writeform;
+		
+		if(!form.subject.value){
+			alert("제목을 입력하세요");
+			return false;
+		}
+		if(!form.content.value){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		if(!form.category_a.value){
+			alert("카테고리를 선택하세요");
+			return false;
+		}
+	}
+</script>

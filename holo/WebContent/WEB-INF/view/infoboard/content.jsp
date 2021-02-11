@@ -56,19 +56,20 @@
                   htmls += '<table width="500" border="1" style="border-collapse:collapse">';         
                   htmls += '<tr id="repnum' + this.repnum + '">';
                   htmls += '<td align="center" width="30">' + this.id + '</td>';
-                       htmls += '<td width="300"><pre>'+this.content+'</pre>';
-                       htmls += '<c:if test="${sessionId =='+ this.id+'}">';
-                       htmls += '<font size=1><a href="javascript:void(0)" onclick="fn_updateReplyForm(' + this.repnum + ', \'' + this.id + '\', \'' + this.content + '\' )">수정</a>';
-                       htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.repnum + ')" >삭제</a></font></td>';
-                       htmls += '</c:if>';
-                       htmls += '<td align="center" width="60">';
-                       htmls += '<button id="replikesUpdate" onclick="replikesUpdate_click('+this.repnum+')" >';
-                    htmls += '👍 ';
-                    htmls += '<span id="replikesCount">'+this.likes+'</span></button> &nbsp;';
-                    htmls += '<button onclick="reportReply('+this.repnum+')" >📢</button></td>'
-                       htmls += '<td align="center" width="60"><font size="1">'+this.regdate+'</font></td>';
-                       htmls += '</tr>';
-                       htmls += '</table>';
+                  htmls += '<td width="300"><pre>'+this.content+'</pre>';
+                  htmls += '<c:if test="${sessionScope.sessionId =='+ this.id+'}">';
+                  htmls += '<font size=1><a href="javascript:void(0)" onclick="fn_updateReplyForm(' + this.repnum + ', \'' + this.id + '\', \'' + this.content + '\' )">수정</a>';
+                  htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.repnum + ')" >삭제</a></font></td>';
+                  htmls += '</c:if>';
+                  htmls += '<td align="center" width="60">';
+                  htmls += '<button id="replikesUpdate" onclick="replikesUpdate_click('+this.repnum+')" >';
+                  htmls += '👍 ';
+                  htmls += '<span id="replikesCount">'+this.likes+'</span></button> &nbsp;';
+                  htmls += '<button onclick="reportReply('+this.repnum+')" >📢</button></td>'
+                  htmls += '<td align="center" width="60"><font size="1">'+this.regdate+'</font></td>';
+                  htmls += '<td>${sessionScope.sessionId}</td>';
+                  htmls += '</tr>';
+                  htmls += '</table>';
                });
             }
             $("#replyList").html(htmls);
@@ -325,7 +326,7 @@
       <div class="button_wrap">
          <a href="#" class="on" onclick="history.back()">글목록</a>
          <c:if test="${sessionScope.sessionId == dto.id}">
-            <a href="window.location='/holo/infoboard/updateForm.holo?articlenum=${dto.articlenum}'">수정</a>
+            <a href="/holo/infoboard/updateForm.holo?articlenum=${dto.articlenum}">수정</a>
             <a href="#" onclick="delConfirm('/holo/infoboard/deleteArticle.holo?articlenum=${dto.articlenum}&category_a=${dto.category_a}')">삭제</a>
           </c:if>
       </div>
@@ -334,8 +335,23 @@
    
    </div>
 
-   <div id="replyList"></div>
+	<!-- 댓글 리스트 출력 -->
 
+   <div id="replyList"></div>
+   
+   
+   
+	<!-- 댓글 작성 -->
+
+	<form method="POST" action="/holo/infoboard/insertRep.holo">
+		<tr>
+			<td colspan="3"><textarea name="content" rows="3" cols="60" placeholder="댓글을 입력하세요" style="resize:none;"></textarea></td>
+			<td><input type="submit" value="댓글쓰기" /></td>
+			<input type="hidden" name="articlenum" value="${dto.articlenum}"/>
+			<input type="hidden" name="pageNum" value="${pageNum}"/>
+			<input type="hidden" name="id" value="${dto.id}"/>
+		</tr>
+	</form>
 
 
 

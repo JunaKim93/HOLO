@@ -59,5 +59,6 @@
 		<mapper resource="/sql/searchSQL.xml"/>
 		<mapper resource="/sql/guideSQL.xml" />
 		<mapper resource="/sql/scrapSQL.xml" />
+		<mapper resource="/sql/bestSQL.xml" />
 	</mappers>  
 </configuration>

@@ -1,54 +1,56 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/resource/etc/color.jsp"%>
 
+<!DOCTYPE html>
 <html>
-<head><title>HOLO</title>
-<link href="/holo/resource/style/style.css" rel="stylesheet" type="text/css">
+<head>
+<meta charset="UTF-8">
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <script language="javascript">
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="../resource/style/login_style.css">
+
+<!-- script 선언 -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script language="javascript">
 		function open_idfind(){
 			window.open("/holo/member/idfindForm.holo", "a", "width=500, height=400, left=300, top=50");
 		}
    
 		function open_pwfind(){
-			window.open("/holo/member/pwfindForm.holo", "a", "width=500, heigh=450, left=300, top=50");
+			window.open("/holo/member/pwfindForm.holo", "a", "width=500, height=400, left=300, top=50");
 		}
 		
    </script>
-   
-   
-   
-</head>
-<body onload="begin()" bgcolor="${bodyback_c}">
-<form name="myform" action="/holo/member/loginPro.holo" method="post" onSubmit="return checkIt()">
-<table cellSpacing=1 cellPadding=1 width="260" border=1 align="center" >
-  
-  <tr height="30">
-    <td colspan="2" align="center" bgcolor="${title_c}"><STRONG>로그인</STRONG></td></tr>
-  
-  <tr height="30">
-    <td align=center>아이디</TD>
-    <td align=center>
-       <input type="text" name="id" required></TD></TR>
-  <tr height="30">
-    <td align=center>비밀번호</TD>
-    <td align=center>
-      <input type=password name="password"></td></tr>
-   <tr>
-   	<td colspan="2" align="center">
-   	   <input type="checkbox" name="auto" value="1"/> 자동로그인</td>
-  <tr height="30">
-    <td colspan="2" align="center">
-      <input type=submit value="로그인">
-      <input type="button" value="회원가입" onclick="javascript:window.location='/holo/member/signupForm.holo'"/></td></tr>
-   <tr>
-   <td colspan="2" align="center">
-      <input type="button" value="아이디 찾기" onclick="open_idfind()" />
-      <input type="button" value="비밀번호 찾기" onclick="open_pwfind()"></td></tr>  
- </table>
-</form>
 
+
+<script src="./js/script.js"></script>
+<title>로그인 페이지</title>
+</head>
+<body>
+   <form name="myform" action="/holo/member/loginPro.holo" method="post" onSubmit="return checkIt()">
+   <section class="login">
+      <h2>로그인</h2>
+      <ul>
+         <li><input type="text" name="id" placeholder="아이디" title="아이디입력"></li>
+         <li><input type="password" name="password" placeholder="비밀번호" title="비밀번호입력"></li>
+         <li><input type="checkbox" name="auto" value="1" id="chk_id"><label for="chk_id">자동로그인</label></li>
+         <li><button type="submit">로그인</button></li>
+      </ul>
+      <div>
+   </form>
+         <ul>
+            <li><a href="/holo/member/signupForm.holo">회원가입</a></li>
+            <li><a href="#" onclick="open_idfind()">아이디 찾기</a></li>
+            <li><a href="#" onclick="open_pwfind()">비밀번호 찾기</a></li>
+         </ul>
+      </div>
+   </section>
 </body>
 </html>

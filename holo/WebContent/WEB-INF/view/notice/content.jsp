@@ -1,83 +1,101 @@
-<%@ page contentType = "text/html; charset=euc-kr" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/resource/etc/color.jsp"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
-
 <head>
-<title>HOLO</title>
-<link href="/holo/resource/style/style.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8">
+<!-- meta ì„ ì–¸ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link ì„ ì–¸ -->
+<link rel="stylesheet" href="../resource/style/board_view_style.css">
+
+<!-- script ì„ ì–¸ -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script src="./js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+	function deleteNotice(){
+	    if(confirm("ê²Œì‹œê¸€ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")==true){
+	    	window.location="/holo/notice/deleteForm.holo?articlenum=${article.articlenum}";
+	    }
+   	}
+    
+    
+    
+</script>
+
+
+
+
+<title>ê²Œì‹œíŒ ê¸€ë³´ê¸°</title>
 </head>
+<body>
+   <div class="board_wrap">
+      <div class="board_title">
+            <strong>ê³µì§€ì‚¬í•­</strong>
+            <p></p>
+      </div>
+      <div class="board_view_wrap">
+         <div class="board_view">
+            <div class="title">
+               ${article.subject}
+         </div>
+         <div class="info">
+            <dl>
+               <dt>ë²ˆí˜¸</dt>
+               <dd>${article.articlenum}</dd>
+            </dl>
+            <dl>
+               <dt>ê¸€ì“´ì´</dt>
+               <dd>${article.id}</dd>
+            </dl>
+            <dl>
+               <dt>ì‘ì„±ì¼</dt>
+               <dd><fmt:formatDate value="${article.regdate}" pattern="yyyy-MM-dd hh:mm"/></dd>
+            </dl>
+            <dl>
+               <dt>ì¡°íšŒìˆ˜</dt>
+               <dd>${article.viewcount}</dd>
+            </dl>
+         </div>
+         <div class="content">
+           <pre>${article.content}</pre>
+         </div>      
+        
+      </div>
+      <div class="button_wrap">
+         <a href="/holo/notice/list.holo?category_a=1" class="on">ê¸€ëª©ë¡</a>
+         <c:if test="${sessionScope.sessionId == dto.id}">
+            <a href="/holo/notice/modifyForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">ìˆ˜ì •</a>
+            <a href="#" onclick="deleteNotice()">ì‚­ì œ</a>
+          </c:if>
+      </div>
+   
+   </div>
+   
+   </div>
 
-	
-    <script>
-    function deleteNotice(){
-         if(confirm("°Ô½Ã±ÛÀ» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")==true){
-         	window.location="/holo/notice/deleteForm.holo?articlenum=${article.articlenum}";
-         }
-        }
-     </script>
-
-<body bgcolor="${bodyback_c}">
-<br><center><b>±Û ³»¿ë</b></center></br>
 
 
-<form>
-<table border="1" cellspacing="0" cellpadding="0" align="center">  
-  <tr>
-    <td align="center">±Û¹øÈ£</td>
-    <td align="center">${article.articlenum}</td>
-  </tr>
-  
-  <tr>
-    <td align="center">Ä«Å×°í¸®</td>
-    <td align="center"><c:if test="${article.category_a ==1}">°øÁö</c:if></td>
-    
-  </tr>
-    
-  <tr>
-    <td align="center">±ÛÁ¦¸ñ</td>
-    <td align="center">${article.subject}</td>  
-   </tr>
-  
-  <tr>
-    <td align="center">ÀÛ¼ºÀÚ</td>
-    <td align="center" align="center">${article.id}</td>
-  </tr>  
-    
-   <tr>
-    <td align="center">ÀÛ¼ºÀÏ</td>
-    <td align="center" align="center">${article.regdate}</td>
-   </tr> 
-    
-    <tr>
-    <td align="center">Á¶È¸¼ö</td>
-    <td align="center" align="center">${article.viewcount}</td>
- 	</tr>
-    
-  <tr>
-    <td width="50" align="center">³»¿ë</td>
-    <td width="200" align="center">${article.content}</td>
-  </tr>
-  
-  
-  </table>
-  <br>
-  <table cellspacing="0" cellpadding="0" align="center">
-  <tr>      
-    <td> 
-	  <input type="button" value="±Û¼öÁ¤" 
-       onclick="document.location.href='/holo/notice/modifyForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}'">
-	   &nbsp;&nbsp;&nbsp;&nbsp;
-	  <input type="button" value="±Û»èÁ¦" 
-       onclick="deleteNotice()">
-	   &nbsp;&nbsp;&nbsp;&nbsp;
-       <a href="/holo/notice/list.holo?category_a=1">±Û¸ñ·Ï</a>
-    	 </td>
-  		</tr>
-	</table> 
-	</br>   
-</form>      
+
+
+
+
+
+
+
+
+
+
+
 </body>
-</html>      
+</html>

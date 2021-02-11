@@ -1,0 +1,128 @@
+@charset "EUC-KR";
+*{
+   margin: 0;
+   padding: 0;
+}
+
+body{font-family: 'NanumSquare', sans-serif !important; font-size:14px; color:#4e4e4e;
+   line-height: 1.4;}
+   
+a, li{
+   text-decoration: none;
+   color: inherit;
+   list-style: none;
+   
+}
+
+table{
+   border-collapse: collapse;
+}
+
+caption{
+   display: none;
+}
+   
+   
+.login{
+   width: 410px;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+}   
+
+.login h2{
+   padding: 0 0 20px;
+   font-size: 32px;
+   color: #000;
+   border-bottom: 2px solid #1e57a4;   /* ÆÄ¶û»ö */
+   text-align: center;
+   line-height: 1;
+}
+
+.login > ul{
+   padding: 40px 0 33px;
+}
+
+.login > ul li{
+   padding: 0 0 12px;
+   text-align: left;
+}
+
+.login > ul li input{
+   width: 100%;
+   height: 46px;
+   box-sizing: border-box;
+   text-indent: 16px;
+}
+
+.login > ul li input::webkit-input-placeholder{
+   font-size: 16px;
+   color: #ddd;
+}   
+
+.login > ul li input[type="checkbox"]{
+   position: absolute;
+   left: -3000%;
+}
+
+.login > ul li input[type="checkbox"] + label{
+   height: 36px;
+   line-height: 36px;
+}
+
+.login > ul li input[type="checkbox"] + label:before{
+   content: "";
+   display: inline-block;
+   margin: 0 10px 0 0;
+   width: 18px;
+   height: 18px;
+   border: 1px solid #333;
+   background: #fff;
+   vertical-align: -5px;
+   
+}
+
+.login > ul li input[type="checkbox"]:checked + label:before {
+   background: url(../image/xs3.PNG) no-repeat center #333;
+   width: 18px;
+   height: 18px;
+   border-color: #333;
+}
+
+.login button{
+   width: 100%;
+   background: #1e57a4;
+   font-size: 18px;
+   color: #fff;
+   height: 56px;
+   border: 0;
+   
+}
+
+.login div ul{
+   display: flex;
+   justify-content: center;
+}
+
+.login div ul li{
+   position: relative;
+   padding: 0 15px;
+}
+
+/* .login div ul li~li:after{
+   content: "";
+   position: absolute;
+   right: 0;
+   top: 4px;
+   height: 14px;
+   width: 1px;
+   background: gray;
+   transform: rotate(25deg);
+} */
+
+.login div ul li a{
+   font-size: 14px;
+   color: gray;
+}

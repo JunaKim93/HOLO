@@ -64,7 +64,7 @@
          <li>
             <a href="/holo/infoboard/list.holo">생활정보</a>
             <ul class="dep2">
-               <li><a href="#">best정보</a></li>
+               <li><a href="/holo/best/infolist.holo">best정보</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=living">생활팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=cooking">자취요리팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=findplace">집구하기팁</a></li>
@@ -81,13 +81,14 @@
          <li>
             <a href="/holo/diy/list.holo">집꾸미기</a>
             <ul class="dep2">
-               <li><a href="#">베스트인테리어</a></li>
+               <li><a href="/holo/best/diylist.holo">베스트인테리어</a></li>
                <li><a href="/holo/diy/list.holo?category_a=myroom">우리집인테리어</a></li>
             </ul>
          </li>   
          <li>
             <a href="/holo/com/list.holo?category_a=1&category_b=1">자유게시판</a>
             <ul class="dep2">
+               <li><a href="/holo/best/comlist.holo">자유게시판 Best</a></li>
                <li><a href="/holo/com/list.holo?category_a=1&category_b=1">전체 자유게시판</a></li>
                <li><a href="/holo/com/list.holo?category_a=2&category_b=1">지역별 자유게시판</a></li>
             </ul>
@@ -98,97 +99,97 @@
          <div>
             <div class="idx_board">
                <div class="title">
+               <a href="#" class="name">공지사항</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">자유게시판</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
+               <a href="#" class="name">인테리어</a>
+               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+            </div>
+            <div class="list">   
+               <ul>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+                  <li>
+                     <a href="#">글 제목이 들어갑니다.</a>
+                     <span>2021-2-9</span>
+                  </li>
+               </ul>
+               </div>         
+            </div>
+            <div class="idx_board">
+               <div class="title">
                <a href="#" class="name">생활정보</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
-            </div>
-            <div class="list">   
-               <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-               </ul>
-               </div>         
-            </div>
-            <div class="idx_board">
-               <div class="title">
-               <a href="#" class="name">게시판2</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
-            </div>
-            <div class="list">   
-               <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-               </ul>
-               </div>         
-            </div>
-            <div class="idx_board">
-               <div class="title">
-               <a href="#" class="name">게시판3</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
-            </div>
-            <div class="list">   
-               <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-               </ul>
-               </div>         
-            </div>
-            <div class="idx_board">
-               <div class="title">
-               <a href="#" class="name">게시판4</a>
                <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
             </div>
             <div class="list">   

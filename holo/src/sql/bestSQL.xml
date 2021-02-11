@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="best">
+	
+	<!--  정보게시판 -->
+	<select id="getInfoBestCount" resultType="int">
+		<![CDATA[
+			select count(*) from infoboard where likes > 10 and (sysdate-regdate) < 1
+		]]>
+	</select>
+	
+	<select id="getInfoBestList" resultType="infoboardDTO" parameterType="HashMap">
+		<![CDATA[
+			select articlenum, id, subject, content, viewcount, likes, regdate, repcount, r from
+			(select articlenum, id, subject, content, viewcount, likes, regdate, repcount, rownum r from
+			(select * from infoboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
+			where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 인테리어 게시판 -->
+	
+	<select id="getDiyBestCount" resultType="int">
+		<![CDATA[
+			select count(*) from diyboard where likes > 10 and (sysdate-regdate) < 1
+		]]>
+	</select>
+	
+	<select id="getDiyBestList" resultType="diyboardDTO" parameterType="HashMap">
+		<![CDATA[
+			select articlenum, id, subject, content, viewcount, likes, regdate, r from
+			(select articlenum, id, subject, content, viewcount, likes, regdate, rownum r from
+			(select * from diyboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
+			where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	
+	
+	
+	<!-- 자유게시판 -->
+	
+	<select id="getComBestCount" resultType="int">
+		<![CDATA[
+			select count(*) from communityboard where likes > 10 and (sysdate-regdate) < 1
+		]]>
+	</select>
+	
+	<select id="getComBestList" resultType="comDTO" parameterType="HashMap">
+		<![CDATA[
+			select articlenum, id, subject, content, viewcount, likes, regdate, repcount, r from
+			(select articlenum, id, subject, content, viewcount, likes, regdate, repcount, rownum r from
+			(select * from communityboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
+			where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+</mapper>
