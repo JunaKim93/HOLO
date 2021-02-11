@@ -48,7 +48,7 @@
 						<c:choose>
 						<c:when test="${list.category_a eq 'living' or list.category_a eq 'cook' or list.category_a eq 'findplace'}">
 							<a href="/holo/infoboard/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
-						</c:when>
+						</c:when>	
 						<c:when test="${list.category_a eq 'market' or list.category_a eq 'free' or list.category_a eq 'group'}">
 							<a href="/holo/market/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
 						</c:when>
@@ -61,7 +61,7 @@
 						</c:choose>
 					</div>
 					<div>
-						 ${cate_a } > ${cate_b }
+						 ${list.category_aName} > ${list.category_bName}
 					</div>
 					<div>
 						<c:if test="${empty list.content}">

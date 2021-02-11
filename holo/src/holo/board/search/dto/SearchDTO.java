@@ -11,6 +11,8 @@ public class SearchDTO {
 	private String content;
 	private int viewCount;
 	private Timestamp regDate;
+	private String category_aName; 
+	private String category_bName; // category 이름을 한글로 변경해주기 위해 생성
 	
 	
 	public int getArticlenum() {
@@ -61,6 +63,72 @@ public class SearchDTO {
 	public void setRegDate(Timestamp regDate) {
 		this.regDate = regDate;
 	}
+	public String getCategory_aName() {
+		switch (category_a) {
+			case "tip":
+			category_aName = "생활 TIP";
+			break;
+		case "cook":
+			category_aName = "자취요리 TIP";
+			break;
+		case "findplace":
+			category_aName = "집 구하기 TIP";
+			break;
+		case "market":
+			category_aName = "중고장터";
+			break;
+		case "free":
+			category_aName = "무료나눔";
+			break;
+		case "group":
+			category_aName = "공동구매";
+			break;
+		case "myroom":
+			category_aName = "우리집 인테리어";
+			break;
+		case "1":
+			category_aName = "전체 자유게시판";
+			break;
+		case "2":
+			category_aName = "지역별 자유게시판";
+			break;
+		}
+		return category_aName;
+	}
+	public void setCategory_aName(String category_aName) {
+		this.category_aName = category_aName;
+	}
+	public String getCategory_bName() {
+		switch (category_b) {
+		case "tip":
+			category_bName = "Tip 게시판";
+			break;
+		case "question":
+			category_bName = "질문 게시판";
+			break;
+		case "sell":
+			category_bName = "팝니다";
+			break;
+		case "buy":
+			category_bName = "삽니다";
+			break;
+		case "b":
+			category_bName = category_aName;
+			break;
+		case "show":
+			category_bName = "우리집 보여주기";
+			break;
+		case "qna":
+			category_bName = "질문 게시판";
+			break;
+		}
+		return category_bName;
+	}
+	public void setCategory_bName(String category_bName) {
+		this.category_bName = category_bName;
+	}
+	
+	
 	
 	
 }
