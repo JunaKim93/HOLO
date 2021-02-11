@@ -1,13 +1,21 @@
 <%@ page contentType = "text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/resource/etc/color.jsp"%>
-
+<!DOCTYPE html>
 <html>
 <head>
-<title>자유게시판</title>
-<link href="/holo/resource/style/style_board.css" rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
+
+<!-- script 선언 -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 function navByCat(){
 	var cat_a = $("#category_a").val();
@@ -16,24 +24,51 @@ function navByCat(){
 	if(cat_b==null){cat_b="1";}
 	window.location="/holo/com/list.holo?category_a="+cat_a+"&category_b="+cat_b;
 };
+function getDescription(){
+	var com_cat;
+	var com_cat_dsc;
+	if(${cat_a=="1"}){
+		com_cat = "전체자유게시판";
+		com_cat_dsc = "자유롭게 이야기할 수 있는 게시판입니다."
+	}else{
+		com_cat = "지역별자유게시판"
+		switch("${cat_b}"){
+		case "1":com_cat_dsc="서울";break;
+		case "2":com_cat_dsc="강원";break;
+		case "3":com_cat_dsc="인천/경기";break;
+		case "4":com_cat_dsc="대구/경북";break;
+		case "5":com_cat_dsc="대전/충청";break;
+		case "6":com_cat_dsc="광주/전라";break;
+		case "7":com_cat_dsc="부산/경남";break;
+		}
+	}
+	$("#com_cat").html(com_cat);
+	$("#com_cat_dsc").html(com_cat_dsc);
+}
 function init(){
+	getDescription();
 	$("#category_a").val("${cat_a}");
 	$("#category_b").val("${cat_b}");
 };
 </script>
+
+<title>자유게시판</title>
+
 </head>
 
-<body onload="init()" bgcolor="${bodyback_c}">
+<body onload="init()">
 
-<center>
-<a href="/holo/member/main.holo"><h1>메인으로</h1></a>
-<b>글목록</b>
-<table width="700" border="0">
-  <tr bgcolor="${value_c}">
-  	<td width 500>
+<a href="/holo/member/main.holo" align="center"><h3>메인으로</h3></a>
+
+<div class="board_wrap">
+	<div class="board_title">
+         <strong id="com_cat"></strong>
+         <p id="com_cat_dsc"></p>
+	</div>
+	<div>
   		<select id="category_a" onchange="navByCat()">
 			<option value="1">자유게시판</option>
-			<option value="2">지역별게시판</option>
+			<option value="2">지역별자유게시판</option>
 		</select>
 		<c:if test="${cat_a!='1'}">
 			<select id="category_b" onchange="navByCat()">
@@ -46,84 +81,65 @@ function init(){
 				<option value="7">부산/경남</option>
 			</select>
 		</c:if>
-  	</td>
-    <td align="right">
-       <a href="/holo/com/form.holo?pagenum=${pagenum}&mode=new&category_a=${cat_a}&category_b=${cat_b}">글쓰기</a>
-    </td>
-  </tr>
-</table>
+	</div>
 
-<c:if test="${count==0}">
-<table width="700" border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="center">
-      <p><h2>게시판에 저장된 글이 없습니다.</h2></p>
-    </td>
-  </tr>
-</table>
-</c:if>
-
-<c:if test="${count>0}">
-<table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
-    <tr height="30" bgcolor="${value_c}"> 
-      <td align="center"  width="50" >번 호</td> 
-      <td align="center"  width="250">제 목</td> 
-      <td align="center"  width="100">작성자</td>
-      <td align="center"  width="50" >좋아요</td>
-      <td align="center"  width="150">작성일</td> 
-      <td align="center"  width="50" >조회수</td>   
-    </tr>
-
-   <c:forEach var="article" items="${list}">
-   <tr height="30">
-    <td align="center"  width="50" >
-	  ${article.articlenum}
-	</td>
-    <td  width="250" >    
-    	<a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">
-    		${article.subject}
-    	</a> 
-	</td>
-    <td align="center"  width="100"> 
-    	${article.id}
-	</td>
-	    <td align="center"  width="100"> 
-    	${article.likes}
-	</td>
-    <td align="center"  width="150">
-    	${article.regdate}
-	</td>
-    <td align="center"  width="50">
-    	${article.viewcount}
-    </td>
-  </tr>
-  </c:forEach>
-</table>
-</c:if>
-
-<c:if test="${count > 0}">
-   <c:set var="pageCount" value="${count / pagesize + ( count % pagesize == 0 ? 0 : 1)}"/>
-   <c:set var="pageBlock" value="${10}"/>
-   <fmt:parseNumber var="result" value="${pagenum / 10}" integerOnly="true" />
-   <c:set var="startPage" value="${result * 10 + 1}"/>
-   <c:set var="endPage" value="${startPage + pageBlock-1}"/>
-   <c:if test="${endPage > pageCount}">
-        <c:set var="endPage" value="${pageCount}"/>
-   </c:if> 
-          
-   <c:if test="${startPage > 10}">
-        <a href="/holo/com/list.holo?pagenum=${startPage - 10 }">[이전]</a>
-   </c:if>
-
-   <c:forEach var="i" begin="${startPage}" end="${endPage}">
-       <a href="/holo/com/list.holo?pagenum=${i}">[${i}]</a>
-   </c:forEach>
-
-   <c:if test="${endPage < pageCount}">
-        <a href="/holo/com/list.holo?pagenum=${startPage + 10}">[다음]</a>
-   </c:if>
-</c:if>
-
-</center>
+	<c:if test="${count==0}">
+		<div align="center">
+	      <h3>게시판에 저장된 글이 없습니다.</h3>
+	    </div>
+	</c:if>
+	<div class="board_list_wrap">
+		<c:if test="${count>0}">
+			<div class="board_list">
+			    <div class="top">
+		            <div class="num">번호</div>
+		            <div class="title">글제목</div>
+		            <div class="writer">작성자</div>
+		            <div class="date">작성일</div>
+		            <div class="count">조회수</div>
+			    </div>
+			    <div>
+				    <c:forEach var="article" items="${list}">
+				    	<div class="num">${article.articlenum}</div>
+				        <div class="title"><a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">${article.subject }</a></div>
+				        <div class="writer">${article.id}</div>
+				        <div class="date">${article.regdate}</div>
+				        <div class="count">${article.viewcount}</div>
+			  		</c:forEach>
+		  		</div>
+			</div>
+			<div class="board_page">
+			   <c:set var="pageCount" value="${count / pagesize + ( count % pagesize == 0 ? 0 : 1)}"/>
+			   <c:set var="pageBlock" value="${10}"/>
+			   <fmt:parseNumber var="result" value="${pagenum / 10}" integerOnly="true" />
+			   <c:set var="startPage" value="${result * 10 + 1}"/>
+			   <c:set var="endPage" value="${startPage + pageBlock-1}"/>
+			   <c:if test="${endPage > pageCount}">
+			        <c:set var="endPage" value="${pageCount}"/>
+		   	   </c:if>
+	   
+			   <c:if test="${startPage > 10}">
+			        <a href="/holo/com/list.holo?pagenum=${startPage - 10 }" class="button prev"><</a>
+			   </c:if>
+			   <c:forEach var="i" begin="${startPage}" end="${endPage}">
+			   		<c:if test="${pagenum==i}">
+			   			<a href="/holo/com/list.holo?pagenum=${i}" class="num on">${i}</a>
+			   		</c:if>
+			   		<c:if test="${pagenum!=i}">
+			        	<a href="/holo/com/list.holo?pagenum=${i}" class="num">${i}</a>
+			        </c:if>
+			   </c:forEach>
+			   <c:if test="${endPage < pageCount}">
+			        <a href="/holo/com/list.holo?pagenum=${startPage + 10}" class="button next">></a>
+			   </c:if>
+	   		</div>
+	 	</c:if>
+		<div class="button_wrap" style="float:right">
+		   <a href="/holo/com/form.holo?pagenum=${pagenum}&mode=new&category_a=${cat_a}&category_b=${cat_b}" class="on">
+		   		글쓰기
+		   </a>
+		</div>
+	</div>
+</div>
 </body>
 </html>
