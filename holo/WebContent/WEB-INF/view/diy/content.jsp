@@ -6,12 +6,22 @@
 
 <html>
 <head>
-<title>인테리어 TIP</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link rel="stylesheet" href="../resource/style/board_view_style.css">
+
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+<script src="./js/script.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<title>인테리어 TIP</title>
+
 <script>
 	$(document).ready(function() {
 
@@ -37,11 +47,9 @@
 				"width=700, height=700, left=100, top=50");
 	}
 	function reportReply(repNum, content) {
-		window.open("/holo/diy/reportReply.holo?repNum=" + repNum
-				+ "&content=" + content, "a",
-				"width=700, height=700, left=100, top=50");
+		window.open("/holo/diy/reportReply.holo?repNum=" + repNum + "&content="
+				+ content, "a", "width=700, height=700, left=100, top=50");
 	}
-
 
 	$(function() {
 		$("#insertRplBtn").click(
@@ -242,75 +250,83 @@
 			}
 		});
 	}
-
-
 </script>
+</head>
+
+
+
 
 
 <body>
-	<div align="center">
-		<b>글내용 보기</b>
+	<div class="board_wrap">
+		<div class="board_title">
+			<c:choose>
+				<c:when test="${category_b eq 'tip'}">
+					<strong>인테리어 TIP</strong>
+					<p>인테리어 정보 게시판입니다.</p>
+				</c:when>
+				<c:when test="${category_b eq 'qna'}">
+					<strong>인테리어 Q&A</strong>
+					<p>인테리어 질문 게시판입니다.</p>
+				</c:when>
+			</c:choose>
+		</div>
+
+		<div class="board_view_wrap">
+			<div class="board_view">
+				<div class="title">${article.subject}</div>
+				<div class="info">
+					<dl>
+						<dt>번호</dt>
+						<dd>${article.articlenum}</dd>
+					</dl>
+					<dl>
+						<dt>글쓴이</dt>
+						<dd>${article.id}</dd>
+					</dl>
+					<dl>
+						<dt>작성일</dt>
+						<dd>
+							<fmt:formatDate value="${article.regDate}"
+								pattern="yyyy-MM-dd hh:mm" />
+						</dd>
+					</dl>
+					<dl>
+						<dt>조회수</dt>
+						<dd>${article.viewcount}</dd>
+					</dl>
+				</div>
+				<div class="content">
+					<pre>${article.content}</pre>
+				</div>
+				<div align="center">
+					<button style="background-color: white;" id="likesUpdate">
+						<span id="likesBtn"></span> <span id="likesCount"></span>
+					</button>
+					&nbsp; <input type="button" style="background-color: white;"
+						value="신고📢"
+						onclick="reportArticle('${article.articlenum}', '${article.subject}')">
+				</div>
+			</div>
+			<div class="button_wrap">
+				<c:choose>
+					<c:when test="${article.category_b ne 'show'}">
+						<a
+							href="/holo/diy/list.holo?pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}"
+							class="on"> 글목록</a>
+					</c:when>
+					<c:when test="${article.category_b eq 'show'}">
+						<a href="/holo/diy/showList.holo?pageNum=${pageNum}" class="on">
+							글목록</a>
+					</c:when>
+				</c:choose>
+				<a
+					href="/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">수정</a>
+				<a href="#" onclick="deleteConfirm()">삭제</a>
+			</div>
+		</div>
 	</div>
-	<br />
-	<div align="center">
-		<form id="form1">
-			<table
-				style="width: 500; border-spacing: 0; padding: 0; align: center;"
-				border="1">
-				<tr height="30">
-					<td align="center" width="125">글번호</td>
-					<td align="center" width="125" align="center">${article.articlenum}</td>
-					<td align="center" width="125">조회수</td>
-					<td align="center" width="125" align="center">${article.viewcount}</td>
-				</tr>
-				<tr height="30">
-					<td align="center" width="125">작성자</td>
-					<td align="center" width="125" align="center">${article.id}</td>
-					<td align="center" width="125">작성일</td>
-					<td align="center" width="125" align="center"><font size="2"><fmt:formatDate
-								value="${article.regDate}" pattern="yyyy-MM-dd hh:mm" /></font></td>
-				</tr>
-				<tr height="30">
-					<td align="center" width="125">글제목</td>
-					<td align="center" width="375" align="center" colspan="3">${article.subject}</td>
-				</tr>
-				<tr>
-					<td align="center" width="125">글내용</td>
-					<td align="left" width="375" colspan="3"><pre>${article.content}</pre></td>
-				</tr>
-				<tr height="30">
-					<td colspan="4" bgcolor="${value_c}" align="right"><input
-						type="button" value="글수정"
-						onclick="document.location.href='/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}'">
-						&nbsp;&nbsp; <input type="button" value="글삭제"
-						onclick="deleteConfirm()"> &nbsp;&nbsp; 
-						<c:choose>
-						<c:when test="${article.category_b ne 'show'}">
-						<input type="button" value="글목록"
-						onclick="document.location.href='/holo/diy/list.holo?pageNum=${pageNum}&category_a=${article.category_a}&category_b=${article.category_b}'">
-						</c:when>
-						<c:when test="${article.category_b eq 'show'}">
-						<input type="button" value="글목록"
-						onclick="document.location.href='/holo/diy/showList.holo?pageNum=${pageNum}'">
-						</c:when>
-						</c:choose>
-						<input type="hidden" name="articlenum"
-						value="${article.articlenum}"> <input type="hidden"
-						name="pageNum" value="${pageNum}"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<br />
-	<div align="center">
-		<button style="background-color: white;" id="likesUpdate">
-			<span id="likesBtn"></span> <span id="likesCount"></span>
-		</button>
-		&nbsp;
-		<button style="background-color: white;"
-			onclick="reportArticle('${article.articlenum}', '${article.subject}')">
-			&nbsp;📢 &nbsp;</button>
-	</div>
+	<div align="center" id="replyList"></div>
 	<br />
 	<div align="center">
 		<br />
@@ -322,6 +338,6 @@
 	</div>
 	<br />
 	<br />
-	<div align="center" id="replyList"></div>
+
 </body>
 </html>
