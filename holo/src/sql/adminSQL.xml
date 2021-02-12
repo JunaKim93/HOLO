@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	
+	<select id="getRptCount" resultType="int">
+	<![CDATA[
+		select sum(count) from(
+			select count(*) as count from infoboard where report >= 5
+			union
+			select count(*) as count from diyboard where report >= 5
+			union
+			select count(*) as count from marketboard where report >= 5
+			union
+			select count(*) as count from communityboard where report >= 5
+		)
+	]]>
+	</select>
+
+	<select id="getRptList" resultType="adminDTO">
+	<![CDATA[
+		select articlenum, id, subject, content, regdate, category_a from
+			(select articlenum, id, subject, content, regdate, category_a from infoboard where report >= 5
+			 union
+			 select articlenum, id, subject, content, regdate, category_a from diyboard where report >= 5
+			 union
+			 select articlenum, id, subject, content, regdate, category_a from marketboard where report >= 5
+			 union
+			 select articlenum, id, subject, content, regdate, category_a from communityboard where report >= 5
+			)
+		order by report desc
+	]]>
+	</select>
+	
+	<select id="getRptI" resultType="adminDTO" parameterType="int">
+		select articlenum, id, reason from infoboardreport
+	</select>
+	<select id="getRptD" resultType="adminDTO" parameterType="int">
+		select articlenum, id, reason from diyboardreport
+	</select>
+	<select id="getRptC" resultType="adminDTO" parameterType="int">
+		select articlenum, id, reason from communityboardreport
+	</select>
+	<select id="getRptM" resultType="adminDTO" parameterType="int">
+		select articlenum, id, reason from marketboardreport
+	</select>
+	
+	
+	
+</mapper>
