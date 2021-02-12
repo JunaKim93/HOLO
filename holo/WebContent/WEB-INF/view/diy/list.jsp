@@ -4,124 +4,159 @@
 
 <html>
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link rel="stylesheet" href="../resource/style/board_list_style.css">
+
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script src="./js/script.js"></script>
+
 <title>우리집 인테리어</title>
 </head>
-<!-- http://localhost:8080/holo/diy/list.holo -->
+
 <body>
-	<div align="center">
-		<a href="/holo/diy/list.holo?category_b=tip"><b>인테리어 TIP</b></a> | <a
-			href="/holo/diy/list.holo?category_b=qna"><b>인테리어 Q&A</b></a> | <a
-			href="/holo/diy/showList.holo"><b>우리집 보여주기</b></a>
-	</div>
+
 	<br />
 	<br />
-	<div align="center">
-		<c:choose>
-			<c:when test="${category_b eq 'tip'}">
-				<b>인테리어 TIP(전체 글:${count})<br />나만의 인테리어 꿀팁을 방출해주세요♥
-				</b>
-			</c:when>
-			<c:when test="${category_b eq 'qna'}">
-				<b>인테리어 Q&A(전체 글:${count})<br />인테리어에 대한 질문과 답변!
-				</b>
-			</c:when>
-		</c:choose>
-	</div>
-	<br />
-	<table width="700" border="1" cellpadding="0" cellspacing="0"
-		align="center">
-		<tr>
-			<td colspan="5" align="right"><a
-				href="/holo/diy/writeForm.holo?category_b=${category_b}">글쓰기</a></td>
-		</tr>
-		<c:if test="${count == 0}">
-			<tr>
-				<td align="center">게시판에 저장된 글이 없습니다.</td>
-			</tr>
-		</c:if>
-		<c:if test="${count>0}">
-			<tr height="30">
-				<td align="center" width="50">번 호</td>
-				<td align="center" width="250">제 목</td>
-				<td align="center" width="100">작성자</td>
-				<td align="center" width="150">작성일</td>
-				<td align="center" width="50">조회수</td>
-			</tr>
+	<div class="board_wrap">
+		<div class="board_title">
+			<c:choose>
+				<c:when test="${category_b eq 'tip'}">
+					<strong><a href="/holo/diy/list.holo?category_b=tip">인테리어
+							TIP</a></strong>
+					<p>나만의 인테리어 꿀팁을 방출해주세요♥</p>
+				</c:when>
+				<c:when test="${category_b eq 'qna'}">
+					<strong><a href="/holo/diy/list.holo?category_b=tip">인테리어
+							Q&A</a></strong>
+					<p>인테리어에 대한 질문과 답변!</p>
+				</c:when>
+			</c:choose>
 
-			<c:forEach var="article" items="${articleList}">
-				<tr height="30">
-					<td align="center"><c:out value="${num}" /> <c:set var="num"
-							value="${num-1}" /></td>
-					<td width="250"><a
-						href="/holo/diy/content.holo?articlenum=${article.articlenum}&pageNum=${currentPage}">
-							${article.subject}</a></td>
-					<td align="center" width="100">${article.id}</td>
-					<td align="center" width="150"><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
-					<td align="center" width="50">${article.viewcount}</td>
-				</tr>
-			</c:forEach>
-		</c:if>
-	</table>
-	
-	<br />
+			<div class="board_page">
+				<a class="num" href="/holo/diy/list.holo?category_b=tip"><b>TIP</b></a>
+				<a class="num" href="/holo/diy/list.holo?category_b=qna"><b>Q&A</b></a>
+				<a class="num" href="/holo/diy/showList.holo"><b>자랑</b></a>
+			</div>
+		</div>
 
-	<div align="center">
 
-		<c:if test="${empty choice and empty search}">
-		<a class="button" href="/holo/diy/list.holo?pageNum=1">[처음]</a>
-			<c:if test="${startPage>5}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}">[이전]</a>
-			</c:if>
 
-			<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${pagenum}&category_b=${category_b}">${pagenum}</a>
-			</c:forEach>
+		<div class="board_list_wrap">
+			<div class="board_list">
+				<div class="top">
+					<div class="num">번호</div>
+					<div class="title">글제목</div>
+					<div class="writer">작성자</div>
+					<div class="date">작성일</div>
+					<div class="count">조회수</div>
+				</div>
+				<div>
+					<c:if test="${count == 0}">
+         		등록된 글이 없습니다.
+         	</c:if>
+					<c:if test="${count >0}">
+						<c:forEach var="list" items="${articleList}">
+							<div class="num">
+								<c:out value="${num}" />
+								<c:set var="num" value="${num-1}" />
+							</div>
 
-			<c:if test="${endPage < pageCount}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}">[다음]</a>
-			</c:if>
-			<a class="button" href="/holo/diy/list.holo?pageNum=${end}&category_b=${category_b}">[끝]</a>
-		</c:if>
+							<div class="title">
+								<a
+									href="/holo/diy/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
+									${list.subject}</a>
+							</div>
 
-		<c:if test="${not empty choice and not empty search}">
-		<a class="button" href="/holo/diy/list.holo?pageNum=1&choice=${choice}&search=${search}">[처음]</a>
-		<c:if test="${startPage>5}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}&choice=${choice}&search=${search}">[이전]</a>
-			</c:if>
+							<div class="writer">${list.id}</div>
+							<div class="date">
+								<fmt:formatDate value="${list.regDate}"
+									pattern="yyyy-MM-dd hh:mm" />
+							</div>
+							<div class="count">${list.viewcount}</div>
+						</c:forEach>
+					</c:if>
+				</div>
+			</div>
+		</div>
 
-			<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${pagenum}&category_b=${category_b}&choice=${choice}&search=${search}">${pagenum}</a>
-			</c:forEach>
+		<br />
 
-			<c:if test="${endPage < pageCount}">
-				<a class="pages"
-					href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}&choice=${choice}&search=${search}">[다음]</a>
-			</c:if>
-			<a class="button" href="/holo/diy/list.holo?pageNum=${end}&category_b=${category_b}&choice=${choice}&search=${search}">[끝]</a>
-		</c:if>
-	</div>
-	<br />
-	<div align="center">
-		<form action="/holo/diy/list.holo">
-			<input type="hidden" name="pageNum" value="1" />
-			<input type="hidden" name="category_b" value="${category_b}" /> <select
-				name="choice">
-				<option value="id">작성자</option>
-				<option value="subject">제목</option>
-				<option value="content">내용</option>
-			</select> <input type="text" name="search"> <input type="submit"
-				value="검색"> &nbsp;
+		<div align="center">
+			<form action="/holo/diy/list.holo">
+				<input type="hidden" name="pageNum" value="1" /> <input
+					type="hidden" name="category_b" value="${category_b}" /> <select
+					name="choice">
+					<option value="id">작성자</option>
+					<option value="subject">제목</option>
+					<option value="content">내용</option>
+				</select> <input type="text" name="search"> <input type="submit"
+					value="검색"> &nbsp;
 				<c:if test="${not empty search}">
-					<input type="button" value="검색 초기화" onclick="document.location.href='/holo/diy/list.holo?category_b=${category_b}'" />
+					<input type="button" value="검색 초기화"
+						onclick="document.location.href='/holo/diy/list.holo?category_b=${category_b}'" />
 				</c:if>
-		</form>
+			</form>
+		</div>
+
+		<div class="board_page">
+
+			<c:if test="${empty choice and empty search}">
+				<a class="button first" href="/holo/diy/list.holo?pageNum=1">처음</a>
+				<c:if test="${startPage>5}">
+					<a class="button prev"
+						href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}">이전</a>
+				</c:if>
+
+				<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+					<a class="num"
+						href="/holo/diy/list.holo?pageNum=${pagenum}&category_b=${category_b}">${pagenum}</a>
+				</c:forEach>
+
+				<c:if test="${endPage < pageCount}">
+					<a class="button next"
+						href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}">다음</a>
+				</c:if>
+				<a class="button last"
+					href="/holo/diy/list.holo?pageNum=${pageCount}&category_b=${category_b}">맨끝</a>
+			</c:if>
+
+			<c:if test="${not empty choice and not empty search}">
+				<a class="button first"
+					href="/holo/diy/list.holo?pageNum=1&choice=${choice}&search=${search}">처음</a>
+				<c:if test="${startPage>5}">
+					<a class="button prev"
+						href="/holo/diy/list.holo?pageNum=${startPage-1}&category_b=${category_b}&choice=${choice}&search=${search}">이전</a>
+				</c:if>
+
+				<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+					<a class="num"
+						href="/holo/diy/list.holo?pageNum=${pagenum}&category_b=${category_b}&choice=${choice}&search=${search}">${pagenum}</a>
+				</c:forEach>
+
+				<c:if test="${endPage < pageCount}">
+					<a class="button next"
+						href="/holo/diy/list.holo?pageNum=${startPage+5}&category_b=${category_b}&choice=${choice}&search=${search}">다음</a>
+				</c:if>
+				<a class="button last"
+					href="/holo/diy/list.holo?pageNum=${pageCount}&category_b=${category_b}&choice=${choice}&search=${search}">맨끝</a>
+			</c:if>
+		</div>
+
+		<div class="button_wrap">
+			<a href="/holo/diy/writeForm.holo" class="on">글작성</a> <a
+				href="/holo/member/main.holo" class="on">메인으로</a>
+
+		</div>
+
 	</div>
-	
+	<br />
 
 </body>
 </html>
