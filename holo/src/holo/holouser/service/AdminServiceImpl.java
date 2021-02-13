@@ -7,14 +7,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import holo.holouser.AdminDTO;
+
 @Service("adminDAO")
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	private SqlSessionTemplate dao = null;
 	
-	@Autowired
-	private HashMap<String,Object> hashmap = null;
 
 	@Override
 	public int getRptCount() throws Exception {
@@ -27,25 +27,36 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List getRptsI(int articlenum) throws Exception {
-		return dao.selectList("admin.getRptI", articlenum);
+	public List getRpts(int articlenum, String tablename) throws Exception {
+		HashMap<String,Object> hashmap = new HashMap();
+		hashmap.put("articlenum", articlenum);
+		hashmap.put("tablename", tablename);
+		
+		return dao.selectList("admin.getRpts", hashmap);
 	}
 
 	@Override
-	public List getRptsD(int articlenum) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.selectList("admin.getRptD", articlenum);
+	public void deleteContent(String tablename, int articlenum) {
+		HashMap<String, Object> hashmap = new HashMap();
+		hashmap.put("tablename", tablename);
+		hashmap.put("articlenum", articlenum);
+		
+		dao.delete("admin.delContent", hashmap);
 	}
 
 	@Override
-	public List getRptsM(int articlenum) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.selectList("admin.getRptM", articlenum);
+	public void cancelRpt(String tablename, String board, int articlenum) {
+		HashMap<String,Object> hashmap = new HashMap();
+		hashmap.put("board", board);
+		hashmap.put("articlenum", articlenum);
+		hashmap.put("tablename", tablename);
+		
+		dao.update("admin.updateRptCount", hashmap);
+		dao.delete("admin.cancelRpt", hashmap);
 	}
 
-	@Override
-	public List getRptsC(int articlenum) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.selectList("admin.getRptC", articlenum);
-	}
+
+
+
+
 }

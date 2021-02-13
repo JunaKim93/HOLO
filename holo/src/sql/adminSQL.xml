@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 	
+	<!--  신고 목록 출력  -->
+	
 	<select id="getRptCount" resultType="int">
 	<![CDATA[
 		select sum(count) from(
@@ -33,19 +35,32 @@
 	]]>
 	</select>
 	
-	<select id="getRptI" resultType="adminDTO" parameterType="int">
-		select articlenum, id, reason from infoboardreport
-	</select>
-	<select id="getRptD" resultType="adminDTO" parameterType="int">
-		select articlenum, id, reason from diyboardreport
-	</select>
-	<select id="getRptC" resultType="adminDTO" parameterType="int">
-		select articlenum, id, reason from communityboardreport
-	</select>
-	<select id="getRptM" resultType="adminDTO" parameterType="int">
-		select articlenum, id, reason from marketboardreport
+	<select id="getRpts" resultType="adminDTO" parameterType="HashMap">
+		select articlenum, id, reason from ${tablename} where articlenum=#{articlenum}
 	</select>
 	
+	
+	
+	
+	<!-- 신고 글 삭제 -->
+	
+	<delete id="delContent" parameterType="HashMap">
+		delete from ${tablename} where articlenum=#{articlenum}
+	</delete>
+	
+	
+	
+	
+	
+	<!--  신고 반려  -->
+	
+	<update id="updateRptCount" parameterType="HashMap">
+		update ${board} set report=0 where articlenum=#{articlenum}
+	</update>
+	
+	<delete id="cancelRpt" parameterType="HashMap">
+		delete from ${tablename} where articlenum=#{articlenum}
+	</delete>
 	
 	
 </mapper>
