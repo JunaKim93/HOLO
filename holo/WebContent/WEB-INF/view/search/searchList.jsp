@@ -14,10 +14,12 @@
 </div>
 <div align="center">
 <form action="/holo/search/searchList.holo">
-	<select name="filter">
+	<select name="category_a">
 		<option value="whole" selected> 전체 게시판  </option>
-		<option value="subject"> 생활정보 게시판  </option>
-		<option value="content"> 인테리어 게시판 </option>
+		<option value="living"> 생활정보 게시판  </option>
+		<option value="market"> 장터 게시판 </option>
+		<option value="diy"> 인테리어 게시판 </option>
+		<option value="community"> 자유 게시판 </option>
 	</select>
 	
 	<select name="choice">

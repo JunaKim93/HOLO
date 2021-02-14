@@ -2,6 +2,8 @@ package holo.board.interior;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,20 @@ public class DiyBoardBean {
 
 	@RequestMapping("writePro.holo")
 	public String writePro(DiyBoardDTO dto,Model model) throws Exception {
-		dto.setThumbnail("No Thumbnail");
+		String content = dto.getContent();
+		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+		Matcher match = pattern.matcher(content);
+		String imgTag = null;
+		if(match.find()){ // 이미지 태그를 찾았다면,,
+		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+			String target = "save/";
+			int target_num = imgTag.indexOf(target); 
+			String result; 
+			result = "/holo/save/" + imgTag.substring(target_num+5,(imgTag.substring(target_num).indexOf("\">")+target_num));				
+			dto.setThumbnail(result);
+		}else {
+			dto.setThumbnail("No Thumbnail");
+		}
 		diyBoardDAO.insert(dto);
 		String cate_b = dto.getCategory_b();
 		model.addAttribute("category_b",cate_b);
@@ -134,7 +149,7 @@ public class DiyBoardBean {
 		model.addAttribute("pageSize", new Integer(pageSize));
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("showList", showList);
-
+		model.addAttribute("category_b", category_b);
 		return "/diy/showList";
 	}
 
