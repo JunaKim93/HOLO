@@ -150,7 +150,7 @@
 		</div>
 
 		<div class="button_wrap">
-			<a href="/holo/diy/writeForm.holo" class="on">글작성</a> <a
+			<a href="/holo/diy/writeForm.holo?category_b=${category_b}" class="on">글작성</a> <a
 				href="/holo/member/main.holo" class="on">메인으로</a>
 
 		</div>
