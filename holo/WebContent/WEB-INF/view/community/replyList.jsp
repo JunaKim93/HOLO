@@ -1,7 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/resource/etc/color.jsp"%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
+
+<!-- script 선언 -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 $(function(){
 	//댓글 좋아요버튼 클릭 이벤트
@@ -67,7 +80,7 @@ $(function(){
 			url: "/holo/com/replyLikes.holo",type: "POST",async:false,
             data: {repnum: repnum},
             success: function (count) {
-            	$("#replyRow"+repnum).children(".replyLikes").html(count);
+            	$("#"+repnum).children(".btnLikeRpl").children(".replyLikes").html(count);
             }
 		})
     };
@@ -125,6 +138,7 @@ $(function(){
 				$(".reply-form-open").remove();
 				//수정하는 동안 숨겨놓았던 댓글 다시 표시
 				$(".editing").show();
+				$(".editing").css("display","flex");
 				//더이상 수정중이 아닌 댓글의 editing이라는 클래스를 제거
 				$(".editing").removeClass();
 				if(mode=="new"){
@@ -191,60 +205,60 @@ $(function(){
 	init();
 });
 </script>
-<br/>
-<b>댓글</b>
-<c:if test="${rplCount==0}">
-	<table width="500" border="1" cellpadding="0" cellspacing="0">
-		<tr>
+</head>
+<body>
+	<div class="board_wrap">
+		<c:if test="${rplCount==0}">
 			<p align="center">댓글을 작성해보세요!</p>
-		</tr>
-	</table>
-</c:if>
-<c:if test="${rplCount>0}">
-	<table border="1" width="1000" cellpadding="0" cellspacing="0">
-		<tr height="30" bgcolor="${value_c}">
-		<td align="center" width="60">id</td>
-		<td align="center" width="590">내용</td>
-		<td align="center" width="120">버튼</td>
-		<td align="center" width="30">좋아요</td>
-		<td align="center" width="140">날짜</td>
-		<c:forEach var="reply" items="${rplList}">
-			<tr height="50" id="replyRow${reply.repnum}">
-				<td align="center">${reply.id}</td>
-				<td style="padding:5px 4px 4px 5px">
-					<div style="display: flex;">
-						<c:forEach var="i" begin="1" end="${reply.depth}">
-							<div>&nbsp;&nbsp;&nbsp;</div>
-						</c:forEach>
-						<div style="border-left: 2px solid DarkGreen;height: 30px;"></div>
-						<c:if test="${reply.id==writer}">
-							<div id="replyContent${reply.repnum}" style="background-color: #66ffcc">${reply.content}</div>
-						</c:if>
-						<c:if test="${reply.id!=writer}">
-							<div id="replyContent${reply.repnum}">${reply.content}</div>
-						</c:if>
+		</c:if>
+		
+		<div class="board_list_wrap">
+			<c:if test="${rplCount>0}">
+				<div class="board_list">
+					<div class="top">
+						<div style="width:10%">작성자</div>
+						<div style="width:70%">내용</div>
+						<div style="width:10%">버튼</div>
+						<div style="width:10%">날짜</div>
 					</div>
-				</td>
-				<td align="left" style="padding:5px 4px 4px 5px">
-					<c:if test="${reply.id!='삭제됨'}">
-						<div id="${reply.repnum}">
-							<button class="btnReReply">↪️</button>
-							<button class="btn-like btnLikeRpl">👍</button>
-							<button class="btnReportRpl">🚨</button>
-							<c:if test="${reply.id==sessionId}">
-								<br/><br style="line-height:5px"/>
-								<button class="btnEditRpl">✏️</button>
-								<button class="btnDelRpl">❌</button>
+					<c:forEach var="reply" items="${rplList}">
+						<div id="replyRow${reply.repnum}" style="display: flex;">
+							<div style="width:10%;">${reply.id}</div>
+							<div style="width:70%;text-align:left;display: flex;">
+								<c:forEach var="i" begin="1" end="${reply.depth}">
+									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+								</c:forEach>
+								<div style="border-left: 2px solid DarkBlue;height: 100%;"></div>
+								<c:if test="${reply.id==writer}">
+									<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+								</c:if>
+								<c:if test="${reply.id!=writer}">
+									<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+								</c:if>
+							</div>
+							<c:if test="${reply.id!='삭제됨'}">
+								<div style="width:10%;">								
+									<div id="${reply.repnum}" style="line-height: 100%; text-align:left;">
+										<button class="btnReReply">↪️</button>
+										<button class="btn-like btnLikeRpl"><span class="replyLikes"></span>&nbsp;👍</button>
+										<button class="btnReportRpl">🚨</button>
+										<c:if test="${reply.id==sessionId}">
+											<br/><br style="line-height:5px"/>
+											<button class="btnEditRpl">✏️</button>
+											<button class="btnDelRpl">❌</button>
+										</c:if>
+									</div>
+								</div>
+								<div style="width:10%">${reply.regdate}</div>
+							</c:if>
+							<c:if test="${reply.id=='삭제됨'}">
+								<div style="width:10%;"></div><div style="width:10%;"></div>
 							</c:if>
 						</div>
-					</c:if>
-				</td>
-				<td align="center" class="replyLikes"></td>
-				<td align="center">${reply.regdate}</td>
-			</tr>
-		</c:forEach>
-	</table>
-</c:if>
-<table width="1000" cellpadding="0" cellspacing="0">
-	<tr id="replyRow0"></tr>
-</table>
+					</c:forEach>
+				</div>
+			</c:if>
+			<div id="replyRow0"></div>
+		</div>
+	</div>
+</body>

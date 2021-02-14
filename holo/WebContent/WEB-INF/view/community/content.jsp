@@ -209,7 +209,6 @@
 			</div>
 		</div> 
       	</div>
-		<br/><br/><br/>
 		<div id="reply_section"></div>
 		<br/><br/><br/><br/>
 	</body>

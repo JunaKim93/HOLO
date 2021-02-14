@@ -98,15 +98,15 @@ function init(){
 		            <div class="date">작성일</div>
 		            <div class="count">조회수</div>
 			    </div>
-			    <div>
-				    <c:forEach var="article" items="${list}">
+			    <c:forEach var="article" items="${list}">
+			    	<div>
 				    	<div class="num">${article.articlenum}</div>
 				        <div class="title"><a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">${article.subject }</a></div>
 				        <div class="writer">${article.id}</div>
 				        <div class="date">${article.regdate}</div>
 				        <div class="count">${article.viewcount}</div>
-			  		</c:forEach>
-		  		</div>
+		  			</div>
+		  		</c:forEach>
 			</div>
 			<div class="board_page">
 			   <c:set var="pageCount" value="${count / pagesize + ( count % pagesize == 0 ? 0 : 1)}"/>
