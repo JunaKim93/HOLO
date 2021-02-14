@@ -228,7 +228,7 @@ $(function(){
 								<c:forEach var="i" begin="1" end="${reply.depth}">
 									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 								</c:forEach>
-								<div style="border-left: 2px solid DarkBlue;height: 100%;"></div>
+								<div style="border-left: 2px solid #1e57a4;height: 100%;"></div>
 								<c:if test="${reply.id==writer}">
 									<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
 								</c:if>
