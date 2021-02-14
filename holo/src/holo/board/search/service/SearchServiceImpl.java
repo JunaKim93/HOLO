@@ -18,12 +18,16 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	private HashMap<String,Object> param = null;
 
-	
+
 	@Override
-	public List<SearchDTO> test(String choice, String search) throws Exception {
+	public List<SearchDTO> getBoardSearchList(String boardName, String choice, String search, int start, int end)
+			throws Exception {
+		param.put("board", boardName);
 		param.put("choice", choice);
 		param.put("search", search);
-		return dao.selectList("search.test", param);
+		param.put("start", start);
+		param.put("end", end);
+		return dao.selectList("search.getBoardSearchList", param);
 	}
 
 	@Override
@@ -33,6 +37,15 @@ public class SearchServiceImpl implements SearchService {
 		param.put("start", start);
 		param.put("end", end);
 		return dao.selectList("search.getSearchList", param);
+	}
+
+	
+	@Override
+	public int boardSearchCount(String boardName, String choice, String search) throws Exception {
+		param.put("board", boardName);
+		param.put("choice", choice);
+		param.put("search", search);
+		return dao.selectOne("search.boardSearchCount", param);
 	}
 
 	@Override

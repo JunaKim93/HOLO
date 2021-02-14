@@ -15,6 +15,9 @@
 			select count(*) as count from communityBoard where ${choice} like '%' || #{search} || '%'
 			)
 	</select>
+	<select id="boardSearchCount" resultType="int" parameterType="HashMap">
+		select count(*) as count from ${board} where ${choice} like '%' || #{search} || '%'
+	</select>
 	
 	<select id="getSearchList" resultType="searchDTO" parameterType="HashMap">
 		select * from( 
@@ -31,6 +34,16 @@
 					union
 					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
 					select * from infoBoard where ${choice} like '%' || #{search} || '%')
+				) order by regDate desc))
+		<![CDATA[ where r >= ${start} and r <= ${end}]]>
+	</select>	
+		
+	<select id="getBoardSearchList" resultType="searchDTO" parameterType="HashMap">
+		select * from( 
+			select articleNum, category_a,category_b, id, subject, content, viewCount, regDate, rownum r from(
+				select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from( 
+					select articleNum, category_a,category_b, id, subject, content, viewCount, regDate from(
+					select * from ${board} where ${choice} like '%' || #{search} || '%')
 				) order by regDate desc))
 		<![CDATA[ where r >= ${start} and r <= ${end}]]>
 	</select>	

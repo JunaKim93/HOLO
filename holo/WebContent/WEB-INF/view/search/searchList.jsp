@@ -14,25 +14,25 @@
 </div>
 <div align="center">
 <form action="/holo/search/searchList.holo">
-	<select name="category_a">
-		<option value="whole" selected> 전체 게시판  </option>
-		<option value="living"> 생활정보 게시판  </option>
-		<option value="market"> 장터 게시판 </option>
-		<option value="diy"> 인테리어 게시판 </option>
-		<option value="community"> 자유 게시판 </option>
+	<select name="board">
+		<option value=""> 전체 게시판  </option>
+		<option value="living"<c:if test="${board eq 'living'}"> selected </c:if>> 생활정보 게시판  </option>
+		<option value="market" <c:if test="${board eq 'market'}"> selected </c:if>> 장터 게시판 </option>
+		<option value="diy"<c:if test="${board eq 'diy'}"> selected </c:if>> 인테리어 게시판 </option>
+		<option value="community"<c:if test="${board eq 'community'}"> selected </c:if>> 자유 게시판 </option>
 	</select>
 	
 	<select name="choice">
-		<option value="id"> 작성자  </option>
-		<option value="subject"> 제목  </option>
-		<option value="content"> 내용 </option>
+		<option value="id" <c:if test="${choice eq 'id'}"> selected </c:if>> 작성자  </option>
+		<option value="subject" <c:if test="${choice eq 'subject'}"> selected </c:if>> 제목  </option>
+		<option value="content" <c:if test="${choice eq 'content'}"> selected </c:if>> 내용 </option>
 	</select>
-		<input type="text" name="search" placeholder="${search}">
+		<input type="text" name="search" value="${search}">
 		<input type="submit" value="검색">
 </form>
 </div>
 <div align="center">
- " ${search} " 로 검색한 결과입니다. (총 ${count}건)
+ ${searchBoard}에서 "${search}" 로 검색한 결과입니다. (총 ${count}건)
 </div>
 <div align="center">
 	<table border="1">

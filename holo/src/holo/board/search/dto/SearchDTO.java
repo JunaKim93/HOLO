@@ -128,7 +128,4 @@ public class SearchDTO {
 		this.category_bName = category_bName;
 	}
 	
-	
-	
-	
 }
