@@ -45,6 +45,7 @@
 		
 		<typeAlias alias="searchDTO" type="holo.board.search.dto.SearchDTO" />
 		<typeAlias type="holo.guide.AddressDTO" alias="addrDTO"/>
+		<typeAlias alias="adminDTO" type="holo.holouser.AdminDTO" />
 
 	</typeAliases>
 	
@@ -60,5 +61,6 @@
 		<mapper resource="/sql/guideSQL.xml" />
 		<mapper resource="/sql/scrapSQL.xml" />
 		<mapper resource="/sql/bestSQL.xml" />
+		<mapper resource="/sql/adminSQL.xml" />
 	</mappers>  
 </configuration>
