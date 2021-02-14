@@ -20,15 +20,9 @@
 	</delete>
 	
 	<select id="getArticles" resultType="diyboardDTO" parameterType="HashMap">	
-		select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, 
-					<if test="category_b == show">
-						thumbnail, 
-					</if>
-					r from (select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, 
-					<if test="category_b == show">
-						thumbnail, 
-					</if>
-					rownum r from (select * from diyBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} order by regDate desc) 
+		select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, thumbnail, r 
+		from (select articlenum, category_a, category_b, id, subject, content, viewcount, likes, report, regDate, thumbnail, rownum r 
+		from (select * from diyBoard order by regDate desc) where category_a=#{category_a} and category_b=#{category_b} order by regDate desc) 
 					<![CDATA[where r >= #{start} and r <= #{end}]]>
 		
 	</select>	
