@@ -42,19 +42,19 @@ public class MessageController {
 			List<MessageDTO> msgListR = null;
 			String receiver = (String)session.getAttribute("sessionId");
 			int unreadMsg = msg.countUnreadMsg(receiver);
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNum;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = msg.countMsgR(receiver);	//¹ÞÀº ¸Þ¼¼Áö °³¼ö
+			int pageSize = 5;							//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
+			int currentPage = pageNum;					//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+			int start = (currentPage - 1) * pageSize+1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½È£
+			int end = currentPage * pageSize;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+			int number = 0;								//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+			int count = 0;								//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+			count = msg.countMsgR(receiver);	//ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
+			int startPage = (int)(cp/5)*5+1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pages = 5;								//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			int endPage = startPage+pages-1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pageCount = 0;							//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}
@@ -76,6 +76,7 @@ public class MessageController {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageNum",pageNum);
 			
 			
 			
@@ -91,19 +92,19 @@ public class MessageController {
 		try {
 			List <MessageDTO> msgListS = null;
 			String sender = (String)session.getAttribute("sessionId");
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNum;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = msg.countMsgS(sender);		//º¸³½ ¸Þ¼¼Áö °³¼ö
+			int pageSize = 5;							//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
+			int currentPage = pageNum;					//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+			int start = (currentPage - 1) * pageSize+1;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½È£
+			int end = currentPage * pageSize;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+			int number = 0;								//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+			int count = 0;								//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+			count = msg.countMsgS(sender);		//ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int cp = 0;
 			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
+			int startPage = (int)(cp/5)*5+1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pages = 5;								//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			int endPage = startPage+pages-1;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int pageCount = 0;							//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(count >0) {
 				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
 				if(endPage > pageCount) {endPage = pageCount;}
@@ -125,6 +126,9 @@ public class MessageController {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
+			int unreadMsg = msg.countUnreadMsg(sender);
+			model.addAttribute("unreadMsg",unreadMsg);
+			model.addAttribute("pageNum",pageNum);
 			
 			
 			
@@ -137,7 +141,7 @@ public class MessageController {
 	@RequestMapping("/msgView_s.holo")
 	public String msgView_s(int msgnum, Model model) {
 		try {
-			MessageDTO dto = msg.getMsg(msgnum);	//¸Þ¼¼Áö ³»¿ë °¡Á®¿À±â
+			MessageDTO dto = msg.getMsg(msgnum);	//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			model.addAttribute("msg", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -148,8 +152,8 @@ public class MessageController {
 	@RequestMapping("/msgView_r.holo")
 	public String msgView_r(int msgnum, Model model) {
 		try {
-			msg.updateReadcount(msgnum);			//Á¶È¸¼ö ¿Ã¸®±â
-			MessageDTO dto = msg.getMsg(msgnum);	//¸Þ¼¼Áö ³»¿ë °¡Á®¿À±â
+			msg.updateReadcount(msgnum);			//ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½
+			MessageDTO dto = msg.getMsg(msgnum);	//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			model.addAttribute("msg", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
