@@ -37,14 +37,15 @@
             <div class="date">작성일</div>
             <div class="count">조회수</div>
          </div>
-         <div align="center">
-         	<c:if test="${count == 0}">
-         	
+         
+         <c:if test="${count == 0}">
+         	<div align="center">
          		<div class="title">
          		등록된 글이 없습니다.
          		</div>
-         	</c:if>
-         </div>
+         	</div>
+         </c:if>
+         
          	<c:if test="${count >0}">
          		<c:forEach var="list" items="${reportlist}">
 		        <div>

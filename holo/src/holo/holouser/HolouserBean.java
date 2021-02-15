@@ -32,6 +32,17 @@ public class HolouserBean {
 	@Autowired
 	private HolouserService memberDAO = null;
 	
+	@RequestMapping("frameset.holo")
+	public String frameset() {
+		
+		return "frameset";
+	}
+	
+	@RequestMapping("index.holo")
+	public String index() {
+		return"index";
+	}
+	
 	@RequestMapping("main.holo")
 	public String main() {
 		return "member/main";
@@ -93,6 +104,10 @@ public class HolouserBean {
 		return "member/loginPro";
 	}
 	
+	@RequestMapping("logoutCheck.holo")
+	public String logoutCheck() {
+		return "member/logoutCheck";
+	}
 	
 	
 	@RequestMapping("logout.holo")

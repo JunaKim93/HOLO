@@ -34,7 +34,6 @@ public class AdminController {
 		model.addAttribute("reportlist",reportlist);
 		model.addAttribute("count", count);
 			
-		System.out.println(count);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -46,7 +45,6 @@ public class AdminController {
 		List reportList = null;
 		AdminDTO dto = null;
 		try {
-			System.out.println(category_a);
 			String boardname = null;
 			String tablename = null;
 			if(category_a.equals("living")  || category_a.equals("cooking") || category_a.equals("findplace")) {

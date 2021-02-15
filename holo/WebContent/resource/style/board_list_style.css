@@ -5,7 +5,8 @@
 }
 
 body{font-family: 'NanumSquare', sans-serif !important; font-size:14px; color:#4e4e4e;
-   line-height: 1;}
+   line-height: 1;
+   }
 
 html{
    font-size: 10px;
@@ -22,7 +23,8 @@ a{
 
 .board_wrap{
    width: 1000px;
-   margin: 100px auto;
+   margin-top: 250px;
+   margin-left: 250px;
 }
 
 .board_title{

@@ -11,7 +11,10 @@
 </c:if>
 
  <c:if test="${check == 1}">
-	<c:redirect url="/member/main.holo" />
+ 	<script>
+ 		parent.document.location.reload();
+ 		window.location="/holo/member/main.holo";
+ 	</script>
 </c:if>
 <c:if test="${check == 2}">
 	<script>

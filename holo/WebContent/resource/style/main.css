@@ -18,10 +18,11 @@ a{
 }
 
 header{
-   display: fixed;
+   position: fixed;
    margin-top: 0;
    /*border-bottom: 1px solid #ddd;*/
-   
+   width: 100%;
+   background-color:white;
    
 }
 
@@ -70,6 +71,7 @@ header .gnb li:first-child{
    display: fixed;
    margin-top: 0;
    z-index: 999; 
+   width: 100%;
 }
 
 .menu_wrap .dep1{
@@ -127,12 +129,13 @@ header .gnb li:first-child{
 /* inx_board*/
 
 #idx_board_wrap{
-   padding: 50px 0;
+   padding: 0 auto;
+   margin-top:250px;
+   width:100%;
    
 }
 
 #idx_board_wrap > div{
-   width: 90%;
    min-width: 1000px;
    max-width: 1200px;
    margin: 0 auto;
