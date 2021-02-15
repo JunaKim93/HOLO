@@ -63,6 +63,7 @@
 					${list.reason} 
 		        </div>
 	            <div class="writer">${list.id}</div>
+	            <div class="num"></div>
             </c:forEach>
          </div>
 

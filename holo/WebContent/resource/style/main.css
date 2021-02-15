@@ -18,6 +18,8 @@ a{
 }
 
 header{
+   display: fixed;
+   margin-top: 0;
    /*border-bottom: 1px solid #ddd;*/
    
    
@@ -63,14 +65,26 @@ header .gnb li:first-child{
 }
 
 /* menu bar*/
+
+.menu_wrap{
+   display: fixed;
+   margin-top: 0;
+   z-index: 999; 
+}
+
 .menu_wrap .dep1{
    margin-top: 50px;
    font-size: 0;
    color: white;
+   display: fixed;
 }
+
+/* .menu_wrap > div{
+   display: flex;
+} */
    
 .menu_wrap .dep1 > li{
-   display:inline-block;
+   display: inline-block;
    width: 20%;
    vertical-align: top;
    background: #1e57a4;
@@ -209,4 +223,106 @@ header .gnb li:first-child{
    text-align: right;
    font-size:  12px;
    color: #777;
+}
+
+/* 푸터 */
+
+.foot{
+   text-align: center;
+   padding: 100px 50px;
+   background-color: #fff;
+}
+
+.foot li{
+   position: relative;
+   display: inline;;
+   padding: 0 7px 0 10px;
+   white-space: nowrap;
+}
+
+.foot li:before{
+   content: '';
+   width: 1px;
+   height: 12px;
+   background-color: #dbdbdb;
+   position: absolute;
+   left: 0;
+   top: 2px;
+}   
+
+.foot li:first-child:before{
+   width: 0;
+}
+
+.foot address{
+   padding-top: 15px;
+}
+
+/* 검색창 */
+
+.green_window {
+   display: inline-block;
+   width: 450px; height: 38px;
+   border: 2px solid #1e57a4;
+   border-radius: 2px;
+   background: white;
+   margin-top: 45px;
+   margin-left: 77px;
+}
+.input_text {
+   width: 348px; height: 30px;
+   margin: 6px 0 0 9px;
+   border: 0;
+   line-height: 21px;
+   font-weight: 540;
+   font-size: 18px;
+   outline: none;
+}
+.sch_smit {
+   width: 43px; height: 43px;
+   margin: 0; border: 0;
+   vertical-align: top;
+   /* background: #1e57a4; */
+   background-color:transparent;
+   color: #1e57a4;;
+   font-weight: 700;
+/*    border-radius: 1px;
+ */   cursor: pointer;
+   margin-top: 45px;
+   margin-left: -45px;
+   white-space: nowrap;
+   position: absolute;
+   padding: 0;
+}
+.sch_smit:hover {
+   color: gray;
+}
+
+.fa fa-search{
+   width: 30px;
+   color: #000;
+}
+
+/* .green_window .input{
+   font-size: 20px;
+   font-weight: 20;
+} */
+
+.green_window {
+   display: inline-block;
+   width: 380px; height: 36px;
+   border: 2px solid #1e57a4;
+   border-radius: 2px;
+   background: white;
+   margin-top: 45px;
+   margin-left: 77px;
+}
+.input_text {
+   width: 348px; height: 30px;
+   margin: 6px 0 0 9px;
+   border: 0;
+   line-height: 21px;
+   font-weight: 540;
+   font-size: 15px;
+   outline: none;
 }

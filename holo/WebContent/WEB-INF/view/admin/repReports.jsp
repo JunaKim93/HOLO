@@ -19,21 +19,20 @@
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="./js/script.js"></script>
 <title>게시판 글목록</title>
 </head>
 
 <body>
    <div class="board_wrap">
       <div class="board_title">
-         <strong><a href="/holo/admin/contentReports.holo">게시물 신고 목록</a></strong>
+         <strong><a href="/holo/admin/repReports.holo">댓글 신고 목록</a></strong>
          <p></p>
       </div>
       <div class="board_list_wrap">
          <div class="board_list">
          <div class="top">
             <div class="num">신고수</div>
-            <div class="title">글제목</div>
+            <div class="title">댓글내용</div>
             <div class="writer">작성자</div>
             <div class="date">작성일</div>
             <div class="count">조회수</div>

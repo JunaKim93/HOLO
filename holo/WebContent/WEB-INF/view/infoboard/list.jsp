@@ -68,9 +68,10 @@
          	<c:if test="${count == 0}">
          		등록된 글이 없습니다.
          	</c:if>
-         	
+         </div>
          	<c:if test="${count >0}">
          		<c:forEach var="list" items="${articleList}">
+         		<div>
 		            <div class="num">
 		            	<c:out value="${num}" />
 						<c:set var="num" value="${num-1}" />
@@ -98,6 +99,7 @@
 		            <div class="writer">${list.id}</div>
 		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
 		            <div class="count">${list.viewcount}</div>
+		        </div>    
 	            </c:forEach>
             </c:if>
          </div>

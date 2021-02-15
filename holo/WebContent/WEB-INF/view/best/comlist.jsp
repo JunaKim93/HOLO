@@ -39,9 +39,13 @@
             <div class="date">작성일</div>
             <div class="count">조회수</div>
          </div>
-         <div>
+         
          	<c:if test="${count == 0}">
-         		인기글이 없습니다.
+         	<div>
+         		<div class="title">
+         			인기글이 없습니다.
+         		</div>
+         	</div>
          	</c:if>
          	
          	<c:if test="${count >0}">

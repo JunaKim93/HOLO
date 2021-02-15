@@ -34,6 +34,7 @@ public class AdminController {
 		model.addAttribute("reportlist",reportlist);
 		model.addAttribute("count", count);
 			
+		System.out.println(count);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -44,31 +45,39 @@ public class AdminController {
 	public String content(int articlenum, String category_a, Model model, int report) {
 		List reportList = null;
 		AdminDTO dto = null;
-		String boardname="";
-		String tablename="";
 		try {
-			if(category_a == "living" || category_a == "cooking" || category_a == "findplace") {
+			System.out.println(category_a);
+			String boardname = null;
+			String tablename = null;
+			if(category_a.equals("living")  || category_a.equals("cooking") || category_a.equals("findplace")) {
 				boardname ="infoboard";
 				tablename ="infoboardreport";
 				reportList = adminDAO.getRpts(articlenum, tablename);
-			}else if(category_a == "market" || category_a == "free" || category_a == "group") {
+				
+			}else if(category_a.equals("market") || category_a.equals("free") || category_a.equals("group")) {
 				boardname="market";
 				tablename="marketboardreport";
 				reportList = adminDAO.getRpts(articlenum, tablename);
-			}else if(category_a =="myroom") {
+
+			}else if(category_a.equals("myroom")) {
 				boardname="diy";
 				tablename="diyboardreport";
 				reportList = adminDAO.getRpts(articlenum, tablename);
-			}else if(category_a == "1" || category_a == "2") {
+
+			}else if(category_a.equals("1") || category_a.equals("2")) {
 				boardname="com";
 				tablename="communityboardreport";
 				reportList = adminDAO.getRpts(articlenum, tablename);
+				
+			}else {
+				System.out.println("카테고리 에러");
 			}
 			model.addAttribute("reportList", reportList);
 			model.addAttribute("boardname", boardname);
+			model.addAttribute("tablename", tablename);
 			model.addAttribute("report", report);
 			model.addAttribute("articlenum", articlenum);
-			model.addAttribute("tablename", tablename);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -182,13 +182,11 @@ public class HolouserBean {
 	@RequestMapping("memberCheck.holo")
 	public int memberCheck(@RequestParam("receiver") String receiver) {
 		int result = 0;
-		System.out.println(receiver);
 		try {
 			result = memberDAO.userCheck(receiver);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(result);
 		return result;
 	}
 	
@@ -225,7 +223,6 @@ public class HolouserBean {
 	public String logon_myInfo(String id, @RequestParam(defaultValue="1") int pageNumI,
 								Model model, HttpSession session)  {
 		try {
-			System.out.println(id);
 			List infoList = null;
 			int pageSize = 5;							//페이지에 노출될 게시물 수
 			int currentPage = pageNumI;					//현재 페이지 번호

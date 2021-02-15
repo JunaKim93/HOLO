@@ -1,0 +1,179 @@
+@charset "EUC-KR";
+*{
+   margin: 0;
+   padding: 0;
+}
+
+body{font-family: 'NanumSquare', sans-serif !important; font-size:14px; color:#4e4e4e;
+   line-height: 1.4;}
+
+html{
+   font-size: 10px;
+}
+
+ul, li{
+   list-style: none;
+}
+
+a{
+   text-decoration: none;
+   color: inherit;
+}
+
+.join_wrap{
+   width: 1000px;
+   margin: 100px auto;
+}
+
+.join_title{
+   margin-bottom: 30px;
+}
+
+.join_title strong{
+   font-size: 3rem;
+}
+
+.join_title p{
+   margin-top: 5px;
+   font-size: 1.4rem;
+}
+
+.button_wrap{
+   margin-top: 30px;
+   text-align: center;
+   font-size: 0;
+}
+
+.button_wrap a{
+   display: inline-block;
+   min-width: 80px;
+   margin-left: 10px;
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 2px;
+   font-size: 1.4rem;
+}
+
+.button_wrap a:first-child {
+   margin-left: 0;
+}
+
+.button_wrap a.on{
+   background: #1e57a4;   /* 파랑색 */
+   color: #fff;
+}   
+
+.button_wrap .writebtn{
+   display: inline-block;
+   min-width: 100px;
+   min-height: 41px;
+   margin-left: 10px;
+   padding: 9px 15px 10px;
+   border: 1px solid #ddd;
+   border-radius: 2px;
+   font-size: 1.4rem;
+   background: #1e57a4;   /* 파랑색 */
+   color: #fff;
+}
+
+div{
+   display: block;
+}
+
+dl{
+   margin-top: 30px;
+}
+
+.join_wrap{
+   width: 1000px;
+   margin: 100px auto;
+}
+
+.join_title{
+   text-align: center;
+}
+
+/* 글작성 페이지 */
+.join_info{
+   border-top: 2px solid #1e57a4;
+}
+
+.join_write .title,
+.join_write .info{
+   padding: 15px;
+}
+
+.join_write .info{
+   border-top: 1px dashed #ddd;
+   border-bottom: 1px solid #000;
+   font-size: 0;
+}
+
+.join_write .title dl{
+   font-size: 0;
+   vertical-align: middle;
+   margin-left: 200px;
+    
+}
+
+.join_write .info dl{
+   display: inline-block;
+   width: 50%;
+   vertical-align: middle;
+}
+
+.join_write .title dt,
+.join_write .title dd,
+.join_write .info dt,
+.join_write .info dd{
+   display: inline-block;
+   vertical-align: middle;
+   font-size: 1.4rem;
+}
+
+.join_write .title dt,
+.join_write .info dt{
+   width: 100px;
+}
+
+.join_write .title dd{
+   width: calc(100% - 100px);
+}
+
+.join_write .title input[type="text"],
+.join_write .title input[type="password"],
+.join_write .title input[type="number"],
+.join_write .info input[type="text"],
+.join_write .info input[type="password"]{
+   padding: 10px;
+   box-sizing: border-box;
+}
+
+.join_write .title input[type="text"]{
+   width: 60%;
+}
+
+.join_write .title input[type="password"]{
+   width: 60%;
+}
+.join_write .title input[type="number"]{
+   width: 60%;
+}
+
+.join_write .content{
+   border-bottom: 1px solid #000;
+}
+
+.confirmId{
+   background: #1e57a4;
+   color: #fff;
+   padding: 10px;
+   border: 0;
+   border-radius: 2px;
+}
+
+.yak{
+   text-align: center;
+   border-top: 2px solid #1e57a4;
+   
+}

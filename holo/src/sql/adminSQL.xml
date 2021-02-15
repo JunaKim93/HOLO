@@ -22,14 +22,14 @@
 
 	<select id="getRptList" resultType="adminDTO">
 	<![CDATA[
-		select articlenum, id, subject, content, regdate, category_a from
-			(select articlenum, id, subject, content, regdate, category_a from infoboard where report >= 5
+		select articlenum, id, subject, content, regdate, category_a, report, viewcount from
+			(select articlenum, id, subject, content, regdate, category_a, report, viewcount from infoboard where report >= 5
 			 union
-			 select articlenum, id, subject, content, regdate, category_a from diyboard where report >= 5
+			 select articlenum, id, subject, content, regdate, category_a, report, viewcount from diyboard where report >= 5
 			 union
-			 select articlenum, id, subject, content, regdate, category_a from marketboard where report >= 5
+			 select articlenum, id, subject, content, regdate, category_a, report, viewcount from marketboard where report >= 5
 			 union
-			 select articlenum, id, subject, content, regdate, category_a from communityboard where report >= 5
+			 select articlenum, id, subject, content, regdate, category_a, report, viewcount from communityboard where report >= 5
 			)
 		order by report desc
 	]]>

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resource/style/main.css">
 
@@ -24,15 +25,22 @@
 <body>
    <div id="wrap">
       <header>
-      <p>[${sessionScope.sessionId}]</p>
+      <p>${sessionScope.sessionId}</p>
          <div>
             <h1 class="logo">
                <a href="/holo/member/main.holo"><img src="../resource/image/holoLogo.png"/></a>
             </h1>
             
+            
             <div>
-      
+            <!-- 검색창 -->   
             </div>
+            
+               <span class='green_window'>
+            <input type='text' class='input_text' placeholder="검색어를 입력해주세요."/>
+         </span>
+            <button type='submit' class='sch_smit'><i class="fa fa-search"></i></button>
+            
             <ul class="gnb">
             <c:if test="${sessionId == null}">
                <li><a href="/holo/member/loginForm.holo">로그인</a></li>
@@ -94,7 +102,7 @@
             </ul>
          </li>
       </ul>
-      
+      </div>
       <div id="idx_board_wrap">
          <div>
             <div class="idx_board">
@@ -218,6 +226,22 @@
                </div>         
             </div>
          </div>
+      </div>
+      <div class="foot">
+         <ul>
+            <li><a href="#">사이트 도움말</a></li>
+            <li><a href="#">사이트 이용약관</a></li>
+            <li><a href="#">사이트 운영원칙</a></li>
+            <li><a href="#">개인정보 취급방침</a></li>
+            <li><a href="#">책임의 한계와 법적고지</a></li>
+            <li><a href="#">게시중단요청서비스</a></li>
+            <li><a href="#">고객센터</a></li>
+         </ul>
+       <address>
+          Copyright @
+          <a href="#"><strong>HOLO</strong></a>
+          All Rights Reserved.
+          </address>     
       </div>
    </body>   
    

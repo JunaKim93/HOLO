@@ -35,4 +35,5 @@ public interface LivingBoardService {
 	public void insertRepReport(InfoRepReportDTO dto) throws Exception;
 	public int searchArticleCount(String category_a, String category_b, String sort, String keyword) throws Exception;
 	public List searchArticles(int start, int end, String category_a, String category_b, String sort, String keyword) throws Exception;
+	public int getRepCount(int articlenum);
 }

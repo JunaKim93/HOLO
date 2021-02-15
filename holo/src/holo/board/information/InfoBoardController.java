@@ -120,16 +120,29 @@ public class InfoBoardController {
 		return "infoboard/content";
 	}
 	
-	@ResponseBody
+	
 	@RequestMapping("/replyList.holo")
-	public List <InfoRepDTO> replyList(@RequestParam("articlenum") int articlenum) throws Exception{
-		List <InfoRepDTO> repList = liveBrdDAO.getReply(articlenum);
-		for (int i=0; i < repList.size(); i++) {
-			int repnum = repList.get(i).getRepnum();
-			liveBrdDAO.updateRepLikes(repnum);
+	public String replyList(@RequestParam("articlenum") int articlenum, 
+							@RequestParam("pageNum") int pageNum, Model model) throws Exception{
+		int count = 0;
+		count = liveBrdDAO.getRepCount(articlenum);
+		List <InfoRepDTO> repList = null;
+		List <InfoRepDTO> list = null;
+		if(count == 0) {
+			list = Collections.EMPTY_LIST;
+		}else {
+			repList = liveBrdDAO.getReply(articlenum);
+			for (int i=0; i < repList.size(); i++) {
+				int repnum = repList.get(i).getRepnum();
+				liveBrdDAO.updateRepLikes(repnum);
+			}
 		}
-		List <InfoRepDTO> list = liveBrdDAO.getReply(articlenum);
-		return list;
+		list = liveBrdDAO.getReply(articlenum);
+		model.addAttribute("replyList", list);
+		model.addAttribute("count", count);
+		model.addAttribute("articlenum", articlenum);
+		model.addAttribute("pageNum", pageNum);
+		return "infoboard/replyList";
 	}
 	
 	

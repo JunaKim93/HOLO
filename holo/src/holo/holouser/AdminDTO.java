@@ -12,8 +12,15 @@ public class AdminDTO {
 	private int viewcount;
 	private Timestamp regdate;
 	private String reason;
+	private String category_a;
 	
 	
+	public String getCategory_a() {
+		return category_a;
+	}
+	public void setCategory_a(String category_a) {
+		this.category_a = category_a;
+	}
 	public int getArticlenum() {
 		return articlenum;
 	}
