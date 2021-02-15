@@ -22,10 +22,11 @@ a{
 }
 
 .board_wrap{
-   width: 1000px;
-   margin-top: 250px;
-   margin-left: 250px;
-}
+	margin-top:250px;
+  	 min-width:1000px; 
+  	 max-width:1200px; 
+  	 margin-left: 370px;
+	}
 
 .board_title{
    margin-bottom: 30px;

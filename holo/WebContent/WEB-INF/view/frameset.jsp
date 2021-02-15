@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<frameset rows="*, *,*" border ="0">
-	<frame src = "/holo/member/index.holo" name = "top" >
-	<frame src = "/holo/member/main.holo" name = "bottom">
+<frameset rows="30%, *" border ="0">
+	<frame src = "/holo/member/index.holo" name = "top" style="position:relative; z-index:2;">
+	<frame src = "/holo/member/main.holo" name = "bottom" style="position:absolute; z-index:1;">
 </frameset>
 </head>
 

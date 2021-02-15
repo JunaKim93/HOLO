@@ -17,8 +17,9 @@
 
 
 
-<body style="overflow:hidden;" scroll="no">
+<body>
 <header>
+
    <div id="wrap">
          <div>
             <h1 class="logo">
@@ -99,15 +100,11 @@
       </div>
       </header>
       
-      
-      
-
+ 
 	
 </body>
-<div>
 
-		<iframe src="/holo/member/main.holo" id="page_content" marginheight="250" name="bottom" width="100%" height="750"align="center">
-      
-      </iframe>
-</div>
+
+		
+
 </html>

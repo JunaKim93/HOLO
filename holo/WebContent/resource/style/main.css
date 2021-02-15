@@ -19,7 +19,8 @@ a{
 
 header{
    position: fixed;
-   margin-top: 0;
+   display: inline;
+   top: 0 !important;
    /*border-bottom: 1px solid #ddd;*/
    width: 100%;
    background-color:white;
@@ -129,8 +130,8 @@ header .gnb li:first-child{
 /* inx_board*/
 
 #idx_board_wrap{
-   padding: 0 auto;
    margin-top:250px;
+   padding: 0 auto;
    width:100%;
    
 }
@@ -329,3 +330,8 @@ header .gnb li:first-child{
    font-size: 15px;
    outline: none;
 }
+
+
+
+
+

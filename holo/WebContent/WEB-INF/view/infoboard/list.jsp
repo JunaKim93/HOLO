@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <title>게시판 글목록</title>
+
 </head>
 
 <body>
