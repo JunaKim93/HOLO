@@ -40,17 +40,26 @@
             <a href="/holo/diy/writeForm.holo?category_b=${category_b}" class="on">글작성</a>      
          </div>
          
-               <div class="board_page">
-            <a href="#" class="button first"><<</a>
-            <a href="#" class="button prev"><</a>
-            <a href="#" class="num on">1</a>
-            <a href="#" class="num">2</a>
-            <a href="#" class="num">3</a>
-            <a href="#" class="num">4</a>
-            <a href="#" class="num">5</a>
-            <a href="#" class="button next">></a>
-            <a href="#" class="button last">>></a>
-         
-         </div>
+              <div class="board_page">
+
+				<a class="button first" href="/holo/diy/showList.holo?pageNum=1">처음</a>
+				<c:if test="${startPage>5}">
+					<a class="button prev"
+						href="/holo/diy/showList.holo?pageNum=${startPage-1}&category_b=${category_b}">이전</a>
+				</c:if>
+
+				<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+					<a class="num"
+						href="/holo/diy/showList.holo?pageNum=${pagenum}&category_b=${category_b}">${pagenum}</a>
+				</c:forEach>
+
+				<c:if test="${endPage < pageCount}">
+					<a class="button next"
+						href="/holo/diy/showList.holo?pageNum=${startPage+5}&category_b=${category_b}">다음</a>
+				</c:if>
+				<a class="button last"
+					href="/holo/diy/showList.holo?pageNum=${pageCount}&category_b=${category_b}">맨끝</a>
+		</div>
+
 </body>
 </html>

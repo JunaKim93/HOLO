@@ -47,7 +47,7 @@
 					<div class="info">
 						<dl>
 							<dt>작성자</dt>
-							<dd>sessionId</dd>
+							<dd>${sessionScope.sessionId}</dd>
 						</dl>
 						<dl>
 							<dt>카테고리</dt>
@@ -68,7 +68,7 @@
 				</div>
 				<div class="button_wrap">
 				<input type="hidden" name="category_a" value="myroom" />
-				<input type="hidden" name="id" value="sessionId" />
+				<input type="hidden" name="id" value="${sessionScope.sessionId}" />
 					<input type="submit" id="writebtn" class="writebtn" value="등록">
 					<a href="/holo/diy/list.holo?category_b=${category_b}">취소</a>
 				</div>

@@ -18,7 +18,7 @@
     		<tr>
     			<td colspan="2" align="center">
     			<input type="hidden" name="repNum" value="${repNum}" />
-    			<input type="hidden" name="id" value="sessionId" />	
+    			<input type="hidden" name="id" value="${sessionScope.sessionId}" />	
     			<input type="submit" value="제출" />
     			<input type="button" value="닫기" onclick="self.close()" />
     			</td>

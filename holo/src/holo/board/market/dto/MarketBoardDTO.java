@@ -17,12 +17,15 @@ public class MarketBoardDTO {
 	private String condition;
 	private String dealing;
 	
+	
+
 	public int getArticlenum() {
 		return articlenum;
 	}
 	public void setArticlenum(int articlenum) {
 		this.articlenum = articlenum;
 	}
+
 	public String getCategory_a() {
 		return category_a;
 	}
@@ -59,10 +62,10 @@ public class MarketBoardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getviewCount() {
+	public int getViewCount() {
 		return viewCount;
 	}
-	public void setviewCount(int viewCount) {
+	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
 	public int getReport() {

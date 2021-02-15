@@ -30,12 +30,12 @@ public class DiyRestBean {
 	}
 
 	@RequestMapping("insertRpl.holo")
-	public void insert(@ModelAttribute DiyReplyDTO dto) throws Exception {
+	public void logon_insert(@ModelAttribute DiyReplyDTO dto) throws Exception {
 		diyBoardDAO.insertRpl(dto);
 	}
 
 	@RequestMapping("updateReply.holo")
-	public void updateRpl(@ModelAttribute DiyReplyDTO dto) throws Exception {
+	public void logon_updateRpl(@ModelAttribute DiyReplyDTO dto) throws Exception {
 		diyBoardDAO.updateRpl(dto);
 	}
 
