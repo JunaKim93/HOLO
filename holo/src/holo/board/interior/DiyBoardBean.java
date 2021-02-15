@@ -27,16 +27,15 @@ public class DiyBoardBean {
 	@Autowired
 	private InteriorBoardService diyBoardDAO = null;
 
-	// tip 게시판
 
 	@RequestMapping("writeForm.holo")
-	public String writeForm(@RequestParam(defaultValue="tip", required=false) String category_b,Model model) {
+	public String logon_writeForm(@RequestParam(defaultValue="tip", required=false) String category_b,Model model) {
 		model.addAttribute("category_b", category_b);
 		return "/diy/writeForm";
 	}
 
 	@RequestMapping("writePro.holo")
-	public String writePro(DiyBoardDTO dto,Model model) throws Exception {
+	public String logon_writePro(DiyBoardDTO dto,Model model) throws Exception {
 		String content = dto.getContent();
 		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
 		Matcher match = pattern.matcher(content);
@@ -125,29 +124,37 @@ public class DiyBoardBean {
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) throws Exception {
 		int pageSize = 10;
 		int currentPage = pageNum;
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = currentPage * pageSize;
-		int count = 0;
+		int start = (currentPage - 1) * pageSize + 1;
+		int end = currentPage * pageSize;
 		int number = 0;
+		int count = 0;
+		int cp = 0;
+		cp = currentPage - 1;
+		int startPage = (int) (cp / 5) * 5 + 1;
+		int pages = 5;
+		int endPage = startPage + pages - 1;
+		int pageCount = 0;
 		String category_a = "myroom";
 		String category_b = "show";
 		
 		List showList = null;
 		count = diyBoardDAO.getArticleCount(category_a,category_b);
 		if (count > 0) {
-			showList = diyBoardDAO.getArticles(category_a, category_b, startRow, endRow);
+			showList = diyBoardDAO.getArticles(category_a, category_b, start, end);
 		} else {
 			showList = Collections.EMPTY_LIST;
 		}
 
 		number = count - (currentPage - 1) * pageSize;
 
-		model.addAttribute("currentPage", new Integer(currentPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
-		model.addAttribute("count", new Integer(count));
-		model.addAttribute("pageSize", new Integer(pageSize));
-		model.addAttribute("number", new Integer(number));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("count", count);
+		model.addAttribute("num", number);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("showList", showList);
 		model.addAttribute("category_b", category_b);
 		return "/diy/showList";
@@ -174,7 +181,7 @@ public class DiyBoardBean {
 
 	 
 	@RequestMapping("updateForm.holo")
-	public String updateForm(int articlenum, int pageNum, Model model) throws Exception {
+	public String logon_updateForm(int articlenum, int pageNum, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
 
 		model.addAttribute("articlenum", new Integer(articlenum));
@@ -185,7 +192,7 @@ public class DiyBoardBean {
 	}
 
 	@RequestMapping("updatePro.holo")
-	public String updatePro(DiyBoardDTO dto, int articlenum, int pageNum, Model model) throws Exception {
+	public String logon_updatePro(DiyBoardDTO dto, int articlenum, int pageNum, Model model) throws Exception {
 		diyBoardDAO.update(dto);
 		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
@@ -193,7 +200,7 @@ public class DiyBoardBean {
 	}
 
 	@RequestMapping("deletePro.holo")
-	public String deletePro(DiyBoardDTO dto, int pageNum, Model model) throws Exception {
+	public String logon_deletePro(DiyBoardDTO dto, int pageNum, Model model) throws Exception {
 		diyBoardDAO.delete(dto);
 		String cate_b = dto.getCategory_b();
 		model.addAttribute("pageNum", new Integer(pageNum));
@@ -201,13 +208,8 @@ public class DiyBoardBean {
 		return "/diy/deletePro";
 	}
 	
-//	@RequestMapping("rplLikePro.holo")
-//	public String rplLikePro(DiyReplyDTO dto) throws Exception {
-//		diyBoardDAO.insertr
-//	}
-
 	@RequestMapping("rplDeletePro.holo")
-	public String rplDeletePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
+	public String logon_rplDeletePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
 		diyBoardDAO.deleteRpl(dto);
 		model.addAttribute("articlenum", new Integer(dto.getArticlenum()));
 		model.addAttribute("pageNum", new Integer(pageNum));
@@ -215,14 +217,14 @@ public class DiyBoardBean {
 	}
 
 	@RequestMapping("reportArticle.holo")
-	public String boardReport(int articlenum, String subject, Model model) throws Exception {
+	public String logon_boardReport(int articlenum, String subject, Model model) throws Exception {
 		model.addAttribute("subject", subject);
 		model.addAttribute("articlenum", articlenum);
 		return "/diy/reportArticle";
 	}
 	
 	@RequestMapping("reportArticlePro.holo")
-	public String boardReportPro(DiyReportDTO dto, Model model) throws Exception {
+	public String logon_boardReportPro(DiyReportDTO dto, Model model) throws Exception {
 		int check = 1;
 		int articlenum;
 		check = diyBoardDAO.checkAReport(dto);
@@ -236,14 +238,14 @@ public class DiyBoardBean {
 	}
 	
 	@RequestMapping("reportReply.holo")
-	public String replyReport(int repNum, String content, Model model) throws Exception {
+	public String logon_replyReport(int repNum, String content, Model model) throws Exception {
 		model.addAttribute("content", content);
 		model.addAttribute("repNum", repNum);
 		return "/diy/reportReply";
 	}
 	
 	@RequestMapping("reportReplyPro.holo")
-	public String replyReportPro(DiyRplReportDTO dto, Model model) throws Exception {
+	public String logon_replyReportPro(DiyRplReportDTO dto, Model model) throws Exception {
 		int check = 1;
 		int articlenum=0;
 		check = diyBoardDAO.checkRReport(dto);

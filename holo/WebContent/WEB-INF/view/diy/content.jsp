@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 
 <html>
 <head>
@@ -320,22 +321,33 @@
 							글목록</a>
 					</c:when>
 				</c:choose>
+				<c:if test="${sessionScope.sessionId == article.id}">
 				<a
 					href="/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">수정</a>
 				<a href="#" onclick="deleteConfirm()">삭제</a>
+				</c:if>
 			</div>
 		</div>
 	</div>
 	<div align="center" id="replyList"></div>
 	<br />
+	<c:if test="${sessionScope.sessionId ne null}">
 	<div align="center">
 		<br />
-		<textarea id="sessionId" style="display: none;">sessionId</textarea>
+		<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
 		<textarea rows="5" cols="80" id="replytext" style="resize: none;"
 			placeholder="댓글을 작성해주세요!"></textarea>
 		<br />
 		<button type="button" id="insertRplBtn">댓글 작성</button>
 	</div>
+	</c:if>
+		<c:if test="${sessionScope.sessionId eq null}">
+	<div align="center">
+		<br />
+		<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+		<align="center">로그인 후 댓글 작성이 가능합니다.</align>
+	</div>
+	</c:if>
 	<br />
 	<br />
 

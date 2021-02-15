@@ -24,12 +24,16 @@ caption{
    
    
 .login{
-   width: 410px;
+   margin-top:250px;
+  	 min-width:1000px; 
+  	 max-width:1200px; 
+  	 margin-left: 370px;
    position: absolute;
    left: 50%;
-   top: 50%;
+   top: 60%;
    transform: translate(-50%, -50%);
    text-align: center;
+   
 }   
 
 .login h2{

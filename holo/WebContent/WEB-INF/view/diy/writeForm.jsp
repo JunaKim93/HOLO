@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +48,7 @@
 					<div class="info">
 						<dl>
 							<dt>작성자</dt>
-							<dd>sessionId</dd>
+							<dd>${sessionScope.sessionId}</dd>
 						</dl>
 						<dl>
 							<dt>카테고리</dt>
@@ -68,7 +69,7 @@
 				</div>
 				<div class="button_wrap">
 				<input type="hidden" name="category_a" value="myroom" />
-				<input type="hidden" name="id" value="sessionId" />
+				<input type="hidden" name="id" value="${sessionScope.sessionId}" />
 					<input type="submit" id="writebtn" class="writebtn" value="등록">
 					<a href="/holo/diy/list.holo?category_b=${category_b}">취소</a>
 				</div>

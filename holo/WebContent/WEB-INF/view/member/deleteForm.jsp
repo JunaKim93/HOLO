@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="/resource/etc/color.jsp"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 
 <html>
 <head><title>메인입니다.</title>

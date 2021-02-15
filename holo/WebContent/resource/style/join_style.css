@@ -21,8 +21,10 @@ a{
 }
 
 .join_wrap{
-   width: 1000px;
-   margin: 100px auto;
+   margin-top:250px;
+  	 min-width:1000px; 
+  	 max-width:1200px; 
+  	 margin-left: 370px;
 }
 
 .join_title{

@@ -140,7 +140,11 @@
          <div class="board_list">
          <div>
          	<c:if test="${count == 0}">
+         	<div>
+         		<div class="title">
          		등록된 댓글이 없습니다.
+         		</div>
+         	</div>
          	</c:if>
          </div>
          	

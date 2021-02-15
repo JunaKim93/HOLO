@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +38,15 @@
             <div class="date">작성일</div>
             <div class="count">조회수</div>
          </div>
-         <div align="center">
-         	<c:if test="${count == 0}">
-         	
+         
+         <c:if test="${count == 0}">
+         	<div align="center">
          		<div class="title">
          		등록된 글이 없습니다.
          		</div>
-         	</c:if>
-         </div>
+         	</div>
+         </c:if>
+         
          	<c:if test="${count >0}">
          		<c:forEach var="list" items="${reportlist}">
 		        <div>

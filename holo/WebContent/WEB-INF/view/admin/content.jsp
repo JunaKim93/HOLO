@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,7 @@
       
       <div class="button_wrap">
             <a href="/holo/admin/delete.holo?boardname=${boardname}&articlenum=${articlenum}" class="on">글 삭제</a>
-            <a href="/holo/admin/cancelRpt.holo?boardname=${boardname}&tablename=${tablename}&articelnum=${articlenum}" class="on">신고 반려</a>
+            <a href="/holo/admin/cancelRpt.holo?boardname=${boardname}&tablename=${tablename}&articlenum=${articlenum}" class="on">신고 반려</a>
             <a href="#" onclick="open_Conetnt()" class="on">원글보기</a>
             <a href="/holo/admin/contentReport.holo" class="on">목록으로</a>
             

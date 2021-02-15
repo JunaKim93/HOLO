@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +20,10 @@
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="./js/script.js"></script>
 <title>게시판 글목록</title>
+
 </head>
-<a href="/holo/best/infolist.holo">BEST</a>
-<a href="/holo/infoboard/list.holo?category_a=living">생활정보</a>
-<a href="/holo/infoboard/list.holo?category_a=cooking">요리정보</a>
-<a href="/holo/infoboard/list.holo?category_a=findplace">집구하기</a>
+
 <body>
    <div class="board_wrap">
       <div class="board_title">
@@ -169,11 +167,11 @@
          <div class="button_wrap">
             <a href="/holo/infoboard/writeForm.holo" class="on">글작성</a>
             <a href="/holo/member/main.holo" class="on">메인으로</a>
-            
+         <br><br><br><br><br>
             <!-- <a href="#">수정</a> -->         
          </div>
       </div>
 
-   </div>
+
 </body>
 </html>
