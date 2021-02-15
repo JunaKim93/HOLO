@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +55,13 @@
 	     </div>
 	     <div>
 	         <c:if test="${count == 0}">
-	         	<div class="writer"> 검색결과가 없습니다 </div>
+	         <div>
+	         	<div class="title"> 검색결과가 없습니다 </div>
+	         </div>
 	         </c:if>
 	         <c:if test="${count > 0}">
 	         	<c:forEach var="list" items="${searchList}">
+	         	<div>
 		            <div class="num">
 		            	<c:out value="${num}" />
 						<c:set var="num" value="${num-1}" />
@@ -80,6 +84,7 @@
 		            <div class="writer">${list.id}</div>
 		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
 		            <div class="count">${list.viewcount}</div>
+		        </div>
 	            </c:forEach>
 	         </c:if>
          </div>

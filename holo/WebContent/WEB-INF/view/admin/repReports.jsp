@@ -20,44 +20,41 @@
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="./js/script.js"></script>
 <title>게시판 글목록</title>
 </head>
 
 <body>
    <div class="board_wrap">
       <div class="board_title">
-         <strong><a href="/holo/best/diylist.holo">오늘의 인테리어 Best</a></strong>
-         <p>최근 24시간 이내의 인기글입니다.</p>
-     
+         <strong><a href="/holo/admin/repReports.holo">댓글 신고 목록</a></strong>
+         <p></p>
       </div>
       <div class="board_list_wrap">
          <div class="board_list">
          <div class="top">
-            <div class="num">번호</div>
-            <div class="title">글제목</div>
+            <div class="num">신고수</div>
+            <div class="title">댓글내용</div>
             <div class="writer">작성자</div>
             <div class="date">작성일</div>
             <div class="count">조회수</div>
          </div>
          
-         	<c:if test="${count == 0}">
-         	<div>
+         <c:if test="${count == 0}">
+         	<div align="center">
          		<div class="title">
-         		인기글이 없습니다.
+         		등록된 글이 없습니다.
          		</div>
-         	<div>
-         	</c:if>
-         	
+         	</div>
+         </c:if>
+         
          	<c:if test="${count >0}">
-         		<c:forEach var="list" items="${diyBestList}">
-         		<div>
+         		<c:forEach var="list" items="${reportlist}">
+		        <div>
 		            <div class="num">
-		            	<c:out value="${num}" />
-						<c:set var="num" value="${num-1}" />
+		            	${list.report}
 		            </div>
 		            <div class="title">
-						<a class="title" href="#">
+						<a class="title" href="/holo/admin/content.holo?report=${list.report}&articlenum=${list.articlenum}&category_a=${list.category_a}">
 						${list.subject} 
 						</a>
 		            </div>
@@ -76,28 +73,12 @@
          
          
          </div>    
+       
                  
          </div>
-         <div class="board_page">
-				<c:if test="${count>0}">
-					<a class="button first" href="/holo/best/diylist.holo?pageNum=1">맨앞</a>
-					<c:if test="${startPage>5}">
-						<a class="button prev" href="/holo/best/diylist.holo?pageNum=${startPage-1}">이전</a>
-					</c:if>
-					<c:if test="${startPage <= 5}">
-						<a class="button first" href="#">이전</a>
-					</c:if>
-					<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
-						<a class="num" href="/holo/best/diylist.holo?pageNum=${pagenum}">${pagenum}</a>
-					</c:forEach>
-					<c:if test="${endPage<pageCount}">
-						<a class="button next" href="/holo/best/diylist.holo?pageNum=${startPage+5}">다음</a>
-					</c:if>
-					<a class="button last" href="/holo/best/diylist.holo?pageNum=${pageCount}">맨뒤</a>
-				</c:if>
          
-         </div>
          <div class="button_wrap">
+        
             <a href="/holo/member/main.holo" class="on">메인으로</a>
             
             <!-- <a href="#">수정</a> -->         

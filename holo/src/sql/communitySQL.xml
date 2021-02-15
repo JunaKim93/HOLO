@@ -215,10 +215,10 @@
 		DELETE FROM COMMUNITYBOARD WHERE ARTICLENUM=#{articlenum}
 	</delete>
 	<delete id="unlike" parameterType="comLikeDTO">
-		DELETE FROM COMMUNITYBOARDLIKE WHERE ARTICLENUM=#{articlenum}
+		DELETE FROM COMMUNITYBOARDLIKE WHERE ARTICLENUM=#{articlenum} AND ID=#{id}
 	</delete>
 	<delete id="unlikeRpl" parameterType="comRplLikeDTO">
-		DELETE FROM COMMUNITYREPLYLIKE WHERE repnum=#{repnum}
+		DELETE FROM COMMUNITYREPLYLIKE WHERE repnum=#{repnum} AND ID=#{id}
 	</delete>
 	
 </mapper>

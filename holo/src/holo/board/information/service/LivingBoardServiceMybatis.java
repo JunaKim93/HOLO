@@ -224,6 +224,12 @@ public class LivingBoardServiceMybatis implements LivingBoardService{
 		
 		return dao.selectList("information.searchArticles", hashmap);
 	}
+
+	@Override
+	public int getRepCount(int articlenum) {
+		
+		return dao.selectOne("information.getRepCount", articlenum);
+	}
 	
 	
 	

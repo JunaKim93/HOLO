@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/resource/etc/color.jsp"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,7 +210,6 @@
 			</div>
 		</div> 
       	</div>
-		<br/><br/><br/>
 		<div id="reply_section"></div>
 		<br/><br/><br/><br/>
 	</body>

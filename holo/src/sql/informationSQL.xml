@@ -72,6 +72,9 @@
 	
 	
 	<!-- reply -->
+	<select id="getRepCount" resultType="int" parameterType="int">
+		select count(*) from inforep where articlenum=#{articlenum}
+	</select>
 	
 	<insert id="insertRep" parameterType="inforepDTO">
 		insert into inforep values(inforep_seq.nextval, #{articlenum}, #{id}, #{content}, sysdate, 0, 0)

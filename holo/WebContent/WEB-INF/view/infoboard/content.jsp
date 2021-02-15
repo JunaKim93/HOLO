@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +15,14 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <!-- link 선언 -->
 <link rel="stylesheet" href="../resource/style/board_view_style.css">
+<link href="/holo/resource/style/scrap.css" rel="stylesheet" type="text/css">
 
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="./js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<%@ include file="/resource/etc/scrapScript.jsp"%>
 <script>
 
    $(document).ready(function(){
@@ -39,40 +41,16 @@
    }
    
 
-   function getReplyList(){
+    function getReplyList(){
       
-      var paramData = {"articlenum" : "${dto.articlenum}"};
+      var paramData = {articlenum : ${dto.articlenum},
+    		  			pageNum : ${pageNum}};
       $.ajax({
          type:'POST',
          url: "/holo/infoboard/replyList.holo",
          data: paramData,
-         dataType: 'JSON',
          success: function(result){
-            var htmls = "";
-            if(result.length < 1){
-               htmls = "등록된 댓글이 없습니다";
-            }else{
-               $(result).each(function(){
-                  htmls += '<table width="500" border="1" style="border-collapse:collapse">';         
-                  htmls += '<tr id="repnum' + this.repnum + '">';
-                  htmls += '<td align="center" width="30">' + this.id + '</td>';
-                  htmls += '<td width="300"><pre>'+this.content+'</pre>';
-                  htmls += '<c:if test="${sessionScope.sessionId =='+ this.id+'}">';
-                  htmls += '<font size=1><a href="javascript:void(0)" onclick="fn_updateReplyForm(' + this.repnum + ', \'' + this.id + '\', \'' + this.content + '\' )">수정</a>';
-                  htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.repnum + ')" >삭제</a></font></td>';
-                  htmls += '</c:if>';
-                  htmls += '<td align="center" width="60">';
-                  htmls += '<button id="replikesUpdate" onclick="replikesUpdate_click('+this.repnum+')" >';
-                  htmls += '👍 ';
-                  htmls += '<span id="replikesCount">'+this.likes+'</span></button> &nbsp;';
-                  htmls += '<button onclick="reportReply('+this.repnum+')" >📢</button></td>'
-                  htmls += '<td align="center" width="60"><font size="1">'+this.regdate+'</font></td>';
-                  htmls += '<td>${sessionScope.sessionId}</td>';
-                  htmls += '</tr>';
-                  htmls += '</table>';
-               });
-            }
-            $("#replyList").html(htmls);
+            $("#replyList").html(result);
          },
          error:function(request, error){
             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
@@ -81,66 +59,6 @@
    }
    
 
-   function fn_updateReplyForm(repnum, id, content){
-      var htmls = "";
-      htmls += '<table width="500" border="1" style="border-collapse:collapse">';         
-      htmls += '<tr id="repnum' + repnum + '">';
-      htmls += '<td align="center" width="50">' + id + '</td>';
-        htmls += '<td><textarea name="updateContent" id="updateContent" rows="2" cols="45" style="resize:none;">';
-        htmls += content +'</textarea>';
-        htmls += '<td align="center"><a href="javascript:void(0)" onClick="fn_updateReply(' + repnum + ', \'' + id + '\')">저장</a></td>';
-        htmls += '<td align="center"><a href="javascript:void(0)" onClick="getReplyList()">취소</a></td>';
-        htmls += '</tr>';
-        htmls += '</table>'; 
-        
-        $('#repnum'+repnum).replaceWith(htmls);
-        $('#repnum'+repnum+'#updateContent').focus();
-   }
-   
-    function fn_updateReply(repnum, id){
-
-      var replyEditContent = $("#updateContent").val();
-      var paramData = JSON.stringify({"content": replyEditContent
-            , "repnum": repnum});
-      $.ajax({
-         url: "/holo/infoboard/updateReply.holo"
-         , data : paramData
-         , contentType: 'application/json'
-         , type : 'POST'
-         , dataType : 'JSON'
-         , success: function(result){
-                console.log(result);
-            getReplyList();
-         }
-         , error: function(error){
-            console.log("에러 : " + error);
-         }
-      });
-   }   
-   
-    function fn_deleteReply(repnum){
-       var paramData = JSON.stringify({"repnum" : repnum});
-       var check = confirm("댓글을 삭제하시겠습니까?");
-       if(check){
-          $.ajax({
-             url: "/holo/infoboard/deleteReply.holo",
-             data: paramData,
-             contentType: 'application/json',
-             type: 'POST',
-             dataType: 'JSON',
-             success: function(result){
-                console.log(result);
-                getReplyList();
-             },
-             error: function(error){
-                console.log("에러:"+error);
-             }
-          });
-       }else{
-          
-       }
-       
-    }
     
     $(function(){
        $("#likesUpdate").click(function(){
@@ -212,61 +130,7 @@
          window.open("/holo/infoboard/reportArticle.holo?articlenum="+articlenum+"&subject="+subject, "a", "width=700, height=700, left=100, top=50");
       }
    }
-    
-    function reportReply(repnum){
-       if(!${sessionCheck}){
-         alert("로그인 후 이용 가능합니다.");
-      }else{
-          $.ajax({
-             url:"/holo/infoboard/reportRepCheck.holo",
-             contentType: "application/json; charset=UTF-8",
-             data: JSON.stringify({
-                'repnum' : repnum,
-                'sessionId' : '${sessionScope.sessionId}'
-             }),
-             type:"POST",
-             dataType:"text",
-             success: function(result){
-                if(result==1){
-                   alert("이미 신고하셨습니다.");
-                }else{
-                   window.open("/holo/infoboard/reportReply.holo?repnum="+repnum, "a", "width=500, height=300, left=100, top=50");
-                }
-             }
-          })
-      }
-    }
-    
-  
-   function replikesUpdate_click(repnum){
-      if(!${sessionCheck}){
-         alert("로그인 후 이용 가능합니다.");
-      }else{
-          $.ajax({
-             url:"/holo/infoboard/updateRepLikes.holo",
-             contentType: "application/json; charset=UTF-8",
-             data: JSON.stringify({
-                'repnum' : repnum,
-                'sessionId' : '${sessionScope.sessionId}'
-             }),
-             type: "POST",
-             dataType:"text",
-             success: function(result){
-                if(result == 1){
-                   alert("이미 추천하셨습니다.");
-                }else{
-                   alert("추천되었습니다.");
-                   location.reload();
-                }
-             }
-          });
-      }
-    }
-  
-
-    
-    
-    
+        
 </script>
 
 
@@ -321,6 +185,7 @@
             <span id="likesCount"></span>
             </button> &nbsp;
          <input type="button" value="신고📢" onclick="reportArticle('${dto.articlenum}', '${dto.subject}')" />
+         <a href="javasript:;" class="btn-scrap">⭐</a>
          </div>
       </div>
       <div class="button_wrap">
@@ -339,30 +204,5 @@
 
    <div id="replyList"></div>
    
-   
-   
-	<!-- 댓글 작성 -->
-
-	<form method="POST" action="/holo/infoboard/insertRep.holo">
-		<tr>
-			<td colspan="3"><textarea name="content" rows="3" cols="60" placeholder="댓글을 입력하세요" style="resize:none;"></textarea></td>
-			<td><input type="submit" value="댓글쓰기" /></td>
-			<input type="hidden" name="articlenum" value="${dto.articlenum}"/>
-			<input type="hidden" name="pageNum" value="${pageNum}"/>
-			<input type="hidden" name="id" value="${dto.id}"/>
-		</tr>
-	</form>
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

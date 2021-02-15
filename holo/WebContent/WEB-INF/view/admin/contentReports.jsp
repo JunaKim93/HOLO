@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 <body>
    <div class="board_wrap">
       <div class="board_title">
-         <strong><a href="/holo/notice/list.holo">게시물 신고 목록</a></strong>
+         <strong><a href="/holo/admin/contentReports.holo">게시물 신고 목록</a></strong>
          <p></p>
       </div>
       <div class="board_list_wrap">
@@ -38,46 +39,48 @@
             <div class="date">작성일</div>
             <div class="count">조회수</div>
          </div>
-         <div>
-         	<c:if test="${count == 0}">
+         
+         <c:if test="${count == 0}">
+         	<div>
+         		<div class="title">
          		등록된 글이 없습니다.
-         	</c:if>
-         	
-         	<c:if test="${count >0}">
-         		<c:forEach var="list" items="${reportlist}">
-		            <div class="num">
-		            	${list.report}
-		            </div>
-		            <div class="title">
-						<a class="title" href="/holo/admin/content.holo?report=${list.report}&articlenum=${list.articlenum}&category_a=${list.category_a}">
-						${list.subject} 
-						
-						</a>
-		            </div>
-		            
-		            <div class="writer">${list.id}</div>
-		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
-		            <div class="count">${list.viewcount}</div>
-	            </c:forEach>
-            </c:if>
-         </div>
-
-         <div>
+         		</div>
+         	</div>
+         </c:if>
+         
+        <c:if test="${count >0}">
+         	<c:forEach var="list" items="${reportlist}">
+		       <div>
+		           <div class="num">
+		           	${list.report}
+		           </div>
+		           <div class="title">
+					<a class="title" href="/holo/admin/content.holo?report=${list.report}&articlenum=${list.articlenum}&category_a=${list.category_a}">
+					${list.subject} 
+					</a>
+		           </div>
+		           
+		           <div class="writer">${list.id}</div>
+		           <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
+		           <div class="count">${list.viewcount}</div>
+		       </div>
+	       </c:forEach>
+        </c:if>
+        </div>
+        <div>
          
         
          
          
-         </div>    
+        </div>    
        
                  
-         </div>
+        </div>
          
-         <div class="button_wrap">
-        
+        <div class="button_wrap">
             <a href="/holo/member/main.holo" class="on">메인으로</a>
-            
             <!-- <a href="#">수정</a> -->         
-         </div>
+        </div>
       </div>
 
    </div>
