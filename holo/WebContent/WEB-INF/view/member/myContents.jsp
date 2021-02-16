@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/view/index.jsp"%>
 
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../resource/style/main.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 
@@ -67,10 +73,14 @@
 
 
 <p>작성글</p>
-
-<div id="my_infoboard"></div>
-<div id="my_diyboard"></div>
-<div id="my_marketboard"></div>
-<div id="my_community"></div>
-
-    
+<body>
+<div id="idx_board_wrap">
+	<div>
+		<div id="my_infoboard"></div>
+		<div id="my_diyboard"></div>
+		<div id="my_marketboard"></div>
+		<div id="my_community"></div>
+	</div>
+</div>
+</body>    
+<%@ include file="/WEB-INF/view/foot.jsp" %>

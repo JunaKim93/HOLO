@@ -153,9 +153,15 @@ public class InfoBoardController {
 	
 	
 	@RequestMapping("/updateForm.holo")
-	public String logon_updateForm(int articlenum, Model model){
+	public String logon_updateForm(int articlenum, Model model, HttpSession session){
 		try{
 			InfoBoardDTO dto = liveBrdDAO.updateGetArticle(articlenum);
+			String sessionId = (String)session.getAttribute("sessionId");
+			int sessionCheck = 0;
+			if(sessionId == dto.getId()) {
+				sessionCheck = 1;
+			}
+			model.addAttribute("sessionCheck", sessionCheck);
 			model.addAttribute("dto", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -177,9 +183,16 @@ public class InfoBoardController {
 	
 	
 	@RequestMapping("/deleteArticle.holo")
-	public String logon_deleteArticle(int articlenum, Model model, String category_a) {
+	public String logon_deleteArticle(int articlenum, Model model, String category_a, HttpSession session) {
 		try {
-			liveBrdDAO.deleteArticle(articlenum);
+			InfoBoardDTO dto = liveBrdDAO.updateGetArticle(articlenum);
+			String sessionId = (String)session.getAttribute("sessionId");
+			int sessionCheck = 0;
+			if(sessionId == dto.getId()) {
+				sessionCheck = 1;
+				liveBrdDAO.deleteArticle(articlenum);
+			}
+			model.addAttribute("sessionCheck", sessionCheck);
 			model.addAttribute("category_a", category_a);
 		}catch(Exception e) {
 			e.printStackTrace();
