@@ -5,18 +5,19 @@
 
 <html>
 <head>
-
+<meta charset="UTF-8">
+<!-- meta 선언 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
 <link rel="stylesheet" href="../resource/style/board_list_style.css">
 
+<!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-<script src="./js/script.js"></script>
 
 <title>우리집 인테리어</title>
 </head>
@@ -45,8 +46,6 @@
 			</div>
 		</div>
 
-
-
 		<div class="board_list_wrap">
 			<div class="board_list">
 				<div class="top">
@@ -59,9 +58,11 @@
 				<div>
 					<c:if test="${count == 0}">
          		등록된 글이 없습니다.
-         	</c:if>
+         		</c:if>
+         		</div>
 					<c:if test="${count >0}">
 						<c:forEach var="list" items="${articleList}">
+						<div>
 							<div class="num">
 								<c:out value="${num}" />
 								<c:set var="num" value="${num-1}" />
@@ -79,11 +80,10 @@
 									pattern="yyyy-MM-dd hh:mm" />
 							</div>
 							<div class="count">${list.viewcount}</div>
+							</div>
 						</c:forEach>
 					</c:if>
 				</div>
-			</div>
-		</div>
 
 		<br />
 
@@ -102,6 +102,7 @@
 						onclick="document.location.href='/holo/diy/list.holo?category_b=${category_b}'" />
 				</c:if>
 			</form>
+		</div>
 		</div>
 
 		<div class="board_page">
@@ -151,9 +152,7 @@
 		<div class="button_wrap">
 			<a href="/holo/diy/writeForm.holo?category_b=${category_b}" class="on">글작성</a> <a
 				href="/holo/member/main.holo" class="on">메인으로</a>
-
 		</div>
-
 	</div>
 	<br />
 

@@ -6,17 +6,18 @@
 
 <head>
 <meta charset="UTF-8">
+<!-- meta 선언 -->
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
 <link rel="stylesheet" href="../resource/style/board_list_style.css">
 
+<!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-<script src="./js/script.js"></script>
-
 <title>중고 장터</title>
 </head>
 
@@ -43,7 +44,6 @@
 					<p>공동구매로 알뜰하게 구매해보세요!</p>
 				</c:when>
 			</c:choose>
-		</div>
 		<div class="board_page">
 			<a class="num" href="/holo/market/list.holo?category_b=sell">팝니다</a>
 			<a class="num" href="/holo/market/list.holo?category_b=buy">삽니다</a> <a
@@ -51,6 +51,7 @@
 				href="/holo/market/list.holo?category_a=free&category_b=b">무료나눔</a>
 			<a class="num"
 				href="/holo/market/list.holo?category_a=group&category_b=b">공동구매</a>
+		</div>
 		</div>
 		<br />
 
@@ -64,12 +65,14 @@
 					<div class="date">작성일</div>
 					<div class="count">조회수</div>
 				</div>
-				<div>
-					<c:if test="${count == 0}">
+        <div>
+         	<c:if test="${count == 0}">
          		등록된 글이 없습니다.
          	</c:if>
+         </div>
 					<c:if test="${count >0}">
 						<c:forEach var="list" items="${articleList}">
+						<div>
 							<div class="num">
 								<c:out value="${num}" />
 								<c:set var="num" value="${num-1}" />
@@ -88,12 +91,11 @@
 									pattern="yyyy-MM-dd hh:mm" />
 							</div>
 							<div class="count">${list.viewCount}</div>
+							</div>
 						</c:forEach>
 					</c:if>
 				</div>
-			</div>
-		</div>
-
+</div>
 		<div class="board_page">
 			<a class="button first" href="/holo/market/list.holo?pageNum=1">처음</a>
 			<c:if test="${startPage>5}">
