@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="/WEB-INF/view/index.jsp"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -212,7 +213,7 @@
 		<form method="post">
 			<table border="1">
 				<tr>
-					<td style="width: 220px"><b>상품 설명</b> <br /> <br /> <img
+					<td style="width: 220px"><br /> <br /> <img
 						src="${article.thumbnail}" style="width: 100%"></td>
 					<td>
 						<table>
@@ -268,14 +269,12 @@
 								</c:if>
 								<td><a>${article.id}</a></td>
 							</tr>
-							<tr>
-								<td><input type="button" value="본인인증"
-									onclick="location.href='/holo/market/auth.holo'" /></td>
-							</tr>
+								<c:if test="${sessionCheck}">
 							<tr>
 								<td><input type="button" value="새 글로 등록"
 									onclick="newArticle()" /></td>
 							</tr>
+							</c:if>
 						</table>
 					</td>
 				</tr>

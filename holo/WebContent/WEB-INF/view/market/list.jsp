@@ -95,27 +95,69 @@
 						</c:forEach>
 					</c:if>
 				</div>
+			<br />
+		<div align="center">
+			<form action="/holo/market/list.holo">
+				<input type="hidden" name="pageNum" value="1" /> 
+				<input type="hidden" name="category_a" value="${category_a}" /> 
+				<input type="hidden" name="category_b" value="${category_b}" /> 
+				<select name="choice">
+					<option value="id">작성자</option>
+					<option value="subject">제목</option>
+					<option value="content">내용</option>
+				</select> <input type="text" name="search"> 
+				<input type="submit" value="검색"> &nbsp;
+				<c:if test="${not empty search}">
+					<input type="button" value="검색 초기화"
+						onclick="document.location.href='/holo/market/list.holo?category_a=${category_a}&category_b=${category_b}'" />
+				</c:if>
+			</form>
+		</div>		
 </div>
 		<div class="board_page">
-			<a class="button first" href="/holo/market/list.holo?pageNum=1">처음</a>
-			<c:if test="${startPage>5}">
-				<a class="button prev"
-					href="/holo/market/list.holo?pageNum=${startPage-1}&category_a=${category_a}&category_b=${category_b}">이전</a>
+	
+			<c:if test="${empty choice and empty search}">
+				<a class="button first" href="/holo/market/list.holo?pageNum=1&category_a=${category_a}&category_b=${category_b}">처음</a>
+				<c:if test="${startPage>5}">
+					<a class="button prev"
+						href="/holo/market/list.holo?pageNum=${startPage-1}&category_a=${category_a}&category_b=${category_b}">이전</a>
+				</c:if>
+
+				<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+					<a class="num"
+						href="/holo/market/list.holo?pageNum=${pagenum}&category_a=${category_a}&category_b=${category_b}">${pagenum}</a>
+				</c:forEach>
+
+				<c:if test="${endPage < pageCount}">
+					<a class="button next"
+						href="/holo/market/list.holo?pageNum=${startPage+5}&category_a=${category_a}&category_b=${category_b}">다음</a>
+				</c:if>
+				<a class="button last"
+					href="/holo/market/list.holo?pageNum=${pageCount}&category_a=${category_a}&category_b=${category_b}">맨끝</a>
 			</c:if>
 
-			<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
-				<a class="num"
-					href="/holo/market/list.holo?pageNum=${pagenum}&category_a=${category_a}&category_b=${category_b}">${pagenum}</a>
-			</c:forEach>
+			<c:if test="${not empty choice and not empty search}">
+				<a class="button first"
+					href="/holo/market/list.holo?pageNum=1&category_a=${category_a}&category_b=${category_b}&choice=${choice}&search=${search}">처음</a>
+				<c:if test="${startPage>5}">
+					<a class="button prev"
+						href="/holo/market/list.holo?pageNum=${startPage-1}&category_a=${category_a}&category_b=${category_b}&choice=${choice}&search=${search}">이전</a>
+				</c:if>
 
-			<c:if test="${endPage < pageCount}">
-				<a class="button next"
-					href="/holo/market/list.holo?pageNum=${startPage+5}&category_a=${category_a}&category_b=${category_b}">다음</a>
+				<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
+					<a class="num"
+						href="/holo/market/list.holo?pageNum=${pagenum}&category_a=${category_a}&category_b=${category_b}&choice=${choice}&search=${search}">${pagenum}</a>
+				</c:forEach>
+
+				<c:if test="${endPage < pageCount}">
+					<a class="button next"
+						href="/holo/market/list.holo?pageNum=${startPage+5}&category_a=${category_a}&category_b=${category_b}&choice=${choice}&search=${search}">다음</a>
+				</c:if>
+				<a class="button last"
+					href="/holo/market/list.holo?pageNum=${pageCount}&category_a=${category_a}&category_b=${category_b}&choice=${choice}&search=${search}">맨끝</a>
 			</c:if>
-			<a class="button last"
-				href="/holo/diy/market.holo?pageNum=${pageCount}&category_a=${category_a}&category_b=${category_b}">맨끝</a>
 		</div>
-
+		
 		<div class="button_wrap">
 			<a
 				href="/holo/market/writeForm.holo?category_a=${category_a}&category_b=${category_b}"
