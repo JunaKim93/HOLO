@@ -120,3 +120,4 @@ window.onload = function(){
     
  
 </script>      
+<%@ include file="/WEB-INF/view/foot.jsp" %>

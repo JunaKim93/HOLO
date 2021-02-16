@@ -99,7 +99,7 @@ public class InfoBoardController {
 	}
 
 	@RequestMapping("/content.holo")
-	public String article(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model, HttpSession session, 
+	public String article(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model, HttpSession session, String category_a,
 						@RequestParam(required=false) String category_b) {
 		try{
 			InfoBoardDTO dto = liveBrdDAO.getArticle(articlenum);
@@ -112,6 +112,7 @@ public class InfoBoardController {
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("sessionCheck", sessionCheck);
 				model.addAttribute("category_b", category_b);
+				model.addAttribute("category_a", category_a);
 				
 			}catch(Exception e) {
 			e.printStackTrace();

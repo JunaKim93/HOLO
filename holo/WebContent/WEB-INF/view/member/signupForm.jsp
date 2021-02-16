@@ -240,3 +240,4 @@
 
 
 </div>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

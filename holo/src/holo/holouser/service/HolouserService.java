@@ -27,4 +27,12 @@ public interface HolouserService {
 	 public List getArticles_I(int start, int end, String id) throws Exception;	 
 	 public int getArticleCount_M(String id) throws Exception;
 	 public List getArticles_M(int start, int end, String id) throws Exception;
+	public int getnCount() throws Exception;
+	public int getcCount() throws Exception;
+	public int getdCount() throws Exception;
+	public int getiCount() throws Exception;
+	public List getCList() throws Exception;
+	public List getDList() throws Exception;
+	public List getIList() throws Exception;
+	public List getNotices() throws Exception;
 }

@@ -152,6 +152,6 @@ window.onload = function(){
 			$("[name=category_b]").hide();
 		}
 	};
-	func
  
 </script>      
+<%@ include file="/WEB-INF/view/foot.jsp" %>

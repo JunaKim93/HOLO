@@ -21,10 +21,8 @@ a{
 }
 
 .board_wrap{
-   margin-top:250px;
-  	 min-width:1000px; 
-  	 max-width:1200px; 
-  	 margin-left: 370px;
+  	margin: 250px, auto;
+  	width:1100px; 
 }
 
 .board_title{

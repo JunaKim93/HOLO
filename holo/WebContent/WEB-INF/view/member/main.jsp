@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ include file="/WEB-INF/view/index.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,65 +22,66 @@
       <div id="idx_board_wrap">
          <div>
             <div class="idx_board">
-               <div class="title">
-               <a href="/holo/notice/list.holo" class="name">공지사항</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+                <div class="title">
+                <a href="/holo/notice/list.holo" class="name">공지사항</a>
+                <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+                </div>
+	            <div class="list">
+	               <ul>
+	               <c:forEach var="nList" items="${noticeList}" end="4">
+	                  <li>
+	                     <a href="/holo/notice/content.holo?num=${nList.articlenum}&pageNum=1">
+	                     <c:choose>
+	                     	<c:when test="${fn:length(nList.subject) gt 15}">
+	                     	<c:out value="${fn:substring(nList.subject, 0, 14) }">...
+	                     	</c:out></c:when>
+	                     	<c:otherwise>
+                     		<c:out value="${nList.subject}">
+	                     	</c:out></c:otherwise>
+	                     </c:choose>
+	                     </a>
+	                     <span><fmt:formatDate value="${nList.regdate}" pattern="yyyy-MM-dd"/></span>
+	                  </li>
+	               </c:forEach>
+	               </ul>
+	            </div>         
             </div>
-            <div class="list">   
-               <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-               </ul>
-               </div>         
-            </div>
+            
+            
             <div class="idx_board">
                <div class="title">
-               <a href="#" class="name">자유게시판</a>
+               <a href="/holo/com/list.holo" class="name">자유게시판</a>
                <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
             </div>
             <div class="list">   
                <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
+               <c:if test="${ccount == 0}">
+               	<li>
+               		<span>Best 글이 없습니다.</span>
+               	</li>
+               </c:if>
+               <c:if test="${ccount > 0}">
+               	  <c:forEach var="cList" items="${comList}" end = "4">
+	                  <li>
+	                     <a href="#">
+  						 <c:choose>
+	                     	<c:when test="${fn:length(cList.subject) gt 15}">
+	                     	<c:out value="${fn:substring(cList.subject, 0, 14) }">...
+	                     	</c:out></c:when>
+	                     	<c:otherwise>
+                     		<c:out value="${nList.subject}">
+	                     	</c:out></c:otherwise>
+                    	 </c:choose>
+						</a>
+	                     <span><fmt:formatDate value="${cList.regdate}" pattern="yyyy-MM-dd"/></span>
+	                  </li>
+                  </c:forEach>
+               </c:if>
                </ul>
                </div>         
             </div>
+            
+            
             <div class="idx_board">
                <div class="title">
                <a href="/holo/diy/list.holo" class="name">인테리어</a>
@@ -86,29 +89,33 @@
             </div>
             <div class="list">   
                <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
+               <c:if test="${dcount == 0}">
+               	<li>
+               		<span>Best 글이 없습니다.</span>
+               	</li>
+               </c:if>
+               <c:if test="${dcount > 0}">
+               	  <c:forEach var="dList" items="${diyList}" end = "4">
+	                  <li>
+	                     <a href="#">
+                     	 <c:choose>
+	                     	<c:when test="${fn:length(dList.subject) gt 15}">
+	                     	<c:out value="${fn:substring(dList.subject, 0, 14) }">...
+	                     	</c:out></c:when>
+	                     	<c:otherwise>
+                     		<c:out value="${dList.subject}">
+	                     	</c:out></c:otherwise>
+                    	 </c:choose>
+	                     </a>
+	                     <span><fmt:formatDate value="${dList.regdate}" pattern="yyyy-MM-dd"/></span>
+	                  </li>
+                  </c:forEach>
+               </c:if>
                </ul>
                </div>         
             </div>
+            
+            
             <div class="idx_board">
                <div class="title">
                <a href="#" class="name">생활정보</a>
@@ -116,50 +123,38 @@
             </div>
             <div class="list">   
                <ul>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
-                  <li>
-                     <a href="#">글 제목이 들어갑니다.</a>
-                     <span>2021-2-9</span>
-                  </li>
+               <c:if test="${icount == 0}">
+               	<li>
+               		<span>Best 글이 없습니다.</span>
+               	</li>
+               </c:if>
+               <c:if test="${icount > 0}">
+               	  <c:forEach var="iList" items="${infoList}" end = "4">
+	                  <li>
+	                     <a href="#">
+	                     <c:choose>
+	                     	<c:when test="${fn:length(iList.subject) gt 15}">
+	                     	<c:out value="${fn:substring(iList.subject, 0, 14) }">...
+	                     	</c:out></c:when>
+	                     	<c:otherwise>
+                     		<c:out value="${iList.subject}">
+	                     	</c:out></c:otherwise>
+	                     </c:choose>
+	                     </a>
+	                     <span><fmt:formatDate value="${iList.regdate}" pattern="yyyy-MM-dd"/></span>
+	                  </li>
+                  </c:forEach>
+               </c:if>
                </ul>
                </div>         
             </div>
          </div>
       </div>
-      <div class="foot">
-         <ul>
-            <li><a href="#">사이트 도움말</a></li>
-            <li><a href="#">사이트 이용약관</a></li>
-            <li><a href="#">사이트 운영원칙</a></li>
-            <li><a href="#">개인정보 취급방침</a></li>
-            <li><a href="#">책임의 한계와 법적고지</a></li>
-            <li><a href="#">게시중단요청서비스</a></li>
-            <li><a href="#">고객센터</a></li>
-         </ul>
-       <address>
-          Copyright @
-          <a href="#"><strong>HOLO</strong></a>
-          All Rights Reserved.
-          </address>     
-      </div>
+      
    </body>   
    
 </html>      
+<%@ include file="/WEB-INF/view/foot.jsp" %>
 
 
 <!-- <input type="search" name="search" class="search_input" data-role="total-input-keyword" title="통합검색" placeholder="검색어를 입력하세요." /></input>

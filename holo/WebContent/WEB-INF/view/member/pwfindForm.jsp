@@ -26,6 +26,6 @@
 	</tr>
 	</table>
 </form>
-
+<%@ include file="/WEB-INF/view/foot.jsp" %>
 
 

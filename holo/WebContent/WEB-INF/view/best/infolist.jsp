@@ -60,7 +60,7 @@
 						<c:set var="num" value="${num-1}" />
 		            </div>
 		            <div class="title">
-						<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
+						<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${list.category_a}">
 						${list.subject} 
 						<c:if test="${list.repcount != 0}">
 							[${list.repcount}]
@@ -113,3 +113,4 @@
    </div>
 </body>
 </html>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

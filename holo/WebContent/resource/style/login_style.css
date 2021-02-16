@@ -24,13 +24,11 @@ caption{
    
    
 .login{
-   margin-top:250px;
-  	 min-width:1000px; 
-  	 max-width:1200px; 
-  	 margin-left: 370px;
+   margin: 250px auto;
+   width:500px; 
    position: absolute;
    left: 50%;
-   top: 60%;
+   top:60%
    transform: translate(-50%, -50%);
    text-align: center;
    
