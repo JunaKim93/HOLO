@@ -35,11 +35,16 @@
 			window.location.href = "newArticlePro.holo?articlenum=${article.articlenum}&category_a=${article.category_a}&category_b=${article.category_b}";
 		}
 	}
+	
 
 	function reportArticle(articlenum, subject) {
+		if(!${sessionCheck}){
+	           alert("로그인 후 이용 가능합니다.");
+	        }else{
 		window.open("/holo/market/reportArticle.holo?articlenum=" + articlenum
 				+ "&subject=" + subject, "a",
 				"width=700, height=700, left=100, top=50");
+	        }
 	}
 
 	$(function() {
@@ -161,9 +166,13 @@
 	$('textarea').val('');
 
 	function reportReply(repNum, content) {
+		  if(!${sessionCheck}){
+	           alert("로그인 후 이용 가능합니다.");
+	        }else{
 		window.open("/holo/market/reportReply.holo?repNum=" + repNum
 				+ "&content=" + content, "a",
 				"width=700, height=700, left=100, top=50");
+	        }
 
 	}
 	function replikesUpdate_click(repNum) {
@@ -260,6 +269,10 @@
 								<td><a>${article.id}</a></td>
 							</tr>
 							<tr>
+								<td><input type="button" value="본인인증"
+									onclick="location.href='/holo/market/auth.holo'" /></td>
+							</tr>
+							<tr>
 								<td><input type="button" value="새 글로 등록"
 									onclick="newArticle()" /></td>
 							</tr>
@@ -289,6 +302,7 @@
 		</form>
 	</div>
 	<br />
+	<c:if test="${sessionScope.sessionId ne null}">
 	<div align="center">
 		<br />
 		<textarea id="sessionId" style="display: none;">sessionId</textarea>
@@ -297,6 +311,14 @@
 		<br />
 		<button type="button" id="insertRplBtn">댓글 작성</button>
 	</div>
+	</c:if>
+	<c:if test="${sessionScope.sessionId eq null}">
+		<div align="center">
+			<br />
+			<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+			<align="center">로그인 후 댓글 작성이 가능합니다.</align>
+		</div>
+	</c:if>
 	<br />
 	<br />
 	<div align="center" id="replyList"></div>
