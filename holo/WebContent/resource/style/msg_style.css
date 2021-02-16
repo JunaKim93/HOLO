@@ -1,0 +1,54 @@
+body{font-family: 'NanumSquare', sans-serif !important; font-size:14px; color:#4e4e4e;
+   line-height: 1.4;}
+
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+.sidenav a.send{
+  background-color: #1e57a4;
+  color: white;
+}
+.sidenav a.current{
+background-color: #ccc;
+}
+
+.sidenav a:hover {
+  background-color: #d9e4f2; /* Dark grey background on mouse-over */
+}
+.msg_list {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+}
+.msg_list > div{
+   border-bottom: 1px solid #ddd;
+}
+.msg_list > div.top{
+   border-bottom: 1px solid #999;
+}
+
+.msg_list > div:last-child{
+   border-bottom: 1px solid #000;
+}  
+.msg_list>div>div{
+	display: inline-block;
+	padding: 15px 0;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
