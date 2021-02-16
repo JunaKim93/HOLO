@@ -1,58 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/view/index.jsp"%>
+<%@ include file="/WEB-INF/view/index.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="../resource/style/guide_style.css">
 
-
+<!-- script 선언 -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
 <style>
-	.map_wrap {position:relative;width:100%;height:350px;}
+	.map_wrap {position:relative;width:100%;height:350px;padding:0 auto;}
     .title {font-weight:bold;display:block;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
 </style>
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 
 
-	<select name="location" id="location" onchange="setLocation()">
-    	<option value="1">서울</option>
-    	<option value="2">강원</option>
-    	<option value="3">인천/경기</option>
-    	<option value="4">대구/경북</option>
-    	<option value="5">대전/충청</option>
-    	<option value="6">광주/전라</option>
-    	<option value="7">부산/경남</option>
-	</select>
-	<span><a href="/holo/guide/location_map.holo?location=0">초기화면으로</a></span>
-	<a href="/holo/member/main.holo">메인화면으로</a>
-	<a href="/holo/guide/map_places.holo">주변 장소 검색하기</a>
-   
-    <div class="map_wrap">
-	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
-	    <div class="hAddr">
-	        <span class="title">지도중심기준 주소정보</span>
-	        <span id="centerAddr"></span>
-	    </div>
-	</div>
-    <br><br><br>
-   
-    
-	[위치 검색] <br>
-	<input type="text" id="keyword" />
-	<button type="button" onClick="set_keyword()" >검색</button>
-	<c:if test="${sessionScope.sessionId != null }">
-		<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
-			<input type="hidden" name="lat" value="" />
-			<input type="hidden" name="lng" value="" />
-			<input type="hidden" name="id" value="${sessionScope.sessionId}" />
-			<input type="hidden" name="address" value="" />
-			<input type="submit" value="선택위치로 거주지 설정"/>
-		</form>
-	</c:if>
-	    
-    
-    
+</head>
+<body>
+   <div class="guide">
+      <h2>거주지 설정하기</h2>
+      <ul>
+         <li>
+         	<select name="location" id="location" onchange="setLocation()">
+		    	<option value="1">서울</option>
+		    	<option value="2">강원</option>
+		    	<option value="3">인천/경기</option>
+		    	<option value="4">대구/경북</option>
+		    	<option value="5">대전/충청</option>
+		    	<option value="6">광주/전라</option>
+		    	<option value="7">부산/경남</option>
+			</select>
+			<div class="map_wrap">
+			    <div id="map" style="width:900px;height:600px; position:relative;"></div>
+			    <div class="hAddr">
+			        <span class="title">지도중심기준 주소정보</span>
+			        <span id="centerAddr"></span>
+			    </div>
+			    <br>
+			    <div align="center" style="margin-top:10px;">
+				[위치 검색] <br>
+				<input type="text" id="keyword" />
+				<button type="button" onClick="set_keyword()" >검색</button>
+				<c:if test="${sessionScope.sessionId != null }">
+					<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
+						<input type="hidden" name="lat" value="" />
+						<input type="hidden" name="lng" value="" />
+						<input type="hidden" name="id" value="${sessionScope.sessionId}" />
+						<input type="hidden" name="address" value="" />
+						<input type="submit" value="선택위치로 거주지 설정"/>
+					</form>
+				</c:if>
+				</div>
+			</div>
+			
+         </li>
+         </ul>
+      </div>
+</body>
+</html>
 <script>
 
 	//--------초기 위치 설정------
@@ -214,12 +231,3 @@
 	
 </script>
 <%@ include file="/WEB-INF/view/foot.jsp" %>
-
-
-
-
-
-		
-
-    
-    

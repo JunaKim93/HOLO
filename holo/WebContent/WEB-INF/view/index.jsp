@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HOLO</title>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resource/style/main.css">
@@ -58,7 +58,7 @@
          <li>
             <a href="/holo/guide/location_map.holo" >초보자가이드</a>
             <ul class="dep2">
-               <li><a href="#" >집 구하기 가이드</a></li>
+               <li><a href="/holo/guide/hologuide.holo" >집 구하기 가이드</a></li>
                <li><a href="#">시세</a></li>
                <li><a href="/holo/guide/map_places.holo" >상권</a></li>
                <li><a href="#">교통</a></li>

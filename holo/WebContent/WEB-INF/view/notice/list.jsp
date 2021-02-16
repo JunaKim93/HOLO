@@ -99,7 +99,7 @@
          </div>
          <div class="button_wrap">
          <c:if test="${sessionScope.sessionId == 'admin'}">
-            <a href="/holo/infoboard/writeForm.holo" class="on">글작성</a>
+            <a href="/holo/notice/writeForm.holo" class="on">글작성</a>
          </c:if>
             <a href="/holo/member/main.holo" class="on">메인으로</a>
             

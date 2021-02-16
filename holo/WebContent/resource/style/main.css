@@ -24,7 +24,7 @@ header{
    /*border-bottom: 1px solid #ddd;*/
    width: 100%;
    background-color:white;
-   margin-bottom: 250px;
+   margin-bottom: 500px;
    
 }
 
@@ -131,7 +131,7 @@ header .gnb li:first-child{
 /* inx_board*/
 
 #idx_board_wrap{
-   margin-top:250px;
+   margin-top:300px;
    padding: 0 auto;
    width:100%;
    

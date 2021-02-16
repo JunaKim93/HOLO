@@ -1,15 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/view/index.jsp"%>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
-    
-    <head>
-    <meta charset="utf-8">
-    <title>카테고리별 장소 검색하기</title>
-    <style>
+<%@ include file="/WEB-INF/view/index.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- meta 선언 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="../resource/style/guide_style.css">
+
+<!-- script 선언 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
+<style>
 		.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		.map_wrap {position:relative;width:100%;height:350px;}
 		#category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
@@ -36,48 +44,58 @@
 		.placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #1e57a4;background: #1e57a4 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 		.placeinfo .tel {color:#0f7833;}
 		.placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
-		</style>
-	</head>
-	<h1><a href="/holo/member/main.holo">메인화면으로</a></h1>
-	<c:if test="${markerCheck}">
-		<p>주변 장소를 확인하세요!</p>
+</style>
+
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+</head>
+<body>
+   <div class="guide">
+   	<c:if test="${markerCheck}">
+      <h2>주변 장소를 확인하세요!</h2>
     </c:if>
     <c:if test="${!markerCheck && sessionId != null}">
-    	<p>거주지를 설정해보세요</p>
-    	<a href="/holo/guide/location_map.holo">거주지 설정하기</a>
+    	<h2>거주지를 설정해보세요</h2>
+    	<h2><a href="/holo/guide/location_map.holo">거주지 설정하기</a></h2>
     </c:if>
     
-    
-	<div class="map_wrap">
-	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
-	    <ul id="category">
-	        <li id="BK9" data-order="0"> 
-	            <span class="category_bg bank"></span>
-	            은행
-	        </li>       
-	        <li id="MT1" data-order="1"> 
-	            <span class="category_bg mart"></span>
-	            마트
-	        </li>  
-	        <li id="PM9" data-order="2"> 
-	            <span class="category_bg pharmacy"></span>
-	            약국
-	        </li>  
-	        <li id="OL7" data-order="3"> 
-	            <span class="category_bg oil"></span>
-	            주유소
-	        </li>  
-	        <li id="CE7" data-order="4"> 
-	            <span class="category_bg cafe"></span>
-	            카페
-	        </li>  
-	        <li id="CS2" data-order="5"> 
-	            <span class="category_bg store"></span>
-	            편의점
-	        </li>      
-	    </ul>
-	</div>
-	
+      <ul>
+         <li>
+			<div class="map_wrap">
+			    <div id="map" style="width:900px;height:600px;position:relative;overflow:hidden;"></div>
+			    <ul id="category">
+			        <li id="BK9" data-order="0"> 
+			            <span class="category_bg bank"></span>
+			            은행
+			        </li>       
+			        <li id="MT1" data-order="1"> 
+			            <span class="category_bg mart"></span>
+			            마트
+			        </li>  
+			        <li id="PM9" data-order="2"> 
+			            <span class="category_bg pharmacy"></span>
+			            약국
+			        </li>  
+			        <li id="OL7" data-order="3"> 
+			            <span class="category_bg oil"></span>
+			            주유소
+			        </li>  
+			        <li id="CE7" data-order="4"> 
+			            <span class="category_bg cafe"></span>
+			            카페
+			        </li>  
+			        <li id="CS2" data-order="5"> 
+			            <span class="category_bg store"></span>
+			            편의점
+			        </li>      
+			    </ul>
+			</div>
+         </li>
+         </ul>
+      </div>
+</body>
+</html>
 	<script>
 		// 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 		var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
@@ -291,4 +309,4 @@
 		    } 
 		} 
 	</script>
-	<%@ include file="/WEB-INF/view/foot.jsp" %>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

@@ -26,7 +26,7 @@ caption{
 .guide{
    width: 100%;
    width: 1000px;
-   margin: 100px auto;
+   margin: 250px auto;
 }   
 
 .guide h2{
@@ -54,6 +54,17 @@ caption{
    height: 100%;
    box-sizing: border-box;
     margin-bottom: -5px;
+}
+
+.guide > ul li a{
+   display: inline-block;
+   min-width: 80;
+   margin-left: 10px;
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 2px;
+   font-size: 1.4rem;
+   color: #fff;
 }
 
 

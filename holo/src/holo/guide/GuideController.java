@@ -118,6 +118,32 @@ public class GuideController {
 		return "guide/map_places";
 	}
 	
+	@RequestMapping("/hologuide.holo")
+	public String hologuide() {
+		return "guide/hologuide";
+	}
+	
+	
+	@RequestMapping("/law.holo")
+	public String law() {
+		return "guide/law";
+	}
+	
+	@RequestMapping("/contract.holo")
+	public String contract() {
+		return "guide/contract";
+	}
+	
+	@RequestMapping("/checklist.holo")
+	public String checklist() {
+		return "guide/checklist";
+	}
+	
+	@RequestMapping("/terms.holo")
+	public String terms() {
+		return "guide/terms";
+	}
+	
 
 	
 	
