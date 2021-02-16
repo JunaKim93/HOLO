@@ -42,11 +42,13 @@ public class SearchBean {
 		int pages = 5;
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
+		String searchBoard = null;
 		
 		if(board == "" || board == null) {
 			count = SearchDAO.searchCount(choice, search);
 		}else {
 			String boardName = Search.modifyBoardName(board);
+			searchBoard = Search.modifySearchBoardName(board);
 			count = SearchDAO.boardSearchCount(boardName, choice, search);
 		}
 
@@ -70,7 +72,7 @@ public class SearchBean {
 			list = Collections.emptyList();
 		}
 		number = count - (currentPage - 1) * pageSize;
-		String searchBoard = Search.modifySearchBoardName(board);
+		
 
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("start", start);

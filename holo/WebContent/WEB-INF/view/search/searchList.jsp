@@ -33,7 +33,10 @@
 </form>
 </div>
 <div align="center">
- ${searchBoard}에서 "${search}" 로 검색한 결과입니다. (총 ${count}건)
+<c:if test="${not empty searchBoard}">
+ ${searchBoard} 에서
+</c:if> 
+"${search}" 로 검색한 결과입니다. (총 ${count}건)
 </div>
 <div align="center">
 	<table border="1">
