@@ -54,7 +54,7 @@ public class MarketServiceImpl implements MarketService {
 	      return dao.selectList("market.getArticles",hashmap);
 	   }
 
-
+	
 	
 	@Override
 	public int getArticleCount(String category_a, String category_b) throws Exception {
