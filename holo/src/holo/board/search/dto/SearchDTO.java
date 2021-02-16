@@ -121,6 +121,27 @@ public class SearchDTO {
 		case "qna":
 			category_bName = "질문 게시판";
 			break;
+		case "1":
+			category_bName = "서울";
+			break;
+		case "2":
+			category_bName = "강원";
+			break;
+		case "3":
+			category_bName = "인천/경기";
+			break;
+		case "4":
+			category_bName = "대구/경북";
+			break;
+		case "5":
+			category_bName = "대전/충청";
+			break;
+		case "6":
+			category_bName = "광주/전라";
+			break;
+		case "7":
+			category_bName = "부산/경남";
+			break;
 		}
 		return category_bName;
 	}
