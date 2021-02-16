@@ -47,3 +47,4 @@
 			</td>
 	</tr>
 	</table>
+	<%@ include file="/WEB-INF/view/foot.jsp" %>

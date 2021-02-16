@@ -154,4 +154,46 @@ public class HolouserServiceMybatis implements HolouserService {
 		return dao.selectList("holouser.getArticles_M", hashmap);
 	}
 
+	@Override
+	public int getnCount() throws Exception {
+		
+		return dao.selectOne("holonotice.getnoticeCount");
+	}
+
+	@Override
+	public int getcCount() throws Exception {
+		return dao.selectOne("best.getComBestCount");
+	}
+
+	@Override
+	public int getdCount() throws Exception {
+		return dao.selectOne("best.getDiyBestCount");
+	}
+
+	@Override
+	public int getiCount() throws Exception {
+		return dao.selectOne("best.getInfoBestCount");
+	}
+
+	@Override
+	public List getCList() throws Exception {
+		return dao.selectList("best.getComBestList", hashmap);
+	}
+
+	@Override
+	public List getDList() throws Exception {
+		return dao.selectList("best.getDiyBestList", hashmap);
+	}
+
+	@Override
+	public List getIList() throws Exception {
+		return dao.selectList("best.getInfoBestList", hashmap);
+	}
+
+	@Override
+	public List getNotices() throws Exception {
+		String category_a = "1";
+		return dao.selectList("holonotice.getnoticeList", category_a);
+	}
+
 }

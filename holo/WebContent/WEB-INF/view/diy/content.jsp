@@ -353,3 +353,4 @@
 
 </body>
 </html>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

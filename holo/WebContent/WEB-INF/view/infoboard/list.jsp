@@ -76,10 +76,10 @@
 		            </div>
 		            <div class="title">
 			            <c:if test="${category_b == null}">
-							<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
+							<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${category_a}">
 						</c:if>
 						<c:if test="${category_b != null}">
-							<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_b=${category_b}">
+							<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${category_a}&category_b=${category_b}">
 						</c:if>
 						<c:if test="${list.category_b == 'question'}">
 							<font color="#9932CC" size="2">[질문]</font>
@@ -175,3 +175,4 @@
 
 </body>
 </html>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

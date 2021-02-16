@@ -95,3 +95,4 @@
 	</c:if>
 </div>
 </body>
+<%@ include file="/WEB-INF/view/foot.jsp" %>

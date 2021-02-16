@@ -32,11 +32,6 @@ public class HolouserBean {
 	@Autowired
 	private HolouserService memberDAO = null;
 	
-	@RequestMapping("frameset.holo")
-	public String frameset() {
-		
-		return "frameset";
-	}
 	
 	@RequestMapping("index.holo")
 	public String index() {
@@ -44,7 +39,48 @@ public class HolouserBean {
 	}
 	
 	@RequestMapping("main.holo")
-	public String main() {
+	public String main(Model model) {
+		List noticeList = null;
+		List comList = null;
+		List diyList = null;
+		List infoList = null;
+		int ccount = 0;
+		int dcount = 0;
+		int icount = 0;
+		try {
+			ccount = memberDAO.getcCount();
+			dcount = memberDAO.getdCount();
+			icount = memberDAO.getiCount();
+			if(ccount > 0) {
+				comList = memberDAO.getCList();
+			}else {
+				comList = Collections.EMPTY_LIST;
+			}
+			
+			if(dcount > 0) {
+				diyList = memberDAO.getDList();
+			}else {
+				diyList = Collections.EMPTY_LIST;
+			}
+			
+			if(icount > 0) {
+				infoList = memberDAO.getIList();
+			}else {
+				infoList = Collections.EMPTY_LIST;
+			}
+			noticeList = memberDAO.getNotices();
+			
+			model.addAttribute("ccount" ,ccount );
+			model.addAttribute("dcount" , dcount);
+			model.addAttribute("icount" , icount);
+			model.addAttribute("comList" , comList);
+			model.addAttribute("diyList" , diyList);
+			model.addAttribute("infoList" , infoList);
+			model.addAttribute("noticeList" , noticeList);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "member/main";
 	}
 	
