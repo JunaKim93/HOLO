@@ -44,7 +44,7 @@ public class DiyRestBean {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
 		int articlenum = Integer.parseInt((String) jsonObj.get("articlenum"));
-		String id = (String) jsonObj.get("id");
+		String id = (String) jsonObj.get("sessionId");
 
 		int check = diyBoardDAO.checkALikes(articlenum, id);
 		if (check == 0) {
@@ -71,7 +71,7 @@ public class DiyRestBean {
 		try {
 			JSONParser parser = new JSONParser();
 			JSONObject jsonObj = (JSONObject) parser.parse(paramData);
-			String id = (String) jsonObj.get("id");
+			String id = (String) jsonObj.get("sessionId");
 			int articlenum = Integer.parseInt((String) jsonObj.get("articlenum"));
 			result = diyBoardDAO.checkALikes(articlenum, id);
 		} catch (Exception e) {
@@ -86,7 +86,7 @@ public class DiyRestBean {
 		int check = 0;
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) parser.parse(paramData);
-		String id = (String) jsonObj.get("id");
+		String id = (String) jsonObj.get("sessionId");
 		int repNum = Integer.parseInt(String.valueOf(jsonObj.get("repNum")));
 		check = diyBoardDAO.checkRLikes(repNum, id);
 		if (check == 0) {

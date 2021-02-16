@@ -43,13 +43,21 @@
 	}
 
 	function reportArticle(articlenum, subject) {
+	       if(!${sessionCheck}){
+	           alert("로그인 후 이용 가능합니다.");
+	        }else{
 		window.open("/holo/diy/reportArticle.holo?articlenum=" + articlenum
 				+ "&subject=" + subject, "a",
 				"width=700, height=700, left=100, top=50");
+	        }
 	}
 	function reportReply(repNum, content) {
+	       if(!${sessionCheck}){
+	           alert("로그인 후 이용 가능합니다.");
+	        }else{
 		window.open("/holo/diy/reportReply.holo?repNum=" + repNum + "&content="
 				+ content, "a", "width=700, height=700, left=100, top=50");
+	        }
 	}
 
 	$(function() {
@@ -174,13 +182,16 @@
 
 	$(function() {
 		$("#likesUpdate").click(function() {
+	          if(!${sessionCheck}){
+	              alert("로그인 후 이용 가능합니다.");
+	           }else{
 			$.ajax({
 				url : "/holo/diy/updateLikes.holo",
 				contentType : "application/json; charset=UTF-8",
 				type : "POST",
 				data : JSON.stringify({
 					'articlenum' : '${article.articlenum}',
-					'id' : 'sessionId'
+					'sessionId' : '${sessionScope.sessionId}'
 				}),
 				dataType : "text",
 				success : function() {
@@ -188,6 +199,7 @@
 					checkLikes();
 				}
 			});
+	           }
 		})
 
 		function likesCount() {
@@ -213,7 +225,7 @@
 				type : "POST",
 				data : JSON.stringify({
 					'articlenum' : '${article.articlenum}',
-					'id' : 'sessionId'
+					'sessionId' : '${sessionScope.sessionId}'
 				}),
 				dataType : "text",
 				success : function(result) {
@@ -237,7 +249,7 @@
 			contentType : "application/json; charset=UTF-8",
 			data : JSON.stringify({
 				'repNum' : repNum,
-				'id' : 'sessionId'
+				'sessionId' : '${sessionScope.sessionId}'
 			}),
 			type : "POST",
 			dataType : "text",
@@ -322,9 +334,9 @@
 					</c:when>
 				</c:choose>
 				<c:if test="${sessionScope.sessionId == article.id}">
-				<a
-					href="/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">수정</a>
-				<a href="#" onclick="deleteConfirm()">삭제</a>
+					<a
+						href="/holo/diy/updateForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">수정</a>
+					<a href="#" onclick="deleteConfirm()">삭제</a>
 				</c:if>
 			</div>
 		</div>
@@ -332,21 +344,21 @@
 	<div align="center" id="replyList"></div>
 	<br />
 	<c:if test="${sessionScope.sessionId ne null}">
-	<div align="center">
-		<br />
-		<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
-		<textarea rows="5" cols="80" id="replytext" style="resize: none;"
-			placeholder="댓글을 작성해주세요!"></textarea>
-		<br />
-		<button type="button" id="insertRplBtn">댓글 작성</button>
-	</div>
+		<div align="center">
+			<br />
+			<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+			<textarea rows="5" cols="80" id="replytext" style="resize: none;"
+				placeholder="댓글을 작성해주세요!"></textarea>
+			<br />
+			<button type="button" id="insertRplBtn">댓글 작성</button>
+		</div>
 	</c:if>
-		<c:if test="${sessionScope.sessionId eq null}">
-	<div align="center">
-		<br />
-		<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
-		<align="center">로그인 후 댓글 작성이 가능합니다.</align>
-	</div>
+	<c:if test="${sessionScope.sessionId eq null}">
+		<div align="center">
+			<br />
+			<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+			<align="center">로그인 후 댓글 작성이 가능합니다.</align>
+		</div>
 	</c:if>
 	<br />
 	<br />

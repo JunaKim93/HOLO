@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import holo.board.interior.dto.DiyBoardDTO;
@@ -21,6 +24,7 @@ import holo.board.search.dto.SearchDTO;
 
 @EnableWebMvc
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/diy/")
 public class DiyBoardBean {
 
@@ -29,7 +33,7 @@ public class DiyBoardBean {
 
 
 	@RequestMapping("writeForm.holo")
-	public String logon_writeForm(@RequestParam(defaultValue="tip", required=false) String category_b,Model model) {
+	public String logon_writeForm(@RequestParam(defaultValue="tip", required=false) String category_b, Model model) {
 		model.addAttribute("category_b", category_b);
 		return "/diy/writeForm";
 	}
@@ -162,17 +166,20 @@ public class DiyBoardBean {
 
 
 	@RequestMapping("content.holo")
-	public String tip(@RequestParam(defaultValue="1") int pageNum, int articlenum, Model model) throws Exception {
+	public String tip(@RequestParam(defaultValue="1") int pageNum, int articlenum, HttpSession session, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
 		diyBoardDAO.updateViewCount(articlenum);
 		List replyList = null;
 		replyList = diyBoardDAO.getRpl(articlenum);
-
-		String id = article.getId();
+		String sessionId = (String)session.getAttribute("sessionId");
+		boolean sessionCheck = true;
+		if(sessionId == null) {
+			sessionCheck = false;
+		}
 
 		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
-		model.addAttribute("id", id);
+		model.addAttribute("sessionCheck", sessionCheck);
 		model.addAttribute("article", article);
 		model.addAttribute("rplList", replyList);
 
