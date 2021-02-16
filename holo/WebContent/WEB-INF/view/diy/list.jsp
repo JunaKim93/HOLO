@@ -23,8 +23,6 @@
 
 <body>
 
-	<br />
-	<br />
 	<div class="board_wrap">
 		<div class="board_title">
 			<c:choose>
