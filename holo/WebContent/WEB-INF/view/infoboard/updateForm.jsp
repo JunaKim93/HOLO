@@ -24,6 +24,13 @@
 <title>게시판 글수정</title>
 </head>
 <body>
+	<c:if test="${sessionCheck == 0}">
+		<script>
+			alert("접근할 수 없습니다.");
+			window.location="/holo/member/main.holo";
+		</script>
+	</c:if>
+	<c:if test="${sessionCheck == 1}">
    <div class="board_wrap">
       <div class="board_title">
          <strong>생활정보 글 수정</strong>
@@ -74,6 +81,7 @@
 	      </div>
       </form>
    </div>
+   </c:if>
 </body>
 </html>
 

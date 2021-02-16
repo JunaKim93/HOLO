@@ -74,7 +74,7 @@
       </div>
       <div class="button_wrap">
          <a href="/holo/notice/list.holo?category_a=1" class="on">글목록</a>
-         <c:if test="${sessionScope.sessionId == dto.id}">
+         <c:if test="${sessionScope.sessionId == 'admin'}">
             <a href="/holo/notice/modifyForm.holo?articlenum=${article.articlenum}&pageNum=${pageNum}">수정</a>
             <a href="#" onclick="deleteNotice()">삭제</a>
           </c:if>

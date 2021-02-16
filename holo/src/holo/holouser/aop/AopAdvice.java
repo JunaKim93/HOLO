@@ -30,7 +30,22 @@ public class AopAdvice {
 		return view;
 	}
 	
-	
+	public Object adminCheck(ProceedingJoinPoint jp) throws Throwable{
+
+		RequestAttributes ra = RequestContextHolder.currentRequestAttributes();
+		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+		
+		HttpServletRequest request = sra.getRequest();
+		HttpSession session = request.getSession();
+		
+		
+		Object view = "admin/error";
+		String sessionId = (String)session.getAttribute("sessionId");
+		if(sessionId.equals("admin")) {
+			view = jp.proceed();
+		}
+		return view;
+	}
 	
 	
 }

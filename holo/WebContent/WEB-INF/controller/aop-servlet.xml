@@ -21,6 +21,7 @@
 	  <aop:pointcut expression="execution(public * holo.board.community.controller.RestController.like(..))" id="comLike"/>
 	  <aop:pointcut expression="execution(public * holo.board.interior..logon_*(..))" id="pc04"/>
 	  <aop:pointcut expression="execution(public * holo.board.market..logon_*(..))" id="pc05"/>
+	  <aop:pointcut expression="execution(public * holo.holouser.AdminController.*(..))" id="pc06"/>
 	  
       <aop:aspect id="beforeA" ref="ad">
          <aop:around method="sessionCheck" pointcut-ref="pc01"/>
@@ -40,6 +41,9 @@
       </aop:aspect>
        <aop:aspect id="aroundMarket" ref="ad">
          <aop:around method="sessionCheck" pointcut-ref="pc05"/>
+      </aop:aspect>
+      <aop:aspect id="aroundAdmin" ref="ad">
+         <aop:around method="adminCheck" pointcut-ref="pc06"/>
       </aop:aspect>
       
   <!--     <aop:aspect id="afterA" ref="ad">

@@ -112,6 +112,9 @@ header .gnb li:first-child{
    background: #d4e3f7;
    font-size: 19px;
    color: black;
+   padding: 15px 0;
+   height: 100px;
+   
 }
 
 .menu_wrap .dep1 > li:hover > .dep2{
