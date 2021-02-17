@@ -14,18 +14,21 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <!-- link 선언 -->
 <link rel="stylesheet" href="../resource/style/guide_style.css">
+<link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
 
 <!-- script 선언 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
 <style>
+		header{z-index:3;}
+		footer{margin-top:150px;}
 		.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		.map_wrap {position:relative;width:100%;height:350px;}
 		#category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
-		#category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
+		#category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:5px 0 5px 0px;text-align: center; cursor: pointer;}
 		#category li.on {background: #eee;}
 		#category li:hover {background: #ffe6e6;border-left:1px solid #acacac;margin-left: -1px;}
 		#category li:last-child{margin-right:0;border-right:0;}
-		#category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+		#category li span {display: block;margin:0 auto;width:22px;height: 28px;}
 		#category li .category_bg {background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;}
 		#category li .bank {background-position: -10px 0;}
 		#category li .mart {background-position: -10px -36px;}
@@ -50,51 +53,54 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 </head>
-<body>
+<body style="margin-top:250px;">
    <div class="guide">
    	<c:if test="${markerCheck}">
       <h2>주변 장소를 확인하세요!</h2>
     </c:if>
     <c:if test="${!markerCheck && sessionId != null}">
-    	<h2>거주지를 설정해보세요</h2>
-    	<h2><a href="/holo/guide/location_map.holo">거주지 설정하기</a></h2>
+    	<div align="center"><p>거주지를 설정해보세요</p><br/>
+    	<div class="button_wrap">
+    		<h3><a href="/holo/guide/location_map.holo">거주지 설정하기</a></h3></div>
+    	</div>
     </c:if>
     
       <ul>
          <li>
 			<div class="map_wrap">
-			    <div id="map" style="width:900px;height:600px;position:relative;overflow:hidden;"></div>
+			    <div id="map" style="width:1000px;height:600px;position:relative;overflow:hidden;"></div>
 			    <ul id="category">
 			        <li id="BK9" data-order="0"> 
-			            <span class="category_bg bank"></span>
-			          	  은행
+			           <span class="category_bg bank"></span><b>은행</b>
 			        </li>       
 			        <li id="MT1" data-order="1"> 
-			            <span class="category_bg mart"></span>
-			            	마트
+			            <span class="category_bg mart"></span><b>마트</b>
 			        </li>  
 			        <li id="PM9" data-order="2"> 
-			            <span class="category_bg pharmacy"></span>
-			         	   약국
+			            <span class="category_bg pharmacy"></span><b>약국</b>
+			         	  
 			        </li>  
 			        <li id="OL7" data-order="3"> 
-			            <span class="category_bg oil"></span>
-			        	    주유소
+			            <span class="category_bg oil"></span><b>주유소</b>
+			        	  
 			        </li>  
 			        <li id="CE7" data-order="4"> 
-			            <span class="category_bg cafe"></span>
-			        	    카페
+			            <span class="category_bg cafe"></span><b>카페</b>
+			        	  
 			        </li>  
 			        <li id="CS2" data-order="5"> 
-			            <span class="category_bg store"></span>
-			          	  편의점
+			            <span class="category_bg store"></span><b>편의점</b>
+			          	 
 			        </li>      
 			    </ul>
 			</div>
          </li>
          </ul>
       </div>
-</body>
+	</body>
+	<footer>
+		<%@ include file="/WEB-INF/view/foot.jsp" %>
+	</footer>
 </html>
 	<script>
 		// 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
@@ -309,4 +315,3 @@
 		    } 
 		} 
 	</script>
-<%@ include file="/WEB-INF/view/foot.jsp" %>
