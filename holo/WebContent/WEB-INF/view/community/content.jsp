@@ -210,7 +210,7 @@
 			</div>
 		</div> 
       	</div>
-		<div id="reply_section"></div>
+		<div id="reply_section" style="margin-top:-150px"></div>
 		<br/><br/><br/><br/>
 	</body>
 </html>
