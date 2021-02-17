@@ -209,11 +209,10 @@ $(function(){
 </head>
 <body>
 	<div class="board_wrap">
-		<c:if test="${rplCount==0}">
-			<p align="center">댓글을 작성해보세요!</p>
-		</c:if>
-		
 		<div class="board_list_wrap">
+			<c:if test="${rplCount==0}">
+				<p align="center">댓글을 작성해보세요!</p><br/><br/>
+			</c:if>
 			<c:if test="${rplCount>0}">
 				<div class="board_list">
 					<div class="top">
