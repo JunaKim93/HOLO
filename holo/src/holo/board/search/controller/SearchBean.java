@@ -43,20 +43,12 @@ public class SearchBean {
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
 		String searchBoard = null;
-
-		if (board == "" || board == null) {
+		
+		if (board.equals("whole")) {
 			count = SearchDAO.searchCount(choice, search);
-			if (!choice.equals("subject")) {
-				rplCount = SearchDAO.searchRplCount(choice, search);
-			}
 		} else {
 			String boardName = Search.modifyBoardName(board);
 			count = SearchDAO.boardSearchCount(boardName, choice, search);
-			if (!choice.equals("subject")) {
-				String rplBoardName = Search.modifyRplBoardName(board);
-				rplCount = SearchDAO.boardSearchRplCount(rplBoardName, choice, search);
-			}
-
 			searchBoard = Search.modifySearchBoardName(board);
 		}
 
@@ -68,18 +60,11 @@ public class SearchBean {
 			if (currentPage > endPage) {
 				currentPage -= 1;
 			}
-			if (board == "" || board == null) {
+			if (board.equals("whole")) {
 				list = SearchDAO.getSearchList(choice, search, start, end); // 검색 결과를 list에 담음
-				if (!choice.equals("subject")) {
-					rplList = SearchDAO.getSearchRplList(choice, search,start,end);
-				}
 			} else {
 				String boardName = Search.modifyBoardName(board);
 				list = SearchDAO.getBoardSearchList(boardName, choice, search, start, end);
-				if (!choice.equals("subject")) {
-					String rplBoardName = Search.modifyRplBoardName(board);
-					rplList = SearchDAO.getBoardRplSearchList(rplBoardName, choice, search, start, end);
-				}
 			}
 			Search.modifyContent(list);
 
