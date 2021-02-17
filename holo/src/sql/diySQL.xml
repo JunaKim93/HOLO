@@ -44,6 +44,10 @@
 		delete from diyReply where repNum=#{repNum}
 	</delete>
 		
+	<select id="getRepCount" resultType="int" parameterType="int">
+		select count(*) from diyReply where articlenum=#{value}
+	</select>
+
 	<select id="getRpl" resultType="diyreplyDTO" parameterType="int">
 		select * from diyReply where articlenum=#{value} order by regDate
 	</select>

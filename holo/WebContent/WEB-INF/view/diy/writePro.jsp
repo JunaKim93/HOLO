@@ -11,6 +11,6 @@
 <c:if test="${category_b eq 'show'}">
 <script>
 	alert("게시글이 등록되었습니다.");
-	window.location="/holo/diy/ShowList.holo"
+	window.location="/holo/diy/showList.holo"
 </script>
 </c:if>

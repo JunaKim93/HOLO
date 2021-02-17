@@ -25,6 +25,7 @@ public interface InteriorBoardService {
 	public void updateRpl(DiyReplyDTO dto) throws Exception;
 	public void deleteRpl(DiyReplyDTO dto) throws Exception;
 	
+	public int getRepCount(int articlenum);
 	public List<DiyReplyDTO> getRpl(int articlenum) throws Exception;
 	
 	// 게시글(A), 댓글(R) 좋아요

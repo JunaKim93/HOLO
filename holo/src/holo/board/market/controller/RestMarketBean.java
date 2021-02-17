@@ -1,9 +1,12 @@
 package holo.board.market.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,17 +33,17 @@ public class RestMarketBean {
 	}
 
 	@RequestMapping("insertReply.holo")
-	public void insert(@ModelAttribute MarketReplyDTO dto) throws Exception {
+	public void logon_insert(@ModelAttribute MarketReplyDTO dto) throws Exception {
 		MarketDAO.insertRpl(dto);
 	}
 
 	@RequestMapping("updateReply.holo")
-	public void updateRpl(@ModelAttribute MarketReplyDTO dto) throws Exception {
+	public void logon_updateRpl(@ModelAttribute MarketReplyDTO dto) throws Exception {
 		MarketDAO.updateRpl(dto);
 	}
-	
+
 	@RequestMapping(value = "/updateRepLikes.holo", method = RequestMethod.POST)
-	public int updateRepLikes(@RequestBody String paramData) throws Exception{
+	public int logon_updateRepLikes(@RequestBody String paramData) throws Exception {
 		int result = 1;
 		int check = 0;
 		JSONParser parser = new JSONParser();
@@ -56,5 +59,5 @@ public class RestMarketBean {
 
 		return result;
 	}
-	
+
 }

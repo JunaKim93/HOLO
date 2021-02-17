@@ -8,22 +8,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- meta 선언 -->
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- font -->
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
-<!-- link 선언 -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <link rel="stylesheet" href="../resource/style/board_view_style.css">
-<link href="/holo/resource/style/scrap.css" rel="stylesheet" type="text/css">
 
-<!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<%@ include file="/resource/etc/scrapScript.jsp"%>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <title>인테리어 TIP</title>
 

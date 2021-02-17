@@ -1,8 +1,6 @@
 package holo.board.search.controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import holo.board.search.dto.SearchDTO;
+import holo.board.search.dto.SearchRplDTO;
 import holo.board.search.service.SearchService;
 
 @Controller
@@ -27,29 +26,30 @@ public class SearchBean {
 	}
 
 	@RequestMapping("/searchList.holo")
-	public String searchList(@RequestParam(defaultValue = "1") int pageNum, String board, String choice, String search, Model model)
-			throws Exception {
+	public String searchList(@RequestParam(defaultValue = "1") int pageNum, String board, String choice, String search,
+			Model model) throws Exception {
 		List<SearchDTO> list = null;
+		List<SearchRplDTO> rplList = null;
 		int pageSize = 10;
 		int currentPage = pageNum;
 		int start = (currentPage - 1) * pageSize + 1;
 		int end = currentPage * pageSize;
 		int number = 0;
 		int count = 0;
-		int cp = 0;
-		cp = currentPage - 1;
+		int rplCount = 0;
+		int cp = currentPage - 1;
 		int startPage = (int) (cp / 5) * 5 + 1;
 		int pages = 5;
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
 		String searchBoard = null;
 		
-		if(board == "" || board == null) {
+		if (board.equals("whole")) {
 			count = SearchDAO.searchCount(choice, search);
-		}else {
+		} else {
 			String boardName = Search.modifyBoardName(board);
-			searchBoard = Search.modifySearchBoardName(board);
 			count = SearchDAO.boardSearchCount(boardName, choice, search);
+			searchBoard = Search.modifySearchBoardName(board);
 		}
 
 		if (count > 0) {
@@ -60,9 +60,9 @@ public class SearchBean {
 			if (currentPage > endPage) {
 				currentPage -= 1;
 			}
-			if(board == "" || board == null) {
+			if (board.equals("whole")) {
 				list = SearchDAO.getSearchList(choice, search, start, end); // 검색 결과를 list에 담음
-			}else {
+			} else {
 				String boardName = Search.modifyBoardName(board);
 				list = SearchDAO.getBoardSearchList(boardName, choice, search, start, end);
 			}
@@ -72,7 +72,6 @@ public class SearchBean {
 			list = Collections.emptyList();
 		}
 		number = count - (currentPage - 1) * pageSize;
-		
 
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("start", start);
@@ -85,6 +84,7 @@ public class SearchBean {
 		model.addAttribute("choice", choice);
 		model.addAttribute("search", search);
 		model.addAttribute("list", list);
+		model.addAttribute("rplList", rplList);
 		model.addAttribute("board", board);
 		model.addAttribute("searchBoard", searchBoard);
 		return "search/searchList";

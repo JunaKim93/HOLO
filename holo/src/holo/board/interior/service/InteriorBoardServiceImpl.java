@@ -136,6 +136,12 @@ public class InteriorBoardServiceImpl implements InteriorBoardService {
 		dao.delete("diy.deleteRpl", dto);
 	}
 
+	
+	@Override
+	public int getRepCount(int articlenum) {
+		return dao.selectOne("diy.getRepCount", articlenum);
+	}
+
 	@Override
 	public List<DiyReplyDTO> getRpl(int articlenum) throws Exception {
 		return dao.selectList("diy.getRpl", articlenum);

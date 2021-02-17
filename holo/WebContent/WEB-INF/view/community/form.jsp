@@ -46,36 +46,7 @@
 		}
 	};
 </script>
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
- elPlaceHolder: "content",
- sSkinURI: "/holo/se2/SmartEditor2Skin.html",
- fCreator: "createSEditor2"
 
-});
-
-window.onload = function(){
-	$("[name=category_a]").val(${cat_a});
-	if(${cat_a=='1'}){
-		$("[name=category_b]").hide();
-	}else{
-		$("[name=category_b]").val(${cat_b});
-	}
-   var btn = document.getElementById("writebtn");
-   btn.onclick = function(){
-		 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-	     //submitContents(btn);
-   }
-}
-
- 
- function pasteHTML(filepath){
-       var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
-       oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
-   }
-</script>
 <title>자유게시판 글작성</title>
 </head>
 <body>
@@ -115,10 +86,10 @@ window.onload = function(){
          </div>
          <div class="button_wrap">
          	<c:if test="${mode=='new'}">
-				<a href="#" id="writebtn" class="on">글쓰기</a>
+				<input type="submit" id="writebtn" class="writebtn" value="글쓰기" />
 			</c:if>
 			<c:if test="${mode=='edit'}">
-				<a id="writebtn" class="on">수정하기</a>
+				<input type="submit" id="writebtn" class="writebtn" value="수정하기" />
 			</c:if>
 			<a href="javascript:this.form.reset();">다시작성</a> 
 			<a href="/holo/com/list.holo?category_a=${cat_a}&category_b=${category_b}&pagenum=${pagenum}">
@@ -130,4 +101,34 @@ window.onload = function(){
 </body>
 </html>
 <%@ include file="/WEB-INF/view/foot.jsp" %>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "content",
+ sSkinURI: "/holo/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+
+});
+
+window.onload = function(){
+	$("[name=category_a]").val(${cat_a});
+	if(${cat_a=='1'}){
+		$("[name=category_b]").hide();
+	}else{
+		$("[name=category_b]").val(${cat_b});
+	}
+   var btn = document.getElementById("writebtn");
+   btn.onclick = function(){
+		 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	     //submitContents(btn);
+   }
+}
+
+ 
+ function pasteHTML(filepath){
+       var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
+       oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
+   }
+</script>
 

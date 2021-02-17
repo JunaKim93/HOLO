@@ -1,23 +1,16 @@
-package holo.board.market.dto;
+package holo.board.search.dto;
 
 import java.sql.Timestamp;
 
-public class MarketReplyDTO {
+public class SearchRplDTO {
 
-	private int repNum;
 	private int articlenum;
 	private String id;
 	private String content;
 	private Timestamp regDate;
-	private int likes;
-	private int report;
+
 	
-	public int getRepNum() {
-		return repNum;
-	}
-	public void setRepNum(int repNum) {
-		this.repNum = repNum;
-	}
+	
 	public int getArticlenum() {
 		return articlenum;
 	}
@@ -42,16 +35,5 @@ public class MarketReplyDTO {
 	public void setRegDate(Timestamp regDate) {
 		this.regDate = regDate;
 	}
-	public int getLikes() {
-		return likes;
-	}
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-	public int getReport() {
-		return report;
-	}
-	public void setReport(int report) {
-		this.report = report;
-	}
+	
 }

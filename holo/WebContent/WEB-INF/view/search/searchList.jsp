@@ -2,20 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/WEB-INF/view/index.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>통합검색 결과</title>
+<script>
+function OnChange()
+{    
+  var board = document.getElementById("board").options[document.getElementById("board").selectedIndex].value;
+  var choice = document.getElementById("choice").options[document.getElementById("choice").selectedIndex].value;
+  if(board==""){board="whole"};
+  
+  window.location="/holo/search/searchList.holo?board="+board+"&choice="+choice+"&search=${search}";
+ 
+}
+</script>
 </head>
 <body>
 <div align="center">
 	<h1>통합검색 결과</h1>
 </div>
 <div align="center">
-<form action="/holo/search/searchList.holo">
-	<select name="board">
+	<select id="board" name="board" onchange="OnChange(this)">
 		<option value=""> 전체 게시판  </option>
 		<option value="living"<c:if test="${board eq 'living'}"> selected </c:if>> 생활정보 게시판  </option>
 		<option value="market" <c:if test="${board eq 'market'}"> selected </c:if>> 장터 게시판 </option>
@@ -23,14 +33,12 @@
 		<option value="community"<c:if test="${board eq 'community'}"> selected </c:if>> 자유 게시판 </option>
 	</select>
 	
-	<select name="choice">
+	<select id="choice" name="choice" onchange="OnChange(this)">
+		<option value="whole" <c:if test="${choice eq 'whole' or empty choice}"> selected </c:if>> 전체  </option>
 		<option value="id" <c:if test="${choice eq 'id'}"> selected </c:if>> 작성자  </option>
 		<option value="subject" <c:if test="${choice eq 'subject'}"> selected </c:if>> 제목  </option>
 		<option value="content" <c:if test="${choice eq 'content'}"> selected </c:if>> 내용 </option>
 	</select>
-		<input type="text" name="search" value="${search}">
-		<input type="submit" value="검색">
-</form>
 </div>
 <div align="center">
 <c:if test="${not empty searchBoard}">
