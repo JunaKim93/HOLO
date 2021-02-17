@@ -55,4 +55,3 @@ public class MarketReplyDTO {
 		this.report = report;
 	}
 }
-

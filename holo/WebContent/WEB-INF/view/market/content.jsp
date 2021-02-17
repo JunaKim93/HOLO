@@ -304,7 +304,7 @@
 	<c:if test="${sessionScope.sessionId ne null}">
 	<div align="center">
 		<br />
-		<textarea id="sessionId" style="display: none;">sessionId</textarea>
+		<textarea id="sessionId" style="display: none;">${sessionScope.sessionId }</textarea>
 		<textarea rows="5" cols="80" id="replytext" style="resize: none;"
 			placeholder="댓글을 작성해주세요!"></textarea>
 		<br />
