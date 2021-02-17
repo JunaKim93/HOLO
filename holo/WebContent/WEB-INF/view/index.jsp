@@ -35,6 +35,8 @@
                <span class='green_window'>
                
             	<input type='text' name="search" class='input_text' placeholder="검색어를 입력해주세요."/>
+            	<input type="hidden" name="choice" value="whole" />
+            	<input type="hidden" name="board" value="whole" />
          		</span>
             	<button type='submit' class='sch_smit' ><i class="fa fa-search"></i></button>
            
