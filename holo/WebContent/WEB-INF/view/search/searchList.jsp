@@ -2,11 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
+<!-- meta 선언 -->
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- link 선언 -->
+<link rel="stylesheet" href="../resource/style/search_list_style.css">
+
+<!-- script 선언 -->
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>통합검색 결과</title>
 <script>
 function OnChange()
@@ -21,9 +32,10 @@ function OnChange()
 </script>
 </head>
 <body>
-<div align="center">
-	<h1>통합검색 결과</h1>
-</div>
+
+	<div class="board_wrap">
+		<div align="center" class="board_title">
+	<strong>통합검색 결과</strong>
 <div align="center">
 	<select id="board" name="board" onchange="OnChange(this)">
 		<option value=""> 전체 게시판  </option>
@@ -40,26 +52,34 @@ function OnChange()
 		<option value="content" <c:if test="${choice eq 'content'}"> selected </c:if>> 내용 </option>
 	</select>
 </div>
-<div align="center">
+
+<p>
 <c:if test="${not empty searchBoard}">
  ${searchBoard} 에서
 </c:if> 
 "${search}" 로 검색한 결과입니다. (총 ${count}건)
+</p>
 </div>
-<div align="center">
-	<table border="1">
-		<tr>
-			<td>제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
-			<td>조회수</td>
-		</tr>
-		
-		<c:forEach var="list" items="${list}">
-			<tr>
-				<td>
-					<div>
-						<c:choose>
+
+
+<c:if test="${count == 0}">
+	<div align="center">
+		<h3>게시판에 저장된 글이 없습니다.</h3>
+	</div>
+</c:if>
+<c:if test="${count >0}">
+<div class="board_list_wrap">
+			<div class="board_list">
+				<div class="top">
+					<div class="title">글제목</div>
+					<div class="writer">작성자</div>
+					<div class="date">작성일</div>
+					<div class="count">조회수</div>
+				</div>
+						<c:forEach var="list" items="${list}">
+						<div>
+							<div class="title">
+								<c:choose>
 						<c:when test="${list.category_a eq 'living' or list.category_a eq 'cook' or list.category_a eq 'findplace'}">
 							<a href="/holo/infoboard/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
 						</c:when>	
@@ -73,38 +93,28 @@ function OnChange()
 							<a href="/holo/com/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
 						</c:when>
 						</c:choose>
-					</div>
-					<div>
-						 ${list.category_aName} > ${list.category_bName}
-					</div>
-					<div>
-						<c:if test="${empty list.content}">
-						글 내용이 없습니다.
+						<br/>
+						 <div style="color: #999999;">${list.category_aName} > ${list.category_bName}</div>
+						 <div>
+						 <c:if test="${empty list.content}">
+							글 내용이 없습니다.
 						</c:if>
-						${list.content}
-					</div>
-				</td>
-				<td align="center">${list.id}</td>
-				<td align="center"><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
-				<td align="center">${list.viewCount}</td>			
-			</tr>
-		</c:forEach>
-	</table>
-</div>
-<div align="center">
-	<a class="pages" href="/holo/search/searchList.holo?pageNum=1&choice=${choice}&search=${search}">[처음]</a>
-	<c:if test="${startPage>5}">
-		<a class="pages" href="/holo/search/searchList.holo?pageNum=${startPage-1}&choice=${choice}&search=${search}">[이전]</a>
-	</c:if>
-	<c:forEach var="pagenum" begin="${startPage}" end="${endPage}">
-		<a class="pages" href="/holo/search/searchList.holo?pageNum=${pagenum}&choice=${choice}&search=${search}">${pagenum}</a>
-	</c:forEach>
-	<c:if test="${endPage<pageCount}">
-		<a class="pages" href="/holo/search/searchList.holo?pageNum=${startPage+5}&choice=${choice}&search=${search}">[다음]</a>
-	</c:if>
-	<fmt:parseNumber var="end" value="${count/10+1}" integerOnly="true" />
-	<a class="button" href="/holo/search/searchList.holo?pageNum=${end}&choice=${choice}&search=${search}">[끝]</a>
-</div>
+						${list.content}</div>
+							</div>
+
+							<div class="writer">${list.id}</div>
+							<div class="date">
+								<fmt:formatDate value="${list.regDate}"
+									pattern="yyyy-MM-dd hh:mm" />
+							</div>
+							<div class="count">${list.viewCount}</div>
+							</div>
+						</c:forEach>
+				</div>
+			</div>
+		</c:if>
+	</div>
+
 </body>
 </html>
 <%@ include file="/WEB-INF/view/foot.jsp" %>
