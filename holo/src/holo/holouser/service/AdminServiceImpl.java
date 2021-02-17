@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import holo.holouser.AdminDTO;
+import holo.holouser.HolouserDTO;
 
 @Service("adminDAO")
 public class AdminServiceImpl implements AdminService{
@@ -53,6 +54,35 @@ public class AdminServiceImpl implements AdminService{
 		
 		dao.update("admin.updateRptCount", hashmap);
 		dao.delete("admin.cancelRpt", hashmap);
+	}
+
+	@Override
+	public int getUserCount() {
+		
+		return dao.selectOne("admin.getUserCount");
+	}
+
+	@Override
+	public List<HolouserDTO> getUsers(int start, int end) {
+		HashMap<String, Object> hashmap = new HashMap();
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		return dao.selectList("admin.getUsers", hashmap);
+	}
+
+	@Override
+	public List<HolouserDTO> userSearch(int start, int end, int search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void pointGift(int pointGift, String id) {
+		HashMap<String, Object> hashmap = new HashMap();
+		hashmap.put("pointGift", pointGift);
+		hashmap.put("id", id);
+		dao.update("admin.pointGift", hashmap);
+		
 	}
 
 

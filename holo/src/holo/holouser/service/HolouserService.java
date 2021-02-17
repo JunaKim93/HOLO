@@ -29,4 +29,5 @@ public interface HolouserService {
 	public List getNotices() throws Exception;
 	public int getCount(String id) throws Exception;
 	public List getList(String id, int start, int end) throws Exception;
+	public HolouserDTO getUserInfo(String id);
 }

@@ -110,13 +110,13 @@
 	
 	<select id="getCount" resultType="int" parameterType="String">
 		select sum(count) from
-			(select count(*) as count from infoboard where id = #{value}
+			(select count(*) as count from infoboard where id = #{id}
 			union
-			select count(*) as count from diyboard where id = #{value}
+			select count(*) as count from diyboard where id = #{id}
 			union
-			select count (*) as count from communityboard where id = #{value}
+			select count (*) as count from communityboard where id = #{id}
 			union
-			select count(*) as count from marketboard where id = #{value}
+			select count(*) as count from marketboard where id = #{id}
 			)
 	</select>
 	
@@ -136,4 +136,10 @@
 	</select>
 	
 	
+	<!-- 회원정보 -->
+	<select id="getUserInfo" resultType="holouserDTO" parameterType="String">
+		select u.id, name, phone, email, status, gender, point, levels, joindate, status, address as authkey from 
+			holouser u left outer join useraddress a on (u.id = a.id) where u.id = #{id}
+	</select>
+
 </mapper>

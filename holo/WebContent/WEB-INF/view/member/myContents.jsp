@@ -26,8 +26,14 @@
 <body>
    <div class="board_wrap">
       <div class="board_title">
-         <strong><a href="/holo/member/myContents.holo">나의 게시물</a></strong>
-         <p>${sessionScope.sessionId}님이 작성한 글 목록입니다.</p>
+      <c:if test="${id == sessionScope.sessionId}">
+         <strong><a href="/holo/member/myContents.holo?id=${id}">나의 게시물</a></strong>
+         <p>${id}님이 작성한 글 목록입니다.</p>
+      </c:if>
+      <c:if test="${id != sessionScope.sessionId}">
+      	<strong><a href="/holo/member/myContents.holo?id=${id}">${id}님의 게시물</a></strong>
+         <p>${id}님이 작성한 글 목록입니다.</p>
+      </c:if>
       </div>
       <div class="board_list_wrap">
          <div class="board_list">

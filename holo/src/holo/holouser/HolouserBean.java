@@ -253,9 +253,9 @@ public class HolouserBean {
 	@RequestMapping("myContents.holo")
 	public String logon_myContents(HttpSession session, 
 					@RequestParam(defaultValue="1", required=true)int pageNum,
+					String id,
 					Model model) {
 		try {
-			String id = (String)session.getAttribute("sessionId");
 			List <InfoBoardDTO> myList = null;
 			int pageSize = 20;							
 			int currentPage = pageNum;					
@@ -309,6 +309,21 @@ public class HolouserBean {
 			e.printStackTrace();
 		}
 		return "member/myContents";
+	}
+	
+	@RequestMapping("userInfo.holo")
+	public String userInfo(String id, Model model) {
+		try {
+			HolouserDTO dto = null;
+			dto = memberDAO.getUserInfo(id);
+			model.addAttribute("dto", dto);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "member/userInfo";
 	}
 	
 	

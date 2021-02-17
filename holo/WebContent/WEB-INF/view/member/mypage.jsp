@@ -58,9 +58,16 @@
          <div class="button_wrap">
             <a href="javascript:window.open('/holo/message/msgListR.holo', '쪽지함', 'width=800, height=400');">쪽지함</a>         
             <a href="/holo/scrapList.holo">스크랩한 게시물</a>
-			<a href="/holo/member/myContents.holo">나의 게시물</a>
+			<a href="/holo/member/myContents.holo?id=${sessionScope.sessionId}">나의 게시물</a>
 			<a href="/holo/member/modifyForm.holo"> 내 정보 수정하기</a>
-			<a href="/holo/member/deleteForm.holo"> 회원 탈퇴 </a>         
+			<c:if test="${sessionScope.sessionId != 'admin'}">
+				<a href="/holo/member/deleteForm.holo"> 회원 탈퇴 </a>         
+			</c:if>
+			<c:if test="${sessionScope.sessionId == 'admin'}">
+			<br>
+				<a href="/holo/admin/contentReports.holo">신고글 관리</a>
+				<a href="/holo/admin/allUsers.holo">회원 관리</a>
+			</c:if>
          </div>
 
 

@@ -114,7 +114,7 @@
 		
 		
 		if(${markerCheck}){    
-			var imageSrc = '/holo/WebContent/resource/image/homemarker.png',
+			var imageSrc = '/holo/resource/image/homemarker.png',
 				imageSize = new kakao.maps.Size(30,35),
 				imageOption = {offset: new kakao.maps.Point(5,5)};
 			    

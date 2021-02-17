@@ -157,4 +157,9 @@ public class HolouserServiceMybatis implements HolouserService {
 		return dao.selectList("holouser.getList", hashmap);
 	}
 
+	@Override
+	public HolouserDTO getUserInfo(String id) {
+		return dao.selectOne("holouser.getUserInfo", id);
+	}
+
 }

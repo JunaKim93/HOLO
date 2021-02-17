@@ -202,7 +202,7 @@
 
 	<!-- 댓글 리스트 출력 -->
 
-   <div id="replyList"></div>
+   <div id="replyList" style="margin-top:-150px;"></div>
    
 </body>
 </html>
