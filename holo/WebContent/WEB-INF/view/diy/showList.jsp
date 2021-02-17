@@ -26,9 +26,8 @@
 <body>
 <div class="board_wrap">
 <div class="board_title">
-					<strong><a href="/holo/diy/list.holo?category_b=tip">인테리어
-							TIP</a></strong>
-					<p>나만의 인테리어 꿀팁을 방출해주세요♥</p>
+					<strong><a href="/holo/diy/list.holo?category_b=tip">인테리어 뽐내기</a></strong>
+					<p>내 방 인테리어 자랑하기♥</p>
 
 	<div class="board_page">
 				<a class="num" href="/holo/diy/list.holo?category_b=tip"><b>TIP</b></a>
