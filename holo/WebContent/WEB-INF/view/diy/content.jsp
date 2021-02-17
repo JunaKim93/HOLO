@@ -13,9 +13,11 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <link rel="stylesheet" href="../resource/style/board_view_style.css">
+<link href="/holo/resource/style/scrap.css" rel="stylesheet" type="text/css">
 
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<%@ include file="/resource/etc/scrapScript.jsp"%>
 
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -281,6 +283,10 @@
 					<strong>인테리어 Q&A</strong>
 					<p>인테리어 질문 게시판입니다.</p>
 				</c:when>
+				<c:when test="${article.category_b eq 'show'}">
+					<strong>인테리어  뽐내기</strong>
+					<p>인테리어 뽐내기 게시판입니다.</p>
+				</c:when>
 			</c:choose>
 		</div>
 
@@ -318,6 +324,7 @@
 					&nbsp; <input type="button" style="background-color: white;"
 						value="신고📢"
 						onclick="reportArticle('${article.articlenum}', '${article.subject}')">
+						<a href="javasript:;" class="btn-scrap">⭐</a>
 				</div>
 			</div>
 			<div class="button_wrap">

@@ -126,7 +126,7 @@ public class DiyBoardBean {
 	}
 	@RequestMapping("showList.holo")
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) throws Exception {
-		int pageSize = 10;
+		int pageSize = 5;
 		int currentPage = pageNum;
 		int start = (currentPage - 1) * pageSize + 1;
 		int end = currentPage * pageSize;

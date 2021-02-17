@@ -26,6 +26,9 @@
 			$("[name=category_b]").show();
 		}
 	};
+	function submit(){
+		document.getElementById("writeForm").submit();
+	}
 	function validateForm(){
 		var cat_a = $("[name=category_a]").val();
 		var cat_b = $("[name=category_b]").val();
@@ -44,6 +47,7 @@
 			alert("내용을 입력해주세요!");
 			return false;
 		}
+		return true;
 	};
 </script>
 
@@ -86,10 +90,10 @@
          </div>
          <div class="button_wrap">
          	<c:if test="${mode=='new'}">
-				<input type="submit" id="writebtn" class="writebtn" value="글쓰기" />
+				<a href="javascript:submit();" id="writebtn" class="on">글쓰기</a>
 			</c:if>
 			<c:if test="${mode=='edit'}">
-				<input type="submit" id="writebtn" class="writebtn" value="수정하기" />
+				<a href="javascript:submit();" id="writebtn" class="on">수정하기</a>
 			</c:if>
 			<a href="javascript:this.form.reset();">다시작성</a> 
 			<a href="/holo/com/list.holo?category_a=${cat_a}&category_b=${category_b}&pagenum=${pagenum}">

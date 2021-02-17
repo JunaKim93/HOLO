@@ -5,12 +5,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link rel="stylesheet" href="../resource/style/board_write_style.css">
+
+<script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
+	charset="utf-8"></script>
+
+<script src="./js/script.js"></script>
 <title>중고장터</title>
 
-<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js" charset="utf-8"></script> 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+<script>
+
+function categoryChange(e) {
+	var b_market = ["팝니다", "삽니다"];
+	var b_free = ["무료나눔"];
+	var b_group = ["공동구매"];
+	var target = document.getElementById("category_b");
+
+	if(e.value == "market") var d = b_market;
+	else if(e.value == "free") var d = b_free;
+	else if(e.value == "group") var d = b_group;
+
+	target.options.length = 0;
+
+	for (x in d) {
+		var opt = document.createElement("option");
+		opt.value = d[x];
+		opt.innerHTML = d[x];
+		target.appendChild(opt);
+	}	
+}
+
+ 
+ function writeSave() {
+	
+	 if((document.writeform.category_a.value == "market" && document.writeform.category_b.value == "b")) {
+	        alert("말머리를 선택하세요");
+	        document.writeform.id.focus();
+	        return false;
+	    }
+	    if(document.writeform.id.value == "") {
+	        alert("이름을 입력하세요");
+	        document.writeform.id.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.subject.value == "") {
+	        alert("제목을 입력하세요");
+	        document.writeform.subject.focus();
+	        return false;
+	    }
+	    
+	    if(document.writeform.content.value == "") {
+	        alert("내용을 입력하세요");
+	        document.writeform.content.focus();
+	        return false;
+	    }
+ }
+ 
+ function chkSel(cate) {
+		if (cate.value == "market") {
+			$("[name=category_b]").show();
+		}else{
+			$("[name=category_b]").hide();
+		}
+	}
+ 
+</script>
 </head>
 <body >  
 <center><b>글쓰기</b>
@@ -63,7 +131,7 @@
   </tr>
 <tr>      
  <td colspan=2  align="center"> 
-	<input type="hidden" name="id" value="sessionId">
+	<input type="hidden" name="id" value=${sessionScope.sessionId }>
  	<input type="submit" name="writebtn" id="writebtn" value="글쓰기" >  
  	<input type="reset" value="다시작성">
 	<input type="button" value="목록보기" OnClick="window.location='/holo/market/list.holo?category_a=${category_a}&category_b=${category_b}'">
@@ -71,29 +139,7 @@
 </form>     
 </body>
 </html>
-
 <script type="text/javascript">
-
-function categoryChange(e) {
-	var b_market = ["팝니다", "삽니다"];
-	var b_free = ["무료나눔"];
-	var b_group = ["공동구매"];
-	var target = document.getElementById("category_b");
-
-	if(e.value == "market") var d = b_market;
-	else if(e.value == "free") var d = b_free;
-	else if(e.value == "group") var d = b_group;
-
-	target.options.length = 0;
-
-	for (x in d) {
-		var opt = document.createElement("option");
-		opt.value = d[x];
-		opt.innerHTML = d[x];
-		target.appendChild(opt);
-	}	
-}
-
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
@@ -117,41 +163,6 @@ window.onload = function(){
        oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
    }
  
- function writeSave() {
-	
-	 if((document.writeform.category_a.value == "market" && document.writeform.category_b.value == "null")
-			 && document.writeform.category_b.value != "sell" 
-			 && document.writeform.category_b.value != "buy") {
-	        alert("말머리를 선택하세요");
-	        document.writeform.id.focus();
-	        return false;
-	    }
-	    if(document.writeform.id.value == "") {
-	        alert("이름을 입력하세요");
-	        document.writeform.id.focus();
-	        return false;
-	    }
-	    
-	    if(document.writeform.subject.value == "") {
-	        alert("제목을 입력하세요");
-	        document.writeform.subject.focus();
-	        return false;
-	    }
-	    
-	    if(document.writeform.content.value == "") {
-	        alert("내용을 입력하세요");
-	        document.writeform.content.focus();
-	        return false;
-	    }
- }
- 
- function chkSel(cate) {
-		if (cate.value == "market") {
-			$("[name=category_b]").show();
-		}else{
-			$("[name=category_b]").hide();
-		}
-	};
- 
+
 </script>      
 <%@ include file="/WEB-INF/view/foot.jsp" %>
