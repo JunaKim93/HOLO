@@ -14,12 +14,9 @@
 <link rel="stylesheet" href="../resource/style/board_write_style.css">
 
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
-<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js"
-	charset="utf-8"></script>
-<script type="text/javascript"
-	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
+<script type="text/javascript" src="/holo/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/holo/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
 	charset="utf-8"></script>
 
 <script src="./js/script.js"></script>

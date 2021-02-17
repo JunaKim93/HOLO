@@ -25,32 +25,42 @@
 	<div class="board_wrap">
 		<div class="board_title">
 			<c:choose>
-				<c:when test="${articleList[0].category_b eq 'sell' and count > 0}">
+				<c:when test="${articleList[0].category_b eq 'sell'}">
 					<strong><a href="/holo/market/list.holo?category_b=sell">팝니다</a></strong>
 					<p>중고물품을 판매해주세요!</p>
 				</c:when>
-				<c:when test="${articleList[0].category_b eq 'buy' and count > 0}">
+				<c:when test="${articleList[0].category_b eq 'buy'}">
 					<strong><a href="/holo/market/list.holo?category_b=buy">삽니다</a></strong>
 					<p>필요한 물품을 구해보세요!</p>
 				</c:when>
-				<c:when test="${articleList[0].category_a eq 'free' and count > 0}">
+				<c:when test="${articleList[0].category_a eq 'free'}">
 					<strong><a
 						href="/holo/market/list.holo?category_a=free&category_b=b">무료나눔</a></strong>
 					<p>안 쓰는 물건을 무료로 나눠주세요!</p>
 				</c:when>
-				<c:when test="${articleList[0].category_a eq 'group' and count > 0}">
+				<c:when test="${articleList[0].category_a eq 'group'}">
 					<strong><a
-						href="/holo/market/list.holo?category_a=free&category_b=b">공동구매</a></strong>
+						href="/holo/market/list.holo?category_a=group&category_b=b">공동구매</a></strong>
 					<p>공동구매로 알뜰하게 구매해보세요!</p>
 				</c:when>
 			</c:choose>
-		<div class="board_page">
-			<a class="num" href="/holo/market/list.holo?category_b=sell">팝니다</a>
-			<a class="num" href="/holo/market/list.holo?category_b=buy">삽니다</a> <a
-				class="num"
-				href="/holo/market/list.holo?category_a=free&category_b=b">무료나눔</a>
-			<a class="num"
-				href="/holo/market/list.holo?category_a=group&category_b=b">공동구매</a>
+			<br /><br />
+		<div align="center">
+			<table style="border-spacing: 0; padding: 0; align: center; border: 1px solid #ddd;" border="1">
+			<tr>
+			<td style="height: 30px; border: 1px solid #ddd;">
+			<a href="/holo/market/list.holo?category_b=sell">&nbsp;팝니다&nbsp;</a>
+			</td>
+			<td style="height: 30px; border: 1px solid #ddd;">
+			<a href="/holo/market/list.holo?category_b=buy">&nbsp;삽니다&nbsp; </a> 
+			</td>
+			<td style="height: 30px; border: 1px solid #ddd;">
+			<a href="/holo/market/list.holo?category_a=free&category_b=b">무료나눔</a>
+			</td>
+			<td style="height: 30px; border: 1px solid #ddd;">
+			<a href="/holo/market/list.holo?category_a=group&category_b=b">공동구매</a>
+			</td>
+			</table>
 		</div>
 		</div>
 		<br />
