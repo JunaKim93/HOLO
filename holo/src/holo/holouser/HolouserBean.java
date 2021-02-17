@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import holo.board.information.DTO.InfoBoardDTO;
 import holo.holouser.HolouserDTO;
 import holo.holouser.service.*;
 import holo.holouser.service.HolouserService;
@@ -123,7 +124,7 @@ public class HolouserBean {
 			response.addCookie(c3);
 		}
 	
-		// status == 1 ÀÎÁõÇÔ status 0 ÀÎÁõ ¾ÈµÊ
+		// status == 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ status 0 ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½
 			
 		int check = memberDAO.userCheck(member);
 		int status = 0;
@@ -250,199 +251,65 @@ public class HolouserBean {
 	}
 	
 	@RequestMapping("myContents.holo")
-	public String logon_myContents(HttpSession session,
-							Model model,
-							@RequestParam(defaultValue="1") int pageNumI,
-							@RequestParam(defaultValue="1") int pageNumD,
-							@RequestParam(defaultValue="1") int pageNumM,
-							@RequestParam(defaultValue="1") int pageNumC) {
-		String id = (String)session.getAttribute("sessionId");
+	public String logon_myContents(HttpSession session, 
+					@RequestParam(defaultValue="1", required=true)int pageNum,
+					Model model) {
+		try {
+			String id = (String)session.getAttribute("sessionId");
+			List <InfoBoardDTO> myList = null;
+			int pageSize = 20;							
+			int currentPage = pageNum;					
+			int start = (currentPage - 1) * pageSize+1;	
+			int end = currentPage * pageSize;			
+			int number = 0;								
+			int count = 0;								
+			count = memberDAO.getCount(id);
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			
+			int pages = 5;								
+			int endPage = startPage+pages-1;			
+			int pageCount = 0;							
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				myList = memberDAO.getList(id, start, end);
+				for(int i =0; i<myList.size(); i++) {
+					String category_a = myList.get(i).getCategory_a();
+					if(category_a.equals("living") || category_a.equals("cooking") || category_a.equals("findplace")) {
+						myList.get(i).setContent("ìƒí™œì •ë³´");
+						myList.get(i).setCategory_b("infoboard");
+					}else if(category_a.equals("market") || category_a.equals("free") || category_a.equals("group")) {
+						myList.get(i).setContent("ìž¥í„°");
+						myList.get(i).setCategory_b("market");
+					}else if(category_a.equals("myroom")) {
+						myList.get(i).setContent("ì¸í…Œë¦¬ì–´");
+						myList.get(i).setCategory_b("diy");
+					}else if(category_a.equals("1") || category_a.equals("2")) {
+						myList.get(i).setContent("ìžìœ ê²Œì‹œíŒ");
+						myList.get(i).setCategory_b("com");
+					}
+				}
+			}else {
+				myList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
 		
-		model.addAttribute("pageNumI", pageNumI);
-		model.addAttribute("pageNumD", pageNumD);
-		model.addAttribute("pageNumM", pageNumM);
-		model.addAttribute("pageNumC", pageNumC);
-		
-		
-		
-		
+			model.addAttribute("myList", myList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "member/myContents";
 	}
-	
-	
-	@RequestMapping("myInfo.holo")
-	public String logon_myInfo(String id, @RequestParam(defaultValue="1") int pageNumI,
-								Model model, HttpSession session)  {
-		try {
-			List infoList = null;
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNumI;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = memberDAO.getArticleCount_I(id);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				infoList = memberDAO.getArticles_I(start, end, id);
-			}else {
-				infoList = Collections.EMPTY_LIST;
-			}
-			number = count - (currentPage-1)*pageSize;		
-		
-			model.addAttribute("infoList", infoList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "member/myInfo";
-	}
-	
-	@RequestMapping("myDiy.holo")
-	public String logon_myDiy(String id, @RequestParam(defaultValue="1") int pageNumD,
-								Model model, HttpSession session)  {
-		try {
-			List diyList = null;
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNumD;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = memberDAO.getArticleCount_D(id);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				diyList = memberDAO.getArticles_I(start, end, id);
-			}else {
-				diyList = Collections.EMPTY_LIST;
-			}
-			number = count - (currentPage-1)*pageSize;		
-		
-			model.addAttribute("diyList", diyList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "member/myDiy";
-	}
-	
-	@RequestMapping("myMarket.holo")
-	public String logon_myMarket(String id, @RequestParam(defaultValue="1") int pageNumM,
-								Model model, HttpSession session)  {
-		try {
-			List marketList = null;
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNumM;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = memberDAO.getArticleCount_M(id);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				marketList = memberDAO.getArticles_M(start, end, id);
-			}else {
-				marketList = Collections.EMPTY_LIST;
-			}
-			number = count - (currentPage-1)*pageSize;		
-		
-			model.addAttribute("marketList", marketList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "member/myMarket";
-	}
-	
-	@RequestMapping("myCom.holo")
-	public String logon_myCom(String id, @RequestParam(defaultValue="1") int pageNumC,
-								Model model, HttpSession session)  {
-		try {
-			List comList = null;
-			int pageSize = 5;							//ÆäÀÌÁö¿¡ ³ëÃâµÉ °Ô½Ã¹° ¼ö
-			int currentPage = pageNumC;					//ÇöÀç ÆäÀÌÁö ¹øÈ£
-			int start = (currentPage - 1) * pageSize+1;	//ÆäÀÌÁöÀÇ Ã¹ ¹øÈ£
-			int end = currentPage * pageSize;			//ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
-			int number = 0;								//°Ô½Ã±Û ¹øÈ£
-			int count = 0;								//ÃÑ °Ô½Ã¹° °³¼ö
-			count = memberDAO.getArticleCount_C(id);
-			int cp = 0;
-			cp = currentPage-1;
-			int startPage = (int)(cp/5)*5+1;			//°¡Àå ¿ÞÂÊ ÆäÀÌÁö
-			int pages = 5;								//¸®½ºÆ®¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °³¼ö
-			int endPage = startPage+pages-1;			//°¡Àå ¿À¸¥ÂÊ ÆäÀÌÁö
-			int pageCount = 0;							//ÃÑ ÆäÀÌÁö °³¼ö
-			if(count >0) {
-				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
-				if(endPage > pageCount) {endPage = pageCount;}
-				if(currentPage > endPage) {currentPage -= 1;}
-				comList = memberDAO.getArticles_C(start, end, id);
-			}else {
-				comList = Collections.EMPTY_LIST;
-			}
-			number = count - (currentPage-1)*pageSize;		
-		
-			model.addAttribute("comList", comList);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("start", start);
-			model.addAttribute("end", end);
-			model.addAttribute("count", count);
-			model.addAttribute("num",number);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "member/myCom";
-	}
-
-	
 	
 	
 }

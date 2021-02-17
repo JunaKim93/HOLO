@@ -63,13 +63,13 @@
                <c:if test="${ccount > 0}">
                	  <c:forEach var="cList" items="${comList}" end = "4">
 	                  <li>
-	                     <a href="#">
+	                     <a href="/holo/com/content.holo?articlenum=${cList.articlenum}&pageNum=1">
   						 <c:choose>
 	                     	<c:when test="${fn:length(cList.subject) gt 15}">
 	                     	<c:out value="${fn:substring(cList.subject, 0, 14) }">...
 	                     	</c:out></c:when>
 	                     	<c:otherwise>
-                     		<c:out value="${nList.subject}">
+                     		<c:out value="${cList.subject}">
 	                     	</c:out></c:otherwise>
                     	 </c:choose>
 						</a>
@@ -97,7 +97,7 @@
                <c:if test="${dcount > 0}">
                	  <c:forEach var="dList" items="${diyList}" end = "4">
 	                  <li>
-	                     <a href="#">
+	                     <a href="/holo/diy/content.holo?articlenum=${dList.articlenum}&pageNum=1">
                      	 <c:choose>
 	                     	<c:when test="${fn:length(dList.subject) gt 15}">
 	                     	<c:out value="${fn:substring(dList.subject, 0, 14) }">...
@@ -107,7 +107,7 @@
 	                     	</c:out></c:otherwise>
                     	 </c:choose>
 	                     </a>
-	                     <span><fmt:formatDate value="${dList.regdate}" pattern="yyyy-MM-dd"/></span>
+	                     <span><fmt:formatDate value="${dList.regDate}" pattern="yyyy-MM-dd"/></span>
 	                  </li>
                   </c:forEach>
                </c:if>
@@ -131,7 +131,7 @@
                <c:if test="${icount > 0}">
                	  <c:forEach var="iList" items="${infoList}" end = "4">
 	                  <li>
-	                     <a href="#">
+	                     <a href="/holo/infoboard/content.holo?articlenum=${iList.articlenum}&pageNum=1">
 	                     <c:choose>
 	                     	<c:when test="${fn:length(iList.subject) gt 15}">
 	                     	<c:out value="${fn:substring(iList.subject, 0, 14) }">...

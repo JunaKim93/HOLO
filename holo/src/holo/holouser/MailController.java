@@ -46,16 +46,16 @@ public class MailController {
 	         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 	         messageHelper.setFrom("2021holo@gmail.com");
 	         messageHelper.setTo(dto.getEmail());
-	         messageHelper.setSubject("[HOLO] 회원가입 인증메일");
-	         messageHelper.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-	                  .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+	         messageHelper.setSubject("[HOLO] 회원 인증");
+	         messageHelper.setText(new StringBuffer().append("<h1>[HOLO 회원 인증메일입니다.]</h1>")
+	                  .append("<p>아래 링크를 클릭하여 회원 가입을 완료하세요!</p>")
 	                  .append("<a href='http://192.168.0.130:8080/holo/sendmail/joinConfirm.holo?id=")
 	                  .append(dto.getId())
 	                  .append("&email=")
 	                  .append(dto.getEmail())
 	                  .append("&authkey=")
 	                  .append(authkey)
-	                  .append("' target='_blenk'>이메일 인증하기</a>")
+	                  .append("' target='_blenk'>인증하기</a>")
 	                  .toString(), true);
 			
 			mailSender.send(message);
@@ -93,15 +93,15 @@ public class MailController {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				messageHelper.setFrom("2021holo@gmail.com");
 				messageHelper.setTo(dto.getEmail());
-				messageHelper.setSubject("[HOLO] �ӽ� ��й�ȣ �߱�");
-				messageHelper.setText(new StringBuffer().append("<h1>[�ӽ� ��й�ȣ �߱�]</h1>")
+				messageHelper.setSubject("[HOLO] 임시 비밀번호 ");
+				messageHelper.setText(new StringBuffer().append("<h1>[임시 비밀번호가 발급되었습니다.]</h1>")
 							.append("<p>")
 							.append(dto.getId())
-							.append("ȸ������ �ӽ� ��й�ȣ��</p>")
+							.append("회원님의 임시비밀번호는</p>")
 							.append("<h1>")
 							.append(tempPw)
 							.append("</h1>")
-							.append("�Դϴ�.")
+							.append("입니다.")
 							.toString(), true);
 				
 				mailSender.send(message);

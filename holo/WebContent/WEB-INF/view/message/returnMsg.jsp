@@ -20,6 +20,7 @@ function submit(){
 		<div class="board_write">
 			<form action="/holo/message/writePro.holo" method="POST" onSubmit="return checkIt()" name="writeForm">
 				<input type="hidden" name="sender" value="${sessionScope.sessionId}"/>
+				<input type="hidden" name="receiver" value="${receiver}" />
 				<div class="title">
 					<dl>
 						<dt>받는사람ID</dt>

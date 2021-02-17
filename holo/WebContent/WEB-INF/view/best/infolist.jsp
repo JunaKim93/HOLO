@@ -23,10 +23,7 @@
 <script src="./js/script.js"></script>
 <title>게시판 글목록</title>
 </head>
-<a href="/holo/best/infolist.holo">BEST</a>
-<a href="/holo/infoboard/list.holo?category_a=living">생활정보</a>
-<a href="/holo/infoboard/list.holo?category_a=cooking">요리정보</a>
-<a href="/holo/infoboard/list.holo?category_a=findplace">집구하기</a>
+
 <body>
    <div class="board_wrap">
       <div class="board_title">
@@ -60,7 +57,7 @@
 						<c:set var="num" value="${num-1}" />
 		            </div>
 		            <div class="title">
-						<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}&category_a=${list.category_a}">
+						<a class="title" href="/holo/infoboard/content.holo?articlenum=${list.articlenum}&pageNum=1&category_a=${list.category_a}">
 						${list.subject} 
 						<c:if test="${list.repcount != 0}">
 							[${list.repcount}]
