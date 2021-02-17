@@ -21,6 +21,7 @@
 <header>
 
    <div id="wrap">
+   <form name="searchform" action="/holo/search/searchList.holo" onsubmit="return searchSubmit()">
          <div>
             <h1 class="logo">
                <a href="/holo/member/main.holo" ><img src="../resource/image/holoLogo.png"/></a>
@@ -32,10 +33,11 @@
             </div>
             
                <span class='green_window'>
-            <input type='text' class='input_text' placeholder="검색어를 입력해주세요."/>
-         </span>
-            <button type='submit' class='sch_smit' ><i class="fa fa-search"></i></button>
-            
+               
+            	<input type='text' name="search" class='input_text' placeholder="검색어를 입력해주세요."/>
+         		</span>
+            	<button type='submit' class='sch_smit' ><i class="fa fa-search"></i></button>
+           
             <ul class="gnb">
             <c:if test="${sessionId == null}">
                <li><a href="/holo/member/loginForm.holo" >로그인</a></li>
@@ -50,7 +52,7 @@
                <li><a href="#">고객센터</a></li>
             </ul>
          </div>
-      
+      </form> 
       </div>
       
       <div class="menu_wrap">

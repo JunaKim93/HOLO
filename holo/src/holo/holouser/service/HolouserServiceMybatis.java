@@ -98,67 +98,6 @@ public class HolouserServiceMybatis implements HolouserService {
 		return dao.selectOne("holouser.getLevels",id);
 	}
 
-	@Override
-	public int getArticleCount_I(String id) throws Exception {
-		return dao.selectOne("holouser.getArticleCount_I", id);
-	}
-
-	@Override
-	public List getArticles_I(int start, int end, String id) throws Exception {
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		hashmap.put("id", id);
-		
-		return dao.selectList("holouser.getArticles_I", hashmap);
-	}
-	
-	@Override
-	public int getArticleCount_C(String id) throws Exception {
-		return dao.selectOne("holouser.getArticleCount_C", id);
-	}
-
-	@Override
-	public List getArticles_C(int start, int end, String id) throws Exception {
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		hashmap.put("id", id);
-		
-		return dao.selectList("holouser.getArticles_C", hashmap);
-	}
-	
-	@Override
-	public int getArticleCount_D(String id) throws Exception {
-		return dao.selectOne("holouser.getArticleCount_D", id);
-	}
-
-	@Override
-	public List getArticles_D(int start, int end, String id) throws Exception {
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		hashmap.put("id", id);
-		
-		return dao.selectList("holouser.getArticles_D", hashmap);
-	}
-	
-	@Override
-	public int getArticleCount_M(String id) throws Exception {
-		return dao.selectOne("holouser.getArticleCount_M", id);
-	}
-
-	@Override
-	public List getArticles_M(int start, int end, String id) throws Exception {
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		hashmap.put("id", id);
-		
-		return dao.selectList("holouser.getArticles_M", hashmap);
-	}
-
-	@Override
-	public int getnCount() throws Exception {
-		
-		return dao.selectOne("holonotice.getnoticeCount");
-	}
 
 	@Override
 	public int getcCount() throws Exception {
@@ -194,6 +133,22 @@ public class HolouserServiceMybatis implements HolouserService {
 	public List getNotices() throws Exception {
 		String category_a = "1";
 		return dao.selectList("holonotice.getnoticeList", category_a);
+	}
+	
+	@Override
+	public int getCount(String id) throws Exception {
+		
+		return dao.selectOne("holouser.getCount", id);
+	}
+
+	@Override
+	public List getList(String id, int start, int end) throws Exception {
+		hashmap.put("id",id);
+		hashmap.put("start",start);
+		hashmap.put("end",end);
+		
+		
+		return dao.selectList("holouser.getList", hashmap);
 	}
 
 }

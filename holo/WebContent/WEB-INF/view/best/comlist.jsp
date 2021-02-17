@@ -57,7 +57,7 @@
 						<c:set var="num" value="${num-1}" />
 		            </div>
 		            <div class="title">
-						<a class="title" href="#">
+						<a class="title" href="/holo/com/content.holo?articlenum=${list.articlenum}">
 						${list.subject} 
 						</a>
 		            </div>

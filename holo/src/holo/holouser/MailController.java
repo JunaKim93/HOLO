@@ -46,16 +46,16 @@ public class MailController {
 	         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 	         messageHelper.setFrom("2021holo@gmail.com");
 	         messageHelper.setTo(dto.getEmail());
-	         messageHelper.setSubject("[HOLO] íšŒì›ê°€ì… ì¸ì¦ë©”ì¼");
-	         messageHelper.setText(new StringBuffer().append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>")
-	                  .append("<p>ì•„ë˜ ë§í¬ë¥¼ í´ë¦­í•˜ì‹œë©´ ì´ë©”ì¼ ì¸ì¦ì´ ì™„ë£Œë©ë‹ˆë‹¤.</p>")
+	         messageHelper.setSubject("[HOLO] È¸¿ø ÀÎÁõ");
+	         messageHelper.setText(new StringBuffer().append("<h1>[HOLO¿¡ ¿À½Å°ÍÀ» È¯¿µÇÕ´Ï´Ù]</h1>")
+	                  .append("<p>¾Æ·¡ ¸µÅ©¸¦ Å¬¸¯ÇÏ¸é ÀÎÁõÀÌ ¿Ï·áµË´Ï´Ù.</p>")
 	                  .append("<a href='http://192.168.0.130:8080/holo/sendmail/joinConfirm.holo?id=")
 	                  .append(dto.getId())
 	                  .append("&email=")
 	                  .append(dto.getEmail())
 	                  .append("&authkey=")
 	                  .append(authkey)
-	                  .append("' target='_blenk'>ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>")
+	                  .append("' target='_blenk'>È¸¿øÀÎÁõ</a>")
 	                  .toString(), true);
 			
 			mailSender.send(message);
@@ -93,15 +93,15 @@ public class MailController {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				messageHelper.setFrom("2021holo@gmail.com");
 				messageHelper.setTo(dto.getEmail());
-				messageHelper.setSubject("[HOLO] ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ß±ï¿½");
-				messageHelper.setText(new StringBuffer().append("<h1>[ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ß±ï¿½]</h1>")
+				messageHelper.setSubject("[HOLO] ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¹ß±Ş");
+				messageHelper.setText(new StringBuffer().append("<h1>[ÀÓ½Ã ºñ¹Ğ¹øÈ£°¡ ¹ß±ŞµÇ¾ú½À´Ï´Ù.]</h1>")
 							.append("<p>")
 							.append(dto.getId())
-							.append("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½</p>")
+							.append("´ÔÀÇ ÀÓ½Ã ºñ¹Ğ¹øÈ£´Â</p>")
 							.append("<h1>")
 							.append(tempPw)
 							.append("</h1>")
-							.append("ï¿½Ô´Ï´ï¿½.")
+							.append("ÀÔ´Ï´Ù.")
 							.toString(), true);
 				
 				mailSender.send(message);

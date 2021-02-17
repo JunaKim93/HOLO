@@ -102,49 +102,38 @@
 	</select>
 	
 	
+	
+	
+	
+	
 	<!-- 내가 쓴 글 가져오기 -->
-	<select id = "getArticleCount_I" resultType="int" parameterType="HashMap">
-		select count(*) from infoboard where id = #{id}
-	</select>	
 	
-	<select id="getArticles_I" resultType="infoboardDTO" parameterType="HashMap">
-		select articlenum, subject, content, likes, regdate, r from
-		(select articlenum, subject, content, likes, regdate, rownum r from
-		(select * from infoboard where id = #{id} order by articlenum desc))
-		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	<select id="getCount" resultType="int" parameterType="String">
+		select sum(count) from
+			(select count(*) as count from infoboard where id = #{value}
+			union
+			select count(*) as count from diyboard where id = #{value}
+			union
+			select count (*) as count from communityboard where id = #{value}
+			union
+			select count(*) as count from marketboard where id = #{value}
+			)
 	</select>
 	
-	<select id = "getArticleCount_C" resultType="int" parameterType="HashMap">
-		select count(*) from communityboard where id = #{id}
-	</select>	
-	
-	<select id="getArticles_C" resultType="comDTO" parameterType="HashMap">
-		select articlenum, subject, content, likes, regdate, r from
-		(select articlenum, subject, content, likes, regdate, rownum r from
-		(select * from communityboard where id = #{id} order by articlenum desc))
-		<![CDATA[where r >= #{start} and r <= #{end}]]>
+	<select id="getList" resultType="infoboardDTO" parameterType="HashMap">
+		select articlenum, id, subject, viewcount, category_a, regdate, r from
+			(select articlenum, id, subject, viewcount, category_a, regdate, rownum r from 
+				(select articlenum, id, subject, viewcount, category_a, regdate from
+					(select articlenum, id, subject, viewcount, category_a, regdate from infoboard where id = #{id}
+					union
+					select articlenum, id, subject, viewcount, category_a, regdate from diyboard where id = #{id}
+					union
+					select articlenum, id, subject, viewcount, category_a, regdate from communityboard where id = #{id}
+					union
+					select articlenum, id, subject, viewcount, category_a, regdate from marketboard where id =#{id})
+				order by regdate desc))
+		<![CDATA[where r>=#{start} and r<=#{end}]]>
 	</select>
 	
-	<select id = "getArticleCount_D" resultType="int" parameterType="HashMap">
-		select count(*) from diyboard where id = #{id}
-	</select>	
-	
-	<select id="getArticles_D" resultType="diyboardDTO" parameterType="HashMap">
-		select articlenum, subject, content, likes, regdate, r from
-		(select articlenum, subject, content, likes, regdate, rownum r from
-		(select * from diyboard where id = #{id} order by articlenum desc))
-		<![CDATA[where r >= #{start} and r <= #{end}]]>
-	</select>
-	
-	<select id = "getArticleCount_M" resultType="int" parameterType="HashMap">
-		select count(*) from marketboard where id = #{id}
-	</select>	
-	
-	<select id="getArticles_M" resultType="MkBoardDTO" parameterType="HashMap">
-		select articlenum, subject, content, likes, regdate, r from
-		(select articlenum, subject, content, likes, regdate, rownum r from
-		(select * from marketboard where id = #{id} order by articlenum desc))
-		<![CDATA[where r >= #{start} and r <= #{end}]]>
-	</select>
 	
 </mapper>

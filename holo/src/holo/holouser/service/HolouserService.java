@@ -19,15 +19,7 @@ public interface HolouserService {
 	 public int userCheck(String id) throws Exception;
 	 public HolouserDTO memberPage(String id) throws Exception;
 	 public int getLevels(String id) throws Exception;
-	 public int getArticleCount_C(String id) throws Exception;
-	 public List getArticles_C(int start, int end, String id) throws Exception;
-	 public int getArticleCount_D(String id) throws Exception;
-	 public List getArticles_D(int start, int end, String id) throws Exception;	 
-	 public int getArticleCount_I(String id) throws Exception;
-	 public List getArticles_I(int start, int end, String id) throws Exception;	 
-	 public int getArticleCount_M(String id) throws Exception;
-	 public List getArticles_M(int start, int end, String id) throws Exception;
-	public int getnCount() throws Exception;
+	 
 	public int getcCount() throws Exception;
 	public int getdCount() throws Exception;
 	public int getiCount() throws Exception;
@@ -35,4 +27,6 @@ public interface HolouserService {
 	public List getDList() throws Exception;
 	public List getIList() throws Exception;
 	public List getNotices() throws Exception;
+	public int getCount(String id) throws Exception;
+	public List getList(String id, int start, int end) throws Exception;
 }

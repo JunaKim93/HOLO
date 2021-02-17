@@ -19,7 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
 <style>
-	.map_wrap {position:relative;width:100%;height:350px;padding:0 auto;}
+	.map_wrap {width:100%;height:350px;padding:0 auto;}
     .title {font-weight:bold;display:block;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
@@ -43,7 +43,7 @@
 		    	<option value="7">부산/경남</option>
 			</select>
 			<div class="map_wrap">
-			    <div id="map" style="width:900px;height:600px; position:relative;"></div>
+			    <div id="map" style="width:900px;height:600px;"></div>
 			    <div class="hAddr">
 			        <span class="title">지도중심기준 주소정보</span>
 			        <span id="centerAddr"></span>
@@ -138,12 +138,10 @@
 	
 	
 		
-	//------------지도에 마커 생성하기------------------
-	
-	
-	// 지도를 클릭한 위치에 표출할 마커입니다
+	//------------지도에 마커 생성하고 좌표 정보 전송------------------
+	// 마커
 	var marker = new kakao.maps.Marker({ 
-	    // 지도 중심좌표에 마커를 생성합니다 
+	    // 중심좌표에 마커를 생성
 	    position: map.getCenter() 
 	}); 
 	// 지도에 마커를 표시합니다
@@ -173,6 +171,7 @@
 	            var getlng = mouseEvent.latLng.getLng();
 	            var getaddress = result[0].address.address_name;
 	            
+	            //위도, 경도, 주소 정보 전송
 	            document.fix_location.lat.value=getlat;
 	    	    document.fix_location.lng.value=getlng;
 	    	    document.fix_location.address.value=getaddress;
