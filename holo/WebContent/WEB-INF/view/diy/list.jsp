@@ -46,6 +46,12 @@
 			</div>
 		</div>
 
+	<c:if test="${count == 0}">
+		<div align="center">
+			<h3>게시판에 저장된 글이 없습니다.</h3>
+		</div>
+	</c:if>
+	<c:if test="${count >0}">
 		<div class="board_list_wrap">
 			<div class="board_list">
 				<div class="top">
@@ -55,12 +61,6 @@
 					<div class="date">작성일</div>
 					<div class="count">조회수</div>
 				</div>
-				<div>
-					<c:if test="${count == 0}">
-         		등록된 글이 없습니다.
-         		</c:if>
-         		</div>
-					<c:if test="${count >0}">
 						<c:forEach var="list" items="${articleList}">
 						<div>
 							<div class="num">
@@ -82,7 +82,6 @@
 							<div class="count">${list.viewcount}</div>
 							</div>
 						</c:forEach>
-					</c:if>
 				</div>
 
 		<br />
@@ -104,6 +103,7 @@
 			</form>
 		</div>
 		</div>
+		</c:if>
 
 		<div class="board_page">
 

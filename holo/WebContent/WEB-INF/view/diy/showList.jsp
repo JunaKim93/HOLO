@@ -35,6 +35,14 @@
 				<a class="num" href="/holo/diy/showList.holo"><b>자랑</b></a>
 			</div>
 			</div>
+			
+	<c:if test="${count == 0}">
+		<div align="center">
+			<h3>게시판에 저장된 글이 없습니다.</h3>
+		</div>
+	</c:if>
+	
+	<c:if test="${count > 0 }">
 	<div class="board_list_wrap">
 	<div class="board_list">
 	<!-- 썸네일식리스트 시작 -->
@@ -59,6 +67,8 @@
 		</ul>
 		</div>
 	</div>
+	</div>
+</c:if>
 
 
 	<div class="button_wrap">
@@ -85,7 +95,7 @@
 		<a class="button last"
 			href="/holo/diy/showList.holo?pageNum=${pageCount}&category_b=${category_b}">맨끝</a>
 	</div>
-</div>
+
 </div>
 </body>
 </html>
