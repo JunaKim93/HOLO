@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <!-- link 선언 -->
 <link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
+<link rel="stylesheet" href="/holo/resource/style/main.css">
 
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
@@ -52,15 +53,9 @@ function init(){
 	$("#category_b").val("${cat_b}");
 };
 </script>
-
 <title>자유게시판</title>
-
 </head>
-
 <body onload="init()">
-
-<a href="/holo/member/main.holo" align="center"><h3>메인으로</h3></a>
-
 <div class="board_wrap">
 	<div class="board_title">
          <strong id="com_cat"></strong>
@@ -142,6 +137,7 @@ function init(){
 		</div>
 	</div>
 </div>
-</body>
-</html>
 <%@ include file="/WEB-INF/view/foot.jsp" %>
+</body>
+
+</html>

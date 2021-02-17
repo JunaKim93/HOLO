@@ -13,8 +13,10 @@
 
 <!-- font -->
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- link 선언 -->
-<link rel="stylesheet" href="./resource/style/board_list_style.css">
+<link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
+<link rel="stylesheet" href="/holo/resource/style/main.css">
 
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
@@ -56,12 +58,12 @@ $(function(){
          <div>
          	<div class="title">
 	         	<c:if test="${count == 0}">
-	         		등록된 글이 없습니다.
+	         		스크랩한 목록이 없습니다.
 	         	</c:if>
          	</div>
          </div>
          	<c:if test="${count >0}">
-         		<c:forEach var="list" items="${articleList}">
+         		<c:forEach var="scrap" items="${scrapList}">
          		<div>
 		            <div class="num">
 		            	<c:if test="${scrap.boardname=='com'}">
@@ -113,15 +115,20 @@ $(function(){
 		   </c:if> 
 	          
 		   <c:if test="${startPage > 10}">
-		        <a class="button prev" href="/holo/member/scrapList.holo?pagenum=${startPage - 10 }">[이전]</a>
+		        <a class="button prev" href="/holo/member/scrapList.holo?pagenum=${startPage - 10 }">이전</a>
 		   </c:if>
 		
 		   <c:forEach var="i" begin="${startPage}" end="${endPage}">
-		       <a class="num" href="/holo/member/scrapList.holo?pagenum=${i}">[${i}]</a>
+		   	   <c:if test="${pagenum==i}">
+		   	   		<a class="num on" href="/holo/member/scrapList.holo?pagenum=${i}">${i}</a>
+		   	   </c:if>
+		   	   <c:if test="${pagenum!=i}">
+		   	   		<a class="num on" href="/holo/member/scrapList.holo?pagenum=${i}">${i}</a>
+		       </c:if>
 		   </c:forEach>
 		
 		   <c:if test="${endPage < pageCount}">
-		        <a class="button next" href="/holo/member/scrapList.holo?pagenum=${startPage + 10}">[다음]</a>
+		        <a class="button next" href="/holo/member/scrapList.holo?pagenum=${startPage + 10}">다음</a>
 		   </c:if>
          </div>
          <div class="button_wrap">
