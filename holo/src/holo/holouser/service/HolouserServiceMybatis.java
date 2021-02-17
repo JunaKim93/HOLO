@@ -116,16 +116,22 @@ public class HolouserServiceMybatis implements HolouserService {
 
 	@Override
 	public List getCList() throws Exception {
+		hashmap.put("start", 1);
+		hashmap.put("end", 5);
 		return dao.selectList("best.getComBestList", hashmap);
 	}
 
 	@Override
 	public List getDList() throws Exception {
+		hashmap.put("start", 1);
+		hashmap.put("end", 5);
 		return dao.selectList("best.getDiyBestList", hashmap);
 	}
 
 	@Override
 	public List getIList() throws Exception {
+		hashmap.put("start", 1);
+		hashmap.put("end", 5);
 		return dao.selectList("best.getInfoBestList", hashmap);
 	}
 

@@ -13,12 +13,10 @@
 	
 	<select id="getInfoBestList" resultType="infoboardDTO" parameterType="HashMap">
 		<![CDATA[
-			select articlenum, id, subject, content, viewcount, likes, regdate, category_a, repcount, r from
-			(select articlenum, id, subject, content, viewcount, likes, regdate, category_a, repcount, rownum r from
-			(select * from infoboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
-			<if test="start != null && end != null">
+			select articlenum, id, subject, content, viewcount, likes, regdate, category_a, r from
+			(select articlenum, id, subject, content, viewcount, likes, regdate, category_a, rownum r from
+			(select * from infoboard where likes > 5 and (sysdate-regdate) < 1 order by likes desc))
 			where r >= #{start} and r <= #{end}
-			</if>
 		]]>
 	</select>
 	
@@ -39,10 +37,8 @@
 		<![CDATA[
 			select articlenum, id, subject, content, viewcount, likes, regdate, r from
 			(select articlenum, id, subject, content, viewcount, likes, regdate, rownum r from
-			(select * from diyboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
-			<if test="start != null && end != null">
+			(select * from diyboard where likes > 5 and (sysdate-regdate) < 1 order by likes desc))
 			where r >= #{start} and r <= #{end}
-			</if>
 		]]>
 	</select>
 	
@@ -59,12 +55,10 @@
 	
 	<select id="getComBestList" resultType="comDTO" parameterType="HashMap">
 		<![CDATA[
-			select articlenum, id, subject, content, viewcount, likes, regdate, repcount, r from
-			(select articlenum, id, subject, content, viewcount, likes, regdate, repcount, rownum r from
-			(select * from communityboard where likes > 10 and (sysdate-regdate) < 1 order by likes desc))
-			<if test="start != null && end != null">
+			select articlenum, id, subject, content, viewcount, likes, regdate, r from
+			(select articlenum, id, subject, content, viewcount, likes, regdate, rownum r from
+			(select * from communityboard where likes > 5 and (sysdate-regdate) < 1 order by likes desc))
 			where r >= #{start} and r <= #{end}
-			</if>
 		]]>
 	</select>
 	
