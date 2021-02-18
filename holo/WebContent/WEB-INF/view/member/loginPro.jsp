@@ -9,6 +9,12 @@
       history.go(-1);
 	</script>
 </c:if>
+<c:if test="${check == -1 }">
+	<script>
+		alert("관리자에 의해 정지당한 계정입니다.");
+		history.go(-1);
+	</script>
+</c:if>
 
  <c:if test="${check == 1}">
  	<script>

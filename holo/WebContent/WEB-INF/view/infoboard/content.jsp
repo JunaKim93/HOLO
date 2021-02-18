@@ -165,7 +165,7 @@
             </dl>
             <dl>
                <dt>글쓴이</dt>
-               <dd>${dto.id}</dd>
+               <dd><a href="/holo/member/userInfo.holo?id=${dto.id}">${dto.id}</a></dd>
             </dl>
             <dl>
                <dt>작성일</dt>

@@ -162,7 +162,7 @@
 							 <a href="javascript:void(0)" onclick="fn_deleteReply(${list.repnum})" >삭제</a>
 							</c:if>
 			            </div>
-			            <div class="writer">${list.id}</div>
+			            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
 			            <div class="count">
 			            <button id="replikesUpdate" onclick="replikesUpdate_click(${list.repnum})" >👍
 			            <span id="replikesCount">${list.likes}</span></button> &nbsp;

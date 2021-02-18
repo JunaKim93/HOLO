@@ -15,5 +15,7 @@ public interface AdminService {
 	public List<HolouserDTO> getUsers(int start, int end);
 	public List<HolouserDTO> userSearch(int start, int end, int search);
 	public void pointGift(int pointGift, String id);
+	public void deleteUser(String id);
+	public void restoreUser(String id);
 	
 }

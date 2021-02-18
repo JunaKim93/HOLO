@@ -124,7 +124,7 @@ public class HolouserBean {
 			response.addCookie(c3);
 		}
 	
-		// status == 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ status 0 ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½
+		// status == 1 ÀÎÁõ ¿Ï·á ----- status 0 ¸ŞÀÏ ÀÎÁõ x ----- status 2 ¿µ±¸Á¤Áö 
 			
 		int check = memberDAO.userCheck(member);
 		int status = 0;
@@ -132,6 +132,8 @@ public class HolouserBean {
 			status = memberDAO.getStatus(member.getId());
 			if(status == 0) {
 				check = 2;
+			}else if(status == 2){
+				check = -1;
 			}else {
 				model.addAttribute("sessionId", member.getId());
 			}
@@ -278,16 +280,16 @@ public class HolouserBean {
 				for(int i =0; i<myList.size(); i++) {
 					String category_a = myList.get(i).getCategory_a();
 					if(category_a.equals("living") || category_a.equals("cooking") || category_a.equals("findplace")) {
-						myList.get(i).setContent("ìƒí™œì •ë³´");
+						myList.get(i).setContent("»ıÈ°Á¤º¸");
 						myList.get(i).setCategory_b("infoboard");
 					}else if(category_a.equals("market") || category_a.equals("free") || category_a.equals("group")) {
-						myList.get(i).setContent("ì¥í„°");
+						myList.get(i).setContent("ÀåÅÍ");
 						myList.get(i).setCategory_b("market");
 					}else if(category_a.equals("myroom")) {
-						myList.get(i).setContent("ì¸í…Œë¦¬ì–´");
+						myList.get(i).setContent("ÀÎÅ×¸®¾î");
 						myList.get(i).setCategory_b("diy");
 					}else if(category_a.equals("1") || category_a.equals("2")) {
-						myList.get(i).setContent("ììœ ê²Œì‹œíŒ");
+						myList.get(i).setContent("ÀÚÀ¯°Ô½ÃÆÇ");
 						myList.get(i).setCategory_b("com");
 					}
 				}

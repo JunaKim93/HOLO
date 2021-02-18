@@ -195,5 +195,18 @@ public class AdminController {
 		
 		return "admin/pointGift";
 	}
+	
+	@RequestMapping("deleteUser.holo")
+	public String deleteUser(String id) {
+		adminDAO.deleteUser(id);
+		
+		return "admin/deleteUser";
+	}
+	
+	@RequestMapping("restoreUser.holo")
+	public String restoreUser(String id) {
+		adminDAO.restoreUser(id);
+		return "admin/restoreUser";
+	}
 
 }

@@ -40,18 +40,10 @@
                   <dd>${dto.name}</dd>
                </dl>
                <dl>
-                  <dt>휴대폰 번호</dt>
-                  <dd>${dto.phone}</dd>
-               </dl>
-            
-               <dl>
                   <dt>이메일</dt>
                   <dd>${dto.email}</dd>
                </dl>
-               <dl>
-                  <dt>인증 상태</dt>
-                  <dd>${dto.status}</dd>
-               </dl>
+               
                <dl>
                   <dt>주소</dt>
                   <dd>${dto.authkey}</dd>
@@ -77,6 +69,18 @@
                   	<input type="submit">
                   </dd>
                </dl>
+               <dl>
+                  <dt>회원 상태</dt>
+                  <dd>
+                  	<c:if test="${dto.status == 0}">인증 미완료</c:if>
+                  	<c:if test="${dto.status == 1}">인증 완료</c:if>
+                  	<c:if test="${dto.status == 2}">자격 정지 </c:if>
+                  </dd>
+               </dl>
+               <dl>
+                  <dt>휴대폰 번호</dt>
+                  <dd>${dto.phone}</dd>
+               </dl>
               </form>
               </c:if>
 </form>
@@ -90,7 +94,12 @@
             <a href="javascript:window.open('/holo/message/msgListR.holo', '쪽지함', 'width=800, height=400');">쪽지보내기</a>         
 			<a href="/holo/member/myContents.holo?id=${dto.id}">작성한 게시물</a>
 			<c:if test="${sessionScope.sessionId == 'admin'}">
-				<a href="/holo/admin/deleteUser.holo">영구정지</a>
+				<c:if test="${dto.status == 1}">
+					<a href="/holo/admin/deleteUser.holo?id=${dto.id}">영구정지</a>
+				</c:if>
+				<c:if test="${dto.status == 2}">
+					<a href="/holo/admin/restoreUser.holo?id=${dto.id}">계정 복구</a>
+				</c:if>
 			</c:if>
          </div>
 

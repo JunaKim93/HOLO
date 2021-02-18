@@ -85,6 +85,15 @@
 		update holouser set point = point+#{pointGift} where id = #{id}
 	</update>
 
+	
+	<!-- 회원 정지/복구  -->
+	<update id="deleteUser" parameterType="String">
+		update holouser set status = 2, authkey= '' where id = #{id}
+	</update>
+	<update id="restoreIser" parameterType="String">
+		update holouser set status = 1 where id = #{id}
+	</update>
+	
 
 
 	

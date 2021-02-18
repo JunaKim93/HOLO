@@ -85,6 +85,16 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	@Override
+	public void deleteUser(String id) {
+		dao.update("admin.deleteUser", id);
+	}
+
+	@Override
+	public void restoreUser(String id) {
+		dao.update("admin.restoreIser", id);
+	}
+
 
 
 
