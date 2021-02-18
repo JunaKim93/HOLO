@@ -67,4 +67,25 @@ caption{
    color: #fff;
 }
 
+#location{
+   margin-left: 50px;
+   box-sizing: content-box;
+   background: #fff;
+   font-size: 18px;
+}
+
+.bottom input[type="submit"]{
+   margin-top:40px;
+      border: 1px solid #ddd;
+   width: 200px;
+   padding: 10px 20px;
+   background-color: #1e57a4;
+   color: #fff;
+}
+
+.bottom input[type="button"]{
+      border: 1px solid #ddd;
+   background-color: #1e57a4;
+   color: #fff;
+}
 

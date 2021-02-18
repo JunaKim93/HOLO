@@ -36,6 +36,7 @@
       <ul>
          <li>
          	<select name="location" id="location" onchange="setLocation()">
+         		<option value="0">---지역 선택---</option>
 		    	<option value="1">서울</option>
 		    	<option value="2">강원</option>
 		    	<option value="3">인천/경기</option>
@@ -45,17 +46,17 @@
 		    	<option value="7">부산/경남</option>
 			</select>
 			<div class="map_wrap">
-			    <div id="map" style="width:1000px;height:600px;"></div>
-			    <div class="hAddr">
+			    <div id="map" style="display:block; 900px;height:600px;margin-left:50px;margin-top:20px"></div>
+            	<div class="hAddr">
 			        <span class="title">지도중심기준 주소정보</span>
 			        <span id="centerAddr"></span>
 			    </div>
 			    <br>
 			    <div align="center" style="margin-top:10px;">
 				[위치 검색] <br>
-				<input type="text" id="keyword" />
-				<button type="button" onClick="set_keyword()" >검색</button>
-				<c:if test="${sessionScope.sessionId != null }">
+				<input type="text" width="1600px" id="keyword" />
+				<button type="button" style="background-color: #1e57a4; color:#fff;padding:3px 3px;font-size:11px;margin-left:2px;border:none;"  onClick="set_keyword()" >검색</button>
+            <c:if test="${sessionScope.sessionId != null }">
 					<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
 						<input type="hidden" name="lat" value="" />
 						<input type="hidden" name="lng" value="" />
