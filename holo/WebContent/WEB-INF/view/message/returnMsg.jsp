@@ -25,7 +25,7 @@ function submit(){
 					<dl>
 						<dt>받는사람ID</dt>
 						<dd>
-							${receiver}
+							<a href="/holo/member/userInfo.holo?id=${receiver}">${receiver}</a>
 						</dd>
 					</dl>
 					<dl>

@@ -38,7 +38,7 @@
 					<div style="width:40px"><c:out value="${num}"/></div>
 					<c:set var="num" value="${num-1}"/>
 					<div style="width:240px"><a href="/holo/message/msgView_s.holo?msgnum=${msg.msgnum}">${msg.subject}</a></div>
-					<div style="width:100px">${msg.receiver}</div>
+					<div style="width:100px"><a href="/holo/member/userInfo.holo?id=${msg.receiver}">${msg.receiver}</a></div>
 					<div style="width:160px"><fmt:formatDate value="${msg.senddate}" pattern="yyyy-MM-dd hh:mm"/></div>
 					<div><c:if test="${msg.readcount ==0}">안읽음</c:if><c:if test="${msg.readcount > 0 }">읽음</c:if></div>
 				</div>
