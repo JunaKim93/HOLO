@@ -24,7 +24,7 @@
             <div class="idx_board">
                 <div class="title">
                 <a href="/holo/notice/list.holo" class="name">공지사항</a>
-                <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+                <a href="/holo/notice/list.holo" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
                 </div>
 	            <div class="list">
 	               <ul>
@@ -51,7 +51,7 @@
             <div class="idx_board">
                <div class="title">
                <a href="/holo/com/list.holo" class="name">자유게시판</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+               <a href="/holo/best/comlist.holo" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
             </div>
             <div class="list">   
                <ul>
@@ -85,7 +85,7 @@
             <div class="idx_board">
                <div class="title">
                <a href="/holo/diy/list.holo" class="name">인테리어</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+               <a href="/holo/best/diylist.holo" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
             </div>
             <div class="list">   
                <ul>
@@ -118,8 +118,8 @@
             
             <div class="idx_board">
                <div class="title">
-               <a href="#" class="name">생활정보</a>
-               <a href="#" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
+               <a href="/holo/infoboard/list.holo" class="name">생활정보</a>
+               <a href="/holo/best/infolist.holo" class="more"><img src="../resource/image/more.PNG" alt="더 보기"></a>
             </div>
             <div class="list">   
                <ul>
