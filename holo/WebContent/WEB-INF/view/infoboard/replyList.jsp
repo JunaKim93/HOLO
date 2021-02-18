@@ -141,7 +141,7 @@
          <div>
          	<c:if test="${count == 0}">
          	<div>
-         		<div class="title">
+         		<div width="200" style="text-align: center;">
          		등록된 댓글이 없습니다.
          		</div>
          	</div>
