@@ -43,7 +43,6 @@
 		<typeAlias alias="HolonoticeDTO" type="holo.notice.HolonoticeDTO"/>
 
 		
-		<typeAlias alias="searchRplDTO" type="holo.board.search.dto.SearchRplDTO" />
 		<typeAlias alias="searchDTO" type="holo.board.search.dto.SearchDTO" />
 		<typeAlias type="holo.guide.AddressDTO" alias="addrDTO"/>
 		<typeAlias alias="adminDTO" type="holo.holouser.AdminDTO" />

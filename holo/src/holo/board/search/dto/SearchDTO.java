@@ -65,10 +65,10 @@ public class SearchDTO {
 	}
 	public String getCategory_aName() {
 		switch (category_a) {
-			case "tip":
+			case "living":
 			category_aName = "생활 TIP";
 			break;
-		case "cook":
+		case "cooking":
 			category_aName = "자취요리 TIP";
 			break;
 		case "findplace":

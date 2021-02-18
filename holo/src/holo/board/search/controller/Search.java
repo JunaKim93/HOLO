@@ -77,25 +77,6 @@ public class Search {
 		return boardName;
 	}
 	
-	public static String modifyRplBoardName(String board) {
-		String rplBoardName = null;
-		switch(board) {
-		case "living":
-			rplBoardName = "infoRep";
-			break;
-		case "market":
-			rplBoardName = "marketReply";
-			break;
-		case "diy":
-			rplBoardName = "diyReply";
-			break;
-		case "community":
-			rplBoardName = "communityReply";
-			break;
-		}
-		return rplBoardName;
-	}
-	
 	
 	public static String modifySearchBoardName(String board) {
 		String searchBoardName = null;

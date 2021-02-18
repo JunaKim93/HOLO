@@ -5,16 +5,6 @@
   
 <mapper namespace="search">
 
-<!-- 	<select id="getBoardSearchRplList" resultType="searchRplDTO" parameterType="HashMap"> -->
-<!-- 		select * from(  -->
-<!-- 			select articlenum, id, content, regDate, rownum r from( -->
-<!-- 				select articlenum, id, content, regDate from(  -->
-<!-- 					select articlenum, id, content, regDate from( -->
-<!-- 					select * from ${board} where ${choice} like '%' || #{search} || '%') -->
-<!-- 				) order by regDate desc)) -->
-<!-- 		<![CDATA[ where r >= ${start} and r <= ${end}]]> -->
-<!-- 	</select>	 -->
-
 	<select id="getBoardSearchList" resultType="searchDTO" parameterType="HashMap">
 		select * from( 
 			select articleNum, category_a,category_b, id, subject, content, viewCount, regDate, rownum r from(
@@ -24,25 +14,7 @@
 				) order by regDate desc))
 		<![CDATA[ where r >= ${start} and r <= ${end}]]>
 	</select>	
-	
-<!-- 	<select id="getSearchRplList" resultType="searchRplDTO" parameterType="HashMap"> -->
-<!-- 		select * from(  -->
-<!-- 			select articlenum, id, content, regDate, rownum r from( -->
-<!-- 				select articlenum, id, content, regDate from(  -->
-<!-- 					select articlenum, id, content, regDate from( -->
-<!-- 					select * from diyReply where ${choice} like '%' || #{search} || '%') -->
-<!-- 					union -->
-<!-- 					select articlenum, id, content, regDate from( -->
-<!-- 					select * from marketReply where ${choice} like '%' || #{search} || '%') -->
-<!-- 					union -->
-<!-- 					select articlenum, id, content, regDate from( -->
-<!-- 					select * from communityReply where ${choice} like '%' || #{search} || '%') -->
-<!-- 					union -->
-<!-- 					select articlenum, id, content, regDate from( -->
-<!-- 					select * from infoRep where ${choice} like '%' || #{search} || '%') -->
-<!-- 				) order by regDate desc)) -->
-<!-- 		<![CDATA[ where r >= ${start} and r <= ${end}]]> -->
-<!-- 	</select>	 -->
+
 	
 	<select id="getSearchList" resultType="searchDTO" parameterType="HashMap">
 		select * from( 
@@ -79,23 +51,6 @@
 			select count(*) as count from communityBoard <include refid="search" />
 			)
 	</select>
-
-<!-- 	<select id="boardSearchRplCount" resultType="int" parameterType="HashMap"> -->
-<!-- 		select count(*) as count from ${board} where ${choice} like '%' || #{search} || '%' -->
-<!-- 	</select> -->
-			
-<!-- 	<select id="searchRplCount" resultType="int" parameterType="HashMap"> -->
-<!-- 	 	select sum(count) from ( -->
-<!-- 			select count(*) as count from diyReply where ${choice} like '%' || #{search} || '%' -->
-<!-- 			union -->
-<!-- 			select count(*) as count from infoRep where ${choice} like '%' || #{search} || '%' -->
-<!-- 			union -->
-<!-- 			select count(*) as count from marketReply where ${choice} like '%' || #{search} || '%' -->
-<!-- 			union -->
-<!-- 			select count(*) as count from communityReply where ${choice} like '%' || #{search} || '%' -->
-<!-- 			) -->
-<!-- 	</select> -->
-	
 	
 	<sql id="search">
 		<choose>
