@@ -303,9 +303,7 @@
                </dl>   
             </div>
             <div class="content">
-                <pre>   
-                
-                
+                <pre>                  
           <table align="center" width="970px" height="300px">
             <tr>
                <td width="35%"><img
@@ -355,7 +353,7 @@
 						</c:if>
 							<td>${article.id}</td>
                 </table></div>
-                </table></tr>
+                </table>
                 <c:if test="${article.id eq sessionScope.sessionId}">
                 <div class="reSell">
                       <li><a href='javascript:void(0);' onclick="newArticle();">새 글로 등록</a></li>
@@ -385,32 +383,34 @@
          </c:if>
       </div>
       </form>
+      </div>
+      </div>
+      
       <!-- 댓글부분 -->
    </div>
-   <br />
-   <c:if test="${sessionScope.sessionId ne null}">
-   <div align="center">
-      <br />
-      <textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
-      <textarea rows="5" cols="80" id="replytext" style="resize: none;"
-         placeholder="댓글을 작성해주세요!"></textarea>
-      <br />
-      <div class="rpl_wrap">
-      <button type="button" id="insertRplBtn">댓글 작성</button>
-      </div>
-   </div>
-   </c:if>
-   <c:if test="${sessionScope.sessionId eq null}">
-      <div align="center">
-         <br />
-         <textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
-         <align="center">로그인 후 댓글 작성이 가능합니다.</align>
-      </div></div>
-   </c:if>
-   <br />
-   <br />
-   <div align="center" id="replyList"></div>
-
+		<br/>
+		<br/>
+	<div align="center" id="replyList"></div>
+	<br />
+	<c:if test="${sessionScope.sessionId ne null}">
+		<div align="center">
+			<br />
+			<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+			<textarea rows="5" cols="80" id="replytext" style="resize: none;"
+				placeholder="댓글을 작성해주세요!"></textarea>
+			<br />
+			<button type="button" id="insertRplBtn">댓글 작성</button>
+		</div>
+	</c:if>
+	<c:if test="${sessionScope.sessionId eq null}">
+		<div align="center">
+			<br />
+			<textarea id="sessionId" style="display: none;">${sessionScope.sessionId}</textarea>
+			<div align="center">로그인 후 댓글 작성이 가능합니다.</div>
+		</div>
+	</c:if>
+	<br />
+	<br />
 </div>
 </body>
 </html>

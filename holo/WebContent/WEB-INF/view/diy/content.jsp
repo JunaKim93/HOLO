@@ -357,7 +357,8 @@
 				</c:if>
 			</div>
 		</div>
-	</div>
+		<br/>
+		<br/>
 	<div align="center" id="replyList"></div>
 	<br />
 	<c:if test="${sessionScope.sessionId ne null}">
@@ -379,7 +380,7 @@
 	</c:if>
 	<br />
 	<br />
-
+</div>
 </body>
 </html>
 <%@ include file="/WEB-INF/view/foot.jsp" %>
