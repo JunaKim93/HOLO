@@ -32,7 +32,7 @@
 </head>
 <body>
    <div class="guide">
-      <h2>거주지 설정하기</h2>
+      <h2>거주지 설정하기</h2>  <h3><a href="/holo/guide/map_places.holo">주변 편의시설 확인하기</a></h3>
       <ul>
          <li>
          	<select name="location" id="location" onchange="setLocation()">

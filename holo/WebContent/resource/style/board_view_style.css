@@ -134,7 +134,7 @@ div{
 }
 
 .board_view .content{
-   padding: 15px;
+   padding: 35px 15px 35px 15px;
    border-bottom: 1px solid #000;
    line-height: 160%;
    font-size: 1.4rem;
