@@ -20,6 +20,7 @@ a{
    color: inherit;
 }
 
+
 .board_wrap{
      width:1100px; 
    margin: 300px auto !important;
@@ -180,6 +181,12 @@ div{
 
 .board_view .info dl:first-child:before {
    display: none;   
+}
+
+.board_view img {
+  width: 60%;
+  height: auto;
+  object-fit: cover;
 }
 
 .thumbnail1 th, td, tr{
