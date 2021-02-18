@@ -63,7 +63,7 @@
 	            <div class="title">
 					${list.reason} 
 		        </div>
-	            <div class="writer">${list.id}</div>
+	            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</div>
 	            <div class="num"></div>
             </c:forEach>
          </div>

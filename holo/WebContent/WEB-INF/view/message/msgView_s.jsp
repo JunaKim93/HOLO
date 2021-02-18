@@ -40,7 +40,7 @@ function del_confirm(){
 				</dl>
 				<dl>
 					<dt>받은사람</dt>
-					<dd>${msg.receiver}</dd>
+					<dd><a href="/holo/member/userInfo.holo?id=${msg.receiver}">${msg.receiver}</a></dd>
 				</dl>
 				<dl>
 					<dt>작성시각</dt>

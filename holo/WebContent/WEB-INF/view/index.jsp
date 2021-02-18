@@ -51,7 +51,7 @@
                
             </c:if>
                <li><a href="/holo/notice/list.holo" >공지사항</a></li>
-               <li><a href="#">고객센터</a></li>
+               <li><a href="/holo/member/siteMap.holo">사이트맵</a></li>
             </ul>
          </div>
       </form> 
@@ -60,11 +60,11 @@
       <div class="menu_wrap">
       <ul class="dep1">
          <li>
-            <a href="/holo/guide/location_map.holo" >초보자가이드</a>
+            <a href="/holo/guide/hologuide.holo" >초보자가이드</a>
             <ul class="dep2">
                <li><a href="/holo/guide/hologuide.holo" >집 구하기 가이드</a></li>
                <li><a href="#">시세</a></li>
-               <li><a href="/holo/guide/map_places.holo" >상권</a></li>
+               <li><a href="/holo/guide/location_map.holo" >상권</a></li>
                <li><a href="#">교통</a></li>
             </ul>
          </li>   

@@ -328,5 +328,8 @@ public class HolouserBean {
 		return "member/userInfo";
 	}
 	
-	
+	@RequestMapping("siteMap.holo")
+	public String siteMap() {
+		return "member/siteMap";
+	}
 }
