@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import holo.board.search.dto.SearchDTO;
-import holo.board.search.dto.SearchRplDTO;
 import holo.board.search.service.SearchService;
 
 @Controller
@@ -29,14 +28,12 @@ public class SearchBean {
 	public String searchList(@RequestParam(defaultValue = "1") int pageNum, String board, String choice, String search,
 			Model model) throws Exception {
 		List<SearchDTO> list = null;
-		List<SearchRplDTO> rplList = null;
 		int pageSize = 10;
 		int currentPage = pageNum;
 		int start = (currentPage - 1) * pageSize + 1;
 		int end = currentPage * pageSize;
 		int number = 0;
 		int count = 0;
-		int rplCount = 0;
 		int cp = currentPage - 1;
 		int startPage = (int) (cp / 5) * 5 + 1;
 		int pages = 5;
@@ -84,7 +81,6 @@ public class SearchBean {
 		model.addAttribute("choice", choice);
 		model.addAttribute("search", search);
 		model.addAttribute("list", list);
-		model.addAttribute("rplList", rplList);
 		model.addAttribute("board", board);
 		model.addAttribute("searchBoard", searchBoard);
 		return "search/searchList";
