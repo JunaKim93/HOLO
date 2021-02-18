@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../resource/style/guide_style.css">
 
 <style type='text/css'>
-	#btn-link { background-color:blue;
+	#btn-link { background-color: #1e57a4;;
 				color: #fff;
 				margin: 20px auto;
 				width: 200px;
