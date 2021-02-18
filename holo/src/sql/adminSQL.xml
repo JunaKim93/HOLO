@@ -61,6 +61,40 @@
 	<delete id="cancelRpt" parameterType="HashMap">
 		delete from ${tablename} where articlenum=#{articlenum}
 	</delete>
+
+
+
+	<!--  회원 정보 출력  -->
 	
+	<select id="getUsers" resultType="holouserDTO" parameterType="HashMap">
+		select id, name, phone, email, gender, point, levels, joindate, status, authkey, r from
+		(select id, name, phone, email, gender, point, levels, joindate, status, authkey, rownum r from
+		(select u.id, name, phone, email, gender, point, levels, joindate, status, address as authkey from 
+			holouser u left outer join useraddress a on (u.id = a.id) order by joindate desc))
+		<![CDATA[where r>=#{start} and r<=#{end}]]>
+	</select>
+
+	<select id="getUserCount" resultType="int">
+		select count(*) from holouser
+	</select>
+
+
+
+	<!--  포인트 선물하기 -->
+	<update id="pointGift" parameterType="HashMap">
+		update holouser set point = point+#{pointGift} where id = #{id}
+	</update>
+
+	
+	<!-- 회원 정지/복구  -->
+	<update id="deleteUser" parameterType="String">
+		update holouser set status = 2, authkey= '' where id = #{id}
+	</update>
+	<update id="restoreIser" parameterType="String">
+		update holouser set status = 1 where id = #{id}
+	</update>
+	
+
+
 	
 </mapper>

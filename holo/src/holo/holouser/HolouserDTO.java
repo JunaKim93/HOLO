@@ -17,7 +17,6 @@ public class HolouserDTO {
 	private String ch;
 	private String authkey;
 	private int status;
-
 	
 	
 	

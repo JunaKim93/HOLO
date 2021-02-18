@@ -141,7 +141,7 @@
          <div>
          	<c:if test="${count == 0}">
          	<div>
-         		<div class="title">
+         		<div width="200" style="text-align: center;">
          		등록된 댓글이 없습니다.
          		</div>
          	</div>
@@ -162,7 +162,7 @@
 							 <a href="javascript:void(0)" onclick="fn_deleteReply(${list.repnum})" >삭제</a>
 							</c:if>
 			            </div>
-			            <div class="writer">${list.id}</div>
+			            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
 			            <div class="count">
 			            <button id="replikesUpdate" onclick="replikesUpdate_click(${list.repnum})" >👍
 			            <span id="replikesCount">${list.likes}</span></button> &nbsp;

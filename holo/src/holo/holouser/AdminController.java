@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import holo.board.information.DTO.InfoBoardDTO;
 import holo.holouser.service.AdminService;
 
 @Controller
@@ -68,7 +70,7 @@ public class AdminController {
 				reportList = adminDAO.getRpts(articlenum, tablename);
 				
 			}else {
-				System.out.println("Ä«Å×°í¸® ¿¡·¯");
+				System.out.println("Ä«ï¿½×°ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			model.addAttribute("reportList", reportList);
 			model.addAttribute("boardname", boardname);
@@ -132,6 +134,79 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return "admin/cancelRpt";
+	}
+	
+	@RequestMapping("allUsers.holo")
+	public String allUsers(@RequestParam(defaultValue="1", required=true)int pageNum, Model model) {
+		try {
+			List <HolouserDTO> userList = null;
+			int pageSize = 20;							
+			int currentPage = pageNum;					
+			int start = (currentPage - 1) * pageSize+1;	
+			int end = currentPage * pageSize;			
+			int number = 0;								
+			int count = 0;								
+			count = adminDAO.getUserCount();
+			int cp = 0;
+			cp = currentPage-1;
+			int startPage = (int)(cp/5)*5+1;			
+			int pages = 5;								
+			int endPage = startPage+pages-1;			
+			int pageCount = 0;							
+			if(count >0) {
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
+				userList = adminDAO.getUsers(start, end);
+			
+			}else {
+				userList = Collections.EMPTY_LIST;
+			}
+			number = count - (currentPage-1)*pageSize;		
+		
+			model.addAttribute("userList", userList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("count", count);
+			model.addAttribute("num",number);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "admin/allUsers";
+	}
+	
+
+	@RequestMapping("pointGift.holo")
+	public String pointGift(int pointGift, String id, Model model) {
+		try {
+			adminDAO.pointGift(pointGift, id);
+			
+			model.addAttribute("id", id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "admin/pointGift";
+	}
+	
+	@RequestMapping("deleteUser.holo")
+	public String deleteUser(String id) {
+		adminDAO.deleteUser(id);
+		
+		return "admin/deleteUser";
+	}
+	
+	@RequestMapping("restoreUser.holo")
+	public String restoreUser(String id) {
+		adminDAO.restoreUser(id);
+		return "admin/restoreUser";
 	}
 
 }

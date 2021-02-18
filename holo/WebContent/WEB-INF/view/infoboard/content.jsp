@@ -165,7 +165,7 @@
             </dl>
             <dl>
                <dt>글쓴이</dt>
-               <dd>${dto.id}</dd>
+               <dd><a href="/holo/member/userInfo.holo?id=${dto.id}">${dto.id}</a></dd>
             </dl>
             <dl>
                <dt>작성일</dt>
@@ -202,7 +202,7 @@
 
 	<!-- 댓글 리스트 출력 -->
 
-   <div id="replyList"></div>
+   <div id="replyList" style="margin-top:-150px;"></div>
    
 </body>
 </html>

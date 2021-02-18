@@ -81,7 +81,7 @@
 						</c:if> 
 						</a>
 					</div>
-		            <div class="writer">${list.id}</div>
+		            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
 		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
 		            <div class="count">${list.viewcount}</div>
 		        </div>

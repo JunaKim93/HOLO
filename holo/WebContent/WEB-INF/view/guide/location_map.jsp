@@ -19,6 +19,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b158e03ff2517acea2f1f0618a14601&libraries=services,clusterer,drawing"></script>
 <style>
+	header{z-index:3;}
+	footer{margin-top:200px;}
 	.map_wrap {width:100%;height:350px;padding:0 auto;}
     .title {font-weight:bold;display:block;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
@@ -43,7 +45,7 @@
 		    	<option value="7">부산/경남</option>
 			</select>
 			<div class="map_wrap">
-			    <div id="map" style="width:900px;height:600px;"></div>
+			    <div id="map" style="width:1000px;height:600px;"></div>
 			    <div class="hAddr">
 			        <span class="title">지도중심기준 주소정보</span>
 			        <span id="centerAddr"></span>
@@ -69,6 +71,9 @@
          </ul>
       </div>
 </body>
+<footer>
+<%@ include file="/WEB-INF/view/foot.jsp" %>
+</footer>
 </html>
 <script>
 
@@ -229,4 +234,3 @@
 	
 	
 </script>
-<%@ include file="/WEB-INF/view/foot.jsp" %>
