@@ -23,7 +23,7 @@
 </head>
 <body>
    <!-- 타이틀 -->
-   <div class="site_wrap">
+   <div class="site_wrap" style="margin-bottom:400px;">
       <div class="sitemap_title">
          <strong><a href="/holo/member/siteMap.holo">사이트맵</a></strong>
          <p>HOLO 사이트를 한 눈에 볼 수 있는 사이트맵입니다.</p>
