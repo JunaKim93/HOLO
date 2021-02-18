@@ -166,12 +166,14 @@ public class MarketBean {
 	}
 
 	@RequestMapping("updateForm.holo")
-	public String logon_updateForm(int articlenum, int pageNum, Model model) throws Exception {
+	public String logon_updateForm(String category_a, String category_b, int articlenum, int pageNum, Model model) throws Exception {
 		MarketBoardDTO article = MarketDAO.getArticle(articlenum);
 
 		model.addAttribute("articlenum", new Integer(articlenum));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("article", article);
+		model.addAttribute("category_a", category_a);
+		model.addAttribute("category_b", category_b);
 
 		return "/market/updateForm";
 	}

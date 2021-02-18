@@ -36,11 +36,15 @@
 			window.location.href = "deletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&category_b=${article.category_b}";
 		}
 	}
-	function deleteRepConfirm(repNum) {
-		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "rplDeletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&repNum="
-					+ repNum;
-		}
+	function deleteRepConfirm(repNum,id) {
+		if(id == "${sessionScope.sessionId}"){
+			if (confirm("삭제하시겠습니까?")) {
+				window.location.href = "rplDeletePro.holo?articlenum=${article.articlenum}&pageNum=${pageNum}&repNum="
+						+ repNum;
+			}
+		 }else{
+			  alert("작성자만 삭제가 가능합니다!");
+		 }
 	}
 
 	function reportArticle(articlenum, subject) {
@@ -121,7 +125,9 @@
 										+ '\')">수정</a>&nbsp;&nbsp;';
 								output += '<a style="text-decoration:none" href="javascript:void(0)" onclick="deleteRepConfirm('
 										+ result[i].repNum
-										+ ');">삭제</a></font></td>';
+			                            + ',\''
+			                            + result[i].id
+										+ '\')">삭제</a></font></td>';
 								output += '<td align="center" width="100">';
 								output += '<button id="replikesUpdate" style="background-color:white;" onclick="replikesUpdate_click('
 										+ result[i].repNum
@@ -149,6 +155,8 @@
 	}
 
 	function updateReplyForm(repNum, id, content, likes, regDate) {
+		var sessionId = "${sessionScope.sessionId}";
+	 	if(id == sessionId){
 		var htmls = "";
 		htmls += '<tr id="repNum' + repNum + '">';
 		htmls += '<td align="center" width="100">' + id + '</td>';
@@ -162,6 +170,9 @@
 
 		$('#repNum' + repNum).replaceWith(htmls);
 		$('#repNum' + repNum + '#updateContent').focus();
+	 	}else{
+			  alert("작성자만 수정이 가능합니다!");
+		  }
 	}
 
 	function updateReply(repNum, id) {
