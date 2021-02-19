@@ -98,7 +98,6 @@ public class MarketBean {
 			int pages = 5;							
 			int endPage = startPage+pages-1;			
 			int pageCount = 0;	
-			int repCount = 0;
 			
 			if(choice != null && search != null) {
 				count = MarketDAO.getSearchCount(category_a, category_b, choice, search);
@@ -116,10 +115,6 @@ public class MarketBean {
 						String id = articleList.get(i).getId();
 						int level = memberDAO.getLevels(id);
 						articleList.get(i).setLevels(level);
-						
-						int articlenum = articleList.get(i).getArticlenum();
-						repCount = MarketDAO.getRepCount(articlenum);
-						articleList.get(i).setRepCount(repCount);
 					}
 				} else {
 					articleList = Collections.EMPTY_LIST;
@@ -134,10 +129,6 @@ public class MarketBean {
 						String id = articleList.get(i).getId();
 						int level = memberDAO.getLevels(id);
 						articleList.get(i).setLevels(level);
-						
-						int articlenum = articleList.get(i).getArticlenum();
-						repCount = MarketDAO.getRepCount(articlenum);
-						articleList.get(i).setRepCount(repCount);
 					}
 				} else {
 					articleList = Collections.EMPTY_LIST;

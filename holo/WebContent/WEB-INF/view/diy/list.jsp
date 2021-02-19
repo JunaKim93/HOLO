@@ -71,7 +71,7 @@
 							<div class="title">
 								<a
 									href="/holo/diy/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
-									${list.subject}<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a> 
+									${list.subject}</a>
 							</div>
 
 							<div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">

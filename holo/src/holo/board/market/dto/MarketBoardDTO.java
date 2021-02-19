@@ -17,7 +17,6 @@ public class MarketBoardDTO {
 	private String condition;
 	private String dealing;
 	private int levels;
-	private int repCount;
 	
 	
 
@@ -106,13 +105,6 @@ public class MarketBoardDTO {
 	public void setLevels(int levels) {
 		this.levels = levels;
 	}
-	public int getRepCount() {
-		return repCount;
-	}
-	public void setRepCount(int repCount) {
-		this.repCount = repCount;
-	}
-	
 	
 	
 }

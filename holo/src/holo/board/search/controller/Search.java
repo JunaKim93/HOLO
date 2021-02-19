@@ -76,39 +76,6 @@ public class Search {
 		}
 		return boardName;
 	}
-	public static String modifyCateAToBoardName(String category_a) {
-		String boardName = null;
-		switch (category_a) {
-		case "living":
-		boardName = "infoRep";
-		break;
-	case "cooking":
-		boardName = "infoRep";
-		break;
-	case "findplace":
-		boardName = "infoRep";
-		break;
-	case "market":
-		boardName = "marketReply";
-		break;
-	case "free":
-		boardName = "marketReply";
-		break;
-	case "group":
-		boardName = "marketReply";
-		break;
-	case "myroom":
-		boardName = "diyReply";
-		break;
-	case "1":
-		boardName = "communityReply";
-		break;
-	case "2":
-		boardName = "communityReply";
-		break;
-	}
-		return boardName;
-	}
 	
 	
 	public static String modifySearchBoardName(String board) {

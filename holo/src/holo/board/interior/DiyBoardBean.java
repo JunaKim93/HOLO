@@ -30,44 +30,43 @@ public class DiyBoardBean {
 
 	@Autowired
 	private InteriorBoardService diyBoardDAO = null;
-
+	
 	@Autowired
 	private HolouserService memberDAO = null;
 
+
 	@RequestMapping("writeForm.holo")
-	public String logon_writeForm(@RequestParam(defaultValue = "tip", required = false) String category_b,
-			Model model) {
+	public String logon_writeForm(@RequestParam(defaultValue="tip", required=false) String category_b, Model model) {
 		model.addAttribute("category_b", category_b);
 		return "/diy/writeForm";
 	}
 
 	@RequestMapping("writePro.holo")
-	public String logon_writePro(DiyBoardDTO dto, Model model) throws Exception {
+	public String logon_writePro(DiyBoardDTO dto,Model model) throws Exception {
 		String content = dto.getContent();
 		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
 		Matcher match = pattern.matcher(content);
 		String imgTag = null;
-		if (match.find()) { // 이미지 태그를 찾았다면,,
-			imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+		if(match.find()){ // 이미지 태그를 찾았다면,,
+		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
 			String target = "save/";
-			int target_num = imgTag.indexOf(target);
-			String result;
-			result = "/holo/save/"
-					+ imgTag.substring(target_num + 5, (imgTag.substring(target_num).indexOf("\">") + target_num));
+			int target_num = imgTag.indexOf(target); 
+			String result; 
+			result = "/holo/save/" + imgTag.substring(target_num+5,(imgTag.substring(target_num).indexOf("\">")+target_num));				
 			dto.setThumbnail(result);
-		} else {
+		}else {
 			dto.setThumbnail("No Thumbnail");
 		}
 		diyBoardDAO.insert(dto);
 		String cate_b = dto.getCategory_b();
-		model.addAttribute("category_b", cate_b);
+		model.addAttribute("category_b",cate_b);
 		return "/diy/writePro";
 	}
 
 	@RequestMapping("list.holo")
-	public String list(@RequestParam(defaultValue = "1", required = true) int pageNum,
-			@RequestParam(defaultValue = "tip", required = false) String category_b, String choice, String search,
-			Model model) throws Exception {
+	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
+						@RequestParam(defaultValue="tip", required=false) String category_b, 
+						String choice, String search, Model model) throws Exception {
 		String category_a = "myroom";
 
 		List<DiyBoardDTO> articleList = null;
@@ -83,54 +82,37 @@ public class DiyBoardBean {
 		int pages = 5;
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
-		int repCount = 0;
-
-		if (choice != null && search != null) {
+		
+		if(choice != null && search != null) {
 			count = diyBoardDAO.getSearchCount(category_b, choice, search);
-		} else {
+		}else{
 			count = diyBoardDAO.getArticleCount(category_a, category_b);
 		}
 
-		if (choice != null && search != null) {
+		if(choice != null && search != null) {
 			if (count > 0) {
-				pageCount = (int) (count / pageSize) + (count % pageSize == 0 ? 0 : 1);
-				if (endPage > pageCount) {
-					endPage = pageCount;
-				}
-				if (currentPage > endPage) {
-					currentPage -= 1;
-				}
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
 				articleList = diyBoardDAO.getSearchArticles(category_b, choice, search, start, end);
-				for (int i = 0; i < articleList.size(); i++) {
+				for(int i=0; i <articleList.size(); i++) {
 					String id = articleList.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					articleList.get(i).setLevels(level);
-					
-					int articlenum = articleList.get(i).getArticlenum();
-					repCount = diyBoardDAO.getRepCount(articlenum);
-					articleList.get(i).setRepCount(repCount);
 				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}
-		} else {
+		}else {
 			if (count > 0) {
-				pageCount = (int) (count / pageSize) + (count % pageSize == 0 ? 0 : 1);
-				if (endPage > pageCount) {
-					endPage = pageCount;
-				}
-				if (currentPage > endPage) {
-					currentPage -= 1;
-				}
+				pageCount = (int)(count / pageSize) + (count % pageSize == 0 ? 0:1);
+				if(endPage > pageCount) {endPage = pageCount;}
+				if(currentPage > endPage) {currentPage -= 1;}
 				articleList = diyBoardDAO.getArticles(category_a, category_b, start, end);
-				for (int i = 0; i < articleList.size(); i++) {
+				for(int i=0; i <articleList.size(); i++) {
 					String id = articleList.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					articleList.get(i).setLevels(level);
-					
-					int articlenum = articleList.get(i).getArticlenum();
-					repCount = diyBoardDAO.getRepCount(articlenum);
-					articleList.get(i).setRepCount(repCount);
 				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
@@ -151,12 +133,12 @@ public class DiyBoardBean {
 		model.addAttribute("choice", choice);
 		model.addAttribute("search", search);
 		model.addAttribute("category_b", category_b);
+		
 
 		return "/diy/list";
 	}
-
 	@RequestMapping("showList.holo")
-	public String list(@RequestParam(defaultValue = "1", required = true) int pageNum, Model model) throws Exception {
+	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, Model model) throws Exception {
 		int pageSize = 5;
 		int currentPage = pageNum;
 		int start = (currentPage - 1) * pageSize + 1;
@@ -171,20 +153,15 @@ public class DiyBoardBean {
 		int pageCount = 0;
 		String category_a = "myroom";
 		String category_b = "show";
-		int repCount = 0;
-
+		
 		List<DiyBoardDTO> showList = null;
-		count = diyBoardDAO.getArticleCount(category_a, category_b);
+		count = diyBoardDAO.getArticleCount(category_a,category_b);
 		if (count > 0) {
 			showList = diyBoardDAO.getArticles(category_a, category_b, start, end);
-			for (int i = 0; i < showList.size(); i++) {
+			for(int i=0; i <showList.size(); i++) {
 				String id = showList.get(i).getId();
 				int level = memberDAO.getLevels(id);
 				showList.get(i).setLevels(level);
-				
-				int articlenum = showList.get(i).getArticlenum();
-				repCount = diyBoardDAO.getRepCount(articlenum);
-				showList.get(i).setRepCount(repCount);
 			}
 		} else {
 			showList = Collections.EMPTY_LIST;
@@ -205,9 +182,9 @@ public class DiyBoardBean {
 		return "/diy/showList";
 	}
 
+
 	@RequestMapping("content.holo")
-	public String tip(@RequestParam(defaultValue = "1") int pageNum, int articlenum, HttpSession session, Model model)
-			throws Exception {
+	public String tip(@RequestParam(defaultValue="1") int pageNum, int articlenum, HttpSession session, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
 		diyBoardDAO.updateViewCount(articlenum);
 		List<DiyReplyDTO> replyList = null;
@@ -215,9 +192,9 @@ public class DiyBoardBean {
 		String id = article.getId();
 		int level = memberDAO.getLevels(id);
 		article.setLevels(level);
-		String sessionId = (String) session.getAttribute("sessionId");
+		String sessionId = (String)session.getAttribute("sessionId");
 		boolean sessionCheck = true;
-		if (sessionId == null) {
+		if(sessionId == null) {
 			sessionCheck = false;
 		}
 
@@ -230,6 +207,7 @@ public class DiyBoardBean {
 		return "/diy/content";
 	}
 
+	 
 	@RequestMapping("updateForm.holo")
 	public String logon_updateForm(int articlenum, int pageNum, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
@@ -257,7 +235,7 @@ public class DiyBoardBean {
 		model.addAttribute("category_b", cate_b);
 		return "/diy/deletePro";
 	}
-
+	
 	@RequestMapping("rplDeletePro.holo")
 	public String logon_rplDeletePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
 		diyBoardDAO.deleteRpl(dto);
@@ -272,43 +250,45 @@ public class DiyBoardBean {
 		model.addAttribute("articlenum", articlenum);
 		return "/diy/reportArticle";
 	}
-
+	
 	@RequestMapping("reportArticlePro.holo")
 	public String logon_boardReportPro(DiyReportDTO dto, Model model) throws Exception {
 		int check = 1;
 		int articlenum;
 		check = diyBoardDAO.checkAReport(dto);
-		if (check == 0) {
+		if(check == 0) {
 			diyBoardDAO.insertAReport(dto);
-			articlenum = dto.getArticlenum();
+			articlenum=dto.getArticlenum();
 			diyBoardDAO.updateAReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/diy/reportArticlePro";
 	}
-
+	
 	@RequestMapping("reportReply.holo")
 	public String logon_replyReport(int repNum, String content, Model model) throws Exception {
 		model.addAttribute("content", content);
 		model.addAttribute("repNum", repNum);
 		return "/diy/reportReply";
 	}
-
+	
 	@RequestMapping("reportReplyPro.holo")
 	public String logon_replyReportPro(DiyRplReportDTO dto, Model model) throws Exception {
 		int check = 1;
-		int articlenum = 0;
+		int articlenum=0;
 		check = diyBoardDAO.checkRReport(dto);
-		if (check == 0) {
+		if(check == 0) {
 			diyBoardDAO.insertRReport(dto);
-			articlenum = diyBoardDAO.getarticlenum(dto.getRepNum());
+			articlenum=diyBoardDAO.getarticlenum(dto.getRepNum());
 			diyBoardDAO.updateRReport(articlenum);
 		}
 		model.addAttribute("check", check);
 		return "/diy/reportReplyPro";
 	}
 
+	
 	// 댓글 프론트 출력
+	
 
 //	@RequestMapping("rplWritePro.holo")
 //	public String rplWritePro(DiyReplyDTO dto, int pageNum, Model model) throws Exception {
@@ -329,7 +309,8 @@ public class DiyBoardBean {
 //		}
 //		return repList;
 //	}
-
+	
+	
 	/////////////////////////// 파일 업로드 테스트
 //
 //	@RequestMapping("fileTestForm.holo")

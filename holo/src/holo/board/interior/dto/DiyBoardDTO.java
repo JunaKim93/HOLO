@@ -16,7 +16,6 @@ public class DiyBoardDTO {
 	private Timestamp regDate;
 	private String thumbnail;
 	private int levels;
-	private int repCount;
 	
 	public int getArticlenum() {
 		return articlenum;
@@ -75,7 +74,7 @@ public class DiyBoardDTO {
 	public Timestamp getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Timestamp regDate) {
+	public void setRegdate(Timestamp regDate) {
 		this.regDate = regDate;
 	}
 	public String getThumbnail() {
@@ -90,13 +89,6 @@ public class DiyBoardDTO {
 	public void setLevels(int levels) {
 		this.levels = levels;
 	}
-	public int getRepCount() {
-		return repCount;
-	}
-	public void setRepCount(int repCount) {
-		this.repCount = repCount;
-	}
-	
 	
 
 }
