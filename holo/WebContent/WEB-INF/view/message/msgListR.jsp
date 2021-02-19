@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
 <link href="/holo/resource/style/msg_style.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+</script>
 <title>[${sessionScope.sessionId}]님의 쪽지함</title>
 </head>
 <body>
@@ -32,7 +33,15 @@
 				<div class="list">
 					<div style="width:40px"><c:out value="${num}"/></div>
 					<c:set var="num" value="${num-1}" />
-					<div style="width:240px"><a href="/holo/message/msgView_r.holo?msgnum=${msg.msgnum}">${msg.subject}</a></div>
+					<div style="width:240px">
+						<a href="/holo/message/msgView_r.holo?msgnum=${msg.msgnum}">
+							<c:if test="${msg.readcount>0}">
+								${msg.subject}
+							</c:if>
+							<c:if test="${msg.readcount==0}">
+								<b style="color:black;">${msg.subject}</b>
+							</c:if>
+						</a></div>
 					<div style="width:100px"><a href="/holo/member/userInfo.holo?id=${msg.sender}">${msg.sender}</a></div>
 					<div style="width:160px"><fmt:formatDate value="${msg.senddate}" pattern="yyyy-MM-dd hh:mm"/></div>
 				</div>

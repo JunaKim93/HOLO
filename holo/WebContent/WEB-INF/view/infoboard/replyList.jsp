@@ -149,11 +149,12 @@
          </div>
          	
          	<c:if test="${count >0}">
+         		<c:set var="rep_order" value="0" />
          		<c:forEach var="list" items="${replyList}">
+         			<c:set var="rep_order" value="${rep_order+1}"/>
          			<div id = "repnum${list.repnum}">
 			            <div class="num">
-			            	<c:out value="${count}" />
-							<c:set var="count" value="${count - 1}" />
+			            	<c:out value="${rep_order}" />
 			            </div>
 			            <div class="title">
 							<pre>${list.content}</pre>
