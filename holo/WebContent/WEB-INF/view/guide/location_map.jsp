@@ -32,7 +32,7 @@
 </head>
 <body>
    <div class="guide">
-      <h2>거주지 설정하기</h2>  <h3><a href="/holo/guide/map_places.holo">주변 편의시설 확인하기</a></h3>
+      <h2>거주지 설정하기</h2>  <h3><a href="/holo/guide/map_places.holo" id="zuijin">👉 주변 편의시설 확인하기  </a></h3>
       <ul>
          <li>
          	<select name="location" id="location" onchange="setLocation()">
@@ -54,15 +54,15 @@
 			    <br>
 			    <div align="center" style="margin-top:10px;">
 				[위치 검색] <br>
-				<input type="text" width="1600px" id="keyword" />
-				<button type="button" style="background-color: #1e57a4; color:#fff;padding:3px 3px;font-size:11px;margin-left:2px;border:none;"  onClick="set_keyword()" >검색</button>
+				<input type="text" style="width:300px;height:25px; " id="keyword" />
+				<button type="button" style="width:40px;height:30px;background-color: #1e57a4; color:#fff;padding:2px 2px;font-size:13px;margin-left:2px;border:none;"  onClick="set_keyword()" >검색</button>
             <c:if test="${sessionScope.sessionId != null }">
 					<form method="post" name="fix_location" action="/holo/guide/fixLocation.holo">
 						<input type="hidden" name="lat" value="" />
 						<input type="hidden" name="lng" value="" />
 						<input type="hidden" name="id" value="${sessionScope.sessionId}" />
 						<input type="hidden" name="address" value="" />
-						<input type="submit" value="선택위치로 거주지 설정"/>
+						<input type="submit" style="margin-top:40px;border: 1px solid #ddd;width: 200px;padding: 10px 20px;background-color: #1e57a4;color: #fff;font-size:13px;" value="선택위치로 거주지 설정"/>
 					</form>
 				</c:if>
 				</div>

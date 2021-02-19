@@ -53,10 +53,10 @@
 	        <div class="date">작성일</div>
 	        <div class="count">조회수</div>
 	     </div>
-	     <div>
+	     
 	         <c:if test="${count == 0}">
 	         <div>
-	         	<div class="title"> 검색결과가 없습니다 </div>
+	         	<div width="200"> 검색결과가 없습니다 </div>
 	         </div>
 	         </c:if>
 	         <c:if test="${count > 0}">
