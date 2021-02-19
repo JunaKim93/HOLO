@@ -25,6 +25,7 @@ public interface MarketService {
 	public void updateRpl(MarketReplyDTO dto) throws Exception;
 	public void deleteRpl(MarketReplyDTO dto) throws Exception;
 	
+	public int getRepCount(int articlenum);
 	public List<MarketReplyDTO> getRpl(int articlenum) throws Exception;
 	
 	// 댓글(R) 좋아요

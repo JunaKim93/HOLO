@@ -55,5 +55,12 @@ public class SearchServiceImpl implements SearchService {
 		return dao.selectOne("search.searchCount",param);
 	}
 	
+	@Override
+	public int getRepCount(String boardName, int articlenum) {
+		param.put("board", boardName);
+		param.put("articlenum", articlenum);
+		return dao.selectOne("search.getRepCount", param);
+	}
+	
 	
 }

@@ -44,6 +44,7 @@ public class SearchBean {
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
 		String searchBoard = null;
+		int repCount = 0;
 		
 		if (board.equals("whole")) {
 			count = SearchDAO.searchCount(choice, search);
@@ -67,6 +68,12 @@ public class SearchBean {
 					String id = list.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					list.get(i).setLevels(level);
+					
+					String category_a = list.get(i).getCategory_a();
+					String boardName = Search.modifyCateAToBoardName(category_a);
+					int articlenum = list.get(i).getArticlenum();
+					repCount = SearchDAO.getRepCount(boardName, articlenum);
+					list.get(i).setRepCount(repCount);
 				}
 			} else {
 				String boardName = Search.modifyBoardName(board);
@@ -75,6 +82,10 @@ public class SearchBean {
 					String id = list.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					list.get(i).setLevels(level);
+					
+					int articlenum = list.get(i).getArticlenum();
+					repCount = SearchDAO.getRepCount(boardName,articlenum);
+					list.get(i).setRepCount(repCount);
 				}
 			}
 			Search.modifyContent(list);

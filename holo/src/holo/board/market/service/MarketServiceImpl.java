@@ -87,6 +87,11 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 	@Override
+	public int getRepCount(int articlenum) {
+		return dao.selectOne("market.getRepCount", articlenum);
+	}
+	
+	@Override
 	public List<MarketReplyDTO> getRpl(int articlenum) throws Exception {
 		return dao.selectList("market.getRpl", articlenum);
 	}

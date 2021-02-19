@@ -44,6 +44,9 @@
 		delete from marketReply where repNum=#{repNum}
 	</delete>
 		
+	<select id="getRepCount" resultType="int" parameterType="int">
+		select count(*) from marketReply where articlenum=#{value}
+	</select>	
 	<select id="getRpl" resultType="MkReplyDTO" parameterType="int">
 		select * from marketReply where articlenum=#{value} order by regDate
  	</select>

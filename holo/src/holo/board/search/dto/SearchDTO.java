@@ -14,6 +14,7 @@ public class SearchDTO {
 	private String category_aName; 
 	private String category_bName; // category 이름을 한글로 변경해주기 위해 생성
 	private int levels;
+	private int repCount;
 	
 	
 	public int getArticlenum() {
@@ -154,6 +155,12 @@ public class SearchDTO {
 	}
 	public void setLevels(int levels) {
 		this.levels = levels;
+	}
+	public int getRepCount() {
+		return repCount;
+	}
+	public void setRepCount(int repCount) {
+		this.repCount = repCount;
 	}
 	
 	
