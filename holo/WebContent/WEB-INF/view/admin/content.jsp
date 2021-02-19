@@ -32,7 +32,7 @@
 </head>
 
 <body>
-   <div class="board_wrap">
+   <div class="board_wrap" style="width: 600px;" >
       <div class="board_title">
          <strong><a href="/holo/admin/contentReport.holo">신고목록</a></strong>
          <p>5회 이상의 신고를 받은 게시물입니다.</p>
@@ -47,33 +47,23 @@
             <!-- <a href="#">수정</a> -->         
       </div>
       
-      <div class="board_list_wrap">
+      <div class="board_list_wrap" >
          <div class="board_list">
          <div class="top">
-            <div class="num">번호</div>
-            <div class="title">신고사유</div>
+            <div class="title" style="width: 80%;">신고사유</div>
             <div class="writer">신고자</div>
          </div>
-         <div>
+        
        		<c:forEach var="list" items="${reportList}">
-	            <div class="num">
-	            	<c:out value="${report}" />
-					<c:set var="num" value="${report-1}" />
-	            </div>
-	            <div class="title">
+       		 <div>
+	            <div class="title" style="width: 80%;">
 					${list.reason} 
 		        </div>
-	            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</div>
-	            <div class="num"></div>
+	            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
+	             </div>
             </c:forEach>
-         </div>
-
-         <div>
-         
         
-         
-         
-         </div>    
+
  
          </div>
           
