@@ -55,6 +55,7 @@
 
 	<update id="updateMember" parameterType="holouserDTO">
 		update holouser <set>
+						<if test="name!=null">name=#{name},</if>
 						<if test="password != null">password=#{password},</if>
 						<if test="phone != null">phone=#{phone},</if>
 						<if test="email != null">email=#{email},</if>
