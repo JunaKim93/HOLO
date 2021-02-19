@@ -25,6 +25,7 @@ import holo.board.information.DTO.InfoBoardReportDTO;
 import holo.board.information.DTO.InfoRepDTO;
 import holo.board.information.DTO.InfoRepReportDTO;
 import holo.board.information.service.LivingBoardService;
+import holo.holouser.service.HolouserService;
 
 @EnableWebMvc
 @Controller
@@ -33,6 +34,9 @@ public class InfoBoardController {
 
 	@Autowired
 	public LivingBoardService liveBrdDAO = null;
+	
+	@Autowired
+	public HolouserService memberDAO = null;
 	
 	@RequestMapping("/list.holo")
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
@@ -58,6 +62,11 @@ public class InfoBoardController {
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
 				articleList = liveBrdDAO.getArticles(start, end, category_a, category_b);
+				for(int i=0; i <articleList.size(); i++) {
+					String id = articleList.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					articleList.get(i).setLevels(level);
+				}
 			
 			}else {
 				articleList = Collections.EMPTY_LIST;
@@ -108,11 +117,16 @@ public class InfoBoardController {
 			if(sessionId == null) {
 				sessionCheck = false;
 			}
-				model.addAttribute("dto", dto);
-				model.addAttribute("pageNum", pageNum);
-				model.addAttribute("sessionCheck", sessionCheck);
-				model.addAttribute("category_b", category_b);
-				model.addAttribute("category_a", category_a);
+			String id = dto.getId();
+			int level = memberDAO.getLevels(id);
+			dto.setLevels(level);
+			
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("sessionCheck", sessionCheck);
+			model.addAttribute("category_b", category_b);
+			model.addAttribute("category_a", category_a);
 				
 			}catch(Exception e) {
 			e.printStackTrace();
@@ -139,6 +153,11 @@ public class InfoBoardController {
 			}
 		}
 		list = liveBrdDAO.getReply(articlenum);
+		for(int i=0; i < list.size(); i++) {
+			String id = list.get(i).getId();
+			int levels = memberDAO.getLevels(id);
+			list.get(i).setLevels(levels);
+		}
 		model.addAttribute("replyList", list);
 		model.addAttribute("count", count);
 		model.addAttribute("articlenum", articlenum);

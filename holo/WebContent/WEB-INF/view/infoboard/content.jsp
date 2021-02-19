@@ -165,7 +165,8 @@
             </dl>
             <dl>
                <dt>글쓴이</dt>
-               <dd><a href="/holo/member/userInfo.holo?id=${dto.id}">${dto.id}</a></dd>
+               <dd><a href="/holo/member/userInfo.holo?id=${dto.id}">
+               <img src="/holo/resource/image/level/${dto.levels}.png" width="15" height="15"/>${dto.id}</a></dd>
             </dl>
             <dl>
                <dt>작성일</dt>

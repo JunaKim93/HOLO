@@ -32,9 +32,9 @@
 	                  <li>
 	                     <a href="/holo/notice/content.holo?num=${nList.articlenum}&pageNum=1">
 	                     <c:choose>
-	                     	<c:when test="${fn:length(nList.subject) gt 15}">
-	                     	<c:out value="${fn:substring(nList.subject, 0, 14) }">...
-	                     	</c:out></c:when>
+	                     	<c:when test="${fn:length(nList.subject) gt 26}">
+	                     	<c:out value="${fn:substring(nList.subject, 0, 25) }" />...
+	                     	</c:when>
 	                     	<c:otherwise>
                      		<c:out value="${nList.subject}">
 	                     	</c:out></c:otherwise>
@@ -65,9 +65,9 @@
 	                  <li>
 	                     <a href="/holo/com/content.holo?articlenum=${cList.articlenum}&pageNum=1">
   						 <c:choose>
-	                     	<c:when test="${fn:length(cList.subject) gt 15}">
-	                     	<c:out value="${fn:substring(cList.subject, 0, 14) }">...
-	                     	</c:out></c:when>
+	                     	<c:when test="${fn:length(cList.subject) gt 26}">
+	                     	<c:out value="${fn:substring(cList.subject, 0, 25) }"/>...
+	                     	</c:when>
 	                     	<c:otherwise>
                      		<c:out value="${cList.subject}">
 	                     	</c:out></c:otherwise>
@@ -99,9 +99,9 @@
 	                  <li>
 	                     <a href="/holo/diy/content.holo?articlenum=${dList.articlenum}&pageNum=1">
                      	 <c:choose>
-	                     	<c:when test="${fn:length(dList.subject) gt 15}">
-	                     	<c:out value="${fn:substring(dList.subject, 0, 14) }">...
-	                     	</c:out></c:when>
+	                     	<c:when test="${fn:length(dList.subject) gt 26}">
+	                     	<c:out value="${fn:substring(dList.subject, 0, 25) }"/>...
+	                     	</c:when>
 	                     	<c:otherwise>
                      		<c:out value="${dList.subject}">
 	                     	</c:out></c:otherwise>
@@ -133,9 +133,9 @@
 	                  <li>
 	                     <a href="/holo/infoboard/content.holo?articlenum=${iList.articlenum}&pageNum=1">
 	                     <c:choose>
-	                     	<c:when test="${fn:length(iList.subject) gt 15}">
-	                     	<c:out value="${fn:substring(iList.subject, 0, 14) }">...
-	                     	</c:out></c:when>
+	                     	<c:when test="${fn:length(iList.subject) gt 26}">
+	                     	<c:out value="${fn:substring(iList.subject, 0, 25) }"/>...
+	                     	</c:when>
 	                     	<c:otherwise>
                      		<c:out value="${iList.subject}">
 	                     	</c:out></c:otherwise>

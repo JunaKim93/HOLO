@@ -46,6 +46,16 @@
                   <dt>이메일</dt>
                   <dd>${c.email}</dd>
                </dl>
+               
+               <dl>
+                  <dt>포인트</dt>
+                  <dd>${c.point}</dd>
+               </dl>
+               
+               <dl>
+                  <dt>등급</dt>
+                  <dd><img src="/holo/resource/image/level/${c.levels}.png" width="45" height="45"/></dd>
+               </dl>
             
               
 </form>

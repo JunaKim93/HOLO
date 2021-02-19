@@ -47,7 +47,7 @@
 		            </div>
 		            <div class="title">
 		            <a class="title" href="/holo/member/userInfo.holo?id=${list.id}">
-		            ${list.id}</a>
+		            <img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>${list.id}</a>
 		            </div>
 		            <div class="writer">${list.authkey} </div>
 		            <div class="date"><fmt:formatDate value="${list.joindate}" pattern="yyyy-MM-dd"/></div>

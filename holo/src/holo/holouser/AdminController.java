@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import holo.board.information.DTO.InfoBoardDTO;
 import holo.holouser.service.AdminService;
+import holo.holouser.service.HolouserService;
 
 @Controller
 @RequestMapping("/admin/")
@@ -19,6 +20,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 	
 	@RequestMapping("contentReports.holo")
 	public String contentReports(Model model) {
@@ -45,7 +49,6 @@ public class AdminController {
 	@RequestMapping("content.holo")
 	public String content(int articlenum, String category_a, Model model, int report) {
 		List reportList = null;
-		AdminDTO dto = null;
 		try {
 			String boardname = null;
 			String tablename = null;
@@ -70,7 +73,7 @@ public class AdminController {
 				reportList = adminDAO.getRpts(articlenum, tablename);
 				
 			}else {
-				System.out.println("ī�װ� ����");
+				System.out.println("카테고리 에러");
 			}
 			model.addAttribute("reportList", reportList);
 			model.addAttribute("boardname", boardname);
@@ -158,6 +161,7 @@ public class AdminController {
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
 				userList = adminDAO.getUsers(start, end);
+				
 			
 			}else {
 				userList = Collections.EMPTY_LIST;

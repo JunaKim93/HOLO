@@ -17,7 +17,14 @@ public class InfoBoardDTO {
 	private int report;
 	private Timestamp regdate;
 	private int repcount;
+	private int levels;
 	
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
 	public int getRepcount() {
 		return repcount;
 	}

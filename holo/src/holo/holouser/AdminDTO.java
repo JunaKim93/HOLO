@@ -13,8 +13,14 @@ public class AdminDTO {
 	private Timestamp regdate;
 	private String reason;
 	private String category_a;
+	private int levels;
 	
-	
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
 	public String getCategory_a() {
 		return category_a;
 	}

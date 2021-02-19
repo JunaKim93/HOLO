@@ -13,6 +13,15 @@ public class InfoRepDTO {
 	private Timestamp regdate;
 	private int likes;
 	private int report;
+	private int levels;
+	
+	
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
 	public int getRepnum() {
 		return repnum;
 	}
