@@ -41,18 +41,8 @@
             <ul>
             <li><a href="/holo/guide/law.holo">- 필수 법률 정보</a>
             <li><a href="/holo/guide/terms.holo">- 기본 자취용어</a>
-            <li><a href="/holo/guide/checklist.holo">- 체크리스트</a>
+            <li><a href="/holo/guide/checklist.holo">- 체크 리스트</a>
             <li><a href="/holo/guide/contract.holo">- 계약서 9계명</a>
-            </li>
-            </ul>
-         </li>
-         </ul>         
-         <ul>
-         <li>
-            <a id="tem1"  href="#">🔹 시세</a>
-            <ul>
-            <li><a href="#">- 지역별 평균 시세</a>
-            <li><a href="#">- 시세 비교</a>
             </li>
             </ul>
          </li>
@@ -63,15 +53,6 @@
             <ul>
             <li><a href="/holo/guide/location_map.holo">- 거주지 설정하기</a>
             <li><a href="/holo/guide/map_places.holo">- 주변 편의시설 정보</a>
-            </li>
-            </ul>
-         </li>
-         </ul>         
-         <ul>
-         <li>
-            <a id="tem1"  href="#">🔹 교통</a>
-            <ul>
-            <li><a href="#">- 주요 지하철 역 위치 정보</a>
             </li>
             </ul>
          </li>
@@ -98,7 +79,7 @@
          </ul>         
          <ul>
          <li>
-            <a id="tem1"  href="/holo/infoboard/list.holo?category_a=cooking">🔹 자취요리 Tip</a>
+            <a id="tem1"  href="/holo/infoboard/list.holo?category_a=cooking">🔹 자취 요리 Tip</a>
             <ul>
             <li><a href="/holo/infoboard/list.holo?category_a=cooking&category_b=tip">- Tip 게시판</a>
             <li><a href="/holo/infoboard/list.holo?category_a=cooking&category_b=question">- 질문 게시판</a>
@@ -163,22 +144,29 @@
          <h2>☕자유게시판</h2>
          <ul>
          <li>
-            <a id="tem1"  href="/holo/com/list.holo?category_a=1&category_b=1">🔹 전체 자유게시판</a>
+            <a id="tem1"  href="/holo/com/list.holo?category_a=1&category_b=1">🔹  Best 자유 게시판</a>
             <ul>
             </ul>
          </li>
          </ul>         
          <ul>
          <li>
-            <a id="tem1"  href="/holo/com/list.holo?category_a=2&category_b=1">🔹 지역별 자유게시판</a>
+            <a id="tem1"  href="/holo/com/list.holo?category_a=1&category_b=1">🔹 전체 자유 게시판</a>
+            <ul>
+            </ul>
+         </li>
+         </ul>         
+         <ul>
+         <li>
+            <a id="tem1"  href="/holo/com/list.holo?category_a=2&category_b=1">🔹 지역별 자유 게시판</a>
             <ul>
             <li><a href="/holo/com/list.holo?category_a=2&category_b=1">- 서울</a>
             <li><a href="/holo/com/list.holo?category_a=2&category_b=2">- 강원</a>
-            <li><a href="/holo/com/list.holo?category_a=2&category_b=3">- 인천/경기</a>
-            <li><a href="/holo/com/list.holo?category_a=2&category_b=4">- 대구/경북</a>
-            <li><a href="/holo/com/list.holo?category_a=2&category_b=5">- 대전/충청</a>
-            <li><a href="/holo/com/list.holo?category_a=2&category_b=6">- 광주/전라</a>
-            <li><a href="/holo/com/list.holo?category_a=2&category_b=7">- 부산/경남</a>
+            <li><a href="/holo/com/list.holo?category_a=2&category_b=3">- 인천/ 경기</a>
+            <li><a href="/holo/com/list.holo?category_a=2&category_b=4">- 대구/ 경북</a>
+            <li><a href="/holo/com/list.holo?category_a=2&category_b=5">- 대전/ 충청</a>
+            <li><a href="/holo/com/list.holo?category_a=2&category_b=6">- 광주/ 전라</a>
+            <li><a href="/holo/com/list.holo?category_a=2&category_b=7">- 부산/ 경남</a>
             </li>
             </ul>
          </li>
@@ -205,7 +193,7 @@
          <c:if test="${sessionScope.sessionId != null}">
 	         <ul>
 	         <li>
-	            <a id="tem1"  href="/holo/member/mypage.holo">🔹 마이페이지</a>
+	            <a id="tem1"  href="/holo/member/mypage.holo">🔹 마이 페이지</a>
 	            <ul>
 	            </ul>
 	         </li>
