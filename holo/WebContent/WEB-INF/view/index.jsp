@@ -71,7 +71,7 @@
          <li>
             <a href="/holo/infoboard/list.holo" >생활정보</a>
             <ul class="dep2">
-               <li><a href="/holo/best/infolist.holo" >best정보</a></li>
+               <li><a href="/holo/best/infolist.holo" >Best정보</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=living" >생활팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=cooking" >자취요리팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=findplace" >집구하기팁</a></li>

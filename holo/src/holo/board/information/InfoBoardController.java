@@ -177,7 +177,7 @@ public class InfoBoardController {
 			InfoBoardDTO dto = liveBrdDAO.updateGetArticle(articlenum);
 			String sessionId = (String)session.getAttribute("sessionId");
 			int sessionCheck = 0;
-			if(sessionId == dto.getId()) {
+			if(sessionId.equals(dto.getId())) {
 				sessionCheck = 1;
 			}
 			model.addAttribute("sessionCheck", sessionCheck);
@@ -207,7 +207,7 @@ public class InfoBoardController {
 			InfoBoardDTO dto = liveBrdDAO.updateGetArticle(articlenum);
 			String sessionId = (String)session.getAttribute("sessionId");
 			int sessionCheck = 0;
-			if(sessionId == dto.getId()) {
+			if(sessionId.equals(dto.getId()) || sessionId.equals("admin")) {
 				sessionCheck = 1;
 				liveBrdDAO.deleteArticle(articlenum);
 			}

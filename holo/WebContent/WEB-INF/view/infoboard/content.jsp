@@ -193,6 +193,8 @@
          <a href="#" class="on" onclick="history.back()">글목록</a>
          <c:if test="${sessionScope.sessionId == dto.id}">
             <a href="/holo/infoboard/updateForm.holo?articlenum=${dto.articlenum}">수정</a>
+          </c:if>
+          <c:if test="${sessionScope.sessionId == dto.id || sessionScope.sessionId == 'admin' }">
             <a href="#" onclick="delConfirm('/holo/infoboard/deleteArticle.holo?articlenum=${dto.articlenum}&category_a=${dto.category_a}')">삭제</a>
           </c:if>
       </div>
