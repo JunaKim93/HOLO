@@ -57,7 +57,8 @@
 						</div>
 						<div class="li-text">
 							<h4 class="li-head">${show.subject}</h4>
-							<p class="li-summary">${show.id}</p>
+							<p class="li-summary">
+							<img src="/holo/resource/image/level/${show.levels}.png" width="15" height="15"/>${show.id}</p>
 							<p class="li-action"><fmt:formatDate value="${show.regDate}"
 									pattern="yyyy-MM-dd hh:mm" /></p>
 						</div>

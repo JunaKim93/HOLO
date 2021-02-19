@@ -98,7 +98,9 @@ function OnChange()
 						 <div style="color: #999999;">${list.category_aName} > ${list.category_bName}</div>
 							</div>
 
-							<div class="writer">${list.id}</div>
+							<div class="writer"><a style="font-size: 1.4rem;" href="/holo/member/userInfo.holo?id=${list.id}">
+							<img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>
+							${list.id}</a></div>
 							<div class="date">
 								<fmt:formatDate value="${list.regDate}"
 									pattern="yyyy-MM-dd hh:mm" />

@@ -11,6 +11,7 @@ public class DiyReplyDTO {
 	private Timestamp regDate;
 	private int likes;
 	private int report;
+	private int levels;
 	
 	public int getRepNum() {
 		return repNum;
@@ -54,6 +55,11 @@ public class DiyReplyDTO {
 	public void setReport(int report) {
 		this.report = report;
 	}
-
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
 }
 

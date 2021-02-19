@@ -20,7 +20,7 @@ import holo.board.interior.dto.DiyReplyDTO;
 import holo.board.interior.dto.DiyReportDTO;
 import holo.board.interior.dto.DiyRplReportDTO;
 import holo.board.interior.service.InteriorBoardService;
-import holo.board.search.dto.SearchDTO;
+import holo.holouser.service.HolouserService;
 
 @EnableWebMvc
 @Controller
@@ -30,6 +30,9 @@ public class DiyBoardBean {
 
 	@Autowired
 	private InteriorBoardService diyBoardDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 
 
 	@RequestMapping("writeForm.holo")
@@ -92,6 +95,11 @@ public class DiyBoardBean {
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
 				articleList = diyBoardDAO.getSearchArticles(category_b, choice, search, start, end);
+				for(int i=0; i <articleList.size(); i++) {
+					String id = articleList.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					articleList.get(i).setLevels(level);
+				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}
@@ -101,6 +109,11 @@ public class DiyBoardBean {
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
 				articleList = diyBoardDAO.getArticles(category_a, category_b, start, end);
+				for(int i=0; i <articleList.size(); i++) {
+					String id = articleList.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					articleList.get(i).setLevels(level);
+				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
 			}
@@ -141,10 +154,15 @@ public class DiyBoardBean {
 		String category_a = "myroom";
 		String category_b = "show";
 		
-		List showList = null;
+		List<DiyBoardDTO> showList = null;
 		count = diyBoardDAO.getArticleCount(category_a,category_b);
 		if (count > 0) {
 			showList = diyBoardDAO.getArticles(category_a, category_b, start, end);
+			for(int i=0; i <showList.size(); i++) {
+				String id = showList.get(i).getId();
+				int level = memberDAO.getLevels(id);
+				showList.get(i).setLevels(level);
+			}
 		} else {
 			showList = Collections.EMPTY_LIST;
 		}
@@ -169,8 +187,11 @@ public class DiyBoardBean {
 	public String tip(@RequestParam(defaultValue="1") int pageNum, int articlenum, HttpSession session, Model model) throws Exception {
 		DiyBoardDTO article = diyBoardDAO.getArticle(articlenum);
 		diyBoardDAO.updateViewCount(articlenum);
-		List replyList = null;
+		List<DiyReplyDTO> replyList = null;
 		replyList = diyBoardDAO.getRpl(articlenum);
+		String id = article.getId();
+		int level = memberDAO.getLevels(id);
+		article.setLevels(level);
 		String sessionId = (String)session.getAttribute("sessionId");
 		boolean sessionCheck = true;
 		if(sessionId == null) {

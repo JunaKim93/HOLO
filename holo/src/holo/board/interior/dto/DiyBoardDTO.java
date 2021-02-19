@@ -15,6 +15,7 @@ public class DiyBoardDTO {
 	private int report;
 	private Timestamp regDate;
 	private String thumbnail;
+	private int levels;
 	
 	public int getArticlenum() {
 		return articlenum;
@@ -82,7 +83,12 @@ public class DiyBoardDTO {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
 	
 
 }

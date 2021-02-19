@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import holo.board.market.dto.MarketReplyDTO;
 import holo.board.market.service.MarketService;
+import holo.holouser.service.HolouserService;
 
 @RestController
 @RequestMapping("/market/")
@@ -24,11 +25,18 @@ public class RestMarketBean {
 
 	@Autowired
 	private MarketService MarketDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 
 	@RequestMapping("replyList.holo")
 	public List<MarketReplyDTO> repList(@RequestParam int articlenum) throws Exception {
 		List<MarketReplyDTO> repList = MarketDAO.getRpl(articlenum);
-
+		for(int i=0; i <repList.size(); i++) {
+			String id = repList.get(i).getId();
+			int level = memberDAO.getLevels(id);
+			repList.get(i).setLevels(level);
+		}
 		return repList;
 	}
 

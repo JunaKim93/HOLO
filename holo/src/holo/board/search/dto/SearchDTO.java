@@ -13,6 +13,7 @@ public class SearchDTO {
 	private Timestamp regDate;
 	private String category_aName; 
 	private String category_bName; // category 이름을 한글로 변경해주기 위해 생성
+	private int levels;
 	
 	
 	public int getArticlenum() {
@@ -148,5 +149,12 @@ public class SearchDTO {
 	public void setCategory_bName(String category_bName) {
 		this.category_bName = category_bName;
 	}
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
+	
 	
 }
