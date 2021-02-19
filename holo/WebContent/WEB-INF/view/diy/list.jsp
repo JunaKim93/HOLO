@@ -74,7 +74,8 @@
 									${list.subject}</a>
 							</div>
 
-							<div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
+							<div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">
+							<img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>${list.id}</a></div>
 							<div class="date">
 								<fmt:formatDate value="${list.regDate}"
 									pattern="yyyy-MM-dd hh:mm" />
@@ -94,7 +95,7 @@
 					<option value="id">작성자</option>
 					<option value="subject">제목</option>
 					<option value="content">내용</option>
-				</select> <input type="text" name="search"> <input type="submit"
+				</select> <input type="text" name="search"> <input type="submit" style="width:35px;height:22px;background-color: #1e57a4; color:#fff;border:none;"
 					value="검색"> &nbsp;
 				<c:if test="${not empty search}">
 					<input type="button" value="검색 초기화"

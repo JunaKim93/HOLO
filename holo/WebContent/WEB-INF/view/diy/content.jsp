@@ -109,7 +109,7 @@
 									+ '</td></tr>';
 							for ( var i in result) {
 								output += '<tr id="repNum' + result[i].repNum + '"><td align="center" width="100">'
-										+ result[i].id + '</td>';
+										+ '<img src="/holo/resource/image/level/'+result[i].levels+'.png" width="15" height="15"/>' + result[i].id + '</td>';
 								output += '<td align="center width="400"><pre>'
 										+ result[i].content + '</pre>';
 								output += '<font size=2><a style="text-decoration:none" href="javascript:void(0)" onclick="updateReplyForm('
@@ -311,7 +311,9 @@
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
-						<dd>${article.id}</dd>
+						<dd>
+						<a href="/holo/member/userInfo.holo?id=${article.id}">
+						<img src="/holo/resource/image/level/${article.levels}.png" width="15" height="15"/>${article.id}</a></dd>
 					</dl>
 					<dl>
 						<dt>작성일</dt>

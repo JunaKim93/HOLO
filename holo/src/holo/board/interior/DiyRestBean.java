@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import holo.board.interior.dto.DiyReplyDTO;
 import holo.board.interior.service.InteriorBoardService;
+import holo.holouser.service.HolouserService;
 
 @RestController
 @RequestMapping("/diy/")
@@ -21,11 +22,19 @@ public class DiyRestBean {
 
 	@Autowired
 	private InteriorBoardService diyBoardDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
+
 
 	@RequestMapping("replyList.holo")
 	public List<DiyReplyDTO> repList(@RequestParam int articlenum) throws Exception {
 		List<DiyReplyDTO> repList = diyBoardDAO.getRpl(articlenum);
-
+		for(int i=0; i <repList.size(); i++) {
+			String id = repList.get(i).getId();
+			int level = memberDAO.getLevels(id);
+			repList.get(i).setLevels(level);
+		}
 		return repList;
 	}
 

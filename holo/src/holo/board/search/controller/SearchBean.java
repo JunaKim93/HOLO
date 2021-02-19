@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import holo.board.search.dto.SearchDTO;
 import holo.board.search.service.SearchService;
+import holo.holouser.service.HolouserService;
 
 @Controller
 @RequestMapping("/search/")
@@ -18,6 +19,9 @@ public class SearchBean {
 
 	@Autowired
 	public SearchService SearchDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 
 	@RequestMapping("/search.holo")
 	public String search() throws Exception {
@@ -59,9 +63,19 @@ public class SearchBean {
 			}
 			if (board.equals("whole")) {
 				list = SearchDAO.getSearchList(choice, search, start, end); // 검색 결과를 list에 담음
+				for(int i=0; i <list.size(); i++) {
+					String id = list.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					list.get(i).setLevels(level);
+				}
 			} else {
 				String boardName = Search.modifyBoardName(board);
 				list = SearchDAO.getBoardSearchList(boardName, choice, search, start, end);
+				for(int i=0; i <list.size(); i++) {
+					String id = list.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					list.get(i).setLevels(level);
+				}
 			}
 			Search.modifyContent(list);
 

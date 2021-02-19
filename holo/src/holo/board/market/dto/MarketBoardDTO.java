@@ -16,6 +16,7 @@ public class MarketBoardDTO {
 	private String thumbnail;
 	private String condition;
 	private String dealing;
+	private int levels;
 	
 	
 
@@ -98,5 +99,12 @@ public class MarketBoardDTO {
 	public void setDealing(String dealing) {
 		this.dealing = dealing;
 	}
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
+	
 	
 }

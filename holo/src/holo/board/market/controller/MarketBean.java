@@ -20,6 +20,7 @@ import holo.board.market.dto.MarketBoardReportDTO;
 import holo.board.market.dto.MarketReplyDTO;
 import holo.board.market.dto.MarketReplyReportDTO;
 import holo.board.market.service.MarketService;
+import holo.holouser.service.HolouserService;
 
 @EnableWebMvc
 @Controller
@@ -28,6 +29,9 @@ public class MarketBean {
 
 	@Autowired
 	public MarketService MarketDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 	
 	
 	@RequestMapping("/writeForm.holo")
@@ -107,6 +111,11 @@ public class MarketBean {
 					if(endPage > pageCount) {endPage = pageCount;}
 					if(currentPage > endPage) {currentPage -= 1;}
 					articleList = MarketDAO.getSearchArticles(category_a, category_b, choice, search, start, end);
+					for(int i=0; i <articleList.size(); i++) {
+						String id = articleList.get(i).getId();
+						int level = memberDAO.getLevels(id);
+						articleList.get(i).setLevels(level);
+					}
 				} else {
 					articleList = Collections.EMPTY_LIST;
 				}
@@ -116,6 +125,11 @@ public class MarketBean {
 					if(endPage > pageCount) {endPage = pageCount;}
 					if(currentPage > endPage) {currentPage -= 1;}
 					articleList = MarketDAO.getArticles(category_a, category_b, start, end);
+					for(int i=0; i <articleList.size(); i++) {
+						String id = articleList.get(i).getId();
+						int level = memberDAO.getLevels(id);
+						articleList.get(i).setLevels(level);
+					}
 				} else {
 					articleList = Collections.EMPTY_LIST;
 				}
@@ -147,7 +161,10 @@ public class MarketBean {
 		try {
 		MarketBoardDTO article = MarketDAO.getArticle(articlenum);
 		MarketDAO.updateViewCount(articlenum);
-
+		String id = article.getId();
+		int level = memberDAO.getLevels(id);
+		article.setLevels(level);
+		
 		String sessionId = (String)session.getAttribute("sessionId");
 		boolean sessionCheck = true;
 		if(sessionId == null) {
