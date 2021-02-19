@@ -83,7 +83,7 @@
 									href="/holo/market/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
 									${list.subject} </a>
 							</div>
-							<div class="writer">${list.id}</div>
+							<div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
 							<div class="date">
 								<fmt:formatDate value="${list.regDate}"
 									pattern="yyyy-MM-dd hh:mm" />
