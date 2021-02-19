@@ -157,7 +157,8 @@
 			            	<c:out value="${rep_order}" />
 			            </div>
 			            <div class="title">
-							<pre>${list.content}</pre>
+			            	<c:if test="${list.report>=5}"><p style="white-space:pre;">신고가 많아 내용을 숨깁니다.</p></c:if>
+							<c:if test="${list.report<5}"><p style="white-space:pre;">${list.content}</p></c:if>
 							<c:if test="${sessionScope.sessionId == list.id}">
 							 <a href="javascript:void(0)" onclick="fn_updateReplyForm(${list.repnum},'${sessionScope.sessionId}','${list.content}')">수정</a>
 							 <a href="javascript:void(0)" onclick="fn_deleteReply(${list.repnum})" >삭제</a>

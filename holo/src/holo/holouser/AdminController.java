@@ -177,6 +177,7 @@ public class AdminController {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage",pageNum);
 			
 			
 		}catch(Exception e) {

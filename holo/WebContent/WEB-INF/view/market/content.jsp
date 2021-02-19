@@ -125,10 +125,16 @@
                      output += '<td align="center" width="100">' + "등록일"
                            + '</td></tr>';
                      for ( var i in result) {
+                    	var content;
+ 						if(result[i].report>=5){
+ 							content = '신고가 너무 많아 내용을 숨깁니다.';
+ 						}else{
+ 							content = result[i].content;
+ 						}
                         output += '<tr id="repNum' + result[i].repNum + '"><td align="center" width="100">'
                               + '<img src="/holo/resource/image/level/'+result[i].levels+'.png" width="15" height="15"/>' +result[i].id + '</td>';
-                        output += '<td align="center width="400"><pre>'
-                              + result[i].content + '</pre>';
+                        output += '<td align="center width="400"><p style="white-space:pre;">'
+                              + content + '</p>';
                         output += '<font size=2><a style="text-decoration:none" href="javascript:void(0)" onclick="updateReplyForm('
                               + result[i].repNum
                               + ',\''
@@ -303,8 +309,7 @@
                   <dd>${article.viewCount}</dd>   
                </dl>   
             </div>
-            <div class="content">
-                <pre>                  
+            <div class="content">             
           <table align="center" width="970px" height="300px">
             <tr>
                <td width="35%"><img
@@ -360,7 +365,9 @@
                       <li><a href='javascript:void(0);' onclick="newArticle();">새 글로 등록</a></li>
                </div>
                </c:if>
-               ${article.content}</pre> <!-- 사진과 글내용 -->
+               <div style="margin:70px 3px 3px 3px;">
+               ${article.content}
+               </div><!-- 사진과 글내용 -->
             </div>
             <div align="center">
 
