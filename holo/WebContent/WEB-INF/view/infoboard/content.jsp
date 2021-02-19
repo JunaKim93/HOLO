@@ -186,7 +186,7 @@
             <span id="likesCount"></span>
             </button> &nbsp;
          <input type="button" value="신고📢" onclick="reportArticle('${dto.articlenum}', '${dto.subject}')" />
-         <a href="javasript:;" class="btn-scrap">⭐</a>
+         <a href="javascript:;" class="btn-scrap">⭐</a>
          </div>
       </div>
       <div class="button_wrap">
