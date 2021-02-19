@@ -17,7 +17,7 @@
 		SELECT COUNT(*) FROM scrap WHERE id = #{value}
 	</select>
 	<select id="scrapList" parameterType="String" resultType="scrapDTO">
-		SELECT * FROM scrap WHERE id = #{value}
+		SELECT * FROM scrap WHERE id = #{value} ORDER BY scrap_date DESC
 	</select>
 	<select id="alreadyScrapped" parameterType="map" resultType="int">
 		SELECT COUNT(*) FROM scrap WHERE id=#{id} AND boardname = #{boardname} AND articlenum = #{articlenum}
