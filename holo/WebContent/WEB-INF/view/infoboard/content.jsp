@@ -178,7 +178,7 @@
             </dl>
          </div>
          <div class="content">
-           <pre>${dto.content}</pre>
+           ${dto.content}
          </div>      
          <div align="center">
             <button id="likesUpdate">

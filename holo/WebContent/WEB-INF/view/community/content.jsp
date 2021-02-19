@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/resource/etc/color.jsp"%>
 <%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -180,7 +179,7 @@
             </dl>
             <dl>
                <dt>글쓴이</dt>
-               <dd>${dto.id}</dd>
+               <dd><img src="/holo/resource/image/level/${dto.levels}.png" width="15" height="15"/>${dto.id}</dd>
             </dl>
             <dl>
                <dt>작성일</dt>

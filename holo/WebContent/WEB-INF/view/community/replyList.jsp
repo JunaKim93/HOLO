@@ -102,10 +102,10 @@ $(function(){
 	//댓글 신고하기
 	function reportReply(repnum){
 		var reason = prompt("신고사유를 입력해주세요.", "");
-		if (!(reason == null || person == "")) {
+		if (!(reason == null || reason == "")) {
 			$.ajax({
 				url: "/holo/com/reportReply.holo",type: "POST",async:false,
-	            data: {repnum: repnum, reson:reason},
+	            data: {repnum: repnum, reason:reason},
 	            //성공시 좋아요수 새로고침
 	            success: function () {
 	            	alert("신고되었습니다!");
@@ -225,11 +225,16 @@ $(function(){
 									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 								</c:forEach>
 								<div style="border-left: 2px solid #1e57a4;height: 100%;"></div>
-								<c:if test="${reply.id==writer}">
-									<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+								<c:if test="${reply.report<5}">
+									<c:if test="${reply.id==writer}">
+										<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+									</c:if>
+									<c:if test="${reply.id!=writer}">
+										<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;"><p style="white-space:pre;">${reply.content}</p></div>
+									</c:if>
 								</c:if>
-								<c:if test="${reply.id!=writer}">
-									<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+								<c:if test="${reply.report>=5}">
+									<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">신고가 많아 내용을 숨겼습니다.</div>
 								</c:if>
 							</div>
 							<c:if test="${reply.id!='삭제됨'}">

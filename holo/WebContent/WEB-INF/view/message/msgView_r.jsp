@@ -56,7 +56,7 @@ function del_confirm(){
 		<div class="button_wrap">
 			<a href="javascript:replyMsg();">답장하기</a>
 			<a href="javascript:del_confirm();">삭제하기</a>
-			<a href="javascript:history.go(-1)">뒤로가기</a>
+			<a href="/holo/message/msgListR.holo">뒤로가기</a>
 		</div>
 	</div>
 </div>
