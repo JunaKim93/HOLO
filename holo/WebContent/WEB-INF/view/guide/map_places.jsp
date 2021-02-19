@@ -59,9 +59,9 @@
       <h2>주변 장소를 확인하세요!</h2>
     </c:if>
     <c:if test="${!markerCheck && sessionId != null}">
-    	<div align="center"><p>거주지를 설정해보세요</p><br/>
+    	<div align="center" style="font-size: 20px;"><p>거주지를 설정해보세요</p><br/>
     	<div class="button_wrap">
-    		<h3><a href="/holo/guide/location_map.holo">거주지 설정하기</a></h3></div>
+    		<h3><a href="/holo/guide/location_map.holo" id="jia">👉 거주지 설정하기</a></h3></div>
     	</div>
     </c:if>
     
