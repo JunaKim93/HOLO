@@ -65,7 +65,8 @@
 						</a>
 		            </div>
 		            
-		            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">${list.id}</a></div>
+		            <div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">
+		            <img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>${list.id}</a></div>
 		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
 		            <div class="count">${list.viewcount}</div>
 		        </div>

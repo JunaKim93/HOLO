@@ -13,6 +13,7 @@ import holo.board.best.service.BestService;
 import holo.board.community.dto.ComDTO;
 import holo.board.information.DTO.InfoBoardDTO;
 import holo.board.interior.dto.DiyBoardDTO;
+import holo.holouser.service.HolouserService;
 
 @Controller
 @RequestMapping("/best/")
@@ -20,6 +21,9 @@ public class BestController {
 	
 	@Autowired
 	private BestService bestDAO = null;
+	
+	@Autowired
+	private HolouserService memberDAO = null;
 	
 	@RequestMapping("infolist.holo")
 	public String infolist(Model model, @RequestParam(defaultValue="1") int pageNum) {
@@ -43,7 +47,9 @@ public class BestController {
 				if(endPage > pageCount) {endPage = pageCount;}
 				if(currentPage > endPage) {currentPage -= 1;}
 				infoBestList = bestDAO.getInfoBestList(start, end);
-			
+				for(int i=0; i<infoBestList.size(); i++) {
+					
+				}
 			}else {
 				infoBestList = Collections.EMPTY_LIST;
 			}
