@@ -87,7 +87,12 @@
 				</b>
 			</div>
 			<div class="title" style="width:70%;">
+				<c:if test="${sessionScope.sessionId != null }">
 				<textarea id="replyTextarea${repnum}" rows="6" style="width:100%;resize:none;">${rplContent}</textarea>
+				</c:if>
+				<c:if test="${sessionScope.sessionId == null}">
+				<textarea id="replyTextarea${repnum}" rows="6" style="width:100%;resize:none;" readonly="readonly" placeholder="로그인 후 댓글을 작성할 수 있습니다!"></textarea>
+				</c:if>
 			</div>
 			<div style="width:10%;" class="rplFormBtn">&nbsp;&nbsp;
 				<c:if test="${mode=='edit'}">
