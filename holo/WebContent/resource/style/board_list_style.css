@@ -45,7 +45,7 @@ a{
    font-size: 0;
 }
 
-/* .button_wrap a{
+.button_wrap a{
    display: inline-block;
    min-width: 80;
    margin-left: 10px;
@@ -53,7 +53,7 @@ a{
    border: 1px solid #ddd;
    border-radius: 2px;
    font-size: 1.4rem;
-} */
+}
 
 .button_wrap a:first-child {
    margin-left: 0;

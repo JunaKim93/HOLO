@@ -33,7 +33,7 @@
             <div class="title">
                <dl>
                   <dt>아이디</dt>
-                  <dd>${dto.id}</dd>
+                  <dd><img src="/holo/resource/image/level/${dto.levels}.png" width="15" height="15"/>${dto.id}</dd>
                </dl>
                <dl>
                   <dt>이름</dt>
