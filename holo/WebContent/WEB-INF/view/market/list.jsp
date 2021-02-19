@@ -26,11 +26,11 @@
 		<div class="board_title">
 			<c:choose>
 				<c:when test="${category_b eq 'sell'}">
-					<strong><a href="/holo/market/list.holo?category_b=sell">중고장터-팝니다</a></strong>
+					<strong><a href="/holo/market/list.holo?category_b=sell">중고장터 - 팝니다</a></strong>
 					<p>중고물품을 사고 팔아보세요!</p>
 				</c:when>
 				<c:when test="${category_b eq 'buy'}">
-					<strong><a href="/holo/market/list.holo?category_b=buy">중고장터-삽니다</a></strong>
+					<strong><a href="/holo/market/list.holo?category_b=buy">중고장터 - 삽니다</a></strong>
 					<p>중고물품을 사고 팔아보세요!</p>
 				</c:when>
 				<c:when test="${category_a eq 'free'}">
