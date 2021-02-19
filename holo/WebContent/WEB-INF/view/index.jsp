@@ -47,7 +47,7 @@
             </c:if>
             <c:if test="${sessionId != null}">   
                <li><a href="/holo/member/logoutCheck.holo" >로그아웃</a></li>
-               <li><a href="/holo/member/mypage.holo" >마이페이지</a></li>
+               <li><a href="/holo/member/mypage.holo" >마이 페이지</a></li>
                
             </c:if>
                <li><a href="/holo/notice/list.holo" >공지사항</a></li>
@@ -60,44 +60,42 @@
       <div class="menu_wrap">
       <ul class="dep1">
          <li>
-            <a href="/holo/guide/hologuide.holo" >초보자가이드</a>
+            <a href="/holo/guide/hologuide.holo" >초보자 가이드</a>
             <ul class="dep2">
                <li><a href="/holo/guide/hologuide.holo" >집 구하기 가이드</a></li>
-               <li><a href="#">시세</a></li>
                <li><a href="/holo/guide/location_map.holo" >상권</a></li>
-               <li><a href="#">교통</a></li>
             </ul>
          </li>   
          <li>
-            <a href="/holo/infoboard/list.holo" >생활정보</a>
+            <a href="/holo/infoboard/list.holo" >생활 정보</a>
             <ul class="dep2">
-               <li><a href="/holo/best/infolist.holo" >best정보</a></li>
-               <li><a href="/holo/infoboard/list.holo?category_a=living" >생활팁</a></li>
-               <li><a href="/holo/infoboard/list.holo?category_a=cooking" >자취요리팁</a></li>
-               <li><a href="/holo/infoboard/list.holo?category_a=findplace" >집구하기팁</a></li>
+               <li><a href="/holo/best/infolist.holo" >Best 정보</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=living" >생활 Tip</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=cooking" >자취 요리 Tip</a></li>
+               <li><a href="/holo/infoboard/list.holo?category_a=findplace" >집 구하기 Tip</a></li>
             </ul>
          </li>   
          <li>
             <a href="/holo/market/list.holo" >장터</a>
             <ul class="dep2">
-               <li><a href="/holo/market/list.holo?category_a=market" >중고장터</a></li>
-               <li><a href="/holo/market/list.holo?category_a=free&category_b=b" >무료나눔</a></li>
-               <li><a href="/holo/market/list.holo?category_a=group&category_b=b" >공동구매</a></li>
+               <li><a href="/holo/market/list.holo?category_a=market" >중고 장터</a></li>
+               <li><a href="/holo/market/list.holo?category_a=free&category_b=b" >무료 나눔</a></li>
+               <li><a href="/holo/market/list.holo?category_a=group&category_b=b" >공동 구매</a></li>
             </ul>
          </li>   
          <li>
-            <a href="/holo/diy/list.holo" >집꾸미기</a>
+            <a href="/holo/diy/list.holo" >집 꾸미기</a>
             <ul class="dep2">
-               <li><a href="/holo/best/diylist.holo" >베스트인테리어</a></li>
-               <li><a href="/holo/diy/list.holo?category_a=myroom" >우리집인테리어</a></li>
+               <li><a href="/holo/best/diylist.holo" >Best 인테리어</a></li>
+               <li><a href="/holo/diy/list.holo?category_a=myroom" >우리집 인테리어</a></li>
             </ul>
          </li>   
          <li>
-            <a href="/holo/com/list.holo?category_a=1&category_b=1" >자유게시판</a>
+            <a href="/holo/com/list.holo?category_a=1&category_b=1" >자유 게시판</a>
             <ul class="dep2">
-               <li><a href="/holo/best/comlist.holo" >자유게시판 Best</a></li>
-               <li><a href="/holo/com/list.holo?category_a=1&category_b=1" >전체 자유게시판</a></li>
-               <li><a href="/holo/com/list.holo?category_a=2&category_b=1" >지역별 자유게시판</a></li>
+               <li><a href="/holo/best/comlist.holo" > Best 자유 게시판</a></li>
+               <li><a href="/holo/com/list.holo?category_a=1&category_b=1" >전체 자유 게시판</a></li>
+               <li><a href="/holo/com/list.holo?category_a=2&category_b=1" >지역별 자유 게시판</a></li>
             </ul>
          </li>
       </ul>

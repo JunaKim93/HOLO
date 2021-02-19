@@ -44,13 +44,11 @@
                   <dd>${dto.email}</dd>
                </dl>
                
-               <dl>
-                  <dt>주소</dt>
-                  <dd>${dto.authkey}</dd>
-               </dl>
+              
                <dl>
                   <dt>성별</dt>
-                  <dd>${dto.gender}</dd>
+                  <dd><c:if test="${dto.gender == 1}">남성</c:if>
+                  <c:if test="${dto.gender == 2}">여성</c:if></dd>
                </dl>
                <dl>
                   <dt>가입일</dt>
@@ -63,6 +61,10 @@
                <c:if test="${sessionScope.sessionId == 'admin' }">
                <form action="/holo/admin/pointGift.holo" method="post">
                <dl>
+               	 <dl>
+                  <dt>주소</dt>
+                  <dd>${dto.authkey}</dd>
+               </dl>
                   <dt>포인트 선물하기</dt>
                   <dd><input type="number" value="0" name="pointGift" />
                   		<input type="hidden" value="${dto.id}" name="id">

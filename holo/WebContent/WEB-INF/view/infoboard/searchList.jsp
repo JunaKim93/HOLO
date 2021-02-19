@@ -106,7 +106,8 @@
 			<c:if test="${category_b != null}">
 				<input type="hidden" name="category_b" value="${category_b}" />
 			</c:if>
-			<input type="submit" value="검색" />
+			<input type="submit" style="width:35px;height:22px;background-color: #1e57a4; color:#fff;border:none;"
+               value="검색">
 			
 	  	</form>
               
