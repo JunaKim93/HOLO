@@ -314,7 +314,7 @@ public class HolouserBean {
 	}
 	
 	@RequestMapping("userInfo.holo")
-	public String userInfo(String id, Model model) {
+	public String logon_userInfo(String id, Model model) {
 		try {
 			HolouserDTO dto = null;
 			dto = memberDAO.getUserInfo(id);
