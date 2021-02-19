@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/view/index.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -95,11 +96,6 @@ function OnChange()
 						</c:choose>
 						<br/>
 						 <div style="color: #999999;">${list.category_aName} > ${list.category_bName}</div>
-						 <div>
-						 <c:if test="${empty list.content}">
-							글 내용이 없습니다.
-						</c:if>
-						${list.content}</div>
 							</div>
 
 							<div class="writer">${list.id}</div>

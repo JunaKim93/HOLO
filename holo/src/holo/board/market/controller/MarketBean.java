@@ -143,7 +143,7 @@ public class MarketBean {
 	}
 
 	@RequestMapping("content.holo")
-	public String content(@RequestParam(defaultValue="1") int pageNum, int articlenum, HttpSession session, Model model) {
+	public String logon_content(@RequestParam(defaultValue="1") int pageNum, int articlenum, HttpSession session, Model model) {
 		try {
 		MarketBoardDTO article = MarketDAO.getArticle(articlenum);
 		MarketDAO.updateViewCount(articlenum);

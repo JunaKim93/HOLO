@@ -74,6 +74,18 @@ caption{
    font-size: 18px;
 }
 
+#zuijin{
+	color: pink;
+	font-size: 24px;
+	text-align: center;
+	margin-left: 355px;
+	/* margin-top: 300px; */
+}
+
+#zuijin:hover{
+	text-decoration: underline;
+	color: aqua;
+
 /* .bottom input[type="submit"]{
    margin-top:40px;
    border: 1px solid #ddd;
