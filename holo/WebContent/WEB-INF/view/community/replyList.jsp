@@ -195,13 +195,9 @@ $(function(){
 			}
 			replyLikes(${r.repnum});
 		</c:forEach>
-		
-		if(${sessionScope.sessionId!=null}){
-			//새로운 댓글은 repnum을 0으로 요청
-			replyForm(0,"","new");
-		}else{
-			replyForm(0,"로그인 후 댓글을 작성할 수 있습니다!","new");
-		}
+		//새로운 댓글은 repnum을 0으로 요청
+		replyForm(0,"","new");
+
 	};
 	init();
 });
