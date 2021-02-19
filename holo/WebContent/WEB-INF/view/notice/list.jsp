@@ -88,7 +88,7 @@
 			    </c:if>
 			
 			    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-			        <a class="num" href="/holo/notice/list.holo?pageNum=${i}&category_a=1">[${i}]</a>
+			        <a class="num" href="/holo/notice/list.holo?pageNum=${i}&category_a=1">${i}</a>
 			    </c:forEach>
 			
 			    <c:if test="${endPage < pageCount}">
