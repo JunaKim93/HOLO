@@ -55,13 +55,9 @@ $(function(){
             <div class="writer">작성자</div>
             <div class="count">삭제하기</div>
          </div>
-         <div>
-         	<div class="title">
-	         	<c:if test="${count == 0}">
+         <c:if test="${count == 0}">
 	         		스크랩한 목록이 없습니다.
 	         	</c:if>
-         	</div>
-         </div>
          	<c:if test="${count >0}">
          		<c:forEach var="scrap" items="${scrapList}">
          		<div>
@@ -72,11 +68,11 @@ $(function(){
 	  					<c:if test="${scrap.boardname=='diy'}">
 	  						인테리어
 	  					</c:if>
-	  					<c:if test="${scrap.boardname=='info'}">
-	  						정보
+	  					<c:if test="${scrap.boardname=='infoboard'}">
+	  						생활정보
 	  					</c:if> 
-	  					<c:if test="${scrap.boardname=='ntc'}">
-	  						공지
+	  					<c:if test="${scrap.boardname=='market'}">
+	  						장터
 	  					</c:if>
 		            </div>
 		            <div class="title">

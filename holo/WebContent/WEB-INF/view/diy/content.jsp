@@ -337,7 +337,7 @@
 					&nbsp; <input type="button" style="background-color: white;"
 						value="신고📢"
 						onclick="reportArticle('${article.articlenum}', '${article.subject}')">
-						<a href="javasript:;" class="btn-scrap">⭐</a>
+						<a href="javascript:;" class="btn-scrap">⭐</a>
 				</div>
 			</div>
 			<div class="button_wrap">
