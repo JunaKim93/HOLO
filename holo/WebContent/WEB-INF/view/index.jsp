@@ -71,7 +71,7 @@
          <li>
             <a href="/holo/infoboard/list.holo" >생활정보</a>
             <ul class="dep2">
-               <li><a href="/holo/best/infolist.holo" >Best정보</a></li>
+               <li><a href="/holo/best/infolist.holo" >Best 정보</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=living" >생활팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=cooking" >자취요리팁</a></li>
                <li><a href="/holo/infoboard/list.holo?category_a=findplace" >집구하기팁</a></li>
@@ -88,7 +88,7 @@
          <li>
             <a href="/holo/diy/list.holo" >집꾸미기</a>
             <ul class="dep2">
-               <li><a href="/holo/best/diylist.holo" >베스트인테리어</a></li>
+               <li><a href="/holo/best/diylist.holo" >Best 인테리어</a></li>
                <li><a href="/holo/diy/list.holo?category_a=myroom" >우리집인테리어</a></li>
             </ul>
          </li>   
