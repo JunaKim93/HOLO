@@ -12,6 +12,8 @@ public class HolonoticeDTO {
 	private int likes;
 	private int dislikes;
 	private Timestamp regdate;
+	private int levels;
+	
 	public int getArticlenum() {
 		return articlenum;
 	}
@@ -66,4 +68,11 @@ public class HolonoticeDTO {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
+	
 }

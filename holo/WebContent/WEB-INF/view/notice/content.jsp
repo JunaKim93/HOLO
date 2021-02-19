@@ -56,7 +56,7 @@
             </dl>
             <dl>
                <dt>글쓴이</dt>
-               <dd>${article.id}</dd>
+               <dd><img src="/holo/resource/image/level/${article.levels}.png" width="15" height="15"/>${article.id}</dd>
             </dl>
             <dl>
                <dt>작성일</dt>

@@ -25,6 +25,9 @@ public class HolonoticeBean {
 	@Autowired
 	private HolonoticeService noticeDAO = null;
 	
+	@Autowired
+	private HolouserService memberDAO = null;
+	
 	@RequestMapping("list.holo")
 	public String list( @RequestParam(defaultValue="1") int pageNum , Model model, @RequestParam(defaultValue="1") String category_a)throws Exception {
         
@@ -35,11 +38,16 @@ public class HolonoticeBean {
         int count = 0;
         int number=0;
         
-        List articleList = null;
+        List<HolonoticeDTO> articleList = null;
         count = noticeDAO.getnoticeCount();
        
         if (count > 0) {
         	articleList = noticeDAO.getnoticeList(category_a, pageNum, pageSize);
+        	for(int i=0; i <articleList.size(); i++) {
+				String id = articleList.get(i).getId();
+				int level = memberDAO.getLevels(id);
+				articleList.get(i).setLevels(level);
+			}
         } else {
             articleList = Collections.EMPTY_LIST;
         }
@@ -73,6 +81,9 @@ public class HolonoticeBean {
 			
 				HolonoticeDTO article =  noticeDAO.getNotice(num);
 				noticeDAO.updateCountviews(num);
+				String id = article.getId();
+				int level = memberDAO.getLevels(id);
+				article.setLevels(level);
 		  
 		        model.addAttribute("num", new Integer(num));
 		        model.addAttribute("pageNum", new Integer(pageNum));

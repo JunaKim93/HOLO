@@ -56,7 +56,7 @@
 						</a>
 		            </div>
 		            
-		            <div class="writer">${list.id}</div>
+		            <div class="writer"><img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>${list.id}</div>
 		            <div class="date"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm"/></div>
 		            <div class="count">${list.viewcount}</div>
 	            </c:forEach>
