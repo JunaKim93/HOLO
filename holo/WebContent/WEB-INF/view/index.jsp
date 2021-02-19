@@ -24,7 +24,7 @@
    <form name="searchform" action="/holo/search/searchList.holo" onsubmit="return searchSubmit()">
          <div>
             <h1 class="logo">
-               <a href="/holo/member/main.holo" ><img src="../resource/image/holoLogo.png"/></a>
+               <a href="/holo/member/main.holo" ><img src="/holo/resource/image/holoLogo.png"/></a>
             </h1>
             
             
