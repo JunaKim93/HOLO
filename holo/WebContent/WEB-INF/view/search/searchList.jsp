@@ -81,17 +81,21 @@ function OnChange()
 						<div>
 							<div class="title">
 								<c:choose>
-						<c:when test="${list.category_a eq 'living' or list.category_a eq 'cook' or list.category_a eq 'findplace'}">
-							<a href="/holo/infoboard/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+                        <c:when test="${list.category_a eq 'living' or list.category_a eq 'cooking' or list.category_a eq 'findplace'}">
+							<a href="/holo/infoboard/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}
+							<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a>
 						</c:when>	
 						<c:when test="${list.category_a eq 'market' or list.category_a eq 'free' or list.category_a eq 'group'}">
-							<a href="/holo/market/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+							<a href="/holo/market/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}
+							<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a>
 						</c:when>
 						<c:when test="${list.category_a eq 'myroom'}">
-							<a href="/holo/diy/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+							<a href="/holo/diy/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}
+							<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a>
 						</c:when>
 						<c:when test="${list.category_a eq '1' or list.category_a eq '2'}">
-							<a href="/holo/com/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}</a>
+							<a href="/holo/com/content.holo?articlenum=${list.articlenum}" target="_blank">${list.subject}
+							<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a>
 						</c:when>
 						</c:choose>
 						<br/>

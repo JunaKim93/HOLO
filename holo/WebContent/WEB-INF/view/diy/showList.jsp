@@ -56,7 +56,9 @@
 							<img src="${show.thumbnail}" width="600px" />
 						</div>
 						<div class="li-text">
-							<h4 class="li-head">${show.subject}</h4>
+							<h4 class="li-head">${show.subject} 
+                            <c:if test="${show.repCount != 0}">[${show.repCount}]</c:if>
+                            </h4>
 							<p class="li-summary">
 							<img src="/holo/resource/image/level/${show.levels}.png" width="15" height="15"/>${show.id}</p>
 							<p class="li-action"><fmt:formatDate value="${show.regDate}"

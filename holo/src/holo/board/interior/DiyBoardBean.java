@@ -82,6 +82,7 @@ public class DiyBoardBean {
 		int pages = 5;
 		int endPage = startPage + pages - 1;
 		int pageCount = 0;
+		int repCount = 0;
 		
 		if(choice != null && search != null) {
 			count = diyBoardDAO.getSearchCount(category_b, choice, search);
@@ -99,6 +100,10 @@ public class DiyBoardBean {
 					String id = articleList.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					articleList.get(i).setLevels(level);
+                    
+                    int articlenum = articleList.get(i).getArticlenum();
+                    repCount = diyBoardDAO.getRepCount(articlenum);
+                    articleList.get(i).setRepCount(repCount);
 				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
@@ -113,6 +118,10 @@ public class DiyBoardBean {
 					String id = articleList.get(i).getId();
 					int level = memberDAO.getLevels(id);
 					articleList.get(i).setLevels(level);
+					
+					 int articlenum = articleList.get(i).getArticlenum();
+	                    repCount = diyBoardDAO.getRepCount(articlenum);
+	                    articleList.get(i).setRepCount(repCount);
 				}
 			} else {
 				articleList = Collections.EMPTY_LIST;
@@ -153,6 +162,7 @@ public class DiyBoardBean {
 		int pageCount = 0;
 		String category_a = "myroom";
 		String category_b = "show";
+		int repCount = 0;
 		
 		List<DiyBoardDTO> showList = null;
 		count = diyBoardDAO.getArticleCount(category_a,category_b);
@@ -162,6 +172,10 @@ public class DiyBoardBean {
 				String id = showList.get(i).getId();
 				int level = memberDAO.getLevels(id);
 				showList.get(i).setLevels(level);
+				
+                int articlenum = showList.get(i).getArticlenum();
+                repCount = diyBoardDAO.getRepCount(articlenum);
+                showList.get(i).setRepCount(repCount);
 			}
 		} else {
 			showList = Collections.EMPTY_LIST;

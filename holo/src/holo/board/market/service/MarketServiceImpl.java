@@ -44,6 +44,10 @@ public class MarketServiceImpl implements MarketService {
 		dao.delete("market.delete", articlenum);
 	}
 	
+    @Override
+    public int getRepCount(int articlenum) {
+        return dao.selectOne("market.getRepCount", articlenum);
+    }
 
 	@Override
 	   public List<MarketBoardDTO> getArticles(String category_a, String category_b, int start, int end) throws Exception {

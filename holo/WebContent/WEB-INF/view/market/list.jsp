@@ -81,8 +81,8 @@
 
 								<a class="title"
 									href="/holo/market/content.holo?articlenum=${list.articlenum}&pageNum=${currentPage}">
-									${list.subject} </a>
-							</div>
+                                    ${list.subject}<c:if test="${list.repCount != 0}">[${list.repCount}]</c:if></a>
+                            </div>
 							<div class="writer"><a href="/holo/member/userInfo.holo?id=${list.id}">
 							<img src="/holo/resource/image/level/${list.levels}.png" width="15" height="15"/>${list.id}</a></div>
 							<div class="date">

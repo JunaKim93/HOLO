@@ -52,6 +52,10 @@
 			)
 	</select>
 	
+	<select id="getRepCount" resultType="int" parameterType="HashMap">
+        select count(*) from ${board} where articlenum=#{articlenum}
+    </select>    
+	
 	<sql id="search">
 		<choose>
 			<when test="choice == 'whole'">
