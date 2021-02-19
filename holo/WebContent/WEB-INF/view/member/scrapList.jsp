@@ -42,7 +42,7 @@ $(function(){
 </head>
 
 <body>
-   <div class="board_wrap">
+   <div class="board_wrap"style="width:700px">
       <div class="board_title">
          <strong>스크랩 게시판</a></strong>
          <p>스크랩 한 게시물을 볼 수 있습니다</p>
@@ -50,10 +50,9 @@ $(function(){
       <div class="board_list_wrap">
          <div class="board_list">
          <div class="top">
-            <div class="num">게시판</div>
-            <div class="title">글제목</div>
-            <div class="writer">작성자</div>
-            <div class="count">삭제하기</div>
+            <div class="num"style="width:20%;">게시판</div>
+            <div class="title"style="width:70%;">글제목</div>
+            <div class="count"style="width:10%;">삭제하기</div>
          </div>
          <c:if test="${count == 0}">
 	         		스크랩한 목록이 없습니다.
@@ -61,7 +60,7 @@ $(function(){
          	<c:if test="${count >0}">
          		<c:forEach var="scrap" items="${scrapList}">
          		<div>
-		            <div class="num">
+		            <div class="num"style="width:20%;">
 		            	<c:if test="${scrap.boardname=='com'}">
 	  						커뮤니티
 	  					</c:if> 
@@ -75,17 +74,13 @@ $(function(){
 	  						장터
 	  					</c:if>
 		            </div>
-		            <div class="title">
+		            <div class="title" style="width:70%;">
 			            <a href="/holo/contentFromScrap.holo?articlenum=${scrap.articlenum}&boardname=${scrap.boardname}">
 							${scrap.subject} 
 						</a>
 		            </div>
-		            
-		            <div class="writer">${scrap.id}</div>
-		            <div>
-			            <div class="count">
-			            	<button class="btn-unScrap" articlenum="${scrap.articlenum}" boardname="${scrap.boardname}">❌</button>
-			            </div>
+		            <div class="count"style="width:10%;text-align:center;">
+		            	<button class="btn-unScrap" articlenum="${scrap.articlenum}" boardname="${scrap.boardname}">❌</button>
 		            </div>
 		        </div>    
 	            </c:forEach>
