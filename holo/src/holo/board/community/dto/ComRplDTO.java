@@ -14,6 +14,7 @@ public class ComRplDTO {
 	private int ref;
 	private int step;
 	private int depth;
+	private int levels;
 	
 	public int getRepnum() {
 		return repnum;
@@ -74,6 +75,12 @@ public class ComRplDTO {
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
+	}
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
 	}
 	
 }

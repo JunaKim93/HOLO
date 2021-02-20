@@ -14,6 +14,8 @@ public class ComDTO {
 	private int likes;
 	private int report;
 	private Timestamp regdate;
+	private int levels;
+	private int repCount;
 	
 	public int getArticlenum() {
 		return articlenum;
@@ -75,4 +77,17 @@ public class ComDTO {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
+	public int getLevels() {
+		return levels;
+	}
+	public void setLevels(int levels) {
+		this.levels = levels;
+	}
+	public int getRepCount() {
+		return repCount;
+	}
+	public void setRepCount(int repCount) {
+		this.repCount = repCount;
+	}
+	
 }

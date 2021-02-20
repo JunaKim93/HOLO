@@ -29,6 +29,7 @@ import holo.board.community.dto.ComLikeDTO;
 import holo.board.community.dto.ComReportDTO;
 import holo.board.community.dto.ComRplDTO;
 import holo.board.community.service.CommunityDAO;
+import holo.holouser.service.HolouserService;
 
 @Controller
 @RequestMapping("/com/")
@@ -38,6 +39,9 @@ public class ViewHandler {
 	@Autowired
 	private CommunityDAO dao = null;
 	
+	@Autowired
+	private HolouserService memberDAO = null;
+	
 	@RequestMapping("list.holo")
 	public String list(	@RequestParam(defaultValue="1") String category_a,
 						@RequestParam(defaultValue="1") String category_b,
@@ -45,10 +49,22 @@ public class ViewHandler {
 						@RequestParam(defaultValue="20") int pagesize, 
 						Model model){
 		try {
-			List list;
+			List<ComDTO> list;
 			int count = dao.countArt(category_a, category_b);
+			int repCount = 0;
+			int level = 0;
+			
 			if(count>0) {
 				list = dao.getList(category_a, category_b, pagenum, pagesize);
+				for(int i=0; i <list.size(); i++) {
+					String id = list.get(i).getId();
+					level = memberDAO.getLevels(id);
+					list.get(i).setLevels(level);
+                    
+                    int articlenum = list.get(i).getArticlenum();
+                    repCount = dao.countRpl(articlenum);
+                    list.get(i).setRepCount(repCount);
+				}
 			}else {
 				list = Collections.EMPTY_LIST;
 			}
@@ -82,6 +98,9 @@ public class ViewHandler {
 				model.addAttribute("alreadyLiked",false);
 			}
 			ComDTO cdto = dao.view(articlenum);
+			String id = cdto.getId();
+			int level = memberDAO.getLevels(id);
+			cdto.setLevels(level);
 			model.addAttribute("dto",cdto);
 			model.addAttribute("pagenum",pagenum);
 			model.addAttribute("cat_a",category_a);
@@ -95,10 +114,15 @@ public class ViewHandler {
 	@RequestMapping("replyList.holo")
 	public String replyList(int articlenum, String writer, Model model) {
 		try {
-			List list;
+			List<ComRplDTO> list;
 			int count = dao.countRpl(articlenum);
 			if(count>0) {
 				list = dao.getRpl(articlenum);
+				for(int i=0; i <list.size(); i++) {
+					String id = list.get(i).getId();
+					int level = memberDAO.getLevels(id);
+					list.get(i).setLevels(level);
+				}
 			}else {
 				list = Collections.EMPTY_LIST;
 			}

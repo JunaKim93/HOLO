@@ -219,7 +219,9 @@ $(function(){
 					</div>
 					<c:forEach var="reply" items="${rplList}">
 						<div id="replyRow${reply.repnum}" style="display: flex;">
-							<div style="width:10%;">${reply.id}</div>
+							<div style="width:10%;">
+							<a href="/holo/member/userInfo.holo?id=${reply.id}">
+			           		<img src="/holo/resource/image/level/${reply.levels}.png" width="15" height="15"/>${reply.id}</a></div>
 							<div style="width:70%;text-align:left;display: flex;">
 								<c:forEach var="i" begin="1" end="${reply.depth}">
 									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
