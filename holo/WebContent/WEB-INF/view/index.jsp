@@ -63,7 +63,8 @@
             <a href="/holo/guide/hologuide.holo" >초보자 가이드</a>
             <ul class="dep2">
                <li><a href="/holo/guide/hologuide.holo" >집 구하기 가이드</a></li>
-               <li><a href="/holo/guide/location_map.holo" >상권</a></li>
+               <li><a href="/holo/guide/location_map.holo" >상권 정보</a></li>
+               <li><a href="/holo/guide/youtube.holo" >자취 꿀팁 영상</a></li>
             </ul>
          </li>   
          <li>

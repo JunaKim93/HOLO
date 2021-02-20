@@ -144,7 +144,10 @@ public class GuideController {
 		return "guide/terms";
 	}
 	
-
+	@RequestMapping("tipVideo.holo")
+	public String tipVideo() throws Exception{
+		return "/guide/tipVideo";
+	}
 	
 	
 }

@@ -49,10 +49,17 @@
          </ul>         
          <ul>
          <li>
-            <a id="tem1"  href="#">🔹 상권</a>
+            <a id="tem1"  href="#">🔹 상권 정보</a>
             <ul>
             <li><a href="/holo/guide/location_map.holo">- 거주지 설정하기</a>
             <li><a href="/holo/guide/map_places.holo">- 주변 편의시설 정보</a>
+            </li>
+            </ul>
+         </li>
+         <li>
+            <a id="tem1"  href="#">🔹 자취 꿀팁 영상</a>
+            <ul>
+            <li><a href="/holo/guide/tipVideo.holo">- 자취꿀팁 [BEST20]</a>
             </li>
             </ul>
          </li>
