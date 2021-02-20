@@ -220,7 +220,12 @@ $(function(){
 					<c:forEach var="reply" items="${rplList}">
 						<div id="replyRow${reply.repnum}" style="display: flex;">
 							<div style="width:10%;">
-							<a href="/holo/member/userInfo.holo?id=${reply.id}">
+							<c:if test="${reply.content!='삭제된 댓글'}">
+								<a href="/holo/member/userInfo.holo?id=${reply.id}">
+							</c:if>
+							<c:if test="${reply.content=='삭제된 댓글'}">
+								삭제됨
+							</c:if>
 			           		<img src="/holo/resource/image/level/${reply.levels}.png" width="15" height="15"/>${reply.id}</a></div>
 							<div style="width:70%;text-align:left;display: flex;">
 								<c:forEach var="i" begin="1" end="${reply.depth}">
@@ -239,7 +244,7 @@ $(function(){
 									<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">신고가 많아 내용을 숨겼습니다.</div>
 								</c:if>
 							</div>
-							<c:if test="${reply.id!='삭제됨'}">
+							<c:if test="${reply.content!='삭제된 댓글'}">
 								<div style="width:10%;">								
 									<div id="${reply.repnum}" style="line-height: 100%; text-align:left;">
 										<button class="btnReReply">↪️</button>
@@ -254,7 +259,7 @@ $(function(){
 								</div>
 								<div style="width:10%">${reply.regdate}</div>
 							</c:if>
-							<c:if test="${reply.id=='삭제됨'}">
+							<c:if test="${reply.content!='삭제된 댓글'}">
 								<div style="width:10%;"></div><div style="width:10%;"></div>
 							</c:if>
 						</div>
