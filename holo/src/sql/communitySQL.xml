@@ -175,8 +175,7 @@
 	</update>
 	<update id="deleteRpl" parameterType="int">
 		UPDATE COMMUNITYREPLY SET
-			CONTENT= '삭제된 댓글',
-			ID='삭제됨'
+			CONTENT= '삭제된 댓글'
 		WHERE repnum=#{repnum}
 	</update>
 	<update id="addLikes" parameterType="ComDTO">
