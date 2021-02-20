@@ -97,8 +97,11 @@ function init(){
 			    <c:forEach var="article" items="${list}">
 			    	<div>
 				    	<div class="num">${article.articlenum}</div>
-				        <div class="title"><a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">${article.subject }</a></div>
-				        <div class="writer">${article.id}</div>
+				        <div class="title"><a href="/holo/com/content.holo?articlenum=${article.articlenum}&pagenum=${pagenum}&category_a=${cat_a}&category_b=${cat_b}">
+				        ${article.subject }<c:if test="${article.repCount != 0}">[${article.repCount}]</c:if></a></div>
+				        <div class="writer"><a href="/holo/member/userInfo.holo?id=${article.id}">
+				        <img src="/holo/resource/image/level/${article.levels}.png" width="15" height="15"/>
+				        ${article.id}</a></div>
 				        <div class="date">${article.regdate}</div>
 				        <div class="count">${article.viewcount}</div>
 		  			</div>
