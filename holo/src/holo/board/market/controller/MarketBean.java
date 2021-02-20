@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import holo.board.interior.dto.DiyBoardDTO;
 import holo.board.market.dto.MarketBoardDTO;
 import holo.board.market.dto.MarketBoardReportDTO;
 import holo.board.market.dto.MarketReplyDTO;
@@ -41,11 +40,6 @@ public class MarketBean {
 		model.addAttribute("category_b",category_b);
 		return "market/writeForm";
 	}
-	
-//	@RequestMapping("/groupWriteForm.holo")
-//	public String groupWriteForm() {
-//		return "market/groupWriteForm";
-//	}
 	
 	@RequestMapping("/writePro.holo")
 	public String logon_writePro(MarketBoardDTO dto, Model model) {
@@ -83,7 +77,7 @@ public class MarketBean {
 	public String list(@RequestParam(defaultValue="1", required = true) int pageNum, 
 			@RequestParam(defaultValue="market", required=false) String category_a,
 			@RequestParam(defaultValue="sell", required=false) String category_b, 
-			String choice, String search, Model model) {
+			String choice, String search, HttpSession session, Model model) {
 		try{
 			List <MarketBoardDTO> articleList = null;
 			int pageSize = 10;							
@@ -99,7 +93,12 @@ public class MarketBean {
 			int endPage = startPage+pages-1;			
 			int pageCount = 0;	
             int repCount = 0;
-			
+            String sessionId = (String)session.getAttribute("sessionId");
+			boolean levelCheck = false;
+			if(sessionId != null) {
+				levelCheck = memberDAO.getLevels(sessionId) > 1;
+			}
+
 			if(choice != null && search != null) {
 				count = MarketDAO.getSearchCount(category_a, category_b, choice, search);
 			}else{
@@ -159,6 +158,7 @@ public class MarketBean {
 			model.addAttribute("category_b", category_b);
 			model.addAttribute("choice", choice);
 			model.addAttribute("search", search);
+			model.addAttribute("levelCheck", levelCheck);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

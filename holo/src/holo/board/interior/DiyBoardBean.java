@@ -138,6 +138,7 @@ public class DiyBoardBean {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
+		
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("choice", choice);
 		model.addAttribute("search", search);

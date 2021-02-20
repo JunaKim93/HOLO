@@ -5,6 +5,19 @@
 <%@ include file="/WEB-INF/view/index.jsp"%>
 
 <head>
+<style type="text/css">
+.button_wrap .write{
+   text-align: center;
+   min-width: 80;
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 2px;
+   font-size: 1.4rem;
+   background: #1e57a4;
+   color: #fff;
+}   
+</style>
+
 <meta charset="UTF-8">
 <!-- meta 선언 -->
 <meta charset="UTF-8">
@@ -18,6 +31,22 @@
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+function confirmLevels(levelCheck) {
+	if("${sessionScope.sessionId}" == ""){
+		alert("로그인 후 글쓰기가 가능합니다.");
+		location.href="/holo/member/loginForm.holo";
+
+	}else{
+		if(levelCheck){
+			location.href="/holo/market/writeForm.holo?category_a=${category_a}&category_b=${category_b}";
+		}else{
+			alert("레벨 3부터 글쓰기가 가능합니다.");
+		}
+	}
+ }
+</script>
+
 <title>중고 장터</title>
 </head>
 
@@ -159,10 +188,8 @@
 		</div>
 		
 		<div class="button_wrap">
-			<a
-				href="/holo/market/writeForm.holo?category_a=${category_a}&category_b=${category_b}"
-				class="on">글작성</a> <a href="/holo/member/main.holo" class="on">메인으로</a>
-
+			<input class="write" type="button"  onclick="confirmLevels(${levelCheck})" value="글작성" />
+			<a href="/holo/member/main.holo" class="on">메인으로</a>
 		</div>
 
 	</div>
