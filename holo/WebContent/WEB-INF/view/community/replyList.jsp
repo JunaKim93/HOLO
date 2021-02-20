@@ -220,13 +220,13 @@ $(function(){
 					<c:forEach var="reply" items="${rplList}">
 						<div id="replyRow${reply.repnum}" style="display: flex;">
 							<div style="width:10%;">
-							<c:if test="${reply.content!='삭제된 댓글'}">
-								<a href="/holo/member/userInfo.holo?id=${reply.id}">
-							</c:if>
-							<c:if test="${reply.content=='삭제된 댓글'}">
-								삭제됨
-							</c:if>
-			           		<img src="/holo/resource/image/level/${reply.levels}.png" width="15" height="15"/>${reply.id}</a></div>
+								<c:if test="${reply.content!='삭제된 댓글'}">
+									<a href="/holo/member/userInfo.holo?id=${reply.id}"><img src="/holo/resource/image/level/${reply.levels}.png" width="15" height="15"/>${reply.id}</a>
+								</c:if>
+								<c:if test="${reply.content=='삭제된 댓글'}">
+									삭제됨
+								</c:if>
+			           		</div>
 							<div style="width:70%;text-align:left;display: flex;">
 								<c:forEach var="i" begin="1" end="${reply.depth}">
 									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
