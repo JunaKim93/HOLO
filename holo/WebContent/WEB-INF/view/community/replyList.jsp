@@ -259,7 +259,7 @@ $(function(){
 								</div>
 								<div style="width:10%">${reply.regdate}</div>
 							</c:if>
-							<c:if test="${reply.content!='삭제된 댓글'}">
+							<c:if test="${reply.content=='삭제된 댓글'}">
 								<div style="width:10%;"></div><div style="width:10%;"></div>
 							</c:if>
 						</div>
