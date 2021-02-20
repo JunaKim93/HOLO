@@ -18,7 +18,7 @@
 	
 	<c:if test="${check==1}">
 	<script>
-		alert("가입을 축하드립니다. /n 이메일 인증 이후 로그인이 가능합니다.");
+		alert("가입을 축하드립니다. \n이메일 인증 이후 로그인이 가능합니다.");
 		window.location="/holo/member/main.holo";
 	</script>
 	</c:if>
