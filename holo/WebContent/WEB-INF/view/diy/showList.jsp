@@ -44,7 +44,7 @@
 	
 	<c:if test="${count > 0 }">
 	<div class="board_list_wrap">
-	<div class="board_list">
+	<div class="board_list" style="width: 100%; border-top: 2px solid #1e57a4;">
 	<!-- 썸네일식리스트 시작 -->
 	<div id="pattern" class="pattern">
 		<ul class="list img-list">

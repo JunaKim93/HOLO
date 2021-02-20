@@ -79,8 +79,8 @@ function resultHtml(data){
 <body>
 <div class="board_wrap">
 	<div class="board_title">
-		<strong><a href="/holo/guide/tipVideo.holo">자취꿀팁 [BEST20]</a></strong>
-		<p>자취 꿀팁 영상들이 업데이트 됩니다!</p>
+		<h2 style="padding: 0 0 20px; font-size: 32px; color: #000; border-bottom: 2px solid #1e57a4; text-align: center; line-height: 1;">
+		자취꿀팁 [BEST20]</h2>
 	</div>
 
 	<div class="board_list_wrap">
