@@ -12,7 +12,14 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <!-- link 선언 -->
 <link rel="stylesheet" href="/holo/resource/style/board_list_style.css">
-
+<style>
+button{
+background-color:white;border: 1px solid #ddd;
+}
+button:hover{
+background-color:#ddd;
+}
+</style>
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -56,7 +63,7 @@ $(function(){
 		//부모 element에 저장된 id속성을 가져옴
     	var repnum = parseInt($(this).parent().attr("id"));
 		//댓글의 기존 내용을 가져옴
-    	var content = $("#replyContent"+repnum).html();
+    	var content = $("#replyContent"+repnum).children("p").html();
     	replyForm(repnum,content,"edit");
 	});
 	//댓글 삭제 버튼 이벤트
@@ -234,10 +241,14 @@ $(function(){
 								<div style="border-left: 2px solid #1e57a4;height: 100%;"></div>
 								<c:if test="${reply.report<5}">
 									<c:if test="${reply.id==writer}">
-										<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;">${reply.content}</div>
+										<div id="replyContent${reply.repnum}" style="background-color: #d4e3f7;line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;width:100%;">
+											<p style="white-space:normal;display: inline-block;text-overflow: ellipsis;">${reply.content}</p>
+										</div>
 									</c:if>
 									<c:if test="${reply.id!=writer}">
-										<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;"><p style="white-space:pre;">${reply.content}</p></div>
+										<div id="replyContent${reply.repnum}" style="line-height: 160%;font-size: 1.4rem;padding:5px 4px 4px 5px;width:100%;">
+											<p style="white-space:normal;display: inline-block;text-overflow: ellipsis;">${reply.content}</p>
+										</div>
 									</c:if>
 								</c:if>
 								<c:if test="${reply.report>=5}">

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/holo/resource/style/board_view_style.css">
 <link href="/holo/resource/style/scrap.css" rel="stylesheet" type="text/css">
 <style type='text/css'>
-	.btn-like {color: transparent;text-shadow: 0 0 2px rgba(255, 255, 255, .7), 0 0 0 #000;}
+	.btn-like {color: transparent;text-shadow: 0 0 2px rgba(255, 255, 255, .7), 0 0 0 #000;border: 1px solid #ddd;}
 	.btn-like:hover {text-shadow: 0 0 0 #ea0;}
 	.btn-like.done {color: inherit;	text-shadow: 0;}
 	.btn-like.done:hover {color: transparent;text-shadow: 0 0 0 #777;}
